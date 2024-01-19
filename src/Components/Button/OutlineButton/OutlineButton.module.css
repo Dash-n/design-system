@@ -1,0 +1,63 @@
+:root {
+    --main-bg-color: #4F84F7;
+    --main-hover-color: #426FCF;
+    --main-active-color: #365AA8;
+    --main-disabled-color: #E9F1FD;
+
+    --outline-hover-color: #CEDDFD;
+    --outline-active-color: #87ABFA;
+
+    --warning-outline-bg-color: #FF2929;
+    --warning-outline-hover-color: #FFA1A1;
+    --warning-outline-active-color: #FF7A7A;
+
+    --warning-bg-color: #FF2929;
+    --warning-hover-color: #D60000;
+    --warning-active-color: #AD0000;
+  }
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    min-height: 37px;
+    border-radius: 8px;
+    padding: 8px 16px;
+
+    color: white;
+    background-color: white;
+
+    font-size: large;
+
+    border: 1px var(--main-bg-color) solid;
+}
+
+.button .svg{
+    color: black;
+}
+
+
+.button:hover { background-color: var(--outline-hover-color);
+}
+.button:active {
+    background-color: var(--main-active-color);
+}
+
+.warning {
+    color: var(--warning-outline-bg-color); border: 1px var(--warning-outline-bg-color) solid;;
+}
+.warning:hover {
+    background-color: var(--warning-outline-hover-color);
+}
+.warning:active  {
+    background-color: var(--warning-outline-active-color);
+}
+
+.button:disabled { color: var(--main-disabled-color); border: 1px var(--main-disabled-color) solid;
+}
+
+.primary { color: var(--main-bg-color); border: 1px var(--main-bg-color) solid;}
+.secondary {
+    background-color: white;
+}

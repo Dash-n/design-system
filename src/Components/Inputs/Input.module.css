@@ -1,0 +1,30 @@
+:root {
+    --main-bg-color: #4F84F7;
+    --main-hover-color: #426FCF;
+    --main-active-color: #365AA8;
+    --main-border-color: #C4C4C4;
+    
+
+    --outline-hover-color: #CEDDFD;
+    --outline-active-color: #87ABFA;
+
+    --warning-outline-bg-color: #FF2929;
+    --warning-outline-hover-color: #FFA1A1;
+    --warning-outline-active-color: #FF7A7A;
+
+    --warning-bg-color: #FF2929;
+    --warning-hover-color: #D60000;
+    --warning-active-color: #AD0000;
+  }
+
+.Input {
+    border-radius: 4px;
+    padding: 16px 16px;
+
+    /* background-color: var(--main-bg-color); */
+    /* color: white; */
+
+    font-size: large;
+
+    border: 1px var(--main-border-color) solid;
+}
