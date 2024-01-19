@@ -40,3 +40,9 @@
 .read-the-docs {
   color: #888;
 }
+
+@font-face {
+  font-family: "Regular";   /*Can be any text*/
+  src: local("Geist"),
+    url("./fonts/Geist/Geist-Regular.otf") format("opentype");
+}
