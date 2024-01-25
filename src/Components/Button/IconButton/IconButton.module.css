@@ -3,9 +3,10 @@
   align-items: center;
   justify-content: center;
 
-  min-height: 40px;
+  height: 40px;
+  width: 40px;
   border-radius: 8px;
-  padding: 8px 16px;
+  padding: 8px 8px;
 
   background-color: var(--main-bg-color);
   color: white;
@@ -23,20 +24,12 @@
   background-color: var(--main-active-color);
 }
 
-.warning {
+.delete {
   background-color: var(--warning-bg-color);
 }
-.warning:hover:not(:disabled) {
+.delete:hover:not(:disabled) {
   background-color: var(--warning-hover-color);
 }
-.warning:active:not(:disabled){
+.delete:active:not(:disabled) {
   background-color: var(--warning-active-color);
-}
-
-.button:disabled {
-  background-color: var(--main-disabled-color);
-}
-
-.warning:disabled {
-  background-color: var(--warning-disabled-color);
 }

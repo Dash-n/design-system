@@ -1,41 +1,23 @@
 import type { Story } from "@ladle/react";
 import styles from "./Button.module.css";
-import { MdDirectionsRun } from "react-icons/md";
+import { getVariant, capitalize } from "../../index.ts";
 
-
-type Props = { 
+type Props = {
   label: string;
-  disabled: boolean;
-  color: string[];
+  disabled?: boolean;
   variant: string;
-  icon: string;
-  size: string;
-  state: string;
- };
+};
 
-function getVariant(variant: any): string {
-  let className: string;
-
-  switch (variant) {
-    case "warning":
-      className = styles.warning;
-      break;
-    default:
-      className = styles.primary;
-  }
-  return className;
-}
-
-export const Button: Story<Props> = ({label, variant, disabled, icon})  => (
-  <button className={`${getVariant(variant)} ${styles.button}`} disabled={disabled}>
-
-    {icon==="left" ? <MdDirectionsRun /> : ""} 
-    {label ?? `${disabled ? "Disabled" : (variant ? variant.substring(0,1).toUpperCase()+variant.substring(1) : "")}`}
-    {icon==="right" ? <MdDirectionsRun /> : ""} 
+export const Button: Story<Props> = ({ label, variant, disabled}) => (
+  <button
+    className={`${getVariant(styles, variant)} ${styles.button}`}
+    disabled={disabled}
+  >
+    {capitalize(label)}
   </button>
 );
 
-
 Button.defaultProps = {
-  variant: 'primary'
-}
+  variant: "",
+  label: "",
+};

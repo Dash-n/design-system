@@ -1,40 +1,25 @@
 import type { Story } from "@ladle/react";
 import styles from "./OutlineButton.module.css";
-import { MdDirectionsRun } from "react-icons/md";
+import { getVariant,capitalize } from "../../index.ts";
 
-
-type Props = { 
+type Props = {
   label: string;
-  disabled: boolean;
-  color: string[];
+  disabled?: boolean;
   variant: string;
-  size: string;
-  state: string;
-  icon: string;
- };
+};
 
-function getVariant(variant: Variant): string {
-  let className: string;
-
-  switch (variant) {
-    case "warning":
-      className = styles.warning;
-      break;
-    default:
-      className = styles.primary;
-  }
-  return className;
-}
-
-export const OutlineButton: Story<Props> = ({label, variant, icon, disabled})  => (
-  <button className={`${getVariant(variant)} ${styles.button}`} disabled={disabled}>
-    {icon==="left" ? <MdDirectionsRun/> : ""} 
-    {label ?? `${disabled ? "Disabled" : (variant ? variant.substring(0,1).toUpperCase()+variant.substring(1) : "")}`}
-    {icon==="right" ? <MdDirectionsRun /> : ""}
-  </button>
-);
-
+export const OutlineButton: Story<Props> = ({ label, variant, disabled }) => {
+  console.log(disabled);
+  return (
+    <button
+      className={`${getVariant(styles, variant)} ${styles.button}`}
+      disabled={disabled}
+    >
+      {capitalize(label)}
+    </button>
+  );
+};
 
 OutlineButton.defaultProps = {
-  variant: 'primary'
-}
+  variant: "",
+};
