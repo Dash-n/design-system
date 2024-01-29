@@ -7,7 +7,6 @@ type Props = {
   label: string;
   checked?: boolean;
   disabled?: boolean;
-  indeterminate?: boolean;
 };
 
 export const Radio: Story<Props> = ({

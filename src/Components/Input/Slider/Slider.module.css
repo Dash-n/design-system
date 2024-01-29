@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding-left: 32px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  height: 24px;
+  align-items: center;
+  font-size: 16px;
+  font-family: "Geist";
+  font-weight: 400;
+  color: #606060;
+}
+
+input {
+  margin: 0 8px;
+}

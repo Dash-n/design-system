@@ -26,8 +26,8 @@
   box-sizing: border-box;
   top: 0;
   left: 0;
-  height: 25px;
-  width: 25px;
+  height: 24px;
+  width: 24px;
   border-radius: 50%;
   border: 2px #606060 solid;
   background-color: white;
@@ -72,15 +72,13 @@
 .container input:checked ~ .checkmark:after {
   display: block;
 }
-
 .container .checkmark:after {
   top: 5px;
   left: 5px;
-  width: 11px;
-  height: 11px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: white;
-  /* background: #4f84f7; */
 }
 
 .container input:disabled ~ .inputLabel {

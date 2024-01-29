@@ -3,7 +3,7 @@ import styles from "./Checkbox.module.css";
 
 type Props = {
   name: string;
-  value?: string;
+  value: string;
   label: string;
   checked?: boolean;
   disabled?: boolean;
