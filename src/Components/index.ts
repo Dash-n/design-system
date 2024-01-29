@@ -1,7 +1,6 @@
-export const getVariant = (styles: any, variant: string) => {
-    return styles[variant] || '';
-  };
-
-export const capitalize = (label: string) => {
-    return label.substring(0, 1).toUpperCase() + label.substring(1)
-}
+export const toTitlecase = (label: string) => {
+  return label.replace(/\w\S*/g, function (txt) {
+    return txt.charAt(0).toUpperCase() + txt.substring(1).toLowerCase();
+  });
+  //   return label.substring(0, 1).toUpperCase() + label.substring(1);
+};

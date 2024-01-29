@@ -1,9 +1,16 @@
 import type { Story } from "@ladle/react";
 import styles from "./MenuButton.module.css";
-import { getVariant } from '../../index.ts';
-import { MdDirectionsRun, MdEdit, MdList, MdEditNote, MdBuild, MdGroups, MdMedication, MdMedicalServices, MdBarChart} from "react-icons/md";
-
-
+import {
+  MdDirectionsRun,
+  MdEdit,
+  MdList,
+  MdEditNote,
+  MdBuild,
+  MdGroups,
+  MdMedication,
+  MdMedicalServices,
+  MdBarChart,
+} from "react-icons/md";
 
 type Props = {
   label?: string;
@@ -16,30 +23,20 @@ type Props = {
 };
 
 const iconMappings = {
-  inputs: {icon: <MdEdit />,label: "Inputs"},
-  database: {icon:<MdList />, label: "Database"},
-  reports: {icon:<MdEditNote />, label: "Reports"},
-  builder: {icon: <MdBuild />, label: "Gym Program"},
-  indivdash: {icon: <MdDirectionsRun />, label: "Individual"},
-  teamdash: {icon: <MdGroups />, label: "Team"},
-  teamphysio: {icon: <MdMedicalServices />, label: "Team Physio"},
-  indivphysio: {icon: <MdMedication />, label: "Physio"},
-  screening: {icon: <MdBarChart />, label: "Screening"}
+  inputs: { icon: <MdEdit />, label: "Inputs" },
+  database: { icon: <MdList />, label: "Database" },
+  reports: { icon: <MdEditNote />, label: "Reports" },
+  builder: { icon: <MdBuild />, label: "Gym Program" },
+  indivdash: { icon: <MdDirectionsRun />, label: "Individual" },
+  teamdash: { icon: <MdGroups />, label: "Team" },
+  teamphysio: { icon: <MdMedicalServices />, label: "Team Physio" },
+  indivphysio: { icon: <MdMedication />, label: "Physio" },
+  screening: { icon: <MdBarChart />, label: "Screening" },
 };
 
-const GetIcon = ({variant}) => {
-  const iconName = iconMappings[variant].icon;
-
-  return iconName;
-}
-
-export const MenuButton: Story<Props> = ({variant, disabled}) => (
-  
-  <button
-    className={`${getVariant(styles, variant)} ${styles.button}`}
-    disabled={disabled}
-  >
-  <GetIcon variant={variant} /> {iconMappings[variant].label}
+export const MenuButton: Story<Props> = ({ variant, disabled }) => (
+  <button className={`${styles[variant]} ${styles.button}`} disabled={disabled}>
+    {iconMappings[variant].icon} {iconMappings[variant].label}
   </button>
 );
 

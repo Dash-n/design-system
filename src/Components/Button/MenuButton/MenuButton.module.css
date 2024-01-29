@@ -10,7 +10,7 @@
   padding: 16px 16px;
 
   background-color: white;
-  color: #365AA8;
+  color: #365aa8;
 
   font-size: large;
   font-family: "Geist";
@@ -19,21 +19,15 @@
 }
 
 .button:hover:not(:disabled) {
-  /* background-color: var(#E9F1FD); */
-  border: 1px #A3BFFB solid;
+  border: 1px #a3bffb solid;
 }
 .button:active:not(:disabled) {
-  background-color: #E9F1FD;
-  
+  background-color: #e9f1fd;
 }
-
 
 .button:disabled {
   background-color: var(--main-disabled-color);
 }
-
 .warning:disabled {
   background-color: var(--warning-disabled-color);
 }
-
-

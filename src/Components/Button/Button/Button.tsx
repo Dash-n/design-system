@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./Button.module.css";
-import { getVariant, capitalize } from "../../index.ts";
+import { toTitlecase } from "../../index.ts";
 
 type Props = {
   label: string;
@@ -8,12 +8,9 @@ type Props = {
   variant: string;
 };
 
-export const Button: Story<Props> = ({ label, variant, disabled}) => (
-  <button
-    className={`${getVariant(styles, variant)} ${styles.button}`}
-    disabled={disabled}
-  >
-    {capitalize(label)}
+export const Button: Story<Props> = ({ label, variant, disabled }) => (
+  <button className={`${styles[variant]} ${styles.button}`} disabled={disabled}>
+    {toTitlecase(label)}
   </button>
 );
 

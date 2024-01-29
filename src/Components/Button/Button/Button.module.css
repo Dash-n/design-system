@@ -29,7 +29,7 @@
 .warning:hover:not(:disabled) {
   background-color: var(--warning-hover-color);
 }
-.warning:active:not(:disabled){
+.warning:active:not(:disabled) {
   background-color: var(--warning-active-color);
 }
 
