@@ -1,0 +1,73 @@
+.input {
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 8px 16px;
+  /* padding: 10x; */
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 1px #c4c4c4 solid;
+
+  color: #606060;
+  font-size: 14px;
+  font-family: "Geist";
+
+  transition: box-shadow 0.2s ease-out;
+
+  /* box-shadow: 0 0 10px var(--ma
+  in-active-color); */
+}
+
+.input:focus {
+  box-shadow: 0 0 2px 3px #4f84f7;
+  outline: none;
+
+  transition: box-shadow 0.3s ease-out;
+}
+
+.label {
+  position: absolute;
+  left: 12px;
+  padding: 12px 8px 0px 8px;
+  background: none;
+  height: 2px;
+  transform: translateY(0);
+  transition: all 0.3s ease-out;
+  font-size: 14px;
+  font-family: "Geist";
+}
+
+.input:not(:placeholder-shown) + .label,
+.input:focus + .label {
+  position: absolute;
+  left: 12px;
+  padding: 4px 8px;
+  background: white;
+  height: 12px;
+  transform: translateY(-50%);
+  font-size: 12px;
+
+  transition: all 0.3s ease-out;
+}
+
+.inputBox {
+  position: relative;
+
+  margin-top: 12px;
+}
+
+.placeholder {
+  display: none;
+}
+
+.input::placeholder {
+  color: transparent;
+}
+
+.input:focus::placeholder {
+  color: #c4c4c4;
+}
+
+.input:disabled + .label {
+  color: #c4c4c4;
+}
