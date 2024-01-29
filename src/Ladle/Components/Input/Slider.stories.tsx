@@ -7,6 +7,6 @@ type Props = {
 
 export const Sliders: Story<Props> = ({}) => (
   <div>
-    <Slider value="3" min={0} max={5} step={1} name="test" />
+    <Slider min={0} max={5} step={1} name="test" />
   </div>
 );

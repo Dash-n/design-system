@@ -1,5 +1,5 @@
 import type { Story } from "@ladle/react";
-import { Checkbox } from "../../Components/Input/Checkbox/Checkbox.tsx";
+import { Checkbox } from "../../../Components/Input/Checkbox/Checkbox.tsx";
 
 type Props = {
   options: string;

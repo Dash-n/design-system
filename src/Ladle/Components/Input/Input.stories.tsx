@@ -1,5 +1,5 @@
 import type { Story } from "@ladle/react";
-import { TextInput } from "../../Components/Input/Text/TextInput.tsx";
+import { TextInput } from "../../../Components/Input/Text/TextInput.tsx";
 
 type Props = {
   options: string;

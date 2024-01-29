@@ -1,5 +1,5 @@
 import type { Story } from "@ladle/react";
-import { Radio } from "../../Components/Input/Radio/Radio.tsx";
+import { Radio } from "../../../Components/Input/Radio/Radio.tsx";
 
 type Props = {
   options: string;
