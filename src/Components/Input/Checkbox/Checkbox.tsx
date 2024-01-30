@@ -7,6 +7,7 @@ type Props = {
   label: string;
   checked?: boolean;
   disabled?: boolean;
+  setChecked: (e: boolean) => void;
 };
 
 export const Checkbox: Story<Props> = ({
@@ -15,6 +16,7 @@ export const Checkbox: Story<Props> = ({
   disabled,
   name,
   value,
+  setChecked,
 }) => (
   <label className={styles.container}>
     <input
@@ -23,6 +25,9 @@ export const Checkbox: Story<Props> = ({
       value={value}
       checked={checked}
       disabled={disabled}
+      onChange={(e) => {
+        setChecked(!checked);
+      }}
     />
     <div className={styles.inputLabel}>{label}</div>
     <span className={styles.checkmark}></span>

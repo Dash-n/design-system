@@ -1,46 +1,37 @@
 import type { Story } from "@ladle/react";
 import styles from "./Slider.module.css";
+import { useRef, useState } from "react";
 
 type Props = {
-  name: string;
+  // id: string;
+  // name: string;
   value: string;
-  checked?: boolean;
   disabled?: boolean;
   min: number;
   max: number;
   step: number;
+  setValue: (e: string) => void;
 };
 
-export const Slider: Story<Props> = ({
-  disabled,
-  name,
-  value,
-  min,
-  max,
-  step,
-}) => (
-  <div className={styles.container}>
-    <div className={styles.inputLabel}>{min}</div>
-    <input
-      type="range"
-      list="markers"
-      min={min}
-      max={max}
-      step={step}
-      name={name}
-      value={value}
-    />
-    <div className={styles.inputLabel}>{max}</div>
-
-    <datalist id="markers">
-      {Array.from({ length: (max - min) / step + 1 }, (_, index) => (
-        <option key={index} value={min + index * step} />
-      ))}
-    </datalist>
-  </div>
-);
-
-Slider.defaultProps = {
-  name: "",
-  // value: "50",
+// const value = useRef(0)
+// const [value, setValue] = useState("");
+export const Slider: Story<Props> = ({ max, min, step, value, setValue }) => {
+  return (
+    <div className={styles.container}>
+      <div className="labelLeft">{min}</div>
+      <input
+        type="range"
+        min={min}
+        max={max}
+        step={step}
+        value={value}
+        onChange={(e) => {
+          setValue(e.target.value);
+        }}
+      />
+      <div className="labelRight">{max}</div>
+    </div>
+  );
 };
+
+Slider.defaultProps = {};
