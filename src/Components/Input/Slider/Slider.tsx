@@ -17,14 +17,6 @@ type Props = {
 // const [value, setValue] = useState("");
 export const Slider: Story<Props> = ({ max, min, step, value, setValue }) => {
   const ref = useRef(null);
-  let sliderWidth = 0;
-
-  useEffect(() => {
-    sliderWidth = ref.current.offsetWidth;
-
-    // tooltipStyle.left = `calc(${(sliderWidth / max) * value}%)`;
-    console.log(sliderWidth);
-  }, [ref.current]);
 
   const divStyle = {
     width: "50px",
@@ -36,21 +28,11 @@ export const Slider: Story<Props> = ({ max, min, step, value, setValue }) => {
     marginBottom: "20px", // Add margin to create space for the tooltip
   };
 
-  const slide = {};
-
-  // const slidecontainer = {
-  //   display: "flex",
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   width: "100%", /* Width of the outside container */
-  //   position: "relative",
-  //   border: "1px solid red"
-  // }
-
   const tooltipStyle = {
     position: "absolute",
     top: "-50px",
-    left: `calc(${(100 / max) * value}%)`,
+    marginLeft: `calc(${(98 / max) * value}% + 1% - 6px - ${2 * value}px)`,
+    // padding: "0 12px",
     height: "24px",
     width: "24px", // Set width to 'auto' to adjust based on content
     borderRadius: "16px 16px 0 16px",
@@ -64,15 +46,6 @@ export const Slider: Story<Props> = ({ max, min, step, value, setValue }) => {
     display: "inline-block",
   };
 
-  // useEffect(() => {
-  //   const element = ref.current;
-  //   console.log(element);
-  // }, []);
-
-  // function handleClick() {
-  //   ref.current.focus();
-  // }
-
   return (
     <div>
       <div className={styles.slidecontainer}>
@@ -83,11 +56,9 @@ export const Slider: Story<Props> = ({ max, min, step, value, setValue }) => {
             display: "flex",
             width: "100%",
             padding: "0",
+            // border: "2px green solid",
           }}
         >
-          <div style={tooltipStyle}>
-            <div className={styles.tooltipText}>{value}</div>
-          </div>
           <input
             className={styles.slider}
             ref={ref}
@@ -96,14 +67,40 @@ export const Slider: Story<Props> = ({ max, min, step, value, setValue }) => {
             max={max}
             step={step}
             value={value}
+            list="tickmarks"
             onChange={(e) => {
               setValue(e.target.value);
               // ref.current.left = value;
             }}
           />
+          <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              width: "100%",
+              padding: "0 4px",
+              position: "relative",
+            }}
+          >
+            <div style={tooltipStyle}>
+              <div className={styles.tooltipText}>{value}</div>
+            </div>
+            {Array.from({ length: (max - min) / step + 1 }, (_, index) => (
+              <span
+                style={{
+                  height: "16px",
+                  width: "16px",
+                  borderRadius: "50%",
+                  background: "#4f84f7",
+                  userSelect: "none",
+                  zIndex: -1,
+                }}
+              />
+            ))}
+          </div>
         </div>
         <div className="labelRight">{max}</div>
-        {/* <button onClick={handleClick}></button> */}
       </div>
     </div>
   );

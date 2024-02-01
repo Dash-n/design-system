@@ -8,9 +8,6 @@ type Props = {
 
 export const Sliders: Story<Props> = ({}) => {
   const [value, setValue] = useState(5);
-  const handleSliderChange = (event) => {
-    setValue(event.target.value);
-  };
 
   // const [leftpos, setLeftpos] = useState({ x: 0, y: 0 });
 
@@ -19,7 +16,7 @@ export const Sliders: Story<Props> = ({}) => {
   }, []);
   return (
     <div>
-      <Slider min={0} max={100} step={1} value={value} setValue={setValue} />
+      <Slider min={0} max={10} step={1} value={value} setValue={setValue} />
     </div>
   );
 };
