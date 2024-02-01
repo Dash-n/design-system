@@ -1,77 +1,55 @@
-input {
-  margin: 0 8px;
-  width: 500px;
+:root {
+  --tooltipWidth: 36px;
+  --markWidth: 16px;
+  --thumbWidth: 24px;
 }
 
-.slidecontainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  height: 88px;
+.horizontalSlider {
   width: 100%;
-  /* position: relative; */
-  /* border: 1px solid red; */
+  height: calc(var(--markWidth) * 2 + var(--tooltipWidth) * 1.5);
 }
 
-/* The slider itself */
-.slider {
-  -webkit-appearance: none; /* Override default CSS styles */
-  appearance: none;
+.thumb {
+  cursor: pointer;
   position: absolute;
   display: flex;
-  width: 100%;
-  height: 8px;
-  background: #4f84f7;
-  border-radius: 16px;
-  margin: 0;
-  transform: translateY(25%);
-}
+  justify-content: center;
+  align-items: center;
 
-/* Mouse-over effects */
-.slider:hover {
-  opacity: 1; /* Fully shown on mouse-over */
-}
-
-/* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-.slider::-webkit-slider-thumb {
-  -webkit-appearance: none; /* Override default look */
-  appearance: none;
-  width: 24px; /* Set a specific slider handle width */
-  height: 24px; /* Slider handle height */
-  background: #4f84f7; /* Green background */
+  bottom: calc(var(--markWidth) - var(--thumbWidth) / 2);
+  height: var(--thumbWidth);
+  width: var(--thumbWidth);
   border-radius: 50%;
-  cursor: pointer; /* Cursor on hover */
-  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-.slider::-webkit-slider-thumb::after {
-  content: "";
-  height: 64px;
-  width: 64px;
-  background: red;
-  z-index: 20;
-}
-.slider:focus-visible::-webkit-slider-thumb {
-  background: white;
-  box-shadow: 0 0 3px 4px #4f84f7;
-  /* border: 2px white solid; */
-  outline: 4px #4f84f7 solid;
-  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
-  /* outline-offset: 2px; */
-}
-.slider::-moz-range-thumb {
-  width: 25px; /* Set a specific slider handle width */
-  height: 25px; /* Slider handle height */
-  background: #04aa6d; /* Green background */
-  cursor: pointer; /* Cursor on hover */
-}
-.slider::-moz-range-thumb:focus {
-  background: red;
-  width: 40px;
-  height: 40px;
+  line-height: 38px;
+
+  background: #4f84f7;
 }
 
-.tooltipText {
-  /* display: flex; */
-  /* justify-content: center; */
-  transform: rotate(-45deg) translateX(-2px);
+.thumb:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 0 2px 4px #4f84f7;
+}
+
+.track {
+  position: relative;
+  height: 4px;
+  background: #4f84f7;
+  border-radius: 4px;
+  bottom: calc(var(--markWidth) - 2px);
+}
+
+.mark {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+
+  bottom: calc(var(--markWidth) / 2);
+  width: var(--markWidth);
+  height: var(--markWidth);
+
+  transform: translateX(calc((var(--thumbWidth) - var(--markWidth)) / 2));
+  border-radius: 100%;
+
+  background: #4f84f7;
 }
