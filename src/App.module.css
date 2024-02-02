@@ -36,5 +36,7 @@
 
 @font-face {
   font-family: "Regular"; /*Can be any text*/
-  src: local("Geist"), url("./fonts/Geist/Geist-Regular.otf") format("opentype");
+  src:
+    local("Geist"),
+    url("./fonts/Geist/Geist-Regular.otf") format("opentype");
 }
