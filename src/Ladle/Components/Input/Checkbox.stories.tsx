@@ -12,13 +12,15 @@ export const Checkboxes: Story<Props> = ({}) => {
 
   return (
     <div>
-      <Checkbox
-        value="1"
-        name="test"
-        label={`One Selected: ${oneChecked}`}
-        checked={oneChecked}
-        setChecked={setOneChecked}
-      ></Checkbox>
+      <div>
+        <Checkbox
+          value="1"
+          name="test"
+          label={`One Selected: ${oneChecked}`}
+          checked={oneChecked}
+          setChecked={setOneChecked}
+        ></Checkbox>
+      </div>
       <Checkbox
         value="2"
         name="test"
