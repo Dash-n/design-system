@@ -1,13 +1,12 @@
-.button {
+.a {
   display: flex;
   align-items: center;
-  justify-content: left;
-  gap: 8px;
 
   height: 40px;
   width: 100%;
   border-radius: 8px;
-  padding: 16px 16px;
+  padding: 0 16px;
+  box-sizing: border-box;
 
   background-color: white;
   color: #365aa8;
@@ -17,15 +16,17 @@
 
   border: none;
 }
-
-.button:hover:not(:disabled) {
-  border: 1px #a3bffb solid;
+a:link {
+  text-decoration: none;
 }
-.button:active:not(:disabled) {
+.a:hover:not(:disabled) {
+  outline: 1px #a3bffb solid;
+}
+.a:active:not(:disabled) {
   background-color: #e9f1fd;
 }
 
-.button:disabled {
+.a:disabled {
   background-color: var(--main-disabled-color);
 }
 .warning:disabled {

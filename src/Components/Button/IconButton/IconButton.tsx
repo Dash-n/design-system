@@ -1,6 +1,7 @@
 import type { Story } from "@ladle/react";
 import styles from "./IconButton.module.css";
 import { MdEdit, MdSettings, MdDelete } from "react-icons/md";
+import { IconContext } from "react-icons";
 
 type Props = {
   label?: string;
@@ -16,7 +17,11 @@ const iconMappings = {
 
 export const IconButton: Story<Props> = ({ variant, disabled }) => (
   <button className={`${styles[variant]} ${styles.button}`} disabled={disabled}>
-    {iconMappings[variant].icon}
+    <IconContext.Provider value={{ size: "24px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+        {iconMappings[variant].icon}
+      </div>
+    </IconContext.Provider>
   </button>
 );
 

@@ -1,0 +1,112 @@
+.container {
+  height: 128px;
+  width: 184px;
+  border-radius: 8px;
+
+  position: relative;
+  background-color: #f4f4f4;
+  clip-path: url("../../../images/folder.svg");
+}
+#triangle-bottomleft {
+  width: 0;
+  height: 0;
+  border-bottom: 100px solid red;
+  border-right: 100px solid transparent;
+}
+
+.a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+  width: 100%;
+
+  color: #4f84f7;
+
+  font-size: large;
+
+  font-family: "Geist";
+
+  border: none;
+}
+a:link {
+  text-decoration: none;
+}
+.a:hover:not(:disabled) {
+  outline: 1px #4f84f7 solid;
+}
+a:focus ~ .buttonContainer {
+  opacity: 100;
+}
+.container:hover:not(:disabled) .buttonContainer {
+  opacity: 100;
+  user-select: all;
+}
+
+.a:disabled {
+  background-color: var(--main-disabled-color);
+}
+.warning:disabled {
+  background-color: var(--warning-disabled-color);
+}
+
+p {
+  text-align: center;
+}
+
+.buttonContainer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 4px 4px;
+  display: flex;
+  flex-direction: row;
+  gap: 4px;
+  opacity: 0;
+  /* user-select: none; */
+  /* display: none; */
+}
+
+.iconButton {
+  /* opacity: 0; */
+}
+
+/* .buttonContainer .iconButton:focus,
+.buttonContainer .iconButton:focus ~ .iconButton {
+  opacity: 100%;
+} */
+
+.buttonContainer:hover,
+.buttonContainer:focus-within {
+  right: 0;
+  opacity: 100;
+  user-select: all;
+}
+
+.iconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  width: 24px;
+  padding: 0;
+  border-radius: 4px;
+  background: white;
+}
+
+.iconButton.primary {
+  color: #4f84f7;
+  border: 2px #4f84f7 solid;
+}
+.iconButton.primary:hover {
+  background: #ceddfd;
+}
+.iconButton.warning {
+  color: #ff2929;
+  border: 2px #ff2929 solid;
+}
+
+.iconButton.warning:hover {
+  background: #ffa1a1;
+}
