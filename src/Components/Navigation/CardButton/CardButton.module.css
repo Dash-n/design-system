@@ -27,7 +27,8 @@ a:link {
   text-decoration: none;
 }
 .a:hover:not(:disabled) {
-  outline: 1px #4f84f7 solid;
+  border: 2px #4f84f7 solid;
+  border-radius: 8px;
 }
 a:focus ~ .buttonContainer {
   opacity: 100;
@@ -57,18 +58,7 @@ p {
   flex-direction: row;
   gap: 4px;
   opacity: 0;
-  /* user-select: none; */
-  /* display: none; */
 }
-
-.iconButton {
-  /* opacity: 0; */
-}
-
-/* .buttonContainer .iconButton:focus,
-.buttonContainer .iconButton:focus ~ .iconButton {
-  opacity: 100%;
-} */
 
 .buttonContainer:hover,
 .buttonContainer:focus-within {

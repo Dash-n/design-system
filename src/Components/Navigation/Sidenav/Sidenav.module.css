@@ -1,0 +1,75 @@
+.sidenav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  gap: 8px;
+  width: 300px;
+  height: 100%;
+  flex-direction: column;
+  overflow: hidden;
+  background: white;
+  padding: 8px 0;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.565, 1);
+  box-shadow: 2px 0 6px #c4c4c4;
+  z-index: 2;
+}
+
+.sidenav.open {
+  width: 300px;
+  padding: 8px 8px;
+
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.565, 1);
+}
+
+.toggleButton {
+  display: none;
+  align-items: center;
+  gap: 24px;
+  margin: 8px;
+  width: 40px;
+  height: 40px;
+  background: white;
+  color: #4f84f7;
+  border: 2px solid #4f84f7;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.toggleButton.inside {
+  position: absolute;
+  right: 10px;
+  border-radius: 50%;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+  /* user-select: none; */
+  opacity: 0;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.565, 1);
+}
+
+.overlay.show {
+  display: block;
+  opacity: 100;
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.565, 1);
+}
+
+@media only screen and (max-width: 768px) {
+  .sidenav {
+    width: 0px;
+  }
+  .toggleButton {
+    display: inline;
+  }
+  .toggleButton.inside {
+    display: flex;
+  }
+}

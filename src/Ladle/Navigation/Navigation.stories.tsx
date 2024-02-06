@@ -2,6 +2,7 @@ import type { Story } from "@ladle/react";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { CardButton } from "../../Components/Navigation/CardButton/CardButton.tsx";
 import { FolderButton } from "../../Components/Navigation/FolderButton/FolderButton.tsx";
+import { Sidenav } from "../../Components/Navigation/Sidenav/Sidenav.tsx";
 
 type Props = {
   label?: string;
@@ -53,5 +54,17 @@ export const FolderButtons: Story<Props> = ({}) => (
   >
     <FolderButton label="Inputs" link=""></FolderButton>
     <FolderButton label="Report" link=""></FolderButton>
+  </div>
+);
+export const Sidenavs: Story<Props> = ({}) => (
+  <div
+    style={{
+      width: "100%",
+      height: "50vh",
+      background: "#F4F4F4",
+      position: "relative",
+    }}
+  >
+    <Sidenav> </Sidenav>
   </div>
 );
