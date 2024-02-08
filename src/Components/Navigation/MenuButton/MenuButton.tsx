@@ -14,14 +14,9 @@ import {
 } from "react-icons/md";
 
 type Props = {
-  label?: string;
   link: string;
   disabled?: boolean;
-  color?: string[];
   variant: string;
-  icon?: string;
-  size?: string;
-  state?: string;
 };
 
 const iconMappings = {
@@ -36,7 +31,11 @@ const iconMappings = {
   screening: { icon: <MdBarChart />, label: "Screening" },
 };
 
-export const MenuButton: Story<Props> = ({ variant, disabled, link }) => (
+export const MenuButton: Story<Props> = ({
+  variant,
+  disabled,
+  link,
+}: Props) => (
   <a
     href={link}
     className={`${styles[variant]} ${styles.a}`}

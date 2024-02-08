@@ -7,31 +7,38 @@ import { IconContext } from "react-icons";
 type Props = {
   label?: string;
   link: string;
-  disabled?: boolean;
-  color?: string[];
-  icon?: string;
-  size?: string;
-  state?: string;
+  editCallback: () => void;
+  deleteCallback: () => void;
 };
 
-export const FolderButton: Story<Props> = ({ label, disabled, link }) => (
+export const FolderButton: Story<Props> = ({
+  label,
+  link,
+  editCallback,
+  deleteCallback,
+}: Props) => (
   <div className={styles.container}>
-    <div className={styles.wrapper}>
-      <a href={link} className={styles.a}>
-        <p style={{ width: "100%", textWrap: "wrap" }}>
-          {toTitlecase(label ?? "")}
-        </p>
-      </a>
-      <div className={styles.buttonContainer}>
-        <IconContext.Provider value={{ size: "18px" }}>
-          <button className={`${styles.iconButton} ${styles.warning}`}>
-            <MdDeleteForever />
-          </button>
-          <button className={`${styles.iconButton} ${styles.primary}`}>
-            <MdEdit />
-          </button>
-        </IconContext.Provider>
-      </div>
+    <a href={link} className={styles.a}>
+      <p style={{ width: "100%", textWrap: "wrap" }}>
+        {toTitlecase(label ?? "")}
+      </p>
+    </a>
+    <div className={styles.buttonContainer}>
+      <IconContext.Provider value={{ size: "18px" }}>
+        <button
+          className={`${styles.iconButton} ${styles.warning}`}
+          onClick={deleteCallback}
+        >
+          <MdDeleteForever />
+        </button>
+        <button
+          className={`${styles.iconButton} ${styles.primary}`}
+          onClick={editCallback}
+        >
+          <MdEdit />
+        </button>
+      </IconContext.Provider>
     </div>
+    {/* </div> */}
   </div>
 );

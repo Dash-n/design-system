@@ -30,32 +30,76 @@ export const MenuButtons: Story<Props> = ({}) => (
     <MenuButton variant="indivphysio" link="google.com"></MenuButton>
   </div>
 );
-export const CardButtons: Story<Props> = ({}) => (
-  <div
-    style={{
-      display: "flex",
-      gap: "8px",
-      // width: "300px",
-      flexDirection: "row",
-    }}
-  >
-    <CardButton label="Inputs" link=""></CardButton>
-    <CardButton label="Report" link=""></CardButton>
-  </div>
-);
-export const FolderButtons: Story<Props> = ({}) => (
-  <div
-    style={{
-      display: "flex",
-      gap: "8px",
-      // width: "300px",
-      flexDirection: "row",
-    }}
-  >
-    <FolderButton label="Inputs" link=""></FolderButton>
-    <FolderButton label="Report" link=""></FolderButton>
-  </div>
-);
+export const CardButtons: Story<Props> = ({}) => {
+  const Edit = () => {
+    console.log("Edit");
+  };
+  const Delete = () => {
+    console.log("Delete");
+  };
+  const Duplicate = () => {
+    console.log("Duplicate");
+  };
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: "8px",
+        // width: "300px",
+        flexDirection: "row",
+      }}
+    >
+      <CardButton
+        editCallback={Edit}
+        deleteCallback={Delete}
+        duplicateCallback={Duplicate}
+        label="Inputs"
+        link=""
+      ></CardButton>
+      <CardButton
+        editCallback={Edit}
+        deleteCallback={Delete}
+        duplicateCallback={Duplicate}
+        label="Report"
+        link=""
+      ></CardButton>
+    </div>
+  );
+};
+
+export const FolderButtons: Story<Props> = ({}) => {
+  const Edit = () => {
+    console.log("Edit");
+  };
+  const Delete = () => {
+    console.log("Delete");
+  };
+
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: "8px",
+        // width: "300px",
+        flexDirection: "row",
+      }}
+    >
+      <FolderButton
+        label="Inputs"
+        link=""
+        editCallback={Edit}
+        deleteCallback={Delete}
+      ></FolderButton>
+      <FolderButton
+        label="Report"
+        link=""
+        editCallback={Edit}
+        deleteCallback={Delete}
+      ></FolderButton>
+    </div>
+  );
+};
 export const Sidenavs: Story<Props> = ({}) => (
   <div
     style={{
@@ -65,6 +109,6 @@ export const Sidenavs: Story<Props> = ({}) => (
       position: "relative",
     }}
   >
-    <Sidenav> </Sidenav>
+    <Sidenav></Sidenav>
   </div>
 );

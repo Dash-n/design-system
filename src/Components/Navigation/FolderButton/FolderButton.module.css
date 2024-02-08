@@ -2,22 +2,15 @@
   height: 128px;
   width: 184px;
   border-radius: 8px;
-
   position: relative;
   background-color: #f4f4f4;
-  clip-path: url("../../../images/folder.svg");
-}
-#triangle-bottomleft {
-  width: 0;
-  height: 0;
-  border-bottom: 100px solid red;
-  border-right: 100px solid transparent;
 }
 
 .a {
   display: flex;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 
   height: 100%;
   width: 100%;
@@ -25,23 +18,54 @@
   color: #4f84f7;
 
   font-size: large;
-
   font-family: "Geist";
 
   border: none;
 }
-a:link {
+.a:link {
   text-decoration: none;
 }
+.a:focus,
 .a:hover:not(:disabled) {
-  outline: 1px #4f84f7 solid;
+  border: 2px #4f84f7 solid;
+  border-radius: 0 8px 8px 8px;
 }
-a:focus ~ .buttonContainer {
-  opacity: 100;
-}
+
 .container:hover:not(:disabled) .buttonContainer {
   opacity: 100;
   user-select: all;
+}
+
+.a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: -8px;
+  height: 10px;
+  width: 100%;
+  background: #f4f4f4;
+  z-index: -1;
+  clip-path: polygon(0% 0%, 20% 0%, 40% 100%, 0% 100%);
+  border-radius: 8px 0 0 0;
+  /* box-shadow: red 60px -16px; */
+}
+.a::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: -6px;
+  height: 8px;
+  width: calc(100% - 9px);
+  background: #f4f4f4;
+  z-index: 0;
+  clip-path: polygon(0% 0%, 20% 0%, 36% 100%, 0% 100%);
+  border-radius: 6px 0 0 0;
+  box-shadow: red 60px -16px;
+}
+
+a:focus::after,
+a:hover:not(:disabled):after {
+  background: #4f84f7;
 }
 
 .a:disabled {
@@ -57,6 +81,7 @@ p {
 
 .buttonContainer {
   position: absolute;
+  box-sizing: border-box;
   right: 0;
   top: 0;
   padding: 4px 4px;
@@ -64,18 +89,7 @@ p {
   flex-direction: row;
   gap: 4px;
   opacity: 0;
-  /* user-select: none; */
-  /* display: none; */
 }
-
-.iconButton {
-  /* opacity: 0; */
-}
-
-/* .buttonContainer .iconButton:focus,
-.buttonContainer .iconButton:focus ~ .iconButton {
-  opacity: 100%;
-} */
 
 .buttonContainer:hover,
 .buttonContainer:focus-within {
