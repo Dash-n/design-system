@@ -7,7 +7,7 @@ type Props = {
   label: string;
   checked?: boolean;
   disabled?: boolean;
-  setChecked: (e: boolean) => void;
+  setChecked: (value: string) => void;
 };
 
 export const Radio: Story<Props> = ({
@@ -22,12 +22,10 @@ export const Radio: Story<Props> = ({
     <input
       type="radio"
       name={name}
-      // checked={checked}
       value={value}
       disabled={disabled}
-      onChange={(e) => {
-        setChecked(!checked);
-        console.log(checked);
+      onChange={() => {
+        setChecked(value);
       }}
     />
     <div className={styles.inputLabel}>{label}</div>

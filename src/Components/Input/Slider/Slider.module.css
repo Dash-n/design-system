@@ -53,3 +53,17 @@
 
   background: #4f84f7;
 }
+
+.toolTip {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+
+  width: var(--tooltipWidth);
+  height: var(--tooltipWidth);
+  border-radius: 50% 50% 50% 0;
+  transform: translateY(calc(var(--tooltipWidth) * -1.25)) rotate(-45deg);
+  background: #4f84f7;
+  color: white;
+  content: "";
+}
