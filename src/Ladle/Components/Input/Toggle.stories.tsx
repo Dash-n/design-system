@@ -12,19 +12,19 @@ export const TwoWayToggles: Story<Props> = ({}) => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <TwoWayToggle value="1" name="defaulttwo"></TwoWayToggle>
       <TwoWayToggle
+        // id="set"
         value="1"
-        name="two"
-        // checked={oneChecked}
-        // setChecked={setChecked}
+        name="set"
+        label={["SuperLeft", "Right"]}
       ></TwoWayToggle>
+      <ThreeWayToggle value="1" name="three"></ThreeWayToggle>
       <ThreeWayToggle
         value="1"
-        name="three"
-        // checked={oneChecked}
-        // setChecked={setChecked}
+        name="four"
+        label={["One", "Two", "Three"]}
       ></ThreeWayToggle>
-      <div>{/* Checked: {oneChecked && "1"} {twoChecked && "2"}{" "} */}</div>
     </div>
   );
 };

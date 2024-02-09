@@ -5,19 +5,17 @@ import { useState } from "react";
 type Props = {
   name: string;
   value: string;
-  label?: string;
-  checked?: boolean;
+  label?: string[];
   disabled?: boolean;
-  setChecked?: (e: boolean) => void;
+  // setValue: (e: string) => void;
 };
 
 export const TwoWayToggle: Story<Props> = ({
   label,
-  checked,
   disabled,
   name,
-  // value
-  // setChecked,
+  // value,
+  // setValue,
 }) => {
   const [value, setValue] = useState("left");
 
@@ -40,12 +38,9 @@ export const TwoWayToggle: Story<Props> = ({
           checked={value === "left"}
           value="1"
           disabled={disabled}
-          onChange={
-            handleLeftChange
-            // console.log(checked);
-          }
+          onChange={handleLeftChange}
         />
-        <span className={`${styles.checkmark} ${styles.left}`}>L</span>
+        <span className={`${styles.checkmark} ${styles.left}`}>{label[0]}</span>
       </label>
 
       <label className={styles.switch}>
@@ -58,15 +53,15 @@ export const TwoWayToggle: Story<Props> = ({
           disabled={disabled}
           onChange={handleRightChange}
         />
-        {/* <div className={styles.inputLabel}>{label}</div> */}
 
-        <span className={`${styles.checkmark} ${styles.right}`}>R</span>
+        <span className={`${styles.checkmark} ${styles.right}`}>
+          {label[1]}
+        </span>
       </label>
-      <div>{value}</div>
     </div>
   );
 };
 
 TwoWayToggle.defaultProps = {
-  name: "",
+  label: ["L", "R"],
 };

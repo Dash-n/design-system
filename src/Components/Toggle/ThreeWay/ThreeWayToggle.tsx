@@ -5,20 +5,14 @@ import { useState } from "react";
 type Props = {
   name: string;
   value: string;
-  label?: string;
+  label?: string[];
+  icon?: string[];
   checked?: boolean;
   disabled?: boolean;
   setChecked?: (e: boolean) => void;
 };
 
-export const ThreeWayToggle: Story<Props> = ({
-  label,
-  checked,
-  disabled,
-  name,
-  // value
-  // setChecked,
-}) => {
+export const ThreeWayToggle: Story<Props> = ({ label, disabled, name }) => {
   const [value, setValue] = useState("left");
 
   const handleLeftChange = () => {
@@ -44,12 +38,9 @@ export const ThreeWayToggle: Story<Props> = ({
           checked={value === "left"}
           value="1"
           disabled={disabled}
-          onChange={
-            handleLeftChange
-            // console.log(checked);
-          }
+          onChange={handleLeftChange}
         />
-        <span className={`${styles.checkmark} ${styles.left}`}>L</span>
+        <span className={`${styles.checkmark} ${styles.left}`}>{label[0]}</span>
       </label>
       <label className={styles.switch}>
         <input
@@ -59,12 +50,11 @@ export const ThreeWayToggle: Story<Props> = ({
           checked={value === "middle"}
           value="2"
           disabled={disabled}
-          onChange={
-            handleMiddleChange
-            // console.log(checked);
-          }
+          onChange={handleMiddleChange}
         />
-        <span className={`${styles.checkmark} ${styles.middle}`}>M</span>
+        <span className={`${styles.checkmark} ${styles.middle}`}>
+          {label[1]}
+        </span>
       </label>
 
       <label className={styles.switch}>
@@ -77,11 +67,15 @@ export const ThreeWayToggle: Story<Props> = ({
           disabled={disabled}
           onChange={handleRightChange}
         />
-        {/* <div className={styles.inputLabel}>{label}</div> */}
 
-        <span className={`${styles.checkmark} ${styles.right}`}>R</span>
+        <span className={`${styles.checkmark} ${styles.right}`}>
+          {label[2]}
+        </span>
       </label>
       <div>{value}</div>
     </div>
   );
+};
+ThreeWayToggle.defaultProps = {
+  label: ["L", "M", "R"],
 };
