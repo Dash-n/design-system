@@ -1,0 +1,27 @@
+:root {
+  font-size: large;
+  font-family: "Geist";
+}
+
+table {
+  font-family: "Geist";
+  border-spacing: 0px;
+}
+
+.headerCell {
+  font-size: 14px;
+  font-weight: 600;
+  height: 48px;
+  padding: 8px 16px;
+  background-color: #4f84f7;
+  color: white;
+}
+
+.bodyCell {
+  font-size: 16px;
+  font-weight: 400;
+  padding: 8px;
+  color: #606060;
+  background-color: white;
+  text-align: center;
+}
