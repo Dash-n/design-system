@@ -58,11 +58,7 @@
 
 .container input:focus-visible ~ .checkmark {
   box-shadow: 0 0 2px 3px #4f84f7;
-  /*box-shadow instead of outline to get rounded edges.
-  compatibility issues?*/
-
   border: 2px #606060 solid;
-  /*border visible when tab-focused to seperate shadow from background*/
 }
 
 .checkmark:after {

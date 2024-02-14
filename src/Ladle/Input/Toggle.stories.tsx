@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
-import { TwoWayToggle } from "../../../Components/Toggle/TwoWay/TwoWayToggle.tsx";
-import { ThreeWayToggle } from "../../../Components/Toggle/ThreeWay/ThreeWayToggle.tsx";
+import { TwoWayToggle } from "../../Components/Toggle/TwoWay/TwoWayToggle.tsx";
+import { ThreeWayToggle } from "../../Components/Toggle/ThreeWay/ThreeWayToggle.tsx";
 import { useState } from "react";
 
 type Props = {
@@ -11,7 +11,6 @@ export const TwoWayToggles: Story<Props> = ({}) => {
   const [value, setValue] = useState("left");
 
   const handleChange = (e) => {
-    // console.log(e);
     setValue(e);
   };
 
