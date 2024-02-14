@@ -1,0 +1,69 @@
+:root {
+  --tooltipWidth: 36px;
+  --markWidth: 16px;
+  --thumbWidth: 24px;
+}
+
+.horizontalSlider {
+  width: 100%;
+  height: calc(var(--markWidth) * 2 + var(--tooltipWidth) * 1.5);
+}
+
+.thumb {
+  cursor: pointer;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  bottom: calc(var(--markWidth) - var(--thumbWidth) / 2);
+  height: var(--thumbWidth);
+  width: var(--thumbWidth);
+  border-radius: 50%;
+  line-height: 38px;
+
+  background: #4f84f7;
+}
+
+.thumb:focus {
+  outline: none;
+  background: white;
+  box-shadow: 0 0 2px 4px #4f84f7;
+}
+
+.track {
+  position: relative;
+  height: 4px;
+  background: #4f84f7;
+  border-radius: 4px;
+  bottom: calc(var(--markWidth) - 2px);
+}
+
+.mark {
+  cursor: pointer;
+  position: absolute;
+  display: block;
+
+  bottom: calc(var(--markWidth) / 2);
+  width: var(--markWidth);
+  height: var(--markWidth);
+
+  transform: translateX(calc((var(--thumbWidth) - var(--markWidth)) / 2));
+  border-radius: 100%;
+
+  background: #4f84f7;
+}
+
+.toolTip {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+
+  width: var(--tooltipWidth);
+  height: var(--tooltipWidth);
+  border-radius: 50% 50% 50% 0;
+  transform: translateY(calc(var(--tooltipWidth) * -1.25)) rotate(-45deg);
+  background: #4f84f7;
+  color: white;
+  content: "";
+}
