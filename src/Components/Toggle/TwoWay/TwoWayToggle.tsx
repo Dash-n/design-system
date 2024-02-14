@@ -4,58 +4,45 @@ import { useState } from "react";
 
 type Props = {
   name: string;
-  value: string;
-  label?: string[];
-  disabled?: boolean;
-  // setValue: (e: string) => void;
+  values?: string[];
+  labels?: string[];
+  setChecked: (e: string) => void;
 };
 
 export const TwoWayToggle: Story<Props> = ({
-  label,
-  disabled,
+  values,
+  labels,
   name,
-  // value,
-  // setValue,
+  setChecked,
 }) => {
-  const [value, setValue] = useState("left");
-
-  const handleLeftChange = () => {
-    setValue("left");
-    console.log(value);
-  };
-  const handleRightChange = () => {
-    setValue("right");
-    console.log(value);
-  };
-
   return (
     <div className={styles.container}>
       <label className={styles.switch}>
         <input
           type="radio"
-          id="1"
+          // id={values[0]}
           name={name}
-          checked={value === "left"}
-          value="1"
-          disabled={disabled}
-          onChange={handleLeftChange}
+          value={values[0]}
+          onChange={(e) => {
+            setChecked(e.target.value);
+          }}
         />
-        <span className={`${styles.checkmark} ${styles.left}`}>{label[0]}</span>
+        <span className={`${styles.checkmark} ${styles.left}`}>
+          {labels[0]}
+        </span>
       </label>
-
       <label className={styles.switch}>
         <input
           type="radio"
+          // id={values[0]}
           name={name}
-          id="3"
-          checked={value === "right"}
-          value="3"
-          disabled={disabled}
-          onChange={handleRightChange}
+          value={values[1]}
+          onChange={(e) => {
+            setChecked(e.target.value);
+          }}
         />
-
         <span className={`${styles.checkmark} ${styles.right}`}>
-          {label[1]}
+          {labels[1]}
         </span>
       </label>
     </div>
@@ -63,5 +50,6 @@ export const TwoWayToggle: Story<Props> = ({
 };
 
 TwoWayToggle.defaultProps = {
-  label: ["L", "R"],
+  labels: ["L", "R"],
+  values: ["0", "1"],
 };

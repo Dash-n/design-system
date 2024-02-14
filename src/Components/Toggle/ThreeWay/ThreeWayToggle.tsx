@@ -4,56 +4,43 @@ import { useState } from "react";
 
 type Props = {
   name: string;
-  value: string;
-  label?: string[];
-  icon?: string[];
-  checked?: boolean;
-  disabled?: boolean;
-  setChecked?: (e: boolean) => void;
+  values?: string[];
+  labels?: string[];
+  setChecked: (e: string) => void;
 };
 
-export const ThreeWayToggle: Story<Props> = ({ label, disabled, name }) => {
-  const [value, setValue] = useState("left");
-
-  const handleLeftChange = () => {
-    setValue("left");
-    console.log(value);
-  };
-  const handleMiddleChange = () => {
-    setValue("middle");
-    console.log(value);
-  };
-  const handleRightChange = () => {
-    setValue("right");
-    console.log(value);
-  };
-
+export const ThreeWayToggle: Story<Props> = ({
+  values,
+  labels,
+  name,
+  setChecked,
+}) => {
   return (
     <div className={styles.container}>
       <label className={styles.switch}>
         <input
           type="radio"
-          id="1"
           name={name}
-          checked={value === "left"}
-          value="1"
-          disabled={disabled}
-          onChange={handleLeftChange}
+          value={values[0]}
+          onChange={(e) => {
+            setChecked(e.target.value);
+          }}
         />
-        <span className={`${styles.checkmark} ${styles.left}`}>{label[0]}</span>
+        <span className={`${styles.checkmark} ${styles.left}`}>
+          {labels[0]}
+        </span>
       </label>
       <label className={styles.switch}>
         <input
           type="radio"
-          id="2"
           name={name}
-          checked={value === "middle"}
-          value="2"
-          disabled={disabled}
-          onChange={handleMiddleChange}
+          value={values[1]}
+          onChange={(e) => {
+            setChecked(e.target.value);
+          }}
         />
         <span className={`${styles.checkmark} ${styles.middle}`}>
-          {label[1]}
+          {labels[1]}
         </span>
       </label>
 
@@ -61,21 +48,20 @@ export const ThreeWayToggle: Story<Props> = ({ label, disabled, name }) => {
         <input
           type="radio"
           name={name}
-          id="3"
-          checked={value === "right"}
-          value="3"
-          disabled={disabled}
-          onChange={handleRightChange}
+          value={values[2]}
+          onChange={(e) => {
+            setChecked(e.target.value);
+          }}
         />
 
         <span className={`${styles.checkmark} ${styles.right}`}>
-          {label[2]}
+          {labels[2]}
         </span>
       </label>
-      <div>{value}</div>
     </div>
   );
 };
 ThreeWayToggle.defaultProps = {
-  label: ["L", "M", "R"],
+  labels: ["L", "M", "R"],
+  values: ["0", "1", "2"],
 };

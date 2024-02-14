@@ -8,23 +8,44 @@ type Props = {
 };
 
 export const TwoWayToggles: Story<Props> = ({}) => {
-  const [oneChecked, setChecked] = useState("left");
+  const [value, setValue] = useState("left");
+
+  const handleChange = (e) => {
+    // console.log(e);
+    setValue(e);
+  };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      <TwoWayToggle value="1" name="defaulttwo"></TwoWayToggle>
+      <TwoWayToggle name="one" setChecked={handleChange}></TwoWayToggle>
       <TwoWayToggle
-        // id="set"
-        value="1"
-        name="set"
-        label={["SuperLeft", "Right"]}
+        name="two"
+        values={["one", "two", "three"]}
+        labels={["One", "Two", "Three"]}
+        setChecked={handleChange}
       ></TwoWayToggle>
-      <ThreeWayToggle value="1" name="three"></ThreeWayToggle>
+      {value}
+    </div>
+  );
+};
+
+export const ThreeWayToggles: Story<Props> = ({}) => {
+  const [value, setValue] = useState("one");
+
+  const handleChange = (e) => {
+    setValue(e);
+  };
+
+  return (
+    <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      <ThreeWayToggle name="one" setChecked={handleChange}></ThreeWayToggle>
       <ThreeWayToggle
-        value="1"
-        name="four"
-        label={["One", "Two", "Three"]}
+        name="two"
+        values={["one", "two", "three"]}
+        labels={["One", "Two", "Three"]}
+        setChecked={handleChange}
       ></ThreeWayToggle>
+      {value}
     </div>
   );
 };
