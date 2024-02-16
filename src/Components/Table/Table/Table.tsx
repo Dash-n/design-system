@@ -1,55 +1,62 @@
 import type { Story } from "@ladle/react";
 import styles from "./Table.module.css";
-import { useState } from "react";
+import { IconContext } from "react-icons";
 
-// type Props = {
-//   label: string;
-//   disabled?: boolean;
-//   variant: string;
-// };
-
-type User = {
-  firstName: string;
-  lastName: string;
-  age: number;
-  visits: number;
-  progress: number;
-  status: string;
+type Props = {
+  content: string[];
+  sort?: { key: null; direction: string };
+  handleSort: (key: string) => void;
 };
 
-export const Table: Story = () => {
-  const [data, setData] = useState<User[]>([]);
+export const Table: Story<Props> = ({ content, sort, handleSort }) => {
+  const renderTableHeaders = () => {
+    if (content.length === 0) {
+      return null;
+    }
+    const headers = Object.keys(content[0]);
+    return (
+      <IconContext.Provider value={{ size: "24px" }}>
+        <thead>
+          <tr>
+            {headers.map((header) => (
+              <th
+                className={styles.headerCell}
+                key={header}
+                onClick={() => handleSort(header)}
+                tabIndex={0}
+              >
+                {header}{" "}
+                {sort.key === header && (sort.direction === "asc" ? "↑" : "↓")}
+              </th>
+            ))}
+          </tr>
+        </thead>
+      </IconContext.Provider>
+    );
+  };
+
+  const renderTableRows = () => {
+    return (
+      <tbody>
+        {content.map((item, index) => (
+          <tr key={index}>
+            {Object.values(item).map((value, subIndex) => (
+              <td className={styles.bodyCell} key={subIndex}>
+                {value}
+              </td>
+            ))}
+          </tr>
+        ))}
+      </tbody>
+    );
+  };
 
   return (
-    <table>
-      <thead>
-        <tr className={styles.headerRow}>
-          <th className={styles.headerCell}>Header</th>
-          <th className={styles.headerCell}>Header</th>
-          <th className={styles.headerCell}>Header</th>
-          <th className={styles.headerCell}>Header</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-        </tr>
-        <tr>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-        </tr>
-        <tr>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-          <td className={styles.bodyCell}>Body</td>
-        </tr>
-      </tbody>
-    </table>
+    <div>
+      <table>
+        {renderTableHeaders()}
+        {renderTableRows()}
+      </table>
+    </div>
   );
 };

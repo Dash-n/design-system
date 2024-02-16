@@ -15,6 +15,9 @@ table {
   padding: 8px 16px;
   background-color: #4f84f7;
   color: white;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .bodyCell {
