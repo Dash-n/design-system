@@ -1,6 +1,5 @@
 import type { Story } from "@ladle/react";
 import styles from "./Paginator.module.css";
-import { MdEdit, MdSettings, MdDelete } from "react-icons/md";
 import { TextInput } from "../../Input/Text/TextInput";
 import {
   MdKeyboardDoubleArrowRight,
@@ -8,7 +7,6 @@ import {
   MdKeyboardArrowLeft,
   MdKeyboardArrowRight,
 } from "react-icons/md";
-import { useState } from "react";
 import { IconContext } from "react-icons";
 
 type Props = {
@@ -19,18 +17,11 @@ type Props = {
   changePage: (e: number) => void;
 };
 
-const iconMappings = {
-  edit: { icon: <MdEdit />, label: "Inputs" },
-  settings: { icon: <MdSettings />, label: "Settings" },
-  delete: { icon: <MdDelete />, label: "Delete" },
-};
-
 export const Paginator: Story<Props> = ({
-  pageSize = 15,
+  pageSize = 10,
   pageIndex,
-  pageCount,
+  pageCount = 1,
   changePage,
-  disabled,
 }) => {
   return (
     <div className={styles.paginator}>
@@ -43,19 +34,18 @@ export const Paginator: Story<Props> = ({
         <button
           className={styles.paginButton}
           onClick={() => {
-            changePage(0);
-            // checkFirst();
+            changePage(0); //First Page
           }}
+          disabled={pageIndex === 0}
         >
           <MdKeyboardDoubleArrowLeft />
         </button>
         <button
           className={styles.paginButton}
           onClick={() => {
-            changePage(-1);
-            // checkFirst();
+            changePage(1); //Prev Page
           }}
-          disabled={disabled}
+          disabled={pageIndex === 0}
         >
           <MdKeyboardArrowLeft />
         </button>
@@ -66,26 +56,22 @@ export const Paginator: Story<Props> = ({
         <button
           className={styles.paginButton}
           onClick={() => {
-            changePage(1);
-            // checkFirst();
+            changePage(2); //Next Page
           }}
+          disabled={pageIndex === pageCount - 1}
         >
           <MdKeyboardArrowRight />
         </button>
         <button
           className={styles.paginButton}
           onClick={() => {
-            changePage(2);
-            // checkFirst();
+            changePage(3); //Last Page
           }}
+          disabled={pageIndex === pageCount - 1}
         >
           <MdKeyboardDoubleArrowRight />
         </button>
       </IconContext.Provider>
     </div>
   );
-
-  Paginator.defaultProps = {
-    pageIndex: 0,
-  };
 };

@@ -10,9 +10,12 @@ type Props = {
 
 export const Paginators: Story<Props> = ({}) => {
   const [pageIndex, setPageIndex] = useState(0);
-  const [pageSize, setPageSize] = useState(10);
-  const [pageCount, setPageCount] = useState();
+  const [pageSize, setPageSize] = useState(5);
+  const [numberOfItems, setNumberOfItems] = useState(50);
+  // const [pageCount, setPageCount] = useState(5);
   const [isFirstPage, setPrevDisabled] = useState(true);
+
+  const pageCount = Math.ceil(numberOfItems / pageSize);
 
   const checkFirst = () => {
     setPrevDisabled(pageIndex < 1);
@@ -20,17 +23,28 @@ export const Paginators: Story<Props> = ({}) => {
     console.log(pageIndex);
   };
 
-  const changePage = (e: number) => {
-    console.log(e);
+  const changePage = (navFunction: number) => {
+    console.log(pageCount);
     console.log(pageIndex);
-    if (e == 2) {
-      setPageIndex(99);
-    } else {
-      console.log("Math " + Math.abs((pageIndex + e) * e));
-      setPageIndex(Math.abs((pageIndex + e) * e));
-      console.log("Page index: " + pageIndex);
+
+    if (navFunction === 0) {
+      setPageIndex(0);
     }
-    checkFirst();
+    if (navFunction === 1) {
+      setPageIndex((prev) => {
+        return prev > 0 ? (prev -= 1) : prev;
+      });
+    }
+    if (navFunction === 2) {
+      setPageIndex((prev) => {
+        return prev < pageCount - 1 ? (prev += 1) : prev;
+      });
+    }
+    if (navFunction === 3) {
+      setPageIndex(pageCount - 1);
+    }
+
+    // checkFirst();
     console.log("Page index: " + pageIndex);
   };
 
@@ -44,6 +58,7 @@ export const Paginators: Story<Props> = ({}) => {
         pageIndex={pageIndex}
         changePage={changePage}
         disabled={isFirstPage}
+        pageCount={pageCount}
       ></Paginator>
     </div>
   );
