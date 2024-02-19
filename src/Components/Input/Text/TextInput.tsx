@@ -20,7 +20,7 @@ export const TextInput: Story<Props> = ({
   maxLength,
   size,
 }) => (
-  <div className={styles.inputBox} style={{ width: "300px" }}>
+  <div className={styles.inputBox}>
     <input
       className={styles.input}
       id={id}

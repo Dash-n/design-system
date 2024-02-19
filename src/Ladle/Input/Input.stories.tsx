@@ -6,8 +6,9 @@ type Props = {
 };
 
 export const Inputs: Story<Props> = ({}) => (
-  <div>
+  <div style={{ width: "300px" }}>
     <TextInput id="name" name="name" label="Name"></TextInput>
+    <TextInput id="name" name="test"></TextInput>
     <TextInput
       id="country"
       name="country"

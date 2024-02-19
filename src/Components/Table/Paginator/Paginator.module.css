@@ -1,0 +1,36 @@
+.paginator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+  padding: 8px 8px;
+
+  font-size: 14px;
+  font-family: "Geist";
+
+  border: none;
+}
+
+.paginButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
+
+.paginButton:disabled {
+  cursor: default;
+}
+
+.paginText {
+  padding: 0 8px;
+}
+
+.paginInput {
+  width: 32px;
+  margin: 0 8px;
+}
