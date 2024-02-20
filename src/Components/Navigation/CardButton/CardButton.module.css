@@ -31,10 +31,10 @@ a:link {
   border-radius: 8px;
 }
 a:focus ~ .buttonContainer {
-  opacity: 100;
+  opacity: 1;
 }
 .container:hover:not(:disabled) .buttonContainer {
-  opacity: 100;
+  opacity: 1;
   user-select: all;
 }
 

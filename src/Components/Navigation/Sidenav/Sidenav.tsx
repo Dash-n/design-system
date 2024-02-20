@@ -42,8 +42,8 @@ export const Sidenav: Story<Props> = ({}) => {
             </IconContext.Provider>
           </button>
         </div>
-        {/* replace with input component after merging */}
-        <input type="select" />{" "}
+        {/* replace with select component after merging */}
+        <input type="select" />
         <MenuButton variant="inputs" link="google.com"></MenuButton>
         <MenuButton variant="database" link="google.com"></MenuButton>
         <MenuButton variant="reports" link="google.com"></MenuButton>

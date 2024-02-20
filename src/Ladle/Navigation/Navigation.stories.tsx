@@ -11,6 +11,13 @@ type Props = {
   link?: string;
 };
 
+const storyDiv = {
+  display: "flex",
+  gap: "8px",
+  width: "600px",
+  flexDirection: "row",
+};
+
 export const MenuButtons: Story<Props> = ({}) => (
   <div
     style={{
@@ -20,14 +27,14 @@ export const MenuButtons: Story<Props> = ({}) => (
       flexDirection: "column",
     }}
   >
-    <MenuButton variant="inputs" link="google.com"></MenuButton>
-    <MenuButton variant="database" link="google.com"></MenuButton>
-    <MenuButton variant="reports" link="google.com"></MenuButton>
-    <MenuButton variant="builder" link="google.com"></MenuButton>
-    <MenuButton variant="teamdash" link="google.com"></MenuButton>
-    <MenuButton variant="indivdash" link="google.com"></MenuButton>
-    <MenuButton variant="teamphysio" link="google.com"></MenuButton>
-    <MenuButton variant="indivphysio" link="google.com"></MenuButton>
+    <MenuButton variant="inputs" link="google.com" />
+    <MenuButton variant="database" link="google.com" />
+    <MenuButton variant="reports" link="google.com" />
+    <MenuButton variant="builder" link="google.com" />
+    <MenuButton variant="teamdash" link="google.com" />
+    <MenuButton variant="indivdash" link="google.com" />
+    <MenuButton variant="teamphysio" link="google.com" />
+    <MenuButton variant="indivphysio" link="google.com" />
   </div>
 );
 export const CardButtons: Story<Props> = ({}) => {
@@ -42,28 +49,21 @@ export const CardButtons: Story<Props> = ({}) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "8px",
-        // width: "300px",
-        flexDirection: "row",
-      }}
-    >
+    <div style={storyDiv}>
       <CardButton
         editCallback={Edit}
         deleteCallback={Delete}
         duplicateCallback={Duplicate}
         label="Inputs"
         link=""
-      ></CardButton>
+      />
       <CardButton
         editCallback={Edit}
         deleteCallback={Delete}
         duplicateCallback={Duplicate}
         label="Report"
         link=""
-      ></CardButton>
+      />
     </div>
   );
 };
@@ -77,26 +77,19 @@ export const FolderButtons: Story<Props> = ({}) => {
   };
 
   return (
-    <div
-      style={{
-        display: "flex",
-        gap: "8px",
-        // width: "300px",
-        flexDirection: "row",
-      }}
-    >
+    <div style={storyDiv}>
       <FolderButton
         label="Inputs"
         link=""
         editCallback={Edit}
         deleteCallback={Delete}
-      ></FolderButton>
+      />
       <FolderButton
         label="Report"
         link=""
         editCallback={Edit}
         deleteCallback={Delete}
-      ></FolderButton>
+      />
     </div>
   );
 };
@@ -109,6 +102,6 @@ export const Sidenavs: Story<Props> = ({}) => (
       position: "relative",
     }}
   >
-    <Sidenav></Sidenav>
+    <Sidenav />
   </div>
 );

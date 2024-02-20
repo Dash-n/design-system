@@ -30,9 +30,8 @@ export const OutlineButtons: Story<Props> = ({}) => (
 
 export const IconButtons: Story<Props> = ({}) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <IconButton variant="edit"></IconButton>
+    <IconButton variant="edit" iconSize="24px"></IconButton>
     <IconButton variant="settings"></IconButton>
     <IconButton variant="delete"></IconButton>
-    <IconButton variant="menu"></IconButton>
   </div>
 );

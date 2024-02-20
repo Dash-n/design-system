@@ -39,6 +39,5 @@ export const FolderButton: Story<Props> = ({
         </button>
       </IconContext.Provider>
     </div>
-    {/* </div> */}
   </div>
 );

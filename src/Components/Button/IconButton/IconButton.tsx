@@ -7,6 +7,7 @@ type Props = {
   label?: string;
   disabled?: boolean;
   variant: string;
+  iconSize?: string;
 };
 
 const iconMappings = {
@@ -15,12 +16,14 @@ const iconMappings = {
   delete: { icon: <MdDelete />, label: "Delete" },
 };
 
-export const IconButton: Story<Props> = ({ variant, disabled }) => (
+export const IconButton: Story<Props> = ({
+  variant,
+  disabled,
+  iconSize = "24px",
+}) => (
   <button className={`${styles[variant]} ${styles.button}`} disabled={disabled}>
-    <IconContext.Provider value={{ size: "24px" }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
-        {iconMappings[variant].icon}
-      </div>
+    <IconContext.Provider value={{ size: iconSize }}>
+      {iconMappings[variant].icon}
     </IconContext.Provider>
   </button>
 );
