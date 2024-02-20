@@ -12,7 +12,6 @@ type Props = {
 
 export const Radio: Story<Props> = ({
   label,
-  checked,
   disabled,
   name,
   value,

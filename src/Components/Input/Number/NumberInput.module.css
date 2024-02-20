@@ -1,6 +1,7 @@
 .input {
   height: 40px;
   width: 100%;
+  text-align: end;
   border-radius: 4px;
   box-sizing: border-box;
   border: 1px #c4c4c4 solid;

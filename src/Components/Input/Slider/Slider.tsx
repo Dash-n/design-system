@@ -10,7 +10,7 @@ type Props = {
   max: number;
   step: number;
   value: number;
-  setValue: (e: number) => void;
+  setValue: (value: number) => void;
 };
 
 export const Slider: Story<Props> = ({ max, min, step, value, setValue }) => {

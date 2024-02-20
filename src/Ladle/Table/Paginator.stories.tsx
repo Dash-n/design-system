@@ -12,21 +12,14 @@ export const Paginators: Story<Props> = ({}) => {
   const [pageIndex, setPageIndex] = useState(0);
   const [pageSize, setPageSize] = useState(5);
   const [numberOfItems, setNumberOfItems] = useState(50);
-  // const [pageCount, setPageCount] = useState(5);
-  const [isFirstPage, setPrevDisabled] = useState(true);
 
   const pageCount = Math.ceil(numberOfItems / pageSize);
 
-  const checkFirst = () => {
-    setPrevDisabled(pageIndex < 1);
-    console.log(isFirstPage);
-    console.log(pageIndex);
+  const setSize = (e) => {
+    setPageSize(e.target.value);
   };
 
   const changePage = (navFunction: number) => {
-    console.log(pageCount);
-    console.log(pageIndex);
-
     if (navFunction === 0) {
       setPageIndex(0);
     }
@@ -43,21 +36,37 @@ export const Paginators: Story<Props> = ({}) => {
     if (navFunction === 3) {
       setPageIndex(pageCount - 1);
     }
+  };
 
-    // checkFirst();
-    console.log("Page index: " + pageIndex);
+  const jumpPage = (e) => {
+    const newPage = e.target.value;
+    if (e.key === "Enter") {
+      if (newPage <= 0) {
+        setPageIndex(0);
+      } else if (newPage > pageCount) {
+        setPageIndex(pageCount - 1);
+      } else {
+        setPageIndex(e.target.value - 1);
+      }
+    }
   };
 
   useEffect;
 
   return (
     <div>
-      {pageIndex}
+      Page: {pageIndex + 1}
+      <br />
+      Items per page: {pageSize}
+      <br />
+      Total number of items: {numberOfItems}
       <Paginator
-        pageSize={10}
+        pageSize={pageSize}
         pageIndex={pageIndex}
+        numberOfItems={numberOfItems}
+        setItems={setSize}
         changePage={changePage}
-        disabled={isFirstPage}
+        jumpPage={jumpPage}
         pageCount={pageCount}
       ></Paginator>
     </div>

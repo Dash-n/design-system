@@ -1,5 +1,5 @@
 import type { Story } from "@ladle/react";
-import styles from "./TextInput.module.css";
+import styles from "./NumberInput.module.css";
 
 type Props = {
   id: string;
@@ -7,33 +7,37 @@ type Props = {
   name: string;
   placeholder?: string;
   disabled?: boolean;
-  maxLength?: number;
+  min: number;
+  max: number;
   size?: number;
-  // setText: () => void;
-  updateValue?: () => void;
+  setText?: () => void;
+  updateValue?: (e: number) => void;
 };
 
-export const TextInput: Story<Props> = ({
+export const NumberInput: Story<Props> = ({
   id,
   label,
   name,
   placeholder,
   disabled,
-  maxLength,
+  min,
+  max,
   size,
-  // setText,
+  setText,
   updateValue,
 }) => (
   <div className={styles.inputBox}>
     <input
+      type="number"
       className={styles.input}
       id={id}
       name={name}
       placeholder={placeholder}
       disabled={disabled}
-      maxLength={maxLength}
+      min={min}
+      max={max}
       size={size}
-      // onChange={setText}
+      onChange={setText}
       onKeyUp={updateValue}
     />
     {label && (
@@ -43,7 +47,3 @@ export const TextInput: Story<Props> = ({
     )}
   </div>
 );
-
-TextInput.defaultProps = {
-  placeholder: " ",
-};
