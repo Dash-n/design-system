@@ -12,7 +12,6 @@ type Props = {
 
 export const Radio: Story<Props> = ({
   label,
-  checked,
   disabled,
   name,
   value,
@@ -24,8 +23,8 @@ export const Radio: Story<Props> = ({
       name={name}
       value={value}
       disabled={disabled}
-      onChange={() => {
-        setChecked(value);
+      onChange={(e) => {
+        setChecked(e.target.value);
       }}
     />
     <div className={styles.inputLabel}>{label}</div>
