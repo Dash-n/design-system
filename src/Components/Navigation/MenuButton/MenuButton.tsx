@@ -1,5 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./MenuButton.module.css";
+import { IconContext } from "react-icons";
 import {
   MdDirectionsRun,
   MdEdit,
@@ -13,13 +14,9 @@ import {
 } from "react-icons/md";
 
 type Props = {
-  label?: string;
+  link: string;
   disabled?: boolean;
-  color?: string[];
   variant: string;
-  icon?: string;
-  size?: string;
-  state?: string;
 };
 
 const iconMappings = {
@@ -34,10 +31,22 @@ const iconMappings = {
   screening: { icon: <MdBarChart />, label: "Screening" },
 };
 
-export const MenuButton: Story<Props> = ({ variant, disabled }) => (
-  <button className={`${styles[variant]} ${styles.button}`} disabled={disabled}>
-    {iconMappings[variant].icon} {iconMappings[variant].label}
-  </button>
+export const MenuButton: Story<Props> = ({
+  variant,
+  disabled,
+  link,
+}: Props) => (
+  <a
+    href={link}
+    className={`${styles[variant]} ${styles.a}`}
+    disabled={disabled}
+  >
+    <IconContext.Provider value={{ size: "24px" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+        {iconMappings[variant].icon} {iconMappings[variant].label}
+      </div>
+    </IconContext.Provider>
+  </a>
 );
 
 MenuButton.defaultProps = {
