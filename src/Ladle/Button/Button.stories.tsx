@@ -2,7 +2,6 @@ import type { Story } from "@ladle/react";
 import { Button } from "../../Components/Button/Button/Button.tsx";
 import { OutlineButton } from "../../Components/Button/OutlineButton/OutlineButton.tsx";
 import { IconButton } from "../../Components/Button/IconButton/IconButton.tsx";
-import { MenuButton } from "../../Components/Button/MenuButton/MenuButton.tsx";
 
 type Props = {
   label?: string;
@@ -29,28 +28,9 @@ export const OutlineButtons: Story<Props> = ({}) => (
   </div>
 );
 
-export const MenuButtons: Story<Props> = ({}) => (
-  <div
-    style={{
-      display: "flex",
-      gap: "8px",
-      width: "300px",
-      flexDirection: "column",
-    }}
-  >
-    <MenuButton variant="inputs"></MenuButton>
-    <MenuButton variant="database"></MenuButton>
-    <MenuButton variant="reports"></MenuButton>
-    <MenuButton variant="builder"></MenuButton>
-    <MenuButton variant="teamdash"></MenuButton>
-    <MenuButton variant="indivdash"></MenuButton>
-    <MenuButton variant="teamphysio"></MenuButton>
-    <MenuButton variant="indivphysio"></MenuButton>
-  </div>
-);
 export const IconButtons: Story<Props> = ({}) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <IconButton variant="edit"></IconButton>
+    <IconButton variant="edit" iconSize="24px"></IconButton>
     <IconButton variant="settings"></IconButton>
     <IconButton variant="delete"></IconButton>
   </div>

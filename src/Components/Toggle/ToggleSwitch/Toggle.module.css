@@ -11,10 +11,9 @@
   font-family: "Geist";
   font-weight: 400;
   color: #606060;
-  gap: 4px;
 }
 
-.container input {
+.switch input {
   position: absolute;
   opacity: 0;
   cursor: pointer;
@@ -23,40 +22,51 @@
 }
 
 .checkmark {
-  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   box-sizing: border-box;
-  top: 0;
-  left: 0;
-  height: 24px;
-  width: 24px;
-  border-radius: 50%;
-  border: 2px #606060 solid;
+  padding: 0 8px;
+  height: 40px;
+  min-width: 40px;
+  border: 2px solid #4f84f7;
+  border-style: solid solid solid none;
   background-color: white;
 }
 
-.container input:disabled ~ .checkmark {
+.switch:first-child .checkmark {
+  border-radius: 8px 0 0 8px;
+  border-style: solid;
+  left: 0;
+}
+.switch:last-child .checkmark {
+  border-radius: 0 8px 8px 0;
+}
+
+.switch input:disabled ~ .checkmark {
   background-color: #efefef;
   border: 2px #c4c4c4 solid;
 }
 
-.container input:disabled ~ span {
+.switch input:disabled ~ span {
   color: #e9f1fd;
 }
 
-.container:hover input:not(:disabled) ~ .checkmark {
+.switch:hover input:not(:disabled) ~ .checkmark {
   background-color: #ceddfd;
 }
 
-.container input:checked ~ .checkmark {
+.switch input:checked ~ .checkmark {
   background-color: #4f84f7;
+  color: white;
   border: 2px #4f84f7 solid;
 }
 
-.container:hover input:checked ~ .checkmark {
+.switch:hover input:checked ~ .checkmark {
   background-color: #4f84f7;
 }
 
-.container input:focus-visible ~ .checkmark {
+.switch input:focus-visible ~ .checkmark {
   box-shadow: 0 0 2px 3px #4f84f7;
   border: 2px #606060 solid;
 }
@@ -66,22 +76,14 @@
   position: absolute;
   display: none;
 }
-.container input:checked ~ .checkmark:after {
+.switch input:checked ~ .checkmark:after {
   display: block;
 }
-.container .checkmark:after {
-  top: 5px;
-  left: 5px;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: white;
-}
 
-.container input:disabled ~ .inputLabel {
+.switch input:disabled ~ .inputLabel {
   color: #c4c4c4;
 }
 
-.container:disabled input ~ .checkmark {
+.switch:disabled input ~ .checkmark {
   background-color: #ceddfd;
 }
