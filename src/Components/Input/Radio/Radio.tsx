@@ -7,7 +7,7 @@ type Props = {
   label: string;
   checked?: boolean;
   disabled?: boolean;
-  setChecked: (e: string) => void;
+  setChecked: (value: string) => void;
 };
 
 export const Radio: Story<Props> = ({

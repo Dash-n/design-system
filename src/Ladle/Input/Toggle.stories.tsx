@@ -1,49 +1,98 @@
 import type { Story } from "@ladle/react";
-import { TwoWayToggle } from "../../Components/Toggle/TwoWay/TwoWayToggle.tsx";
-import { ThreeWayToggle } from "../../Components/Toggle/ThreeWay/ThreeWayToggle.tsx";
+import { Toggle } from "../../Components/Toggle/ToggleSwitch/Toggle.tsx";
+import { IconToggle } from "../../Components/Toggle/IconToggle/IconToggle.tsx";
 import { useState } from "react";
-
+import {
+  BsArrowRight,
+  BsArrowLeft,
+  BsArrowUp,
+  BsArrowDown,
+} from "react-icons/bs";
+import { MdFormatListBulleted, MdGridView } from "react-icons/md";
 type Props = {
   options: string;
 };
 
-export const TwoWayToggles: Story<Props> = ({}) => {
-  const [value, setValue] = useState("left");
+export const Toggles: Story<Props> = ({}) => {
+  const [value, setValue] = useState("one");
 
-  const handleChange = (e) => {
-    setValue(e);
+  const handleChange = (value: string) => {
+    setValue(value);
+    console.log(value);
   };
+
+  const icons = [
+    <BsArrowLeft />,
+    <BsArrowUp />,
+    <BsArrowRight />,
+    <BsArrowDown />,
+    "Test",
+  ];
+
+  const view = [<MdFormatListBulleted />, <MdGridView />];
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      <TwoWayToggle name="one" setChecked={handleChange}></TwoWayToggle>
-      <TwoWayToggle
+      <Toggle name="two" values={["1", "2"]} setChecked={handleChange}></Toggle>
+      <Toggle
         name="two"
-        values={["one", "two", "three"]}
-        labels={["One", "Two", "Three"]}
+        values={["list", "grid"]}
+        labels={view}
         setChecked={handleChange}
-      ></TwoWayToggle>
+      ></Toggle>
+      <Toggle
+        name="three"
+        values={["Day", "Month", "Year"]}
+        setChecked={handleChange}
+      ></Toggle>
+      <Toggle
+        name="two"
+        labels={icons}
+        values={["left", "up", "right", "down", ""]}
+        setChecked={handleChange}
+      ></Toggle>
+      <Toggle
+        name="mmonth"
+        values={["one", "two", "three", "four", "five"]}
+        labels={["January", "February", "March", "April", <BsArrowDown />]}
+        setChecked={handleChange}
+        iconSize={"24px"}
+      ></Toggle>
       {value}
     </div>
   );
 };
-
-export const ThreeWayToggles: Story<Props> = ({}) => {
+export const IconToggles: Story<Props> = ({}) => {
   const [value, setValue] = useState("one");
 
-  const handleChange = (e) => {
-    setValue(e);
+  const [icons, setIcons] = useState([
+    <BsArrowLeft />,
+    <BsArrowUp />,
+    <BsArrowRight />,
+    <BsArrowDown />,
+    "Test",
+  ]);
+
+  const handleChange = (value: string) => {
+    setValue(value);
   };
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      <ThreeWayToggle name="one" setChecked={handleChange}></ThreeWayToggle>
-      <ThreeWayToggle
+      <IconToggle
         name="two"
-        values={["one", "two", "three"]}
-        labels={["One", "Two", "Three"]}
+        variant="booking"
+        values={["List", "Grid"]}
         setChecked={handleChange}
-      ></ThreeWayToggle>
+      ></IconToggle>
+      <IconToggle
+        name="free"
+        icons={icons}
+        variant="free"
+        values={["left", "up", "right", "down", ""]}
+        setChecked={handleChange}
+      ></IconToggle>
+
       {value}
     </div>
   );
