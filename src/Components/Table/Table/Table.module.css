@@ -3,9 +3,23 @@
   font-family: "Geist";
 }
 
+.tableContainer {
+  overflow: auto;
+  height: 300px;
+  /* outline: 1px solid red; */
+}
+
 table {
+  box-sizing: border-box;
+  width: 100%;
   font-family: "Geist";
   border-spacing: 0px;
+  position: relative;
+}
+
+.headerRow {
+  position: sticky;
+  top: 0;
 }
 
 .headerCell {
@@ -27,4 +41,19 @@ table {
   color: #606060;
   background-color: white;
   text-align: center;
+}
+
+.bodyRow:hover > .bodyCell {
+  background-color: var(--outline-hover-color);
+}
+
+.tableTitle {
+  display: flex;
+  width: 100%;
+
+  align-items: center;
+  justify-content: space-between;
+}
+.titleButtons {
+  display: flex;
 }

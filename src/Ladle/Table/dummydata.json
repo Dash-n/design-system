@@ -78,5 +78,13 @@
     "email": "rhughill9@jiathis.com",
     "gender": "Male",
     "ip_address": "222.39.1.171"
+  },
+  {
+    "id": 10,
+    "first_name": "Randy",
+    "last_name": "Hughill",
+    "email": "rhughill9@jiathis.com",
+    "gender": "Male",
+    "something_else": { "a": 2, "b": 2, "c": 3 }
   }
 ]

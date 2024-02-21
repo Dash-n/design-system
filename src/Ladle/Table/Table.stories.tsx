@@ -1,7 +1,10 @@
 import type { Story } from "@ladle/react";
 import { Table } from "../../Components/Table/Table/Table.tsx";
 import { Paginator } from "../../Components/Table/Paginator/Paginator.tsx";
+import { IconButton } from "../../Components/Button/IconButton/IconButton.tsx";
 import { useState, useEffect } from "react";
+import { MdFitScreen, MdLeaderboard, MdOutlineFitScreen } from "react-icons/md";
+
 import jsondata from "./dummydata.json";
 
 type Props = {
@@ -25,16 +28,54 @@ export const Tables: Story<Props> = ({}) => {
     console.log(key);
   };
 
+  const tableContainer = {
+    overflow: "auto",
+    height: "300px",
+    // outline: "1px solid red",
+    borderRadius: "8px",
+    border: "1px solid #c4c4c4",
+  };
+  const tableTitle = {
+    display: "flex",
+    width: "100%",
+    background: "white",
+    alignItems: "center",
+    justifyContent: "space-between",
+  };
+
+  const titleButtons = {
+    display: "flex",
+  };
+
   return (
     <div
       style={{
         width: "100%",
-        height: "100%",
+        height: "300px",
         background: "#f4f4f4",
-        padding: "20px",
+        // padding: "20px",
+        // display: "flex",
+        // flexDirection: "column"
       }}
     >
-      <Table content={jsonData} sort={sort} handleSort={handleSort}></Table>
+      <div style={tableTitle}>
+        Table
+        <div style={titleButtons}>
+          <IconButton
+            label={<MdLeaderboard />}
+            variant="outline"
+            iconSize="20px"
+          />
+          <IconButton
+            label={<MdFitScreen />}
+            variant="outline"
+            iconSize="20px"
+          />
+        </div>
+      </div>
+      <div style={tableContainer}>
+        <Table content={jsonData} sort={sort} handleSort={handleSort}></Table>
+      </div>
     </div>
   );
 };

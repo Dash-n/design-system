@@ -1,5 +1,7 @@
 import type { Story } from "@ladle/react";
 import styles from "./Table.module.css";
+import { IconButton } from "../../Button/IconButton/IconButton";
+import { MdFitScreen, MdLeaderboard, MdOutlineFitScreen } from "react-icons/md";
 import { IconContext } from "react-icons";
 
 type Props = {
@@ -17,7 +19,7 @@ export const Table: Story<Props> = ({ content, sort, handleSort }) => {
     return (
       <IconContext.Provider value={{ size: "24px" }}>
         <thead>
-          <tr>
+          <tr className={styles.headerRow}>
             {headers.map((header) => (
               <th
                 className={styles.headerCell}
@@ -39,10 +41,14 @@ export const Table: Story<Props> = ({ content, sort, handleSort }) => {
     return (
       <tbody>
         {content.map((item, index) => (
-          <tr key={index}>
+          <tr key={index} className={styles.bodyRow}>
             {Object.values(item).map((value, subIndex) => (
               <td className={styles.bodyCell} key={subIndex}>
-                {value}
+                {typeof value === "object"
+                  ? Object.values(value).map((subValue) => (
+                      <td className={styles.bodyCell}>{subValue}</td>
+                    ))
+                  : value}
               </td>
             ))}
           </tr>
@@ -53,10 +59,27 @@ export const Table: Story<Props> = ({ content, sort, handleSort }) => {
 
   return (
     <div>
-      <table>
-        {renderTableHeaders()}
-        {renderTableRows()}
-      </table>
+      {/* <div className={styles.tableTitle}>
+        Table
+        <div className={styles.titleButtons}>
+          <IconButton
+            label={<MdLeaderboard />}
+            variant="outline"
+            iconSize="20px"
+          />
+          <IconButton
+            label={<MdFitScreen />}
+            variant="outline"
+            iconSize="20px"
+          />
+        </div> */}
+      {/* </div> */}
+      <div className={styles.tableContainer}>
+        <table>
+          {renderTableHeaders()}
+          {renderTableRows()}
+        </table>
+      </div>
     </div>
   );
 };
