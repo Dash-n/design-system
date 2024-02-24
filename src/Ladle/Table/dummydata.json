@@ -71,13 +71,13 @@
     "gender": "Male",
     "ip_address": "251.130.241.69"
   },
+
   {
     "id": 10,
     "first_name": "Randy",
     "last_name": "Hughill",
     "email": "rhughill9@jiathis.com",
-    "gender": "Male",
-    "ip_address": "222.39.1.171"
+    "gender": "Male"
   },
   {
     "id": 10,
@@ -85,6 +85,6 @@
     "last_name": "Hughill",
     "email": "rhughill9@jiathis.com",
     "gender": "Male",
-    "something_else": { "a": 2, "b": 2, "c": 3 }
+    "ip_address": "222.39.1.171"
   }
 ]

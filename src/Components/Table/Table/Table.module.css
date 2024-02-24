@@ -6,7 +6,6 @@
 .tableContainer {
   overflow: auto;
   height: 300px;
-  /* outline: 1px solid red; */
 }
 
 table {
@@ -14,24 +13,31 @@ table {
   width: 100%;
   font-family: "Geist";
   border-spacing: 0px;
-  position: relative;
 }
 
 .headerRow {
-  position: sticky;
   top: 0;
+  /* z-index: 1; */
+}
+
+.stickyGroup {
+  width: 100%;
+  position: sticky;
+  left: 0;
 }
 
 .headerCell {
   font-size: 14px;
   font-weight: 600;
   height: 48px;
-  padding: 8px 16px;
+  /* max-width: 20px; */
+  padding: 8px;
   background-color: #4f84f7;
   color: white;
   cursor: pointer;
-  overflow: hidden;
-  white-space: nowrap;
+  /* position: relative; */
+  /* overflow: hidden; */
+  /* white-space: nowrap; */
 }
 
 .bodyCell {
@@ -43,8 +49,28 @@ table {
   text-align: center;
 }
 
+.stickyHeader,
+.stickyCell {
+  width: 100px;
+}
+
+.wordWrap {
+  word-wrap: break-word;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100px;
+}
+
 .bodyRow:hover > .bodyCell {
   background-color: var(--outline-hover-color);
+}
+
+.nestedCell {
+  display: flex;
+  justify-content: space-around;
 }
 
 .tableTitle {
