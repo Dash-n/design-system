@@ -6,15 +6,15 @@ import { toTitlecase } from "../..";
 type Props = {
   content: string[];
   sort?: { key: null; direction: string };
-  handleSort: (key: string) => void;
-  // customHeaderStyles: string[];
+  handleSort?: (key: string) => void;
+  customHeaderStyles?: string[];
 };
 
 export const Table: Story<Props> = ({
   content,
   sort,
   handleSort,
-  // customHeaderStyles,
+  customHeaderStyles,
 }) => {
   const headers = content.length === 0 ? null : Object.keys(content[0]);
 
@@ -34,10 +34,8 @@ export const Table: Story<Props> = ({
   const customClasses = {
     email: styles.truncate,
   };
-  console.log(styles.truncate);
-  console.log(customStyles);
   const sticky = ["first_name", true && "ip_address", "gender"].filter(Boolean);
-  console.log(sticky);
+
   // const customHeaderStyle = checkColumn() ? { color: "red" } : null;
 
   const renderTableHeaders = () => {
@@ -105,7 +103,7 @@ export const Table: Story<Props> = ({
       <tbody>
         {content.map((item, index) => (
           <tr key={index} className={styles.bodyRow}>
-            <td className={styles.stickyGroup}>
+            <td>
               {Object.values(item).map((value, subIndex) =>
                 sticky.includes(headers[subIndex]) ? (
                   <td

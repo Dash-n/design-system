@@ -21,9 +21,11 @@ table {
 }
 
 .stickyGroup {
-  width: 100%;
+  /* width: 100%; */
   position: sticky;
   left: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .headerCell {
@@ -43,6 +45,7 @@ table {
 .bodyCell {
   font-size: 16px;
   font-weight: 400;
+  width: 100%;
   padding: 8px;
   color: #606060;
   background-color: white;
