@@ -8,36 +8,34 @@ import { Slider } from "../../Components/Input/Slider/Slider.tsx";
 import { useState } from "react";
 
 type Props = {
+  label: string;
+  placeholder: string;
   options: string;
 };
 
-export const TextInputs: Story<Props> = ({}) => {
+export const TextInputs: Story<Props> = ({ label, placeholder }) => {
   return (
     <div
       style={{
-        width: "60px",
+        // width: "60px",
         display: "flex",
         flexDirection: "column",
         gap: "20px",
       }}
     >
-      <TextInput id="name" name="name" label="Name"></TextInput>
-      <TextInput id="name" name="test"></TextInput>
       <TextInput
-        id="country"
-        name="country"
-        label="Country"
-        placeholder="Hong Kong"
-        size={5}
-      ></TextInput>
-      <TextInput
-        id="disabled"
-        name="nothing"
-        label="Disabled"
-        disabled
-      ></TextInput>
+        id="control"
+        name="control"
+        label={label}
+        placeholder={placeholder}
+      />
+      <TextInput id="disabled" name="nothing" label="Disabled" disabled />
     </div>
   );
+};
+TextInputs.args = {
+  label: "Label",
+  placeholder: "Placeholder",
 };
 
 export const NumberInputs: Story<Props> = ({}) => {
@@ -101,7 +99,7 @@ export const Checkboxes: Story<Props> = ({}) => {
         setChecked={setTwoChecked}
       ></Checkbox>
       <div>
-        Checked: {zeroChecked && "0"} {oneChecked && "1"} {twoChecked && "2"}{" "}
+        Checked: {zeroChecked && "0"} {oneChecked && "1"} {twoChecked && "2"}
       </div>
     </div>
   );
@@ -127,14 +125,12 @@ export const Radios: Story<Props> = ({}) => {
         value="2"
         name="test"
         label={`Two Selected: ${value === "2"}`}
-        // checked={value === "2"}
         setChecked={handleChange}
       ></Radio>
       <Radio
         value="3"
         name="test"
         label={`Three Selected: ${value === "3"}`}
-        // checked={value === "3"}
         setChecked={handleChange}
       ></Radio>
       <div>Value: {`${value}`}</div>

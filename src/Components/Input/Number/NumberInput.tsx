@@ -1,5 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./NumberInput.module.css";
+import { useEffect, useRef } from "react";
 
 type Props = {
   id: string;
@@ -7,11 +8,11 @@ type Props = {
   name: string;
   placeholder?: string;
   disabled?: boolean;
-  min: number;
-  max: number;
+  min?: number;
+  max?: number;
   size?: number;
   setText?: () => void;
-  updateValue?: (e: number) => void;
+  updateValue?: (value: any) => void;
 };
 
 export const NumberInput: Story<Props> = ({
@@ -25,25 +26,27 @@ export const NumberInput: Story<Props> = ({
   size,
   setText,
   updateValue,
-}) => (
-  <div className={styles.inputBox}>
-    <input
-      type="number"
-      className={styles.input}
-      id={id}
-      name={name}
-      placeholder={placeholder}
-      disabled={disabled}
-      min={min}
-      max={max}
-      size={size}
-      onChange={setText}
-      onKeyUp={updateValue}
-    />
-    {label && (
-      <label htmlFor={id} className={styles.label}>
-        {label}
-      </label>
-    )}
-  </div>
-);
+}) => {
+  return (
+    <div className={styles.inputBox}>
+      <input
+        type="number"
+        className={styles.input}
+        id={id}
+        name={name}
+        placeholder={placeholder}
+        disabled={disabled}
+        min={min}
+        max={max}
+        size={size}
+        onChange={setText}
+        onKeyUp={updateValue}
+      />
+      {label && (
+        <label htmlFor={id} className={styles.label}>
+          {label}
+        </label>
+      )}
+    </div>
+  );
+};

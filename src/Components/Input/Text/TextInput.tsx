@@ -9,7 +9,6 @@ type Props = {
   disabled?: boolean;
   maxLength?: number;
   size?: number;
-  // setText: () => void;
   updateValue?: () => void;
 };
 
@@ -21,7 +20,6 @@ export const TextInput: Story<Props> = ({
   disabled,
   maxLength,
   size,
-  // setText,
   updateValue,
 }) => (
   <div className={styles.inputBox}>
@@ -33,7 +31,6 @@ export const TextInput: Story<Props> = ({
       disabled={disabled}
       maxLength={maxLength}
       size={size}
-      // onChange={setText}
       onKeyUp={updateValue}
     />
     {label && (
@@ -44,6 +41,9 @@ export const TextInput: Story<Props> = ({
   </div>
 );
 
-TextInput.defaultProps = {
-  placeholder: " ",
+export const controlInput = TextInput.bind({});
+
+TextInput.args = {
+  label: "Label",
+  placeholder: "Placeholder",
 };

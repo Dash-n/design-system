@@ -1,10 +1,10 @@
 import type { Story } from "@ladle/react";
 import styles from "./IconButton.module.css";
 import { MdEdit, MdSettings, MdDelete } from "react-icons/md";
-import { IconContext } from "react-icons";
+import { IconContext, IconType } from "react-icons";
 
 type Props = {
-  label?: string;
+  label?: IconType;
   disabled?: boolean;
   variant: string;
   iconSize?: string;
@@ -19,6 +19,7 @@ const iconMappings = {
 export const IconButton: Story<Props> = ({
   variant,
   disabled,
+  label,
   iconSize = "24px",
 }) => (
   <button className={`${styles[variant]} ${styles.button}`} disabled={disabled}>
@@ -29,6 +30,6 @@ export const IconButton: Story<Props> = ({
 );
 
 IconButton.defaultProps = {
-  variant: "edit",
-  label: "",
+  variant: "solid",
+  // label: "",
 };
