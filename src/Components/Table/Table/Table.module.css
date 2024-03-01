@@ -17,29 +17,26 @@ table {
 
 .headerRow {
   top: 0;
-  /* z-index: 1; */
+  position: sticky;
+  z-index: 1;
 }
 
 .stickyGroup {
-  /* width: 100%; */
   position: sticky;
   left: 0;
   margin: 0;
   padding: 0;
+  border-right: 1px solid #c4c4c4;
 }
 
 .headerCell {
   font-size: 14px;
   font-weight: 600;
   height: 48px;
-  /* max-width: 20px; */
   padding: 8px;
   background-color: #4f84f7;
   color: white;
   cursor: pointer;
-  /* position: relative; */
-  /* overflow: hidden; */
-  /* white-space: nowrap; */
 }
 
 .bodyCell {

@@ -28,13 +28,6 @@ export const Tables: Story<Props> = ({}) => {
     console.log(key);
   };
 
-  const tableContainer = {
-    overflow: "auto",
-    height: "300px",
-    // outline: "1px solid red",
-    borderRadius: "8px",
-    border: "1px solid #c4c4c4",
-  };
   const tableTitle = {
     display: "flex",
     width: "100%",
@@ -73,7 +66,7 @@ export const Tables: Story<Props> = ({}) => {
           />
         </div>
       </div>
-      <div style={tableContainer}>
+      <div>
         <Table content={jsonData} sort={sort} handleSort={handleSort}></Table>
       </div>
     </div>

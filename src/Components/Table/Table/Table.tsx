@@ -19,7 +19,9 @@ export const Table: Story<Props> = ({
   const headers = content.length === 0 ? null : Object.keys(content[0]);
 
   const checkColumn = (header: string, index: number) => {
-    return headers[index] === header;
+    if (headers === null) {
+      return false;
+    } else return headers[index] === header;
   };
 
   const customStyles = {
@@ -36,13 +38,13 @@ export const Table: Story<Props> = ({
   };
   const sticky = ["first_name", true && "ip_address", "gender"].filter(Boolean);
 
-  // const customHeaderStyle = checkColumn() ? { color: "red" } : null;
+  const customHeaderStyle = checkColumn() ? { color: "red" } : null;
 
   const renderTableHeaders = () => {
     if (content.length === 0) {
       return null;
     }
-    // const headers = Object.keys(content[0]);
+    const headers = Object.keys(content[0]);
     return (
       <IconContext.Provider value={{ size: "24px" }}>
         <thead>
@@ -103,7 +105,7 @@ export const Table: Story<Props> = ({
       <tbody>
         {content.map((item, index) => (
           <tr key={index} className={styles.bodyRow}>
-            <td>
+            <td className={`${styles.stickyGroup}`}>
               {Object.values(item).map((value, subIndex) =>
                 sticky.includes(headers[subIndex]) ? (
                   <td
