@@ -1,6 +1,5 @@
 import type { Story } from "@ladle/react";
 import styles from "./NumberInput.module.css";
-import { useEffect, useRef } from "react";
 
 type Props = {
   id: string;

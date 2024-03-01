@@ -69,7 +69,7 @@ export const NumberInputs: Story<Props> = ({}) => {
   );
 };
 
-export const Checkboxes: Story<Props> = ({}) => {
+export const Checkboxes: Story<Props> = ({ label }) => {
   const [zeroChecked, setZeroChecked] = useState(true);
   const [oneChecked, setOneChecked] = useState(true);
   const [twoChecked, setTwoChecked] = useState(true);
@@ -100,9 +100,20 @@ export const Checkboxes: Story<Props> = ({}) => {
       ></Checkbox>
       <div>
         Checked: {zeroChecked && "0"} {oneChecked && "1"} {twoChecked && "2"}
+        <Checkbox
+          id="user"
+          value="none"
+          name="user"
+          label={label}
+          // checked={twoChecked}
+          // setChecked={setTwoChecked}
+        ></Checkbox>
       </div>
     </div>
   );
+};
+Checkboxes.args = {
+  label: "Label",
 };
 
 export const Radios: Story<Props> = ({}) => {
