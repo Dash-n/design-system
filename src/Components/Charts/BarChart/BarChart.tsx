@@ -58,10 +58,6 @@ export const BarChart: Story<Props> = ({
   xLabel,
   yLabel,
 }) => {
-  // const data = jsondata;
-  console.log(yLabel);
-  // const dataKeys = data.length === 0 ? [] : Object.keys(data[0]);
-  const dataKeys = data.length === 0 ? [] : Object.keys(dataPoints[0]);
   keys ??= [];
   dataPoints = dataPoints[0];
 
@@ -72,9 +68,6 @@ export const BarChart: Story<Props> = ({
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
         <BChart
-          layout="vertical"
-          // width={width}
-          // height={height}
           data={data}
           margin={{
             top: 5,
@@ -84,11 +77,11 @@ export const BarChart: Story<Props> = ({
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <YAxis dataKey={xAxisKey}>
+          <XAxis dataKey={xAxisKey}>
             <Label value={xLabel} position="bottom" />
-          </YAxis>
+          </XAxis>
 
-          <XAxis
+          <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           {/* <Tooltip /> */}
@@ -105,9 +98,6 @@ export const BarChart: Story<Props> = ({
             ) : (
               ""
             );
-            // ) : (
-            //   console.log("does not exist")
-            // );
           })}
         </BChart>
       </ResponsiveContainer>
