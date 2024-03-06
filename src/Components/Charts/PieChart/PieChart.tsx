@@ -70,36 +70,44 @@ const renderCustomizedLabel = ({
   );
 };
 
-export const PieChart: Story<Props> = ({ data, dataKey, nameKey }) => {
+export const PieChart: Story<Props> = ({
+  data,
+  dataKey,
+  nameKey,
+  title,
+  width,
+  height,
+}) => {
   {
-    // pieData = data.map((entry)=>
-    // )
     return (
-      <ResponsiveContainer width="50%" height="50%">
-        <PChart>
-          <Tooltip content={<CustomTooltip />} />
-          <Legend verticalAlign="top" align="right" />
-          <Pie
-            data={data}
-            cx="50%"
-            cy="50%"
-            labelLine={false}
-            label={renderCustomizedLabel}
-            innerRadius="10%"
-            outerRadius="100%"
-            fill="#8884d8"
-            dataKey={dataKey}
-            nameKey={nameKey}
-          >
-            {data.map((entry, index) => (
-              <Cell
-                key={`cell-${index}`}
-                fill={COLORS[index % COLORS.length]}
-              />
-            ))}
-          </Pie>
-        </PChart>
-      </ResponsiveContainer>
+      <div style={{ width: "100%", height: "100%" }}>
+        <p className={styles.title}>{title}</p>
+        <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
+          <PChart>
+            <Tooltip content={<CustomTooltip />} />
+            <Legend verticalAlign="top" align="right" />
+            <Pie
+              data={data}
+              cx="50%"
+              cy="50%"
+              labelLine={false}
+              label={renderCustomizedLabel}
+              innerRadius="10%"
+              outerRadius="25%"
+              fill="#8884d8"
+              dataKey={dataKey}
+              nameKey={nameKey}
+            >
+              {data.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+          </PChart>
+        </ResponsiveContainer>
+      </div>
     );
   }
 };

@@ -1,10 +1,12 @@
 import type { Story } from "@ladle/react";
 import { BarChart } from "../../Components/Charts/BarChart/BarChart.tsx";
+import { RadarChart } from "../../Components/Charts/RadarChart/RadarChart.tsx";
 import { StackedBarChart } from "../../Components/Charts/StackedBarChart/StackedBarChart.tsx";
 import { PieChart } from "../../Components/Charts/PieChart/PieChart.tsx";
 import { LineChart } from "../../Components/Charts/LineChart/LineChart.tsx";
 import { useState, useEffect } from "react";
 import jsondata from "./sportsData.json";
+import exercisedata from "./exerciseStats.json";
 
 type Props = {
   options: string;
@@ -92,14 +94,26 @@ BarCharts.argTypes = {
   },
 };
 
-export const PieCharts: Story<Props> = ({}) => {
+export const PieCharts: Story<Props> = ({
+  containerHeight,
+  containerWidth,
+}) => {
   return (
     <PieChart
       data={jsondata}
+      title="Title"
       nameKey="player_name"
       dataKey="points_scored"
+      width={containerWidth}
+      height={containerHeight}
     ></PieChart>
   );
+};
+PieCharts.args = {
+  containerWidth: 100,
+  containerHeight: 100,
+  title: "Personal Stats",
+  // colors: ["#DDCC77", "#CC6677", "#88CCEE"],
 };
 
 export const StackedBarCharts: Story<Props> = ({
@@ -231,4 +245,50 @@ LineCharts.argTypes = {
     control: { type: "radio" },
     defaultValue: "player_name",
   },
+};
+
+type RadarProps = {
+  id: string;
+  name: string;
+  data: string[];
+  containerWidth: number;
+  containerHeight: number;
+  axisKey: string;
+  valueKey: string;
+  title?: string;
+};
+
+export const RadarCharts: Story<RadarProps> = ({
+  containerWidth,
+  containerHeight,
+  axisKey,
+  valueKey,
+  title,
+}) => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <RadarChart
+        id="chart"
+        title={title}
+        width={containerWidth}
+        height={containerHeight}
+        data={exercisedata}
+        valueKey={valueKey}
+        axisKey={axisKey}
+      ></RadarChart>
+    </div>
+  );
+};
+RadarCharts.args = {
+  containerWidth: 100,
+  containerHeight: 100,
+  title: "Personal Stats",
+  valueKey: "value",
+  axisKey: "exercise",
+  // colors: ["#DDCC77", "#CC6677", "#88CCEE"],
 };
