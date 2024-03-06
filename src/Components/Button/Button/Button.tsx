@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./Button.module.css";
-import { toTitlecase } from "../../index.ts";
+import { toTitlecase } from "../../index.tsx";
 
 type Props = {
   label: string;

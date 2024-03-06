@@ -7,24 +7,23 @@ import {
   Cell,
   ResponsiveContainer,
   Tooltip,
+  Legend,
 } from "recharts";
 
-const data = [
-  { name: "Group A", value: 400 },
-  { name: "Group B", value: 300 },
-  { name: "Group C", value: 300 },
-  { name: "Group D", value: 200 },
-];
+// const data = [
+//   { name: "Group A", value: 400 },
+//   { name: "Group B", value: 300 },
+//   { name: "Group C", value: 300 },
+//   { name: "Group D", value: 200 },
+// ];
 type Props = {
   id: string;
   name: string;
   data: string[];
-  keys?: string[];
+  key: string[];
   width: number;
   height: number;
-  xAxisKey: string;
-  xLabel: string;
-  yLabel: string;
+  valueKey: string;
   title?: string;
   dataPoints: any;
 };
@@ -44,6 +43,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 const RADIAN = Math.PI / 180;
+
 const renderCustomizedLabel = ({
   cx,
   cy,
@@ -53,7 +53,7 @@ const renderCustomizedLabel = ({
   percent,
   index,
 }) => {
-  const radius = innerRadius + (outerRadius - innerRadius);
+  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
@@ -61,7 +61,7 @@ const renderCustomizedLabel = ({
     <text
       x={x}
       y={y}
-      // fill="white"
+      fill="white"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
     >
@@ -70,21 +70,26 @@ const renderCustomizedLabel = ({
   );
 };
 
-export const PieChart: Story<Props> = ({}) => {
+export const PieChart: Story<Props> = ({ data, dataKey, nameKey }) => {
   {
+    // pieData = data.map((entry)=>
+    // )
     return (
-      <ResponsiveContainer width="100%" height="100%">
-        <PChart width={400} height={400}>
+      <ResponsiveContainer width="50%" height="50%">
+        <PChart>
           <Tooltip content={<CustomTooltip />} />
+          <Legend verticalAlign="top" align="right" />
           <Pie
             data={data}
-            cx="25%"
+            cx="50%"
             cy="50%"
             labelLine={false}
             label={renderCustomizedLabel}
-            outerRadius="25%"
+            innerRadius="10%"
+            outerRadius="100%"
             fill="#8884d8"
-            dataKey="value"
+            dataKey={dataKey}
+            nameKey={nameKey}
           >
             {data.map((entry, index) => (
               <Cell
