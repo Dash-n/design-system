@@ -58,20 +58,17 @@ export const StackedBarChart: Story<Props> = ({
   xLabel,
   yLabel,
 }) => {
-  // const data = jsondata;
   console.log(yLabel);
   keys ??= [];
   dataPoints = dataPoints[0];
 
-  const colors = ["#DDCC77", "#CC6677", "#88CCEE"];
+  const COLORS = ["#DDCC77", "#CC6677", "#88CCEE"];
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
         <BChart
-          // width={width}
-          // height={height}
           data={data}
           margin={{
             top: 5,
@@ -88,7 +85,6 @@ export const StackedBarChart: Story<Props> = ({
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
-          {/* <Tooltip /> */}
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" />
           {keys.map((point, index) => {
@@ -97,15 +93,12 @@ export const StackedBarChart: Story<Props> = ({
               <Bar
                 dataKey={point}
                 stackId="a"
-                fill={dataPoints[point].color ?? colors[index]}
+                fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
               />
             ) : (
               ""
             );
-            // ) : (
-            //   console.log("does not exist")
-            // );
           })}
         </BChart>
       </ResponsiveContainer>

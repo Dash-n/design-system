@@ -1,10 +1,9 @@
 import type { Story } from "@ladle/react";
-import styles from "./BarChart.module.css";
+import styles from "./LineChart.module.css";
 import { toTitlecase } from "../..";
 import {
-  BarChart as BChart,
-  Bar,
-  Rectangle,
+  LineChart as LChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -26,6 +25,7 @@ type Props = {
   yLabel: string;
   title?: string;
   dataPoints: any;
+  dotRadius: number;
 };
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -47,7 +47,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-export const BarChart: Story<Props> = ({
+export const LineChart: Story<Props> = ({
   data,
   width,
   height,
@@ -57,6 +57,7 @@ export const BarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  dotRadius,
 }) => {
   keys ??= [];
   dataPoints = dataPoints[0];
@@ -67,7 +68,7 @@ export const BarChart: Story<Props> = ({
     <div style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
-        <BChart
+        <LChart
           data={data}
           margin={{
             top: 5,
@@ -87,18 +88,20 @@ export const BarChart: Story<Props> = ({
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" />
           {keys.map((point, index) => {
-            console.log(point);
+            console.log(dotRadius);
             return dataPoints[point] ? (
-              <Bar
+              <Line
                 dataKey={point}
-                fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" />}
+                stroke={
+                  dataPoints[point].color ?? COLORS[index % COLORS.length]
+                }
+                activeDot={{ r: dotRadius }}
               />
             ) : (
               ""
             );
           })}
-        </BChart>
+        </LChart>
       </ResponsiveContainer>
     </div>
   );
