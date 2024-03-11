@@ -1,0 +1,90 @@
+[
+  {
+    "id": 1,
+    "first_name": "Reilly",
+    "last_name": "Currum",
+    "email": "rcurrum0@nydailynews.com",
+    "gender": "Male",
+    "ip_address": "187.72.219.162"
+  },
+  {
+    "id": 2,
+    "first_name": "Donia",
+    "last_name": "Peniello",
+    "email": "dpeniello1@foxnews.com",
+    "gender": "Female",
+    "ip_address": "34.175.101.21"
+  },
+  {
+    "id": 3,
+    "first_name": "Zora",
+    "last_name": "Wank",
+    "email": "zwank2@51.la",
+    "gender": "Female",
+    "ip_address": "124.205.140.199"
+  },
+  {
+    "id": 4,
+    "first_name": "Barbe",
+    "last_name": "Diffley",
+    "email": "bdiffley3@deliciousdays.com",
+    "gender": "Female",
+    "ip_address": "250.111.245.189"
+  },
+  {
+    "id": 5,
+    "first_name": "Jedidiah",
+    "last_name": "Spoure",
+    "email": "jspoure4@comcast.net",
+    "gender": "Male",
+    "ip_address": "44.241.215.71"
+  },
+  {
+    "id": 6,
+    "first_name": "Teodorico",
+    "last_name": "Shildrake",
+    "email": "tshildrake5@sbwire.com",
+    "gender": "Genderfluid",
+    "ip_address": "247.190.49.81"
+  },
+  {
+    "id": 7,
+    "first_name": "Raquel",
+    "last_name": "Trevers",
+    "email": "rtrevers6@quantcast.com",
+    "gender": "Female",
+    "ip_address": "106.123.61.73"
+  },
+  {
+    "id": 8,
+    "first_name": "Dulcinea",
+    "last_name": "Tipper",
+    "email": "dtipper7@zimbio.com",
+    "gender": "Female",
+    "ip_address": "194.96.204.106"
+  },
+  {
+    "id": 9,
+    "first_name": "Lester",
+    "last_name": "Saffe",
+    "email": "lsaffe8@simplemachines.org",
+    "gender": "Male",
+    "ip_address": "251.130.241.69"
+  },
+
+  {
+    "id": 10,
+    "first_name": "Randy",
+    "last_name": "Hughill",
+    "email": "rhughill9@jiathis.com",
+    "gender": "Male"
+  },
+  {
+    "id": 10,
+    "first_name": "Randy",
+    "last_name": "Hughill",
+    "email": "rhughill9@jiathis.com",
+    "gender": "Male",
+    "ip_address": "222.39.1.171"
+  }
+]

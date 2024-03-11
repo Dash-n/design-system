@@ -3,12 +3,13 @@ import styles from "./TextInput.module.css";
 
 type Props = {
   id: string;
-  label: string;
+  label?: string;
   name: string;
   placeholder?: string;
   disabled?: boolean;
   maxLength?: number;
   size?: number;
+  updateValue?: () => void;
 };
 
 export const TextInput: Story<Props> = ({
@@ -19,8 +20,9 @@ export const TextInput: Story<Props> = ({
   disabled,
   maxLength,
   size,
+  updateValue,
 }) => (
-  <div className={styles.inputBox} style={{ width: "300px" }}>
+  <div className={styles.inputBox}>
     <input
       className={styles.input}
       id={id}
@@ -29,13 +31,19 @@ export const TextInput: Story<Props> = ({
       disabled={disabled}
       maxLength={maxLength}
       size={size}
+      onKeyUp={updateValue}
     />
-    <label htmlFor={id} className={styles.label}>
-      {label}
-    </label>
+    {label && (
+      <label htmlFor={id} className={styles.label}>
+        {label}
+      </label>
+    )}
   </div>
 );
 
-TextInput.defaultProps = {
-  placeholder: " ",
+export const controlInput = TextInput.bind({});
+
+TextInput.args = {
+  label: "Label",
+  placeholder: "Placeholder",
 };
