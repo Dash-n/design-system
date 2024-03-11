@@ -13,6 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { CustomTooltip } from "../../index.tsx";
 
 type Props = {
   id: string;
@@ -28,24 +29,24 @@ type Props = {
   dataPoints: any;
 };
 
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className={styles.customTooltip}>
-        <p className={styles.tooltipTitle}>{`${label}`} </p>
-        {payload.map((column) => {
-          console.log(column);
-          return (
-            <p className={styles.label}>
-              {`${toTitlecase(column.name)}: ${column.value}`}{" "}
-            </p>
-          );
-        })}
-      </div>
-    );
-  }
-  return null;
-};
+// const CustomTooltip = ({ active, payload, label }) => {
+//   if (active && payload && payload.length) {
+//     return (
+//       <div className={styles.customTooltip}>
+//         <p className={styles.tooltipTitle}>{`${label}`} </p>
+//         {payload.map((column) => {
+//           console.log(column);
+//           return (
+//             <p className={styles.label}>
+//               {`${toTitlecase(column.name)}: ${column.value}`}{" "}
+//             </p>
+//           );
+//         })}
+//       </div>
+//     );
+//   }
+//   return null;
+// };
 
 export const BarChart: Story<Props> = ({
   data,

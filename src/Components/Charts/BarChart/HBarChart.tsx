@@ -1,11 +1,13 @@
 import type { Story } from "@ladle/react";
-import styles from "./LineChart.module.css";
+import styles from "./BarChart.module.css";
 import { toTitlecase } from "../..";
 import {
-  LineChart as LChart,
-  Line,
+  BarChart as BChart,
+  Bar,
+  Rectangle,
   XAxis,
   YAxis,
+  Cell,
   CartesianGrid,
   Tooltip,
   Label,
@@ -25,8 +27,6 @@ type Props = {
   yLabel: string;
   title?: string;
   dataPoints: any;
-  dotRadius: number;
-  strokeWidth: number;
 };
 
 const CustomTooltip = ({ active, payload, label }) => {
@@ -48,7 +48,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-export const LineChart: Story<Props> = ({
+export const HBarChart: Story<Props> = ({
   data,
   width,
   height,
@@ -58,8 +58,6 @@ export const LineChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
-  dotRadius,
-  strokeWidth,
 }) => {
   keys ??= [];
   dataPoints = dataPoints[0];
@@ -70,8 +68,9 @@ export const LineChart: Story<Props> = ({
     <div style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
-        <LChart
+        <BChart
           data={data}
+          layout="vertical"
           margin={{
             top: 5,
             right: 30,
@@ -80,31 +79,31 @@ export const LineChart: Story<Props> = ({
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={xAxisKey}>
+          <YAxis dataKey={xAxisKey} type="category">
+            {/* orientation="right" */}
             <Label value={xLabel} position="bottom" />
-          </XAxis>
+          </YAxis>
 
-          <YAxis
-            label={{ value: yLabel, angle: -90, position: "insideLeft" }}
+          <XAxis
+            type="number"
+            // label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" />
+
           {keys.map((point, index) => {
-            console.log(dotRadius);
+            console.log(point);
             return dataPoints[point] ? (
-              <Line
+              <Bar
                 dataKey={point}
-                stroke={
-                  dataPoints[point].color ?? COLORS[index % COLORS.length]
-                }
-                strokeWidth={strokeWidth}
-                activeDot={{ r: dotRadius }}
+                fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
+                activeBar={<Rectangle stroke="#4F84F7" />}
               />
             ) : (
               ""
             );
           })}
-        </LChart>
+        </BChart>
       </ResponsiveContainer>
     </div>
   );

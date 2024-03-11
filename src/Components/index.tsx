@@ -10,16 +10,10 @@ export const toTitlecase = (label: string) => {
 
 // import { Tooltip } from "recharts";
 
-const storyDiv = {
-  display: "flex",
-  gap: "8px",
-  width: "600px",
-  flexDirection: "row",
-};
-
 const customTooltip = {
   display: "flex",
-  padding: "1px 8px",
+  flexDirection: "column",
+  padding: "24px 8px",
   backgroundColor: "rgba(255, 255, 255, 0.8)",
   border: "1px solid #c4c4c4",
 };
@@ -36,7 +30,7 @@ export const CustomTooltip = ({ active, payload, label }) => {
       <div style={customTooltip}>
         <p style={tooltipTitle}>{`${label}`} </p>
         {payload.map((column) => {
-          console.log(column);
+          // console.log(column);
           return <p>{`${toTitlecase(column.name)}: ${column.value}`} </p>;
         })}
       </div>

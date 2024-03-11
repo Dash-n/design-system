@@ -1,9 +1,10 @@
 import type { Story } from "@ladle/react";
-import styles from "./StackedBarChart.module.css";
-import { toTitlecase } from "../..";
+import styles from "./ComboChart.module.css";
+import { toTitlecase } from "../../index.tsx";
 import {
-  BarChart as BChart,
+  ComposedChart as CChart,
   Bar,
+  Line,
   Rectangle,
   XAxis,
   YAxis,
@@ -13,12 +14,14 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { CustomTooltip } from "../../index.tsx";
 
 type Props = {
   id: string;
   name: string;
   data: string[];
-  keys?: string[];
+  barKeys?: string[];
+  dotKeys?: string[];
   width: number;
   height: number;
   xAxisKey: string;
@@ -28,38 +31,38 @@ type Props = {
   dataPoints: any;
 };
 
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className={styles.customTooltip}>
-        <p className={styles.tooltipTitle}>{`${label}`} </p>
-        {payload.map((column) => {
-          console.log(column);
-          return (
-            <p className={styles.label}>
-              {`${toTitlecase(column.name)}: ${column.value}`}{" "}
-            </p>
-          );
-        })}
-      </div>
-    );
-  }
-  return null;
-};
+// const CustomTooltip = ({ active, payload, label }) => {
+//   if (active && payload && payload.length) {
+//     return (
+//       <div className={styles.customTooltip}>
+//         <p className={styles.tooltipTitle}>{`${label}`} </p>
+//         {payload.map((column) => {
+//           console.log(column);
+//           return (
+//             <p className={styles.label}>
+//               {`${toTitlecase(column.name)}: ${column.value}`}{" "}
+//             </p>
+//           );
+//         })}
+//       </div>
+//     );
+//   }
+//   return null;
+// };
 
-export const StackedBarChart: Story<Props> = ({
+export const ComboChart: Story<Props> = ({
   data,
   width,
   height,
-  keys,
+  barKeys,
+  dotKeys,
   xAxisKey,
   dataPoints,
   title,
   xLabel,
   yLabel,
 }) => {
-  console.log(yLabel);
-  keys ??= [];
+  // keys ??= [];
   dataPoints = dataPoints[0];
 
   const COLORS = ["#DDCC77", "#CC6677", "#88CCEE"];
@@ -68,7 +71,7 @@ export const StackedBarChart: Story<Props> = ({
     <div style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
-        <BChart
+        <CChart
           data={data}
           margin={{
             top: 5,
@@ -87,12 +90,11 @@ export const StackedBarChart: Story<Props> = ({
           />
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" />
-          {keys.map((point, index) => {
+          {barKeys.map((point, index) => {
             console.log(point);
             return dataPoints[point] ? (
               <Bar
                 dataKey={point}
-                stackId="a"
                 fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
               />
@@ -100,7 +102,15 @@ export const StackedBarChart: Story<Props> = ({
               ""
             );
           })}
-        </BChart>
+          {dotKeys.map((point, index) => {
+            console.log(point);
+            return dataPoints[point] ? (
+              <Line type="monotone" dataKey={point} stroke="#4F84F7" />
+            ) : (
+              ""
+            );
+          })}
+        </CChart>
       </ResponsiveContainer>
     </div>
   );

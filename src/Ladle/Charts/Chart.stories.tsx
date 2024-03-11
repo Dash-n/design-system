@@ -1,7 +1,9 @@
 import type { Story } from "@ladle/react";
 import { BarChart } from "../../Components/Charts/BarChart/BarChart.tsx";
+import { ComboChart } from "../../Components/Charts/ComboChart/ComboChart.tsx";
+import { HBarChart } from "../../Components/Charts/BarChart/HBarChart.tsx";
+import { StackedBarChart } from "../../Components/Charts/BarChart/StackedBarChart.tsx";
 import { RadarChart } from "../../Components/Charts/RadarChart/RadarChart.tsx";
-import { StackedBarChart } from "../../Components/Charts/StackedBarChart/StackedBarChart.tsx";
 import { PieChart } from "../../Components/Charts/PieChart/PieChart.tsx";
 import { LineChart } from "../../Components/Charts/LineChart/LineChart.tsx";
 import { useState, useEffect } from "react";
@@ -14,6 +16,8 @@ type Props = {
   containerHeight: number;
   colors?: string[];
   keys?: string[];
+  barKeys?: string[];
+  dotKeys?: string[];
   xAxisKey: string;
   xLabel: string;
   yLabel: string;
@@ -21,6 +25,12 @@ type Props = {
   customData: any[];
   dotRadius: number;
 };
+
+function filterKeysByType(dataArray, dataType) {
+  return dataArray.map((obj) =>
+    Object.keys(obj).filter((key) => typeof obj[key] === dataType)
+  );
+}
 
 export const BarCharts: Story<Props> = ({
   containerWidth,
@@ -36,8 +46,8 @@ export const BarCharts: Story<Props> = ({
   return (
     <div
       style={{
-        width: "100%",
-        height: "100%",
+        width: `${containerWidth}%`,
+        height: `${containerHeight}%`,
       }}
     >
       <BarChart
@@ -50,25 +60,16 @@ export const BarCharts: Story<Props> = ({
         yLabel={yLabel}
         keys={keys}
         colors={colors}
-        width={containerWidth}
-        height={containerHeight}
+        width={100}
+        height={100}
         dataPoints={customData}
       ></BarChart>
-      <div>{keys}</div>
     </div>
   );
 };
-
-function filterKeysByType(dataArray, dataType) {
-  return dataArray.map((obj) =>
-    Object.keys(obj).filter((key) => typeof obj[key] === dataType)
-  );
-}
-const numberKeys = filterKeysByType(jsondata, "number");
-
 BarCharts.args = {
   containerWidth: 100,
-  containerHeight: 100,
+  containerHeight: 80,
   title: "Team Stats",
   xLabel: "#",
   yLabel: "#",
@@ -93,20 +94,159 @@ BarCharts.argTypes = {
     defaultValue: "player_name",
   },
 };
+export const ComboCharts: Story<Props> = ({
+  containerWidth,
+  containerHeight,
+  colors,
+  barKeys,
+  dotKeys,
+  xAxisKey,
+  xLabel,
+  yLabel,
+  customData,
+  title,
+}) => {
+  return (
+    <div
+      style={{
+        width: `${containerWidth}%`,
+        height: `${containerHeight}%`,
+      }}
+    >
+      <ComboChart
+        id="chart"
+        data={jsondata}
+        name="bar"
+        title={title}
+        xAxisKey={xAxisKey}
+        xLabel={xLabel}
+        yLabel={yLabel}
+        barKeys={barKeys}
+        dotKeys={dotKeys}
+        colors={colors}
+        width={100}
+        height={100}
+        dataPoints={customData}
+      ></ComboChart>
+    </div>
+  );
+};
+ComboCharts.args = {
+  containerWidth: 100,
+  containerHeight: 80,
+  title: "Team Stats",
+  xLabel: "#",
+  yLabel: "#",
+  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  customData: [
+    {
+      points_scored: { label: "Points Scored", color: "green" },
+      assists: { label: "Points Scored", color: "blue" },
+      games_played: { label: "Games Played" },
+    },
+  ],
+};
+ComboCharts.argTypes = {
+  barKeys: {
+    options: filterKeysByType(jsondata, "number")[0],
+    control: { type: "check" },
+    defaultValue: ["games_played"],
+  },
+  dotKeys: {
+    options: filterKeysByType(jsondata, "number")[0],
+    control: { type: "check" },
+    defaultValue: ["points_scored", "assists"],
+  },
+
+  xAxisKey: {
+    options: filterKeysByType(jsondata, "string")[0],
+    control: { type: "radio" },
+    defaultValue: "player_name",
+  },
+};
+export const HorizontalBarCharts: Story<Props> = ({
+  containerWidth,
+  containerHeight,
+  colors,
+  keys,
+  xAxisKey,
+  xLabel,
+  yLabel,
+  customData,
+  title,
+}) => {
+  return (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+      }}
+    >
+      <HBarChart
+        id="chart"
+        data={jsondata}
+        name="bar"
+        title={title}
+        xAxisKey={xAxisKey}
+        xLabel={xLabel}
+        yLabel={yLabel}
+        keys={keys}
+        colors={colors}
+        width={containerWidth}
+        height={containerHeight}
+        dataPoints={customData}
+      ></HBarChart>
+    </div>
+  );
+};
+HorizontalBarCharts.args = {
+  containerWidth: 100,
+  containerHeight: 100,
+  title: "Team Stats",
+  xLabel: "#",
+  yLabel: "#",
+  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  customData: [
+    {
+      points_scored: { label: "Points Scored", color: "green" },
+      assists: { label: "Points Scored", color: "blue" },
+      games_played: { label: "Games Played" },
+    },
+  ],
+};
+HorizontalBarCharts.argTypes = {
+  keys: {
+    options: filterKeysByType(jsondata, "number")[0],
+    control: { type: "check" },
+    defaultValue: ["points_scored", "assists", "games_played"],
+  },
+  xAxisKey: {
+    options: filterKeysByType(jsondata, "string")[0],
+    control: { type: "radio" },
+    defaultValue: "player_name",
+  },
+};
 
 export const PieCharts: Story<Props> = ({
   containerHeight,
   containerWidth,
 }) => {
   return (
-    <PieChart
-      data={jsondata}
-      title="Title"
-      nameKey="player_name"
-      dataKey="points_scored"
-      width={containerWidth}
-      height={containerHeight}
-    ></PieChart>
+    <div
+      style={{
+        width: `${containerWidth}%`,
+        height: `${containerHeight}%`,
+      }}
+    >
+      <PieChart
+        data={jsondata}
+        title="Title"
+        nameKey="player_name"
+        dataKey="points_scored"
+        width="100"
+        height="100"
+      ></PieChart>
+    </div>
   );
 };
 PieCharts.args = {
@@ -130,8 +270,8 @@ export const StackedBarCharts: Story<Props> = ({
   return (
     <div
       style={{
-        width: "100%",
-        height: "100%",
+        width: `${containerWidth}%`,
+        height: `${containerHeight}%`,
       }}
     >
       <StackedBarChart
@@ -144,19 +284,18 @@ export const StackedBarCharts: Story<Props> = ({
         yLabel={yLabel}
         keys={keys}
         colors={colors}
-        width={containerWidth}
-        height={containerHeight}
+        width={100}
+        height={100}
         dataPoints={customData}
       ></StackedBarChart>
-      <div>{keys}</div>
     </div>
   );
 };
 StackedBarCharts.args = {
   containerWidth: 100,
-  containerHeight: 100,
+  containerHeight: 80,
   title: "Team Stats",
-  xLabel: "#",
+  xLabel: "Players",
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
   customData: [
@@ -195,8 +334,8 @@ export const LineCharts: Story<Props> = ({
   return (
     <div
       style={{
-        width: "100%",
-        height: "100%",
+        width: `${containerWidth}%`,
+        height: `${containerHeight}%`,
       }}
     >
       <LineChart
@@ -210,22 +349,22 @@ export const LineCharts: Story<Props> = ({
         keys={keys}
         dotRadius={dotRadius}
         colors={colors}
-        width={containerWidth}
-        height={containerHeight}
+        width={100}
+        height={100}
         dataPoints={customData}
       ></LineChart>
-      <div>{keys}</div>
     </div>
   );
 };
 LineCharts.args = {
   containerWidth: 100,
-  containerHeight: 100,
+  containerHeight: 80,
   title: "Team Stats",
   dotRadius: 8,
   xLabel: "#",
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+
   customData: [
     {
       points_scored: { label: "Points Scored", color: "green" },
@@ -268,8 +407,8 @@ export const RadarCharts: Story<RadarProps> = ({
   return (
     <div
       style={{
-        width: "100%",
-        height: "100%",
+        width: `${containerWidth}%`,
+        height: `${containerHeight}%`,
       }}
     >
       <RadarChart
@@ -286,7 +425,7 @@ export const RadarCharts: Story<RadarProps> = ({
 };
 RadarCharts.args = {
   containerWidth: 100,
-  containerHeight: 100,
+  containerHeight: 80,
   title: "Personal Stats",
   valueKey: "value",
   axisKey: "exercise",
