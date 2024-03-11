@@ -15,7 +15,8 @@ export const OutlineButton: Story<Props> = ({ label, variant, disabled }) => {
       className={`${styles[variant]} ${styles.button}`}
       disabled={disabled}
     >
-      {toTitlecase(label)}
+      {label}
+      {/* {toTitlecase(label)} */}
     </button>
   );
 };
