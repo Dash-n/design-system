@@ -13,6 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { CustomTooltip, CustomLegend, COLORS } from "../../index.tsx";
 
 type Props = {
   id: string;
@@ -26,25 +27,6 @@ type Props = {
   yLabel: string;
   title?: string;
   dataPoints: any;
-};
-
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className={styles.customTooltip}>
-        <p className={styles.tooltipTitle}>{`${label}`} </p>
-        {payload.map((column) => {
-          console.log(column);
-          return (
-            <p className={styles.label}>
-              {`${toTitlecase(column.name)}: ${column.value}`}{" "}
-            </p>
-          );
-        })}
-      </div>
-    );
-  }
-  return null;
 };
 
 export const StackedBarChart: Story<Props> = ({
@@ -61,8 +43,6 @@ export const StackedBarChart: Story<Props> = ({
   console.log(yLabel);
   keys ??= [];
   dataPoints = dataPoints[0];
-
-  const COLORS = ["#DDCC77", "#CC6677", "#88CCEE"];
 
   return (
     <div style={{ width: "100%", height: "100%" }}>

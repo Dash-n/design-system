@@ -8,12 +8,21 @@ export const toTitlecase = (label: string) => {
     });
 };
 
-// import { Tooltip } from "recharts";
+export const COLORS = [
+  "#88CCEE",
+  "#DDCC77",
+  "#CC6677",
+  "#AA4499",
+  "#882255",
+  "#117733",
+  "#332288",
+  "#44AA99",
+];
 
 const customTooltip = {
   display: "flex",
   flexDirection: "column",
-  padding: "24px 8px",
+  padding: "0 16px",
   backgroundColor: "rgba(255, 255, 255, 0.8)",
   border: "1px solid #c4c4c4",
 };
@@ -30,11 +39,32 @@ export const CustomTooltip = ({ active, payload, label }) => {
       <div style={customTooltip}>
         <p style={tooltipTitle}>{`${label}`} </p>
         {payload.map((column) => {
-          // console.log(column);
           return <p>{`${toTitlecase(column.name)}: ${column.value}`} </p>;
         })}
       </div>
     );
   }
   return null;
+};
+
+const customLegend = {
+  display: "flex",
+  justifyContent: "end",
+};
+export const CustomLegend = (props) => {
+  const { payload } = props;
+
+  // console.log(payload);
+  return (
+    <div style={customLegend}>
+      {payload.map((entry, index) => (
+        <div
+          key={`item-${index}`}
+          style={{ color: `${payload[index].color}`, marginRight: "10px" }}
+        >
+          {toTitlecase(entry.value)}
+        </div>
+      ))}
+    </div>
+  );
 };

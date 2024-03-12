@@ -12,6 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
+import { CustomTooltip, CustomLegend, COLORS } from "../../index.tsx";
 
 type Props = {
   id: string;
@@ -29,25 +30,6 @@ type Props = {
   strokeWidth: number;
 };
 
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className={styles.customTooltip}>
-        <p className={styles.tooltipTitle}>{`${label}`} </p>
-        {payload.map((column) => {
-          console.log(column);
-          return (
-            <p className={styles.label}>
-              {`${toTitlecase(column.name)}: ${column.value}`}{" "}
-            </p>
-          );
-        })}
-      </div>
-    );
-  }
-  return null;
-};
-
 export const LineChart: Story<Props> = ({
   data,
   width,
@@ -63,8 +45,6 @@ export const LineChart: Story<Props> = ({
 }) => {
   keys ??= [];
   dataPoints = dataPoints[0];
-
-  const COLORS = ["#DDCC77", "#CC6677", "#88CCEE"];
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -88,7 +68,8 @@ export const LineChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" />
+          {/* <Legend  /> */}
+          <Legend verticalAlign="top" align="right" content={CustomLegend} />
           {keys.map((point, index) => {
             console.log(dotRadius);
             return dataPoints[point] ? (

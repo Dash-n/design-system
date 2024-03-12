@@ -13,7 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip } from "../../index.tsx";
+import { CustomTooltip, CustomLegend } from "../../index.tsx";
 
 type Props = {
   id: string;
@@ -28,25 +28,6 @@ type Props = {
   title?: string;
   dataPoints: any;
 };
-
-// const CustomTooltip = ({ active, payload, label }) => {
-//   if (active && payload && payload.length) {
-//     return (
-//       <div className={styles.customTooltip}>
-//         <p className={styles.tooltipTitle}>{`${label}`} </p>
-//         {payload.map((column) => {
-//           console.log(column);
-//           return (
-//             <p className={styles.label}>
-//               {`${toTitlecase(column.name)}: ${column.value}`}{" "}
-//             </p>
-//           );
-//         })}
-//       </div>
-//     );
-//   }
-//   return null;
-// };
 
 export const BarChart: Story<Props> = ({
   data,
@@ -86,7 +67,7 @@ export const BarChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" />
+          <Legend verticalAlign="top" align="right" content={CustomLegend} />
           {keys.map((point, index) => {
             console.log(point);
             return dataPoints[point] ? (

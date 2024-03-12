@@ -14,7 +14,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip } from "../../index.tsx";
+import { CustomTooltip, CustomLegend, COLORS } from "../../index.tsx";
 
 type Props = {
   id: string;
@@ -31,25 +31,6 @@ type Props = {
   dataPoints: any;
 };
 
-// const CustomTooltip = ({ active, payload, label }) => {
-//   if (active && payload && payload.length) {
-//     return (
-//       <div className={styles.customTooltip}>
-//         <p className={styles.tooltipTitle}>{`${label}`} </p>
-//         {payload.map((column) => {
-//           console.log(column);
-//           return (
-//             <p className={styles.label}>
-//               {`${toTitlecase(column.name)}: ${column.value}`}{" "}
-//             </p>
-//           );
-//         })}
-//       </div>
-//     );
-//   }
-//   return null;
-// };
-
 export const ComboChart: Story<Props> = ({
   data,
   width,
@@ -64,8 +45,6 @@ export const ComboChart: Story<Props> = ({
 }) => {
   // keys ??= [];
   dataPoints = dataPoints[0];
-
-  const COLORS = ["#DDCC77", "#CC6677", "#88CCEE"];
 
   return (
     <div style={{ width: "100%", height: "100%" }}>
@@ -97,6 +76,7 @@ export const ComboChart: Story<Props> = ({
                 dataKey={point}
                 fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
+                maxBarSize={20}
               />
             ) : (
               ""
@@ -105,7 +85,12 @@ export const ComboChart: Story<Props> = ({
           {dotKeys.map((point, index) => {
             console.log(point);
             return dataPoints[point] ? (
-              <Line type="monotone" dataKey={point} stroke="#4F84F7" />
+              <Line
+                type="monotone"
+                dataKey={point}
+                // stroke="#4F84F7"
+                strokeWidth={2}
+              />
             ) : (
               ""
             );

@@ -51,8 +51,6 @@ export const RadarChart: Story<Props> = ({
   valueKey,
   title,
 }) => {
-  const COLORS = ["#DDCC77", "#CC6677", "#88CCEE"];
-
   return (
     <div style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
@@ -75,8 +73,8 @@ export const RadarChart: Story<Props> = ({
           <Radar
             name="a"
             dataKey={valueKey}
-            stroke="#8884d8"
-            fill="#8884d8"
+            stroke="#332288"
+            fill="#88CCEE"
             fillOpacity={0.6}
           />
         </RChart>
