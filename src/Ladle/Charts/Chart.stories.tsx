@@ -6,6 +6,7 @@ import { StackedBarChart } from "../../Components/Charts/BarChart/StackedBarChar
 import { RadarChart } from "../../Components/Charts/RadarChart/RadarChart.tsx";
 import { PieChart } from "../../Components/Charts/PieChart/PieChart.tsx";
 import { LineChart } from "../../Components/Charts/LineChart/LineChart.tsx";
+import { ScatterChart } from "../../Components/Charts/ScatterChart/ScatterChart.tsx";
 import { useState, useEffect } from "react";
 import jsondata from "./sportsData.json";
 import exercisedata from "./exerciseStats.json";
@@ -378,6 +379,73 @@ LineCharts.argTypes = {
     options: filterKeysByType(jsondata, "number")[0],
     control: { type: "check" },
     defaultValue: ["points_scored", "assists", "games_played"],
+  },
+  xAxisKey: {
+    options: filterKeysByType(jsondata, "string")[0],
+    control: { type: "radio" },
+    defaultValue: "player_name",
+  },
+};
+
+export const ScatterCharts: Story<Props> = ({
+  containerWidth,
+  containerHeight,
+  colors,
+  keys,
+  xAxisKey,
+  xLabel,
+  yLabel,
+  customData,
+  title,
+  dotRadius,
+}) => {
+  return (
+    <div
+      style={{
+        width: `${containerWidth}%`,
+        height: `${containerHeight}%`,
+      }}
+    >
+      <ScatterChart
+        id="chart"
+        data={jsondata}
+        // name="bar"
+        title={title}
+        xAxisKey={xAxisKey}
+        xLabel={xLabel}
+        yLabel={yLabel}
+        keys={keys}
+        dotRadius={dotRadius}
+        colors={colors}
+        width={100}
+        height={100}
+        dataPoints={customData}
+      ></ScatterChart>
+    </div>
+  );
+};
+ScatterCharts.args = {
+  containerWidth: 100,
+  containerHeight: 80,
+  title: "Team Stats",
+  dotRadius: 8,
+  xLabel: "#",
+  yLabel: "#",
+  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+
+  customData: [
+    {
+      points_scored: { label: "Points Scored", color: "green" },
+      assists: { label: "Points Scored", color: "blue" },
+      games_played: { label: "Games Played" },
+    },
+  ],
+};
+ScatterCharts.argTypes = {
+  keys: {
+    options: filterKeysByType(jsondata, "number")[0],
+    control: { type: "check" },
+    defaultValue: ["points_scored"],
   },
   xAxisKey: {
     options: filterKeysByType(jsondata, "string")[0],

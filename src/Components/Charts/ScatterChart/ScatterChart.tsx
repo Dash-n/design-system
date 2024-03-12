@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
-import styles from "./LineChart.module.css";
-import { toTitlecase } from "../..";
+import styles from "./ScatterChart.module.css";
+import { toTitlecase } from "../../index.tsx";
 import {
   LineChart as LChart,
   Line,
@@ -30,7 +30,41 @@ type Props = {
   strokeWidth: number;
 };
 
-export const LineChart: Story<Props> = ({
+const CustomizedDot = (props) => {
+  const { cx, cy, stroke, payload, index, value } = props;
+  console.log(payload);
+
+  if (value > 2500) {
+    return (
+      <svg
+        x={cx - 10}
+        y={cy - 10}
+        width={20}
+        height={20}
+        fill="red"
+        viewBox="0 0 1024 1024"
+      >
+        <path d="M3 3 L3 25 L23 14 z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg
+      x={cx - 10}
+      y={cy - 10}
+      width={200}
+      height={200}
+      fill="green"
+      stroke="red"
+      viewBox="0 0 1024 1024"
+    >
+      <path d="M 50,5 95,97.5 5,97.5 z" />
+    </svg>
+  );
+};
+
+export const ScatterChart: Story<Props> = ({
   data,
   width,
   height,
@@ -69,23 +103,17 @@ export const LineChart: Story<Props> = ({
           />
           <Tooltip content={CustomTooltip} />
           {/* <Legend  /> */}
-          <Legend
-            verticalAlign="top"
-            align="right"
-            content={CustomLegend}
-            iconType="star"
-          />
+          <Legend verticalAlign="top" align="right" content={CustomLegend} />
           {keys.map((point, index) => {
             console.log(dotRadius);
             return dataPoints[point] ? (
               <Line
-                // iconType="line"
                 dataKey={point}
                 stroke={
                   dataPoints[point].color ?? COLORS[index % COLORS.length]
                 }
-                strokeWidth={strokeWidth}
-                activeDot={{ r: dotRadius }}
+                strokeWidth={0}
+                dot={<CustomizedDot />}
               />
             ) : (
               ""
