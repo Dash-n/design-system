@@ -9,7 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { CustomLegend, COLORS } from "../../index.tsx";
+import { CustomLegend, COLORS } from "../../../Utils/index.tsx";
 
 type Props = {
   id: string;
@@ -22,7 +22,7 @@ type Props = {
   title?: string;
   dataPoints: any;
 };
-import { toTitlecase } from "../..";
+import { toTitlecase } from "../../../Utils/index.tsx";
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {

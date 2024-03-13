@@ -1,6 +1,5 @@
 import type { Story } from "@ladle/react";
 import styles from "./ComboChart.module.css";
-import { toTitlecase } from "../../index.tsx";
 import {
   ComposedChart as CChart,
   Bar,
@@ -14,7 +13,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip, CustomLegend, COLORS } from "../../index.tsx";
+import { CustomTooltip, titleLegend, COLORS } from "../../../Utils/index.tsx";
 
 type Props = {
   id: string;
@@ -43,7 +42,6 @@ export const ComboChart: Story<Props> = ({
   xLabel,
   yLabel,
 }) => {
-  // keys ??= [];
   dataPoints = dataPoints[0];
 
   return (
@@ -68,31 +66,29 @@ export const ComboChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" />
-          {barKeys.map((point, index) => {
+          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          {barKeys?.map((point, index) => {
             console.log(point);
-            return dataPoints[point] ? (
+            return (
               <Bar
                 dataKey={point}
                 fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
                 maxBarSize={20}
               />
-            ) : (
-              ""
             );
           })}
-          {dotKeys.map((point, index) => {
+          {dotKeys?.map((point, index) => {
             console.log(point);
-            return dataPoints[point] ? (
+            return (
               <Line
                 type="monotone"
                 dataKey={point}
-                // stroke="#4F84F7"
+                stroke={
+                  dataPoints[point].color ?? COLORS[index % COLORS.length]
+                }
                 strokeWidth={2}
               />
-            ) : (
-              ""
             );
           })}
         </CChart>

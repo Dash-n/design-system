@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./LineChart.module.css";
-import { toTitlecase } from "../..";
+import { toTitlecase } from "../../../Utils/index.tsx";
 import {
   LineChart as LChart,
   Line,
@@ -12,7 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip, CustomLegend, COLORS } from "../../index.tsx";
+import { CustomTooltip, titleLegend, COLORS } from "../../../Utils/index.tsx";
 
 type Props = {
   id: string;
@@ -41,9 +41,8 @@ export const LineChart: Story<Props> = ({
   xLabel,
   yLabel,
   dotRadius,
-  strokeWidth,
+  strokeWidth = 1,
 }) => {
-  keys ??= [];
   dataPoints = dataPoints[0];
 
   return (
@@ -68,18 +67,11 @@ export const LineChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          {/* <Legend  /> */}
-          <Legend
-            verticalAlign="top"
-            align="right"
-            content={CustomLegend}
-            iconType="star"
-          />
-          {keys.map((point, index) => {
+          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          {keys?.map((point, index) => {
             console.log(dotRadius);
-            return dataPoints[point] ? (
+            return (
               <Line
-                // iconType="line"
                 dataKey={point}
                 stroke={
                   dataPoints[point].color ?? COLORS[index % COLORS.length]
@@ -87,8 +79,6 @@ export const LineChart: Story<Props> = ({
                 strokeWidth={strokeWidth}
                 activeDot={{ r: dotRadius }}
               />
-            ) : (
-              ""
             );
           })}
         </LChart>

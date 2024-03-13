@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./CardButton.module.css";
-import { toTitlecase } from "../../index.ts";
+import { toTitlecase } from "../../../Utils/index.tsx";
 import { MdFileCopy, MdDeleteForever, MdEdit } from "react-icons/md";
 import { IconContext } from "react-icons";
 

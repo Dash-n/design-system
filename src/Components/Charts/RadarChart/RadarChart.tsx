@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./RadarChart.module.css";
-import { toTitlecase } from "../..";
+import { toTitlecase, CustomTooltip } from "../../../Utils";
 import {
   RadarChart as RChart,
   Radar,
@@ -22,25 +22,6 @@ type Props = {
   axisKey: string;
   valueKey: string;
   title?: string;
-};
-
-const CustomTooltip = ({ active, payload, label }) => {
-  if (active && payload && payload.length) {
-    return (
-      <div className={styles.customTooltip}>
-        <p className={styles.tooltipTitle}>{`${toTitlecase(label)}`} </p>
-        {payload.map((column) => {
-          console.log(column);
-          return (
-            <p className={styles.label}>
-              {`${toTitlecase(column.name)}: ${column.value}`}{" "}
-            </p>
-          );
-        })}
-      </div>
-    );
-  }
-  return null;
 };
 
 export const RadarChart: Story<Props> = ({

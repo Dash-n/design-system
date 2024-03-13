@@ -1,20 +1,19 @@
 import type { Story } from "@ladle/react";
 import styles from "./BarChart.module.css";
-import { toTitlecase } from "../..";
+import { toTitlecase } from "../../../Utils/index.tsx";
 import {
   BarChart as BChart,
   Bar,
   Rectangle,
   XAxis,
   YAxis,
-  Cell,
   CartesianGrid,
   Tooltip,
   Label,
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip, CustomLegend, COLORS } from "../../index.tsx";
+import { CustomTooltip, titleLegend, COLORS } from "../../../Utils/index.tsx";
 
 type Props = {
   id: string;
@@ -41,7 +40,6 @@ export const HBarChart: Story<Props> = ({
   xLabel,
   yLabel,
 }) => {
-  keys ??= [];
   dataPoints = dataPoints[0];
 
   return (
@@ -59,28 +57,26 @@ export const HBarChart: Story<Props> = ({
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <YAxis dataKey={xAxisKey} type="category">
-            {/* orientation="right" */}
+          <YAxis
+            dataKey={xAxisKey}
+            type="category"
+            label={{ value: yLabel, position: "top" }}
+          ></YAxis>
+
+          <XAxis type="number">
             <Label value={xLabel} position="bottom" />
-          </YAxis>
+          </XAxis>
 
-          <XAxis
-            type="number"
-            // label={{ value: yLabel, angle: -90, position: "insideLeft" }}
-          />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" />
+          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
 
-          {keys.map((point, index) => {
-            console.log(point);
-            return dataPoints[point] ? (
+          {keys?.map((point, index) => {
+            return (
               <Bar
                 dataKey={point}
                 fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
               />
-            ) : (
-              ""
             );
           })}
         </BChart>

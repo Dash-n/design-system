@@ -1,6 +1,5 @@
 import type { Story } from "@ladle/react";
 import styles from "./BarChart.module.css";
-import { toTitlecase } from "../..";
 import {
   BarChart as BChart,
   Bar,
@@ -13,7 +12,11 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip, CustomLegend } from "../../index.tsx";
+import {
+  CustomTooltip,
+  titleLegend,
+  toTitlecase,
+} from "../../../Utils/index.tsx";
 
 type Props = {
   id: string;
@@ -40,7 +43,7 @@ export const BarChart: Story<Props> = ({
   xLabel,
   yLabel,
 }) => {
-  keys ??= [];
+  // keys ??= [];
   dataPoints = dataPoints[0];
 
   const COLORS = ["#DDCC77", "#CC6677", "#88CCEE"];
@@ -67,17 +70,14 @@ export const BarChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" content={CustomLegend} />
-          {keys.map((point, index) => {
-            console.log(point);
-            return dataPoints[point] ? (
+          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          {keys?.map((point, index) => {
+            return (
               <Bar
                 dataKey={point}
                 fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
               />
-            ) : (
-              ""
             );
           })}
         </BChart>

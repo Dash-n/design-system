@@ -35,8 +35,6 @@ const tooltipTitle = {
 
 export const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
-    console.log(label);
-    console.log(payload);
     return (
       <div style={customTooltip}>
         <p style={tooltipTitle}>{label} </p>
@@ -51,11 +49,4 @@ export const CustomTooltip = ({ active, payload, label }) => {
 
 export const titleLegend = (value: string) => {
   return <span>{toTitlecase(value)}</span>;
-};
-
-export const titleTooltip = (value, name, props) => {
-  console.log(value);
-  console.log(name);
-  console.log(props);
-  // return <span>{toTitlecase(value)}</span>;
 };

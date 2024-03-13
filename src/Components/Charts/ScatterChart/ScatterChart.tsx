@@ -73,7 +73,7 @@ export const ScatterChart: Story<Props> = ({
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
-          <Tooltip formatter={titleTooltip} />
+          <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" formatter={titleLegend} />
           {keys.map((point, index) => {
             console.log(dotRadius);
@@ -86,7 +86,6 @@ export const ScatterChart: Story<Props> = ({
                 strokeWidth={0}
                 shape={SHAPES[index]}
                 fill={COLORS[index % COLORS.length]}
-                // dot={<CustomizedDot />}
               />
             ) : (
               ""
