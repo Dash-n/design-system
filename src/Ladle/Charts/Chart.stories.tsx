@@ -445,7 +445,7 @@ ScatterCharts.argTypes = {
   keys: {
     options: filterKeysByType(jsondata, "number")[0],
     control: { type: "check" },
-    defaultValue: ["points_scored"],
+    defaultValue: ["points_scored", "assists", "games_played"],
   },
   xAxisKey: {
     options: filterKeysByType(jsondata, "string")[0],

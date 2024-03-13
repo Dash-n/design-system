@@ -1,9 +1,8 @@
 import type { Story } from "@ladle/react";
 import styles from "./ScatterChart.module.css";
-import { toTitlecase } from "../../index.tsx";
 import {
-  LineChart as LChart,
-  Line,
+  ScatterChart as LChart,
+  Scatter,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -12,7 +11,13 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip, CustomLegend, COLORS } from "../../index.tsx";
+import {
+  CustomTooltip,
+  titleLegend,
+  titleTooltip,
+  COLORS,
+  toTitlecase,
+} from "../../../Utils/index.tsx";
 
 type Props = {
   id: string;
@@ -27,42 +32,9 @@ type Props = {
   title?: string;
   dataPoints: any;
   dotRadius: number;
-  strokeWidth: number;
 };
 
-const CustomizedDot = (props) => {
-  const { cx, cy, stroke, payload, index, value } = props;
-  console.log(payload);
-
-  if (value > 2500) {
-    return (
-      <svg
-        x={cx - 10}
-        y={cy - 10}
-        width={20}
-        height={20}
-        fill="red"
-        viewBox="0 0 1024 1024"
-      >
-        <path d="M3 3 L3 25 L23 14 z" />
-      </svg>
-    );
-  }
-
-  return (
-    <svg
-      x={cx - 10}
-      y={cy - 10}
-      width={200}
-      height={200}
-      fill="green"
-      stroke="red"
-      viewBox="0 0 1024 1024"
-    >
-      <path d="M 50,5 95,97.5 5,97.5 z" />
-    </svg>
-  );
-};
+const SHAPES = ["triangle", "diamond", "cross", "square"];
 
 export const ScatterChart: Story<Props> = ({
   data,
@@ -75,9 +47,9 @@ export const ScatterChart: Story<Props> = ({
   xLabel,
   yLabel,
   dotRadius,
-  strokeWidth,
 }) => {
   keys ??= [];
+  console.log(xAxisKey);
   dataPoints = dataPoints[0];
 
   return (
@@ -94,26 +66,27 @@ export const ScatterChart: Story<Props> = ({
           }}
         >
           <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey={xAxisKey}>
+          <XAxis type="category" dataKey={xAxisKey}>
             <Label value={xLabel} position="bottom" />
           </XAxis>
 
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
-          <Tooltip content={CustomTooltip} />
-          {/* <Legend  /> */}
-          <Legend verticalAlign="top" align="right" content={CustomLegend} />
+          <Tooltip formatter={titleTooltip} />
+          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
           {keys.map((point, index) => {
             console.log(dotRadius);
             return dataPoints[point] ? (
-              <Line
+              <Scatter
                 dataKey={point}
                 stroke={
                   dataPoints[point].color ?? COLORS[index % COLORS.length]
                 }
                 strokeWidth={0}
-                dot={<CustomizedDot />}
+                shape={SHAPES[index]}
+                fill={COLORS[index % COLORS.length]}
+                // dot={<CustomizedDot />}
               />
             ) : (
               ""

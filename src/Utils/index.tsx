@@ -35,11 +35,13 @@ const tooltipTitle = {
 
 export const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
+    console.log(label);
+    console.log(payload);
     return (
       <div style={customTooltip}>
-        <p style={tooltipTitle}>{`${label}`} </p>
-        {payload.map((column) => {
-          return <p>{`${toTitlecase(column.name)}: ${column.value}`} </p>;
+        <p style={tooltipTitle}>{label} </p>
+        {payload.map((column, index) => {
+          return <p>{`${toTitlecase(column.dataKey)}: ${column.value}`} </p>;
         })}
       </div>
     );
@@ -47,24 +49,13 @@ export const CustomTooltip = ({ active, payload, label }) => {
   return null;
 };
 
-const customLegend = {
-  display: "flex",
-  justifyContent: "end",
+export const titleLegend = (value: string) => {
+  return <span>{toTitlecase(value)}</span>;
 };
-export const CustomLegend = (props) => {
-  const { payload } = props;
 
-  // console.log(payload);
-  return (
-    <div style={customLegend}>
-      {payload.map((entry, index) => (
-        <div
-          key={`item-${index}`}
-          style={{ color: `${payload[index].color}`, marginRight: "10px" }}
-        >
-          {toTitlecase(entry.value)}
-        </div>
-      ))}
-    </div>
-  );
+export const titleTooltip = (value, name, props) => {
+  console.log(value);
+  console.log(name);
+  console.log(props);
+  // return <span>{toTitlecase(value)}</span>;
 };
