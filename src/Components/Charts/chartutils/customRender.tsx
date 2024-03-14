@@ -1,4 +1,4 @@
-import { toTitlecase } from "../../../Utils";
+import { toTitlecase } from "../../../Utils/toTitleCase";
 
 export const COLORS = [
   "#88CCEE",
@@ -12,7 +12,7 @@ export const COLORS = [
 ];
 
 const Square = (props: any, index: number) => {
-  const { cx, cy, value } = props;
+  const { cx, cy } = props;
   return (
     <svg
       x={cx - 10}
@@ -27,7 +27,7 @@ const Square = (props: any, index: number) => {
   );
 };
 const Circle = (props: any, index: number) => {
-  const { cx, cy, value } = props;
+  const { cx, cy } = props;
   return (
     <svg
       x={cx - 10}
@@ -42,7 +42,7 @@ const Circle = (props: any, index: number) => {
   );
 };
 const Triangle = (props: any, index: number) => {
-  const { cx, cy, value } = props;
+  const { cx, cy } = props;
   return (
     <svg
       x={cx - 10}
@@ -57,7 +57,7 @@ const Triangle = (props: any, index: number) => {
   );
 };
 const Star = (props: any, index: number) => {
-  const { cx, cy, value } = props;
+  const { cx, cy } = props;
 
   return (
     <svg
@@ -94,7 +94,7 @@ export const CustomTooltip = ({ active, payload, label }) => {
     return (
       <div style={customTooltip}>
         <p style={tooltipTitle}>{label} </p>
-        {payload.map((column, index) => {
+        {payload.map((column) => {
           return <p>{`${toTitlecase(column.dataKey)}: ${column.value}`} </p>;
         })}
       </div>

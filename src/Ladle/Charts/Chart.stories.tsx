@@ -7,7 +7,6 @@ import { RadarChart } from "../../Components/Charts/RadarChart/RadarChart.tsx";
 import { PieChart } from "../../Components/Charts/PieChart/PieChart.tsx";
 import { LineChart } from "../../Components/Charts/LineChart/LineChart.tsx";
 import { ScatterChart } from "../../Components/Charts/ScatterChart/ScatterChart.tsx";
-import { useState, useEffect } from "react";
 import jsondata from "./sportsData.json";
 import exercisedata from "./exerciseStats.json";
 
@@ -254,7 +253,6 @@ PieCharts.args = {
   containerWidth: 100,
   containerHeight: 100,
   title: "Personal Stats",
-  // colors: ["#DDCC77", "#CC6677", "#88CCEE"],
 };
 
 export const StackedBarCharts: Story<Props> = ({
@@ -342,7 +340,6 @@ export const LineCharts: Story<Props> = ({
       <LineChart
         id="chart"
         data={jsondata}
-        // name="bar"
         title={title}
         xAxisKey={xAxisKey}
         xLabel={xLabel}
@@ -409,7 +406,6 @@ export const ScatterCharts: Story<Props> = ({
       <ScatterChart
         id="chart"
         data={jsondata}
-        // name="bar"
         title={title}
         xAxisKey={xAxisKey}
         xLabel={xLabel}
@@ -497,5 +493,4 @@ RadarCharts.args = {
   title: "Personal Stats",
   valueKey: "value",
   axisKey: "exercise",
-  // colors: ["#DDCC77", "#CC6677", "#88CCEE"],
 };

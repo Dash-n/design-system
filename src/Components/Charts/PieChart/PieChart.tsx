@@ -8,8 +8,8 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
-import { COLORS } from "../chartutils/index.tsx";
-import { toTitlecase } from "../../../Utils/index.tsx";
+import { COLORS } from "../chartutils/customRender.tsx";
+import { toTitlecase } from "../../../Utils/toTitleCase.ts";
 
 type Props = {
   id?: string;

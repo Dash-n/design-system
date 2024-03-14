@@ -12,11 +12,14 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip, titleLegend, COLORS } from "../chartutils/index.tsx";
+import {
+  CustomTooltip,
+  titleLegend,
+  COLORS,
+} from "../chartutils/customRender.tsx";
 
 type Props = {
-  id: string;
-  name: string;
+  id?: string;
   data: string[];
   keys?: string[];
   width: number;
@@ -29,6 +32,7 @@ type Props = {
 };
 
 export const StackedBarChart: Story<Props> = ({
+  id,
   data,
   width,
   height,
@@ -42,7 +46,7 @@ export const StackedBarChart: Story<Props> = ({
   dataPoints = dataPoints[0];
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
         <BChart

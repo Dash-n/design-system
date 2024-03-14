@@ -16,7 +16,7 @@ import {
   titleLegend,
   COLORS,
   customLegend,
-} from "../chartutils/index.tsx";
+} from "../chartutils/customRender.tsx";
 
 type Props = {
   id?: string;
@@ -136,9 +136,9 @@ export const ScatterChart: Story<Props> = ({
           />
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" content={customLegend} />
-          {keys.map((point, index) => {
+          {keys?.map((point, index) => {
             console.log(dotRadius);
-            return dataPoints[point] ? (
+            return (
               <Line
                 dataKey={point}
                 stroke={
@@ -148,8 +148,6 @@ export const ScatterChart: Story<Props> = ({
                 dot={SHAPES[index]}
                 fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
               />
-            ) : (
-              ""
             );
           })}
         </LChart>

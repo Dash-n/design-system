@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./RadarChart.module.css";
-import { toTitlecase, CustomTooltip } from "../../../Utils";
+import { CustomTooltip } from "../../../Utils/toTitleCase";
 import {
   RadarChart as RChart,
   Radar,
@@ -8,14 +8,11 @@ import {
   PolarAngleAxis,
   PolarRadiusAxis,
   Tooltip,
-  Label,
-  Legend,
   ResponsiveContainer,
 } from "recharts";
 
 type Props = {
-  id: string;
-  name: string;
+  id?: string;
   data: string[];
   width: number;
   height: number;
@@ -25,6 +22,7 @@ type Props = {
 };
 
 export const RadarChart: Story<Props> = ({
+  id,
   data,
   width,
   height,
@@ -33,7 +31,7 @@ export const RadarChart: Story<Props> = ({
   title,
 }) => {
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
         <RChart
