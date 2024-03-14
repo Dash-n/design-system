@@ -12,7 +12,7 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import { CustomTooltip, titleLegend, COLORS } from "../../../Utils/index.tsx";
+import { CustomTooltip, titleLegend, COLORS } from "../chartutils/index.tsx";
 
 type Props = {
   id: string;

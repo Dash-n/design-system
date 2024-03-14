@@ -1,8 +1,8 @@
 import type { Story } from "@ladle/react";
 import styles from "./ScatterChart.module.css";
 import {
-  ScatterChart as LChart,
-  Scatter,
+  LineChart as LChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -14,14 +14,12 @@ import {
 import {
   CustomTooltip,
   titleLegend,
-  titleTooltip,
   COLORS,
-  toTitlecase,
-} from "../../../Utils/index.tsx";
+  customLegend,
+} from "../chartutils/index.tsx";
 
 type Props = {
-  id: string;
-  name: string;
+  id?: string;
   data: string[];
   keys?: string[];
   width: number;
@@ -34,9 +32,72 @@ type Props = {
   dotRadius: number;
 };
 
-const SHAPES = ["triangle", "diamond", "cross", "square"];
+const Square = (props: any) => {
+  const { cx, cy, value, fill } = props;
+  return (
+    <svg
+      x={cx - 10}
+      y={cy - 10}
+      width={200}
+      height={200}
+      fill={fill}
+      viewBox="0 0 1024 1024"
+    >
+      <polygon points="0,0 100,0 100,100 0,100" />
+    </svg>
+  );
+};
+const Circle = (props: any) => {
+  const { cx, cy, value, fill } = props;
+  return (
+    <svg
+      x={cx - 10}
+      y={cy - 10}
+      width={200}
+      height={200}
+      fill={fill}
+      viewBox="0 0 1024 1024"
+    >
+      <circle r="45" cx="50" cy="50" />
+    </svg>
+  );
+};
+const Triangle = (props: any) => {
+  const { cx, cy, value, fill } = props;
+  return (
+    <svg
+      x={cx - 10}
+      y={cy - 10}
+      width={200}
+      height={200}
+      fill={fill}
+      viewBox="0 0 1024 1024"
+    >
+      <polygon points="50,0 100,90 0,90" />
+    </svg>
+  );
+};
+const Star = (props: any) => {
+  const { cx, cy, value, fill } = props;
+
+  return (
+    <svg
+      x={cx - 20}
+      y={cy - 15}
+      width={200}
+      height={200}
+      fill={fill}
+      viewBox="0 0 1024 1024"
+    >
+      <polygon points="100,10 60,132 160,52 40,52 140,132" />{" "}
+    </svg>
+  );
+};
+
+const SHAPES = [Square, Triangle, Circle, Star];
 
 export const ScatterChart: Story<Props> = ({
+  id,
   data,
   width,
   height,
@@ -53,7 +114,7 @@ export const ScatterChart: Story<Props> = ({
   dataPoints = dataPoints[0];
 
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
         <LChart
@@ -74,18 +135,18 @@ export const ScatterChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend verticalAlign="top" align="right" content={customLegend} />
           {keys.map((point, index) => {
             console.log(dotRadius);
             return dataPoints[point] ? (
-              <Scatter
+              <Line
                 dataKey={point}
                 stroke={
                   dataPoints[point].color ?? COLORS[index % COLORS.length]
                 }
                 strokeWidth={0}
-                shape={SHAPES[index]}
-                fill={COLORS[index % COLORS.length]}
+                dot={SHAPES[index]}
+                fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
               />
             ) : (
               ""

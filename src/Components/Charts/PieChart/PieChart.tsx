@@ -1,30 +1,29 @@
-import React, { PureComponent } from "react";
+import type { Story } from "@ladle/react";
 import styles from "./PieChart.module.css";
 import {
   PieChart as PChart,
   Pie,
-  Sector,
   Cell,
   ResponsiveContainer,
   Tooltip,
   Legend,
 } from "recharts";
-import { CustomLegend, COLORS } from "../../../Utils/index.tsx";
+import { COLORS } from "../chartutils/index.tsx";
+import { toTitlecase } from "../../../Utils/index.tsx";
 
 type Props = {
-  id: string;
-  name: string;
+  id?: string;
   data: string[];
-  key: string[];
+  dataKey: string[];
+  nameKey: string[];
   width: number;
   height: number;
   valueKey: string;
   title?: string;
   dataPoints: any;
 };
-import { toTitlecase } from "../../../Utils/index.tsx";
 
-const CustomTooltip = ({ active, payload, label }) => {
+const PieTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
     return (
       <div className={styles.customTooltip}>
@@ -64,6 +63,7 @@ const renderCustomizedLabel = ({
 };
 
 export const PieChart: Story<Props> = ({
+  id,
   data,
   dataKey,
   nameKey,
@@ -73,11 +73,11 @@ export const PieChart: Story<Props> = ({
 }) => {
   {
     return (
-      <div style={{ width: "100%", height: "100%" }}>
+      <div id={id} style={{ width: "100%", height: "100%" }}>
         <p className={styles.title}>{title}</p>
         <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
           <PChart>
-            <Tooltip content={<CustomTooltip />} />
+            <Tooltip content={<PieTooltip />} />
             <Legend verticalAlign="top" align="right" />
             <Pie
               data={data}

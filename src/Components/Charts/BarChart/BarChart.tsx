@@ -12,15 +12,10 @@ import {
   Legend,
   ResponsiveContainer,
 } from "recharts";
-import {
-  CustomTooltip,
-  titleLegend,
-  toTitlecase,
-} from "../../../Utils/index.tsx";
+import { CustomTooltip, titleLegend, COLORS } from "../chartutils/index.tsx";
 
 type Props = {
-  id: string;
-  name: string;
+  id?: string;
   data: string[];
   keys?: string[];
   width: number;
@@ -33,6 +28,7 @@ type Props = {
 };
 
 export const BarChart: Story<Props> = ({
+  id,
   data,
   width,
   height,
@@ -43,13 +39,10 @@ export const BarChart: Story<Props> = ({
   xLabel,
   yLabel,
 }) => {
-  // keys ??= [];
   dataPoints = dataPoints[0];
 
-  const COLORS = ["#DDCC77", "#CC6677", "#88CCEE"];
-
   return (
-    <div style={{ width: "100%", height: "100%" }}>
+    <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
         <BChart
