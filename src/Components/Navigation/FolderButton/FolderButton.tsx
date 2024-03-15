@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./FolderButton.module.css";
-import { toTitlecase } from "../../index.ts";
+import { toTitlecase } from "../../../Utils/index.ts";
 import { MdDeleteForever, MdEdit } from "react-icons/md";
 import { IconContext } from "react-icons";
 

@@ -11,22 +11,18 @@ const exampleContent = [
   {
     title: "Appointment Cancelled",
     content: "Physio has cancelled your appointment",
-    unread: true,
   },
   {
     title: "Physio has changed your appointment",
     content: "New time is Wednesday, August 16 @ 12:00pm",
-    unread: true,
   },
   {
     title: "Appointment Cancelled",
     content: "Physio has cancelled your appointment",
-    unread: true,
   },
   {
     title: "Appointment Cancelled",
     content: "New time is Wednesday",
-    unread: false,
   },
 ];
 
@@ -35,5 +31,3 @@ export const Toasts: Story<Props> = ({ content, variant, disabled }) => (
     <Toast variant={variant} content={exampleContent}></Toast>
   </div>
 );
-
-// Toasts.argTypes

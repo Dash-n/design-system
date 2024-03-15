@@ -8,7 +8,7 @@
   border-radius: 8px;
   padding: 8px 16px;
 
-  background-color: var(--main-bg-color);
+  /* background-color: var(--main-bg-color); */
   /* color: white; */
 
   font-size: large;
@@ -19,10 +19,16 @@
 
 .notifContainer {
   display: flex;
-  flex-direction: column;
-  justify-content: start;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   padding: 8px;
+}
+
+.containerText {
+  display: flex;
+  flex-direction: column;
 }
 
 .notifTitle {
@@ -32,8 +38,16 @@
   font-weight: 200;
 }
 
-span {
+.lineSpan {
   display: block;
   width: 100%;
   border-top: 1px solid #ccc;
+}
+
+.dot {
+  height: 20px;
+  width: 20px;
+  background-color: red;
+  border-radius: 50%;
+  display: inline-block;
 }
