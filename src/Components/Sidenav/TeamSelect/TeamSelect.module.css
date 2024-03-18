@@ -1,0 +1,67 @@
+.selectBox {
+  display: flex;
+  position: relative;
+  padding: 8px;
+  margin: 4px;
+  gap: 8px;
+  /* width: 100%; */
+  height: 40px;
+  align-items: center;
+  border-radius: 8px;
+  border-radius: 4px;
+  box-sizing: border-box;
+  border: 1px #c4c4c4 solid;
+}
+
+.select {
+  width: 100%;
+  border: none;
+  color: #606060;
+  font-size: 14px;
+  font-family: "Geist";
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  /* transition: box-shadow 0.2s ease-out; */
+}
+
+.select:focus {
+  box-shadow: 0 0 2px 3px #4f84f7;
+  outline: none;
+
+  transition: box-shadow 0.3s ease-out;
+}
+
+.select:not(:placeholder-shown) + .label,
+.select:focus + .label {
+  position: absolute;
+  left: 12px;
+  padding: 4px 0px;
+  background: white;
+  height: 12px;
+  transform: translateY(-50%);
+  font-size: 12px;
+
+  transition: all 0.3s ease-out;
+}
+
+.placeholder {
+  display: none;
+}
+
+.select::placeholder {
+  color: transparent;
+}
+
+.select:focus::placeholder {
+  color: #c4c4c4;
+}
+
+.select:disabled + .label {
+  color: #c4c4c4;
+}
+
+.logo {
+  height: 32px;
+}

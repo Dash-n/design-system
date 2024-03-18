@@ -2,7 +2,7 @@ import type { Story } from "@ladle/react";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { CardButton } from "../../Components/Navigation/CardButton/CardButton.tsx";
 import { FolderButton } from "../../Components/Navigation/FolderButton/FolderButton.tsx";
-import { Sidenav } from "../../Components/Navigation/Sidenav/Sidenav.tsx";
+import { Sidenav } from "../../Components/Sidenav/Sidenav.tsx";
 
 type Props = {
   label?: string;
@@ -97,7 +97,7 @@ export const Sidenavs: Story<Props> = ({}) => (
   <div
     style={{
       width: "100%",
-      height: "50vh",
+      height: "80vh",
       background: "#F4F4F4",
       position: "relative",
     }}

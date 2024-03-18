@@ -1,0 +1,19 @@
+.userDiv {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  /* justify-content: center; */
+
+  min-height: 40px;
+  border-radius: 8px;
+  padding: 8px 16px;
+
+  font-size: large;
+  font-family: "Geist";
+  /* text-decoration: none; */
+}
+
+a {
+  color: #606060;
+}

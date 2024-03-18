@@ -1,0 +1,33 @@
+.header {
+  display: flex;
+  align-items: center;
+
+  height: 40px;
+  width: 80%;
+  border-radius: 8px;
+  padding: 0 16px;
+
+  background-color: white;
+  /* color: #365aa8; */
+
+  font-size: 16px;
+  font-family: "Geist";
+
+  border: 1px solid #c4c4c4;
+}
+a:link {
+  text-decoration: none;
+}
+.a:hover:not(:disabled) {
+  border: 1px #a3bffb solid;
+}
+.a:active:not(:disabled) {
+  background-color: #e9f1fd;
+}
+
+.a:disabled {
+  background-color: var(--main-disabled-color);
+}
+.warning:disabled {
+  background-color: var(--warning-disabled-color);
+}
