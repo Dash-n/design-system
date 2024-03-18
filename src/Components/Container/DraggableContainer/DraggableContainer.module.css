@@ -1,0 +1,15 @@
+.questionContainer {
+  width: 100%;
+  height: 100%;
+  border: 1px solid #c4c4c4;
+}
+
+.questionBar {
+  display: flex;
+}
+
+.questionDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

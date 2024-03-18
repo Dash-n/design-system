@@ -1,5 +1,6 @@
 import type { Story } from "@ladle/react";
 import { Container } from "../Components/Container/Container";
+import { DraggableContainer } from "../Components/Container/DraggableContainer/DraggableContainer";
 import { Button } from "../Components/Button/Button/Button";
 
 type Props = {
@@ -22,3 +23,7 @@ Containers.args = {
   margin: "24px",
 };
 // Toasts.argTypes
+
+export const DraggableContainers = ({}) => (
+  <DraggableContainer></DraggableContainer>
+);
