@@ -56,7 +56,7 @@ export const Sidenav: Story<Props> = ({}) => {
               "PolyU - Men's Soccer",
             ]}
             values={["one", "two"]}
-            // setAnswer={handleChange}
+            // setAnswer={handleChange} //todo
           />
           <MenuButton variant="inputs" link="google.com"></MenuButton>
           <MenuButton variant="database" link="google.com"></MenuButton>

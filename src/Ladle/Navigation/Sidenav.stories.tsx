@@ -2,7 +2,7 @@ import type { Story } from "@ladle/react";
 import { User } from "../../Components/Sidenav/User/User";
 import { SideHeader } from "../../Components/Sidenav/SideHeader/SideHeader";
 import { TeamSelect } from "../../Components/Sidenav/TeamSelect/TeamSelect";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 type Props = {
   username: string;
@@ -37,7 +37,6 @@ export const Selects: Story<Props> = ({ options }) => {
   return (
     <div
       style={{
-        // width: "300px",
         display: "flex",
         flexDirection: "column",
         gap: "20px",
