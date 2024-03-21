@@ -8,17 +8,12 @@ type Props = {
   content: string;
 };
 
-export const Toast: Story<Props> = ({ content, variant, disabled }) => {
+export const Toast: Story<Props> = ({ content }) => {
   console.log(content);
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardTitle}>{title}</div>
       <div className={styles.contentContainer}></div>
-      <span className={styles.readDot}></span>
     </div>
   );
 };
-// Button.defaultProps = {
-//   variant: "",
-//   label: "",
-// };

@@ -10,11 +10,10 @@ type Props = {
 
 export const Container: Story<Props> = ({
   children,
-  width,
+  width = "100%",
   height = "100%",
   margin,
 }: Props) => {
-  console.log(margin);
   return (
     <div
       className={styles.container}

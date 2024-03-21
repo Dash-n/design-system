@@ -9,7 +9,7 @@ type Props = {
   content: any[];
 };
 
-export const Toast: Story<Props> = ({ content, variant, disabled }) => {
+export const Toast: Story<Props> = ({ content }) => {
   console.log(content);
   return (
     <div className={styles.toastContainer}>
