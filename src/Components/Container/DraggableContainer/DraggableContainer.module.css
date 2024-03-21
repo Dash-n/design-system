@@ -3,13 +3,12 @@
   flex-direction: row;
   border-radius: 8px;
   border: 1px solid #c4c4c4;
-  /* height: 200px; */
   overflow: hidden;
   background-color: white;
 }
 
 .containerBody {
-  height: 200px;
+  height: 100%;
   width: 100%;
   padding: 8px;
 }
@@ -24,4 +23,11 @@
 
 .deleteEnd {
   padding: 8px;
+}
+
+.deleteButton {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
 }
