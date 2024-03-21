@@ -7,10 +7,6 @@
   min-height: 40px;
   border-radius: 8px;
   padding: 8px 16px;
-
-  /* background-color: var(--main-bg-color); */
-  /* color: white; */
-
   font-size: large;
   font-family: "Geist";
 
@@ -19,7 +15,6 @@
 
 .notifContainer {
   display: flex;
-  /* flex-direction: column; */
   justify-content: space-between;
   align-items: center;
   width: 100%;
