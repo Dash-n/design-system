@@ -35,7 +35,7 @@ export const Sidenav: Story<Props> = ({}) => {
       ></div>
 
       <div className={`${styles.sidenav} ${isOpen ? styles.open : ""}`}>
-        <div style={{ gap: "8px" }}>
+        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
           <div style={{ position: "relative" }}>
             <button
               className={`${styles.toggleButton} ${styles.inside}`}
