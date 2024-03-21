@@ -8,7 +8,7 @@ type Props = {
   disabled?: boolean;
   options: string[];
   values: string[];
-  setAnswer: (e) => void;
+  setAnswer: (answer: any) => void;
 };
 
 export const Select: Story<Props> = ({

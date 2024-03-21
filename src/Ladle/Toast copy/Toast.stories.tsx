@@ -1,5 +1,5 @@
 import type { Story } from "@ladle/react";
-import { Toast } from "../../Components/Toast/Toast.tsx";
+import { Toast } from "../../Components/Toast/Toast.js";
 
 type Props = {
   content: any;
@@ -16,7 +16,7 @@ const exampleContent = [
   {
     title: "Physio has changed your appointment",
     content: "New time is Wednesday, August 16 @ 12:00pm",
-    unread: true,
+    unread: false,
   },
   {
     title: "Appointment Cancelled",
@@ -35,3 +35,5 @@ export const Toasts: Story<Props> = ({ content, variant, disabled }) => (
     <Toast variant={variant} content={exampleContent}></Toast>
   </div>
 );
+
+// Toasts.argTypes

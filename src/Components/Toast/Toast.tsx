@@ -3,14 +3,12 @@ import styles from "./Toast.module.css";
 import { toTitlecase } from "../../Utils/index.ts";
 
 type Props = {
-  // label: string;
   disabled?: boolean;
   variant: string;
   content: any[];
 };
 
 export const Toast: Story<Props> = ({ content }) => {
-  console.log(content);
   return (
     <div className={styles.toastContainer}>
       {content.map((entry, index) => (
@@ -30,7 +28,3 @@ export const Toast: Story<Props> = ({ content }) => {
     </div>
   );
 };
-// Button.defaultProps = {
-//   variant: "",
-//   label: "",
-// };

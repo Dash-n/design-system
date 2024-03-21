@@ -50,7 +50,6 @@ export const DraggableContainers = ({}) => {
 
       const [removedItem] = reorderedItems.splice(sourceIndex, 1);
       reorderedItems.splice(destinationIndex, 0, removedItem);
-      console.log(reorderedItems);
 
       return setItems(reorderedItems);
     }

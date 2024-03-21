@@ -20,14 +20,5 @@ export const Date: Story<Props> = ({ selected, onSelect, footer }) => {
       onSelect={onSelect}
       footer={footer}
     />
-
-    // <div className={styles.inputBox}>
-
-    //   {label && (
-    //     <label htmlFor={id} className={styles.label}>
-    //       {label}
-    //     </label>
-    //   )}
-    // </div>
   );
 };
