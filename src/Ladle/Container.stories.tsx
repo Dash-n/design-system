@@ -1,7 +1,7 @@
 import type { Story } from "@ladle/react";
 import { Container } from "../Components/Container/Container";
 import { DraggableContainer } from "../Components/Container/DraggableContainer/DraggableContainer";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 type Props = {
@@ -21,27 +21,20 @@ export const Containers: Story<Props> = ({ width, height, margin }) => (
 Containers.args = {
   width: "100%",
   height: "100%",
-  margin: "24px",
+  margin: "20px 0",
 };
 
-const testData = [
-  {
-    id: "one",
-    items: ["Johnny", "Billy", "Tom"],
-  },
-  {
-    id: "two",
-    items: ["Jimmy"],
-  },
-];
+const testData = [<div>a</div>, <Container>Container</Container>, <div>c</div>];
 
 export const DraggableContainers = ({}) => {
   const [items, setItems] = useState(testData);
 
+  const deleteDraggable = (e) => {
+    console.log(e); //do something here
+  };
+
   const handleDragDrop = (results) => {
     const { source, destination, type } = results;
-    console.log(results);
-    console.log(destination, source);
     if (!destination) return;
 
     if (
@@ -49,45 +42,18 @@ export const DraggableContainers = ({}) => {
       source.index === destination.index
     )
       return;
-    const sourceIndex = source.index;
-    const destinationIndex = destination.index;
 
     if (type === "group") {
       const reorderedItems = [...items];
+      const sourceIndex = source.index;
+      const destinationIndex = destination.index;
 
       const [removedItem] = reorderedItems.splice(sourceIndex, 1);
       reorderedItems.splice(destinationIndex, 0, removedItem);
+      console.log(reorderedItems);
 
       return setItems(reorderedItems);
     }
-
-    const itemSourceIndex = items.findIndex(
-      (item) => item.id === source.droppableId
-    );
-    const itemDestinationIndex = items.findIndex(
-      (item) => item.id === destination.droppableId
-    );
-    const newSourceItems = [...items[itemSourceIndex].items];
-    const newDestinationItems =
-      source.droppableId !== destination.droppableId
-        ? [...items[itemDestinationIndex].items]
-        : newSourceItems;
-
-    const [deletedItem] = newSourceItems.splice(sourceIndex, 1);
-    newDestinationItems.splice(destinationIndex, 0, deletedItem);
-
-    const newItems = [...items];
-
-    newItems[itemSourceIndex] = {
-      ...items[itemSourceIndex],
-      items: newSourceItems,
-    };
-    newItems[itemDestinationIndex] = {
-      ...items[itemDestinationIndex],
-      items: newDestinationItems,
-    };
-
-    setItems(newItems);
   };
 
   return (
@@ -97,10 +63,11 @@ export const DraggableContainers = ({}) => {
         padding: "24px",
       }}
     >
-      <DraggableContainer content={testData} onDragEnd={handleDragDrop} />
+      <DraggableContainer
+        content={items}
+        onDelete={deleteDraggable}
+        onDragEnd={handleDragDrop}
+      />
     </div>
   );
 };
-// DraggableContainers.args = {
-//   testData: ["red", "blue", "yellow"],
-// };
