@@ -30,7 +30,7 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title?: string;
-  dataPoints: any;
+  customData: any;
 };
 
 export const ComboChart: Story<Props> = ({
@@ -41,13 +41,11 @@ export const ComboChart: Story<Props> = ({
   barKeys,
   dotKeys,
   xAxisKey,
-  dataPoints,
+  customData,
   title,
   xLabel,
   yLabel,
 }) => {
-  dataPoints = dataPoints[0];
-
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
@@ -72,11 +70,10 @@ export const ComboChart: Story<Props> = ({
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" formatter={titleLegend} />
           {barKeys?.map((point, index) => {
-            console.log(point);
             return (
               <Bar
                 dataKey={point}
-                fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
+                fill={customData[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
                 maxBarSize={20}
               />
@@ -89,7 +86,7 @@ export const ComboChart: Story<Props> = ({
                 type="monotone"
                 dataKey={point}
                 stroke={
-                  dataPoints[point].color ?? COLORS[index % COLORS.length]
+                  customData[point].color ?? COLORS[index % COLORS.length]
                 }
                 strokeWidth={2}
               />

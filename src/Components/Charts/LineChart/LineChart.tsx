@@ -27,7 +27,7 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title?: string;
-  dataPoints: any;
+  customData: any;
   dotRadius: number;
   strokeWidth: number;
 };
@@ -39,15 +39,13 @@ export const LineChart: Story<Props> = ({
   height,
   keys,
   xAxisKey,
-  dataPoints,
+  customData,
   title,
   xLabel,
   yLabel,
   dotRadius,
   strokeWidth = 1,
 }) => {
-  dataPoints = dataPoints[0];
-
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
@@ -77,7 +75,7 @@ export const LineChart: Story<Props> = ({
               <Line
                 dataKey={point}
                 stroke={
-                  dataPoints[point].color ?? COLORS[index % COLORS.length]
+                  customData[point].color ?? COLORS[index % COLORS.length]
                 }
                 strokeWidth={strokeWidth}
                 activeDot={{ r: dotRadius }}

@@ -28,7 +28,7 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title?: string;
-  dataPoints: any;
+  customData: any;
   dotRadius: number;
 };
 
@@ -103,7 +103,7 @@ export const ScatterChart: Story<Props> = ({
   height,
   keys,
   xAxisKey,
-  dataPoints,
+  customData,
   title,
   xLabel,
   yLabel,
@@ -111,7 +111,6 @@ export const ScatterChart: Story<Props> = ({
 }) => {
   keys ??= [];
   console.log(xAxisKey);
-  dataPoints = dataPoints[0];
 
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -142,11 +141,11 @@ export const ScatterChart: Story<Props> = ({
               <Line
                 dataKey={point}
                 stroke={
-                  dataPoints[point].color ?? COLORS[index % COLORS.length]
+                  customData[point].color ?? COLORS[index % COLORS.length]
                 }
                 strokeWidth={0}
                 dot={SHAPES[index]}
-                fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
+                fill={customData[point].color ?? COLORS[index % COLORS.length]}
               />
             );
           })}

@@ -28,7 +28,7 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title?: string;
-  dataPoints: any;
+  customData: any;
 };
 
 export const BarChart: Story<Props> = ({
@@ -38,12 +38,12 @@ export const BarChart: Story<Props> = ({
   height,
   keys,
   xAxisKey,
-  dataPoints,
+  customData,
   title,
   xLabel,
   yLabel,
 }) => {
-  dataPoints = dataPoints[0];
+  // customData = customData[0];
 
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -72,7 +72,7 @@ export const BarChart: Story<Props> = ({
             return (
               <Bar
                 dataKey={point}
-                fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
+                fill={customData[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
               />
             );

@@ -1,6 +1,7 @@
 import type { Story } from "@ladle/react";
 import styles from "./RadarChart.module.css";
-import { CustomTooltip } from "../../../Utils/toTitleCase";
+
+import { CustomTooltip } from "../chartutils/customRender.tsx";
 import {
   RadarChart as RChart,
   Radar,

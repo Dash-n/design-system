@@ -62,7 +62,7 @@ export const BarCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
-        dataPoints={customData}
+        customData={customData}
       ></BarChart>
     </div>
   );
@@ -74,13 +74,11 @@ BarCharts.args = {
   xLabel: "#",
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
-  customData: [
-    {
-      points_scored: { label: "Points Scored", color: "green" },
-      assists: { label: "Points Scored", color: "blue" },
-      games_played: { label: "Games Played" },
-    },
-  ],
+  customData: {
+    points_scored: { label: "Points Scored", color: "green" },
+    assists: { label: "Points Scored", color: "blue" },
+    games_played: { label: "Games Played" },
+  },
 };
 BarCharts.argTypes = {
   keys: {
@@ -126,7 +124,7 @@ export const ComboCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
-        dataPoints={customData}
+        customData={customData}
       ></ComboChart>
     </div>
   );
@@ -138,13 +136,11 @@ ComboCharts.args = {
   xLabel: "#",
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
-  customData: [
-    {
-      points_scored: { label: "Points Scored", color: "green" },
-      assists: { label: "Points Scored", color: "blue" },
-      games_played: { label: "Games Played" },
-    },
-  ],
+  customData: {
+    points_scored: { label: "Points Scored", color: "green" },
+    assists: { label: "Points Scored", color: "blue" },
+    games_played: { label: "Games Played" },
+  },
 };
 ComboCharts.argTypes = {
   barKeys: {
@@ -194,7 +190,7 @@ export const HorizontalBarCharts: Story<Props> = ({
         colors={colors}
         width={containerWidth}
         height={containerHeight}
-        dataPoints={customData}
+        customData={customData}
       ></HBarChart>
     </div>
   );
@@ -206,13 +202,11 @@ HorizontalBarCharts.args = {
   xLabel: "#",
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
-  customData: [
-    {
-      points_scored: { label: "Points Scored", color: "green" },
-      assists: { label: "Points Scored", color: "blue" },
-      games_played: { label: "Games Played" },
-    },
-  ],
+  customData: {
+    points_scored: { label: "Points Scored", color: "green" },
+    assists: { label: "Points Scored", color: "blue" },
+    games_played: { label: "Games Played" },
+  },
 };
 HorizontalBarCharts.argTypes = {
   keys: {
@@ -285,7 +279,7 @@ export const StackedBarCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
-        dataPoints={customData}
+        customData={customData}
       ></StackedBarChart>
     </div>
   );
@@ -297,13 +291,11 @@ StackedBarCharts.args = {
   xLabel: "Players",
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
-  customData: [
-    {
-      points_scored: { label: "Points Scored", color: "green" },
-      assists: { label: "Points Scored", color: "blue" },
-      games_played: { label: "Games Played" },
-    },
-  ],
+  customData: {
+    points_scored: { label: "Points Scored", color: "green" },
+    assists: { label: "Points Scored", color: "blue" },
+    games_played: { label: "Games Played" },
+  },
 };
 StackedBarCharts.argTypes = {
   keys: {
@@ -349,7 +341,7 @@ export const LineCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
-        dataPoints={customData}
+        customData={customData}
       ></LineChart>
     </div>
   );
@@ -363,13 +355,11 @@ LineCharts.args = {
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
 
-  customData: [
-    {
-      points_scored: { label: "Points Scored", color: "green" },
-      assists: { label: "Points Scored", color: "blue" },
-      games_played: { label: "Games Played" },
-    },
-  ],
+  customData: {
+    points_scored: { label: "Points Scored", color: "green" },
+    assists: { label: "Points Scored", color: "blue" },
+    games_played: { label: "Games Played" },
+  },
 };
 LineCharts.argTypes = {
   keys: {
@@ -415,7 +405,7 @@ export const ScatterCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
-        dataPoints={customData}
+        customData={customData}
       ></ScatterChart>
     </div>
   );
@@ -429,13 +419,11 @@ ScatterCharts.args = {
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
 
-  customData: [
-    {
-      points_scored: { label: "Points Scored", color: "green" },
-      assists: { label: "Points Scored", color: "blue" },
-      games_played: { label: "Games Played" },
-    },
-  ],
+  customData: {
+    points_scored: { label: "Points Scored", color: "green" },
+    assists: { label: "Points Scored", color: "blue" },
+    games_played: { label: "Games Played" },
+  },
 };
 ScatterCharts.argTypes = {
   keys: {

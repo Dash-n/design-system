@@ -28,7 +28,7 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title?: string;
-  dataPoints: any;
+  customData: any;
 };
 
 export const StackedBarChart: Story<Props> = ({
@@ -38,13 +38,11 @@ export const StackedBarChart: Story<Props> = ({
   height,
   keys,
   xAxisKey,
-  dataPoints,
+  customData,
   title,
   xLabel,
   yLabel,
 }) => {
-  dataPoints = dataPoints[0];
-
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
@@ -74,7 +72,7 @@ export const StackedBarChart: Story<Props> = ({
               <Bar
                 dataKey={point}
                 stackId="a"
-                fill={dataPoints[point].color ?? COLORS[index % COLORS.length]}
+                fill={customData[point].color ?? COLORS[index % COLORS.length]}
                 activeBar={<Rectangle stroke="#4F84F7" />}
               />
             );
