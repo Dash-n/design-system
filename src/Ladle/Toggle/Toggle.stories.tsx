@@ -11,7 +11,6 @@ export const Toggles: Story<Props> = ({}) => {
 
   const handleChange = (value: string) => {
     setValue(value);
-    console.log(value);
   };
 
   const view = [<MdFormatListBulleted />, <MdGridView />];

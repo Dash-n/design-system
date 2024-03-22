@@ -67,7 +67,6 @@ export const StackedBarChart: Story<Props> = ({
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" formatter={titleLegend} />
           {keys?.map((point, index) => {
-            console.log(point);
             return (
               <Bar
                 dataKey={point}

@@ -51,7 +51,6 @@ export const RadarChart: Story<Props> = ({
 
           <Tooltip content={CustomTooltip} />
           <Radar
-            name="a"
             dataKey={valueKey}
             stroke="#332288"
             fill="#88CCEE"

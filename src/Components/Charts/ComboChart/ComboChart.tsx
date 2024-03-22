@@ -1,7 +1,7 @@
 import type { Story } from "@ladle/react";
 import styles from "./ComboChart.module.css";
 import {
-  ComposedChart as CChart,
+  ComposedChart,
   Bar,
   Line,
   Rectangle,
@@ -50,7 +50,7 @@ export const ComboChart: Story<Props> = ({
     <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
-        <CChart
+        <ComposedChart
           data={data}
           margin={{
             top: 5,
@@ -80,7 +80,6 @@ export const ComboChart: Story<Props> = ({
             );
           })}
           {dotKeys?.map((point, index) => {
-            console.log(point);
             return (
               <Line
                 type="monotone"
@@ -92,7 +91,7 @@ export const ComboChart: Story<Props> = ({
               />
             );
           })}
-        </CChart>
+        </ComposedChart>
       </ResponsiveContainer>
     </div>
   );

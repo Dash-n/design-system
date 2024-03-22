@@ -19,7 +19,7 @@ const Square = (props: any, index: number) => {
       y={cy - 10}
       width={20}
       height={20}
-      fill={props.payload[index].color}
+      fill={props.payload[index].color ?? COLORS[index % COLORS.length]}
       viewBox="0 0 20 20"
     >
       <polygon points="0,0 100,0 100,100 0,100" />
@@ -34,7 +34,7 @@ const Circle = (props: any, index: number) => {
       y={cy - 10}
       width={20}
       height={20}
-      fill={props.payload[index].color}
+      fill={props.payload[index].color ?? COLORS[index % COLORS.length]}
       viewBox="0 0 20 20"
     >
       <circle r="10" cx="10" cy="10" />
@@ -49,7 +49,7 @@ const Triangle = (props: any, index: number) => {
       y={cy - 10}
       width={20}
       height={20}
-      fill={props.payload[index].color}
+      fill={props.payload[index].color ?? COLORS[index % COLORS.length]}
       viewBox="0 0 100 100"
     >
       <polygon points="50,0 100,100 0,100" />
@@ -65,7 +65,7 @@ const Star = (props: any, index: number) => {
       y={cy - 15}
       width={20}
       height={20}
-      fill={props.payload[index].color}
+      fill={props.payload[index].color ?? COLORS[index % COLORS.length]}
       viewBox="40 10 120 120"
     >
       <polygon points="100,10 60,132 160,52 40,52 140,132" />
@@ -115,7 +115,6 @@ const customLegendWrapper = {
 
 export const customLegend = (props) => {
   const { payload } = props;
-  console.log(payload);
 
   return (
     <div style={customLegendWrapper}>
@@ -124,7 +123,7 @@ export const customLegend = (props) => {
           style={{
             display: "flex",
             gap: "4px",
-            color: entry.payload.fill,
+            color: entry.payload.fill ?? COLORS[index % COLORS.length],
           }}
           key={`item-${index}`}
         >

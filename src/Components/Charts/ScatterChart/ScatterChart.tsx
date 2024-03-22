@@ -110,7 +110,6 @@ export const ScatterChart: Story<Props> = ({
   dotRadius,
 }) => {
   keys ??= [];
-  console.log(xAxisKey);
 
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -136,7 +135,6 @@ export const ScatterChart: Story<Props> = ({
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" content={customLegend} />
           {keys?.map((point, index) => {
-            console.log(dotRadius);
             return (
               <Line
                 dataKey={point}
