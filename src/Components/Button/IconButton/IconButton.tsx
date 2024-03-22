@@ -24,5 +24,4 @@ export const IconButton: Story<Props> = ({
 
 IconButton.defaultProps = {
   variant: "solid",
-  // label: "",
 };

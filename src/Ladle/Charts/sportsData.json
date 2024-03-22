@@ -1,0 +1,72 @@
+[
+  {
+    "player_name": "Saxe McGown",
+    "team_name": "Team A",
+    "points_scored": 35,
+    "assists": 18,
+    "games_played": 98
+  },
+  {
+    "player_name": "Natasha Banstead",
+    "team_name": "Team C",
+    "points_scored": 2,
+    "assists": 13,
+    "games_played": 48
+  },
+  {
+    "player_name": "Kelcey Michin",
+    "team_name": "Team B",
+    "points_scored": 33,
+    "assists": 2,
+    "games_played": 77
+  },
+  {
+    "player_name": "Junia Smurfit",
+    "team_name": "Team A",
+    "points_scored": 46,
+    "assists": 6,
+    "games_played": 54
+  },
+  {
+    "player_name": "Erskine Carrington",
+    "team_name": "Team C",
+    "points_scored": 13,
+    "assists": 11,
+    "games_played": 72
+  },
+  {
+    "player_name": "Chris Cooper",
+    "team_name": "Team C",
+    "points_scored": 17,
+    "assists": 14,
+    "games_played": 70
+  },
+  {
+    "player_name": "Ediva Tyrrell",
+    "team_name": "Team B",
+    "points_scored": 7,
+    "assists": 17,
+    "games_played": 38
+  },
+  {
+    "player_name": "Murdock Vale",
+    "team_name": "Team B",
+    "points_scored": 18,
+    "assists": 17,
+    "games_played": 18
+  },
+  {
+    "player_name": "Swen Scotts",
+    "team_name": "Team A",
+    "points_scored": 17,
+    "assists": 17,
+    "games_played": 15
+  },
+  {
+    "player_name": "Catherine Atherton",
+    "team_name": "Team C",
+    "points_scored": 22,
+    "assists": 17,
+    "games_played": 71
+  }
+]

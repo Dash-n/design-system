@@ -25,7 +25,6 @@ export const Tables: Story<Props> = ({}) => {
     const direction =
       sort.key === key && sort.direction === "asc" ? "desc" : "asc";
     setSort({ key, direction });
-    console.log(key);
   };
 
   const tableTitle = {
@@ -46,9 +45,6 @@ export const Tables: Story<Props> = ({}) => {
         width: "100%",
         height: "300px",
         background: "#f4f4f4",
-        // padding: "20px",
-        // display: "flex",
-        // flexDirection: "column"
       }}
     >
       <div style={tableTitle}>

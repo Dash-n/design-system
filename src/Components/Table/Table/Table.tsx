@@ -1,7 +1,7 @@
 import type { Story } from "@ladle/react";
 import styles from "./Table.module.css";
 import { IconContext } from "react-icons";
-import { toTitlecase } from "../..";
+import { toTitlecase } from "../../../Utils/toTitleCase";
 
 type Props = {
   content: string[];
