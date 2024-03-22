@@ -17,7 +17,6 @@ export const TextInputs: Story<Props> = ({ label, placeholder }) => {
   return (
     <div
       style={{
-        // width: "60px",
         display: "flex",
         flexDirection: "column",
         gap: "20px",
@@ -100,14 +99,7 @@ export const Checkboxes: Story<Props> = ({ label }) => {
       ></Checkbox>
       <div>
         Checked: {zeroChecked && "0"} {oneChecked && "1"} {twoChecked && "2"}
-        <Checkbox
-          id="user"
-          value="none"
-          name="user"
-          label={label}
-          // checked={twoChecked}
-          // setChecked={setTwoChecked}
-        ></Checkbox>
+        <Checkbox id="user" value="none" name="user" label={label}></Checkbox>
       </div>
     </div>
   );
