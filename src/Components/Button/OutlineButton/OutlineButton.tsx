@@ -9,18 +9,12 @@ type Props = {
 };
 
 export const OutlineButton: Story<Props> = ({ label, variant, disabled }) => {
-  console.log(disabled);
   return (
     <button
       className={`${styles[variant]} ${styles.button}`}
       disabled={disabled}
     >
       {label}
-      {/* {toTitlecase(label)} */}
     </button>
   );
-};
-
-OutlineButton.defaultProps = {
-  variant: "",
 };

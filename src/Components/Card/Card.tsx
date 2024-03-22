@@ -9,7 +9,6 @@ type Props = {
 };
 
 export const Toast: Story<Props> = ({ content }) => {
-  console.log(content);
   return (
     <div className={styles.cardContainer}>
       <div className={styles.cardTitle}>{title}</div>

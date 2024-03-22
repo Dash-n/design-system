@@ -14,7 +14,6 @@ export const PageContainer: Story<Props> = ({
   height = "100%",
   margin,
 }: Props) => {
-  console.log(margin);
   return (
     <div
       className={styles.container}

@@ -29,7 +29,6 @@
   padding: 0 8px;
   height: 40px;
   min-width: 40px;
-  /* border: 2px solid #4f84f7; */
   background-color: white;
 }
 
@@ -53,14 +52,9 @@
 
 .switch input:checked ~ .checkmark {
   color: #4f84f7;
-  /* color: white; */
   border: 2px #4f84f7 solid;
   border-style: none none solid none;
   transition: all 0.3s ease-out;
-}
-
-.switch:hover input:checked ~ .checkmark {
-  /* background-color: #4f84f7; */
 }
 
 .switch input:focus-visible ~ .checkmark {

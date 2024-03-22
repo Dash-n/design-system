@@ -14,7 +14,6 @@ export const Sidenav: Story<Props> = ({}) => {
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   return (
