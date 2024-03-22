@@ -1,7 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./Checkbox.module.css";
 
-// if no label or value set, defaults to label
 type Props = {
   id: string;
   name: string;
@@ -9,7 +8,7 @@ type Props = {
   label?: string;
   checked?: boolean;
   disabled?: boolean;
-  setChecked: (e: boolean) => void;
+  setChecked: (check: boolean) => void;
 };
 
 export const Checkbox: Story<Props> = ({

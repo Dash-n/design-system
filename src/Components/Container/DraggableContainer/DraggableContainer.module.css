@@ -1,0 +1,33 @@
+.dragContainer {
+  display: flex;
+  flex-direction: row;
+  border-radius: 8px;
+  border: 1px solid #c4c4c4;
+  overflow: hidden;
+  background-color: white;
+}
+
+.containerBody {
+  height: 100%;
+  width: 100%;
+  padding: 8px;
+}
+
+.dragHandle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  background-color: #e9f1fd;
+}
+
+.deleteEnd {
+  padding: 8px;
+}
+
+.deleteButton {
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+}
