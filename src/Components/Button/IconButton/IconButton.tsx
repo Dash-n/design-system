@@ -7,6 +7,7 @@ type Props = {
   disabled?: boolean;
   variant: string;
   iconSize?: string;
+  onClick: () => void;
 };
 
 export const IconButton: Story<Props> = ({
@@ -14,8 +15,13 @@ export const IconButton: Story<Props> = ({
   disabled,
   label,
   iconSize = "24px",
+  onClick,
 }) => (
-  <button className={`${styles[variant]} ${styles.button}`} disabled={disabled}>
+  <button
+    className={`${styles[variant]} ${styles.button}`}
+    disabled={disabled}
+    onClick={onClick}
+  >
     <IconContext.Provider value={{ size: iconSize }}>
       {label}
     </IconContext.Provider>
