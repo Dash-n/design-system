@@ -1,8 +1,21 @@
 import type { Story } from "@ladle/react";
+import { SideHeader } from "../../Components/Sidenav/SideHeader/SideHeader.tsx";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { CardButton } from "../../Components/Navigation/CardButton/CardButton.tsx";
 import { FolderButton } from "../../Components/Navigation/FolderButton/FolderButton.tsx";
 import { Sidenav } from "../../Components/Sidenav/Sidenav.tsx";
+
+import {
+  MdDirectionsRun,
+  MdEdit,
+  MdList,
+  MdEditNote,
+  MdBuild,
+  MdGroups,
+  MdMedication,
+  MdMedicalServices,
+  MdBarChart,
+} from "react-icons/md";
 
 type Props = {
   label?: string;
@@ -27,14 +40,22 @@ export const MenuButtons: Story<Props> = ({}) => (
       flexDirection: "column",
     }}
   >
-    <MenuButton variant="inputs" link="google.com" />
-    <MenuButton variant="database" link="google.com" />
-    <MenuButton variant="reports" link="google.com" />
-    <MenuButton variant="builder" link="google.com" />
-    <MenuButton variant="teamdash" link="google.com" />
-    <MenuButton variant="indivdash" link="google.com" />
-    <MenuButton variant="teamphysio" link="google.com" />
-    <MenuButton variant="indivphysio" link="google.com" />
+    <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
+    <MenuButton icon={<MdList />} label="Database" link="google.com" />
+    <MenuButton icon={<MdEditNote />} label="Reports" link="google.com" />
+    <MenuButton icon={<MdBuild />} label="Gym Program" link="google.com" />
+    <MenuButton icon={<MdGroups />} label="Team" link="google.com" />
+    <MenuButton
+      icon={<MdDirectionsRun />}
+      label="Individual"
+      link="google.com"
+    />
+    <MenuButton
+      icon={<MdMedicalServices />}
+      label="Team Physio"
+      link="google.com"
+    />
+    <MenuButton icon={<MdMedication />} label="Physio" link="google.com" />
   </div>
 );
 export const CardButtons: Story<Props> = ({}) => {
@@ -102,6 +123,23 @@ export const Sidenavs: Story<Props> = ({}) => (
       position: "relative",
     }}
   >
-    <Sidenav />
+    <Sidenav>
+      <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
+      <MenuButton icon={<MdList />} label="Database" link="google.com" />
+      <MenuButton icon={<MdEditNote />} label="Reports" link="google.com" />
+      <MenuButton icon={<MdBuild />} label="Gym Program" link="google.com" />
+      <MenuButton icon={<MdGroups />} label="Team" link="google.com" />
+      <MenuButton
+        icon={<MdDirectionsRun />}
+        label="Individual"
+        link="google.com"
+      />
+      <MenuButton
+        icon={<MdMedicalServices />}
+        label="Team Physio"
+        link="google.com"
+      />
+      <MenuButton icon={<MdMedication />} label="Physio" link="google.com" />
+    </Sidenav>
   </div>
 );

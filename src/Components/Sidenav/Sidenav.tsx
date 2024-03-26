@@ -9,15 +9,14 @@ import { TeamSelect } from "./TeamSelect/TeamSelect";
 import { SideHeader } from "./SideHeader/SideHeader";
 
 type Props = {
-  open?: boolean;
+  children: React.ReactNode;
 };
 
-export const Sidenav: Story<Props> = ({}) => {
+export const Sidenav: Story<Props> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
-    console.log(isOpen);
   };
 
   return (
@@ -58,7 +57,8 @@ export const Sidenav: Story<Props> = ({}) => {
             values={["one", "two"]}
             // setAnswer={handleChange} //todo
           />
-          <MenuButton variant="inputs" link="google.com"></MenuButton>
+          {children}
+          {/* <MenuButton variant="inputs" link="google.com"></MenuButton>
           <MenuButton variant="database" link="google.com"></MenuButton>
           <MenuButton variant="reports" link="google.com"></MenuButton>
           <MenuButton variant="builder" link="google.com"></MenuButton>
@@ -66,7 +66,7 @@ export const Sidenav: Story<Props> = ({}) => {
           <MenuButton variant="teamdash" link="google.com"></MenuButton>
           <MenuButton variant="indivdash" link="google.com"></MenuButton>
           <MenuButton variant="teamphysio" link="google.com"></MenuButton>
-          <MenuButton variant="indivphysio" link="google.com"></MenuButton>
+          <MenuButton variant="indivphysio" link="google.com"></MenuButton> */}
         </div>
         <User username="Admin"></User>
       </div>
