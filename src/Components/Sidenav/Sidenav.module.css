@@ -42,6 +42,12 @@
   border-radius: 8px;
 }
 
+.navItemContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .overlay {
   display: none;
   position: fixed;
