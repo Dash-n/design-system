@@ -2,11 +2,27 @@ import type { Story } from "@ladle/react";
 import { User } from "../../Components/Sidenav/User/User";
 import { SideHeader } from "../../Components/Sidenav/SideHeader/SideHeader";
 import { TeamSelect } from "../../Components/Sidenav/TeamSelect/TeamSelect";
+import { Sidenav } from "../../Components/Sidenav/Sidenav.tsx";
+import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { useState } from "react";
 
+import {
+  MdDirectionsRun,
+  MdEdit,
+  MdList,
+  MdEditNote,
+  MdBuild,
+  MdGroups,
+  MdMedication,
+  MdMedicalServices,
+} from "react-icons/md";
+type selectOption = {
+  option: string;
+  value: string;
+};
 type Props = {
   username: string;
-  options: string[];
+  options: selectOption[];
   text: string;
 };
 
@@ -20,7 +36,7 @@ Users.args = {
 };
 export const SideHeaders: Story<Props> = ({ text }) => (
   <div>
-    <SideHeader text={text} />
+    <SideHeader label={text} />
   </div>
 );
 SideHeaders.args = {
@@ -32,6 +48,7 @@ export const Selects: Story<Props> = ({ options }) => {
 
   const handleChange = (e) => {
     setValue(e.target.value);
+    console.log(e.target.value);
   };
 
   return (
@@ -47,26 +64,47 @@ export const Selects: Story<Props> = ({ options }) => {
         name="name"
         label="Superbowl"
         options={options}
-        values={["one", "two"]}
         setAnswer={handleChange}
       ></TeamSelect>
     </div>
   );
 };
-Selects.argTypes = {
-  options: {
-    options: [
-      "PolyU - Men's Basketball",
-      "PolyU - Men's Handball",
-      "PolyU - Men's Rugby",
-      "PolyU - Men's Soccer",
-    ],
-    control: { type: "radio" },
-    defaultValue: [
-      "PolyU - Men's Basketball",
-      "PolyU - Men's Handball",
-      "PolyU - Men's Rugby",
-      "PolyU - Men's Soccer",
-    ],
-  },
+Selects.args = {
+  options: [
+    { option: "PolyU - Men's Basketball", value: "mbbal" },
+    { option: "PolyU - Men's Handball", value: "mhbal" },
+    { option: "PolyU - Men's Rugby" },
+    { option: "PolyU - Men's Soccer" },
+  ],
 };
+
+export const Sidenavs: Story<Props> = ({}) => (
+  <div
+    style={{
+      width: "100%",
+      height: "80vh",
+      background: "#F4F4F4",
+      position: "relative",
+    }}
+  >
+    <Sidenav>
+      <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
+      <MenuButton icon={<MdList />} label="Database" link="google.com" />
+      <MenuButton icon={<MdEditNote />} label="Reports" link="google.com" />
+      <MenuButton icon={<MdBuild />} label="Gym Program" link="google.com" />
+      <SideHeader label="Dashboards" />
+      <MenuButton icon={<MdGroups />} label="Team" link="google.com" />
+      <MenuButton
+        icon={<MdDirectionsRun />}
+        label="Individual"
+        link="google.com"
+      />
+      <MenuButton
+        icon={<MdMedicalServices />}
+        label="Team Physio"
+        link="google.com"
+      />
+      <MenuButton icon={<MdMedication />} label="Physio" link="google.com" />
+    </Sidenav>
+  </div>
+);

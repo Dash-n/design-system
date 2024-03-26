@@ -2,13 +2,16 @@ import type { Story } from "@ladle/react";
 import styles from "./TeamSelect.module.css";
 import logo from "../../../images/polyulogo.png";
 
+type selectOption = {
+  option: string;
+  value: string;
+};
 type Props = {
   id: string;
   name: string;
   label?: string;
   disabled?: boolean;
-  options: string[];
-  values: string[];
+  options: selectOption[];
   setAnswer: (answer: any) => void;
 };
 
@@ -17,7 +20,6 @@ export const TeamSelect: Story<Props> = ({
   name,
   disabled,
   options,
-  values,
   setAnswer,
 }) => (
   <div className={styles.selectBox}>
@@ -29,8 +31,8 @@ export const TeamSelect: Story<Props> = ({
       disabled={disabled}
       onChange={setAnswer}
     >
-      {options.map((option, index) => (
-        <option value={values[index]}>{option}</option>
+      {options.map((option) => (
+        <option value={option.value}>{option.option}</option>
       ))}
       ;
     </select>
