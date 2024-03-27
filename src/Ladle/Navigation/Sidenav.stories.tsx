@@ -48,7 +48,6 @@ export const Selects: Story<Props> = ({ options }) => {
 
   const handleChange = (e) => {
     setValue(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
