@@ -113,7 +113,6 @@ export const Table: Story<Props> = ({
                     key={subIndex}
                     style={customStyles[headers[subIndex]]}
                   >
-                    {/* {Object.values(item).map((x) => x + " ")} */}
                     {checkValue(value)}
                   </td>
                 ) : null

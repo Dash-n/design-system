@@ -35,7 +35,7 @@ export const Sidenav: Story<Props> = ({ children }) => {
 
       <div className={`${styles.sidenav} ${isOpen ? styles.open : ""}`}>
         <div className={styles.navItemContainer}>
-          <div>
+          <div style={{ position: "relative" }}>
             <button
               className={`${styles.toggleButton} ${styles.inside}`}
               onClick={toggleSidebar}
@@ -54,8 +54,6 @@ export const Sidenav: Story<Props> = ({ children }) => {
               { option: "PolyU - Men's Rugby" },
               { option: "PolyU - Men's Soccer" },
             ]}
-            values={["one", "two"]}
-            // setAnswer={handleChange} //todo
           />
           {children}
         </div>
