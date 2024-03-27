@@ -1,7 +1,7 @@
 :root {
   --tooltipWidth: 36px;
-  --markWidth: 16px;
-  --thumbWidth: 24px;
+  --markWidth: 20px;
+  --thumbWidth: 20px;
 }
 
 .horizontalSlider {

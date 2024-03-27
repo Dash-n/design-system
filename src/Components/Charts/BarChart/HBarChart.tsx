@@ -30,6 +30,7 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  domain: any;
 };
 
 export const HBarChart: Story<Props> = ({
@@ -43,6 +44,7 @@ export const HBarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  domain,
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -65,7 +67,7 @@ export const HBarChart: Story<Props> = ({
             label={{ value: yLabel, position: "top" }}
           ></YAxis>
 
-          <XAxis type="number">
+          <XAxis type="number" domain={domain}>
             <Label value={xLabel} position="bottom" />
           </XAxis>
 

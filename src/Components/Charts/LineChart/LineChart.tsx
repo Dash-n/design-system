@@ -30,6 +30,7 @@ type Props = {
   customData: any;
   dotRadius: number;
   strokeWidth: number;
+  domain?: any;
 };
 
 export const LineChart: Story<Props> = ({
@@ -44,6 +45,7 @@ export const LineChart: Story<Props> = ({
   xLabel,
   yLabel,
   dotRadius,
+  domain,
   strokeWidth = 1,
 }) => {
   return (
@@ -66,6 +68,7 @@ export const LineChart: Story<Props> = ({
 
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
+            domain={domain}
           />
           <Tooltip content={CustomTooltip} />
           <Legend

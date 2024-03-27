@@ -16,7 +16,6 @@ import {
   CustomTooltip,
   titleLegend,
   COLORS,
-  RoundedBar,
 } from "../chartutils/customRender.tsx";
 
 type Props = {
@@ -30,6 +29,7 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  domain?: any;
 };
 
 export const BarChart: Story<Props> = ({
@@ -43,6 +43,7 @@ export const BarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  domain = ["auto", "auto"],
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -64,6 +65,7 @@ export const BarChart: Story<Props> = ({
 
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
+            domain={domain}
           />
           <Tooltip content={CustomTooltip} />
           <Legend
@@ -75,10 +77,10 @@ export const BarChart: Story<Props> = ({
           {keys?.map((point, index) => {
             return (
               <Bar
+                shape={<Rectangle radius={[8, 8, 0, 0]} />}
                 dataKey={point}
                 fill={customData[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" />}
-                // shape={RoundedBar}
+                activeBar={<Rectangle stroke="#4F84F7" radius={[8, 8, 0, 0]} />}
               />
             );
           })}

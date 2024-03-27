@@ -29,6 +29,7 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  domain: any;
 };
 
 export const StackedBarChart: Story<Props> = ({
@@ -42,6 +43,7 @@ export const StackedBarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  domain,
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -63,6 +65,7 @@ export const StackedBarChart: Story<Props> = ({
 
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
+            domain={domain}
           />
           <Tooltip content={CustomTooltip} />
           <Legend verticalAlign="top" align="right" formatter={titleLegend} />

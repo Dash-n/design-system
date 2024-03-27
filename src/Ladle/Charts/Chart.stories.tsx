@@ -24,6 +24,8 @@ type Props = {
   title: string;
   customData: any[];
   dotRadius: number;
+  domainMin: any;
+  domainMax: any;
 };
 
 function filterKeysByType(dataArray, dataType) {
@@ -42,6 +44,8 @@ export const BarCharts: Story<Props> = ({
   yLabel,
   customData,
   title,
+  domainMin,
+  domainMax,
 }) => {
   return (
     <div
@@ -63,6 +67,7 @@ export const BarCharts: Story<Props> = ({
         width={100}
         height={100}
         customData={customData}
+        domain={[domainMin, domainMax]}
       ></BarChart>
     </div>
   );
@@ -70,6 +75,8 @@ export const BarCharts: Story<Props> = ({
 BarCharts.args = {
   containerWidth: 100,
   containerHeight: 80,
+  domainMin: 0,
+  domainMax: 200,
   title: "Team Stats",
   xLabel: "#",
   yLabel: "#",
@@ -103,6 +110,8 @@ export const ComboCharts: Story<Props> = ({
   yLabel,
   customData,
   title,
+  domainMin,
+  domainMax,
 }) => {
   return (
     <div
@@ -125,6 +134,7 @@ export const ComboCharts: Story<Props> = ({
         width={100}
         height={100}
         customData={customData}
+        domain={[domainMin, domainMax]}
       ></ComboChart>
     </div>
   );
@@ -135,6 +145,8 @@ ComboCharts.args = {
   title: "Team Stats",
   xLabel: "#",
   yLabel: "#",
+  domainMin: 0,
+  domainMax: 100,
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
@@ -168,6 +180,8 @@ export const HorizontalBarCharts: Story<Props> = ({
   xAxisKey,
   xLabel,
   yLabel,
+  domainMin,
+  domainMax,
   customData,
   title,
 }) => {
@@ -190,6 +204,7 @@ export const HorizontalBarCharts: Story<Props> = ({
         colors={colors}
         width={containerWidth}
         height={containerHeight}
+        domain={[domainMin, domainMax]}
         customData={customData}
       ></HBarChart>
     </div>
@@ -201,6 +216,8 @@ HorizontalBarCharts.args = {
   title: "Team Stats",
   xLabel: "#",
   yLabel: "#",
+  domainMin: 0,
+  domainMax: 200,
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
@@ -228,6 +245,7 @@ export const PieCharts: Story<Props> = ({
   return (
     <div
       style={{
+        backgroundColor: "#c4c4c4",
         width: `${containerWidth}%`,
         height: `${containerHeight}%`,
       }}
@@ -257,6 +275,8 @@ export const StackedBarCharts: Story<Props> = ({
   xAxisKey,
   xLabel,
   yLabel,
+  domainMin,
+  domainMax,
   customData,
   title,
 }) => {
@@ -279,6 +299,7 @@ export const StackedBarCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
+        domain={[domainMin, domainMax]}
         customData={customData}
       ></StackedBarChart>
     </div>
@@ -290,6 +311,8 @@ StackedBarCharts.args = {
   title: "Team Stats",
   xLabel: "Players",
   yLabel: "#",
+  domainMin: 0,
+  domainMax: 100,
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
@@ -318,6 +341,8 @@ export const LineCharts: Story<Props> = ({
   xAxisKey,
   xLabel,
   yLabel,
+  domainMin,
+  domainMax,
   customData,
   title,
   dotRadius,
@@ -341,6 +366,7 @@ export const LineCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
+        domain={[domainMin, domainMax]}
         customData={customData}
       ></LineChart>
     </div>
@@ -353,8 +379,9 @@ LineCharts.args = {
   dotRadius: 8,
   xLabel: "#",
   yLabel: "#",
+  domainMin: 0,
+  domainMax: 100,
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
-
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -382,6 +409,8 @@ export const ScatterCharts: Story<Props> = ({
   xAxisKey,
   xLabel,
   yLabel,
+  domainMin,
+  domainMax,
   customData,
   title,
   dotRadius,
@@ -405,6 +434,7 @@ export const ScatterCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
+        domain={[domainMin, domainMax]}
         customData={customData}
       ></ScatterChart>
     </div>
@@ -418,7 +448,8 @@ ScatterCharts.args = {
   xLabel: "#",
   yLabel: "#",
   colors: ["#DDCC77", "#CC6677", "#88CCEE"],
-
+  domainMin: 0,
+  domainMax: 100,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
