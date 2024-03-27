@@ -68,7 +68,12 @@ export const ComboChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign="top"
+            align="right"
+            height={32}
+            formatter={titleLegend}
+          />
           {barKeys?.map((point, index) => {
             return (
               <Bar

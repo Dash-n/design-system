@@ -133,7 +133,12 @@ export const ScatterChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" content={customLegend} />
+          <Legend
+            verticalAlign="top"
+            align="left"
+            height={32}
+            content={customLegend}
+          />
           {keys?.map((point, index) => {
             return (
               <Line

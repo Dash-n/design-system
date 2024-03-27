@@ -68,9 +68,13 @@ export const LineChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign="top"
+            align="right"
+            height={32}
+            formatter={titleLegend}
+          />
           {keys?.map((point, index) => {
-            console.log(dotRadius);
             return (
               <Line
                 dataKey={point}

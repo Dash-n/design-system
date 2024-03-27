@@ -70,7 +70,12 @@ export const HBarChart: Story<Props> = ({
           </XAxis>
 
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign="top"
+            align="right"
+            height={32}
+            formatter={titleLegend}
+          />
 
           {keys?.map((point, index) => {
             return (
