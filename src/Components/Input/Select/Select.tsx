@@ -1,13 +1,16 @@
 import type { Story } from "@ladle/react";
 import styles from "./Select.module.css";
 
+type selectOption = {
+  option: string;
+  value: string;
+};
 type Props = {
   id: string;
   name: string;
   label?: string;
   disabled?: boolean;
-  options: string[];
-  values: string[];
+  options: selectOption[];
   setAnswer: (e) => void;
 };
 
@@ -16,8 +19,7 @@ export const Select: Story<Props> = ({
   name,
   label,
   disabled,
-  options,
-  values,
+  options = [],
   setAnswer,
 }) => (
   <div className={styles.selectBox}>
@@ -28,8 +30,8 @@ export const Select: Story<Props> = ({
       disabled={disabled}
       onChange={setAnswer}
     >
-      {options.map((option, index) => (
-        <option value={values[index]}>{option}</option>
+      {options.map((option) => (
+        <option value={option.value}>{option.option}</option>
       ))}
       ;
     </select>

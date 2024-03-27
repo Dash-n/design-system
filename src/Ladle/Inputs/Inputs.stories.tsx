@@ -6,18 +6,22 @@ import { Radio } from "../../Components/Input/Radio/Radio.tsx";
 import { Select } from "../../Components/Input/Select/Select.tsx";
 import { Slider } from "../../Components/Input/Slider/Slider.tsx";
 import { useState } from "react";
+import { format } from "date-fns";
 
+type selectOption = {
+  option: string;
+  value: string;
+};
 type Props = {
   label: string;
   placeholder: string;
-  options: string;
+  options: selectOption[];
 };
 
 export const TextInputs: Story<Props> = ({ label, placeholder }) => {
   return (
     <div
       style={{
-        // width: "60px",
         display: "flex",
         flexDirection: "column",
         gap: "20px",
@@ -100,14 +104,7 @@ export const Checkboxes: Story<Props> = ({ label }) => {
       ></Checkbox>
       <div>
         Checked: {zeroChecked && "0"} {oneChecked && "1"} {twoChecked && "2"}
-        <Checkbox
-          id="user"
-          value="none"
-          name="user"
-          label={label}
-          // checked={twoChecked}
-          // setChecked={setTwoChecked}
-        ></Checkbox>
+        <Checkbox id="user" value="none" name="user" label={label}></Checkbox>
       </div>
     </div>
   );
@@ -149,7 +146,7 @@ export const Radios: Story<Props> = ({}) => {
   );
 };
 
-export const Selects: Story<Props> = ({}) => {
+export const Selects: Story<Props> = ({ options }) => {
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
@@ -169,8 +166,7 @@ export const Selects: Story<Props> = ({}) => {
         id="name"
         name="name"
         label="Superbowl"
-        options={["primary", "two"]}
-        values={["one", "two"]}
+        options={options}
         setAnswer={handleChange}
       ></Select>
       <div style={{ width: "60px" }}>
@@ -178,21 +174,25 @@ export const Selects: Story<Props> = ({}) => {
           id="name"
           name="name"
           label="Superbowl"
-          options={["primary", "two"]}
-          values={["one", "two"]}
+          options={options}
           setAnswer={handleChange}
         ></Select>
       </div>
       <Select
         id="name"
         name="two"
-        options={["one", "two"]}
-        values={["one", "two"]}
+        options={options}
         setAnswer={handleChange}
       ></Select>
       {value}
     </div>
   );
+};
+Selects.args = {
+  options: [
+    { option: "one", value: "1" },
+    { option: "two", value: "2" },
+  ],
 };
 
 export const Sliders: Story<Props> = ({}) => {
@@ -212,4 +212,14 @@ export const Sliders: Story<Props> = ({}) => {
       Value is: {value}
     </div>
   );
+};
+
+export const DatePicker: Story<Props> = ({}) => {
+  const [selected, setSelected] = useState<Date>();
+
+  let footer = <p>Select Date</p>;
+  if (selected) {
+    footer = <p>{format(selected, "PP")}</p>;
+  }
+  return <Date selected={selected} footer={footer} onSelect={setSelected} />;
 };

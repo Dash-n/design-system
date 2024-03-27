@@ -35,7 +35,7 @@ export const Sidenav: Story<Props> = ({ children }) => {
 
       <div className={`${styles.sidenav} ${isOpen ? styles.open : ""}`}>
         <div className={styles.navItemContainer}>
-          <div style={{ position: "relative" }}>
+          <div>
             <button
               className={`${styles.toggleButton} ${styles.inside}`}
               onClick={toggleSidebar}

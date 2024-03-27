@@ -19,7 +19,7 @@ export const TeamSelect: Story<Props> = ({
   id,
   name,
   disabled,
-  options,
+  options = [],
   setAnswer,
 }) => (
   <div className={styles.selectBox}>
