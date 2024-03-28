@@ -11,9 +11,10 @@ type Props = {
   label?: string;
   disabled?: boolean;
   variant?: string;
+  alternate: boolean;
 };
 
-export const Tables: Story<Props> = ({}) => {
+export const Tables: Story<Props> = ({ alternate }) => {
   const [jsonData, setData] = useState([]);
   const [sort, setSort] = useState({ key: null, direction: "asc" });
 
@@ -63,10 +64,18 @@ export const Tables: Story<Props> = ({}) => {
         </div>
       </div>
       <div>
-        <Table content={jsonData} sort={sort} handleSort={handleSort}></Table>
+        <Table
+          content={jsonData}
+          sort={sort}
+          handleSort={handleSort}
+          alternate={alternate}
+        ></Table>
       </div>
     </div>
   );
+};
+Tables.args = {
+  alternate: false,
 };
 
 export const Paginators: Story<Props> = ({}) => {
