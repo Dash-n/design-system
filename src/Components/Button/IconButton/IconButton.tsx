@@ -27,7 +27,3 @@ export const IconButton: Story<Props> = ({
     </IconContext.Provider>
   </button>
 );
-
-IconButton.defaultProps = {
-  variant: "solid",
-};

@@ -23,7 +23,7 @@ export const Table: Story<Props> = ({
   sort,
   alternate = false,
   handleSort,
-  customHeaderStyles,
+  customHeaderStyles = {},
 }) => {
   const headers = content.length === 0 ? null : Object.keys(content[0]);
 
@@ -38,7 +38,7 @@ export const Table: Story<Props> = ({
     first_name: {
       maxWidth: "200px",
       wordWrap: "break-word",
-      left: "0",
+      textAlign: "left",
     },
     ip_address: { width: "100px", maxWidth: "100px", wordWrap: "break-word" },
   };
@@ -47,7 +47,7 @@ export const Table: Story<Props> = ({
   };
   const sticky = ["first_name", true && "ip_address", "gender"].filter(Boolean);
 
-  const customHeaderStyle = checkColumn() ? { color: "red" } : null;
+  const customHeaderStyle = checkColumn()?: null;
 
   const renderTableHeaders = () => {
     if (content.length === 0) {
@@ -67,7 +67,7 @@ export const Table: Story<Props> = ({
                     key={header}
                     onClick={() => handleSort(header)}
                     tabIndex={0}
-                    style={customStyles[header]}
+                    style={customHeaderStyles[header]}
                   >
                     {toTitlecase(header)}
                     {sort.key === header &&
@@ -84,7 +84,7 @@ export const Table: Story<Props> = ({
                   key={header}
                   onClick={() => handleSort(header)}
                   tabIndex={0}
-                  style={customStyles[header]}
+                  style={customHeaderStyles[header]}
                 >
                   {toTitlecase(header)}
                   {sort.key === header &&
@@ -141,7 +141,7 @@ export const Table: Story<Props> = ({
               <td
                 className={`${styles.bodyCell} ${customClasses[headers[subIndex]]} ${styles.stickyCell}`}
                 key={subIndex}
-                style={customStyles[headers[subIndex]]}
+                style={customHeaderStyle[headers[subIndex]]}
               >
                 {checkValue(value)}
               </td>
@@ -153,7 +153,7 @@ export const Table: Story<Props> = ({
             <td
               className={`${styles.bodyCell} ${customClasses[headers[subIndex]]}`}
               key={subIndex}
-              style={customStyles[headers[subIndex]]}
+              style={customHeaderStyle[headers[subIndex]]}
             >
               {checkValue(value)}
             </td>

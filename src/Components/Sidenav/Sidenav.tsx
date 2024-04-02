@@ -6,13 +6,18 @@ import { IconContext } from "react-icons";
 import { MdMenu, MdArrowBack } from "react-icons/md";
 import { User } from "./User/User";
 import { TeamSelect } from "./TeamSelect/TeamSelect";
-import { SideHeader } from "./SideHeader/SideHeader";
 
-type Props = {
-  open?: boolean;
+type selectOption = {
+  option: string;
+  value: string;
 };
 
-export const Sidenav: Story<Props> = ({}) => {
+type Props = {
+  teams: selectOption[];
+  children: React.ReactNode;
+};
+
+export const Sidenav: Story<Props> = ({ teams, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -34,7 +39,7 @@ export const Sidenav: Story<Props> = ({}) => {
       ></div>
 
       <div className={`${styles.sidenav} ${isOpen ? styles.open : ""}`}>
-        <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+        <div className={styles.navItemContainer}>
           <div style={{ position: "relative" }}>
             <button
               className={`${styles.toggleButton} ${styles.inside}`}
@@ -45,27 +50,8 @@ export const Sidenav: Story<Props> = ({}) => {
               </IconContext.Provider>
             </button>
           </div>
-          <TeamSelect
-            id="name"
-            name="name"
-            options={[
-              "PolyU - Men's Basketball",
-              "PolyU - Men's Handball",
-              "PolyU - Men's Rugby",
-              "PolyU - Men's Soccer",
-            ]}
-            values={["one", "two"]}
-            // setAnswer={handleChange} //todo
-          />
-          <MenuButton variant="inputs" link="google.com"></MenuButton>
-          <MenuButton variant="database" link="google.com"></MenuButton>
-          <MenuButton variant="reports" link="google.com"></MenuButton>
-          <MenuButton variant="builder" link="google.com"></MenuButton>
-          <SideHeader text="Dashboards" />
-          <MenuButton variant="teamdash" link="google.com"></MenuButton>
-          <MenuButton variant="indivdash" link="google.com"></MenuButton>
-          <MenuButton variant="teamphysio" link="google.com"></MenuButton>
-          <MenuButton variant="indivphysio" link="google.com"></MenuButton>
+          <TeamSelect id="teams" name="teams" options={teams} />
+          {children}
         </div>
         <User username="Admin"></User>
       </div>
