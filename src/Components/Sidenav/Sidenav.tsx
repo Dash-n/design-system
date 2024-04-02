@@ -6,13 +6,18 @@ import { IconContext } from "react-icons";
 import { MdMenu, MdArrowBack } from "react-icons/md";
 import { User } from "./User/User";
 import { TeamSelect } from "./TeamSelect/TeamSelect";
-import { SideHeader } from "./SideHeader/SideHeader";
+
+type selectOption = {
+  option: string;
+  value: string;
+};
 
 type Props = {
+  teams: selectOption[];
   children: React.ReactNode;
 };
 
-export const Sidenav: Story<Props> = ({ children }) => {
+export const Sidenav: Story<Props> = ({ teams, children }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -45,16 +50,7 @@ export const Sidenav: Story<Props> = ({ children }) => {
               </IconContext.Provider>
             </button>
           </div>
-          <TeamSelect
-            id="name"
-            name="name"
-            options={[
-              { option: "PolyU - Men's Basketball", value: "mbbal" },
-              { option: "PolyU - Men's Handball", value: "mhbal" },
-              { option: "PolyU - Men's Rugby" },
-              { option: "PolyU - Men's Soccer" },
-            ]}
-          />
+          <TeamSelect id="teams" name="teams" options={teams} />
           {children}
         </div>
         <User username="Admin"></User>
