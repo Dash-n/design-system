@@ -2,7 +2,6 @@ import type { Story } from "@ladle/react";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { CardButton } from "../../Components/Navigation/CardButton/CardButton.tsx";
 import { FolderButton } from "../../Components/Navigation/FolderButton/FolderButton.tsx";
-import { Sidenav } from "../../Components/Navigation/Sidenav/Sidenav.tsx";
 
 type Props = {
   label?: string;
@@ -27,14 +26,27 @@ export const MenuButtons: Story<Props> = ({}) => (
       flexDirection: "column",
     }}
   >
-    <MenuButton variant="inputs" link="google.com" />
-    <MenuButton variant="database" link="google.com" />
-    <MenuButton variant="reports" link="google.com" />
-    <MenuButton variant="builder" link="google.com" />
-    <MenuButton variant="teamdash" link="google.com" />
-    <MenuButton variant="indivdash" link="google.com" />
-    <MenuButton variant="teamphysio" link="google.com" />
-    <MenuButton variant="indivphysio" link="google.com" />
+    <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
+    <MenuButton icon={<MdList />} label="Database" link="google.com" />
+    <MenuButton icon={<MdEditNote />} label="Reports" link="google.com" />
+    <MenuButton icon={<MdBuild />} label="Gym Program" link="google.com" />
+    <MenuButton icon={<MdGroups />} label="Team" link="google.com" />
+    <MenuButton
+      icon={<MdDirectionsRun />}
+      label="Individual"
+      link="google.com"
+    />
+    <MenuButton
+      icon={<MdMedicalServices />}
+      label="Team Physio"
+      link="google.com"
+    />
+    <MenuButton
+      icon={<MdMedication />}
+      label="Physio"
+      link="?story=button--outline-buttons"
+      disabled={true}
+    />
   </div>
 );
 export const CardButtons: Story<Props> = ({}) => {
@@ -93,15 +105,3 @@ export const FolderButtons: Story<Props> = ({}) => {
     </div>
   );
 };
-export const Sidenavs: Story<Props> = ({}) => (
-  <div
-    style={{
-      width: "100%",
-      height: "50vh",
-      background: "#F4F4F4",
-      position: "relative",
-    }}
-  >
-    <Sidenav />
-  </div>
-);

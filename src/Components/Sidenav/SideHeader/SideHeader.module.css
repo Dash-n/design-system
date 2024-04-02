@@ -1,20 +1,18 @@
-.a {
+.header {
   display: flex;
   align-items: center;
 
   height: 40px;
-  padding: 0 16px;
-  box-sizing: border-box;
-  width: 100%;
+  width: 80%;
   border-radius: 8px;
+  padding: 0 16px;
 
   background-color: white;
-  color: #365aa8;
 
-  font-size: large;
+  font-size: 16px;
   font-family: "Geist";
 
-  border: none;
+  border: 1px solid #c4c4c4;
 }
 a:link {
   text-decoration: none;

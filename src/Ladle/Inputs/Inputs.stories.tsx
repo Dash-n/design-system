@@ -9,10 +9,14 @@ import { Date } from "../../Components/Input/Date/Date.tsx";
 import { useState } from "react";
 import { format } from "date-fns";
 
+type selectOption = {
+  option: string;
+  value: string;
+};
 type Props = {
   label: string;
   placeholder: string;
-  options: string;
+  options: selectOption[];
 };
 
 export const TextInputs: Story<Props> = ({ label, placeholder }) => {
@@ -143,7 +147,7 @@ export const Radios: Story<Props> = ({}) => {
   );
 };
 
-export const Selects: Story<Props> = ({}) => {
+export const Selects: Story<Props> = ({ options }) => {
   const [value, setValue] = useState("");
 
   const handleChange = (e) => {
@@ -163,8 +167,7 @@ export const Selects: Story<Props> = ({}) => {
         id="name"
         name="name"
         label="Superbowl"
-        options={["primary", "two"]}
-        values={["one", "two"]}
+        options={options}
         setAnswer={handleChange}
       ></Select>
       <div style={{ width: "60px" }}>
@@ -172,21 +175,25 @@ export const Selects: Story<Props> = ({}) => {
           id="name"
           name="name"
           label="Superbowl"
-          options={["primary", "two"]}
-          values={["one", "two"]}
+          options={options}
           setAnswer={handleChange}
         ></Select>
       </div>
       <Select
         id="name"
         name="two"
-        options={["one", "two"]}
-        values={["one", "two"]}
+        options={options}
         setAnswer={handleChange}
       ></Select>
       {value}
     </div>
   );
+};
+Selects.args = {
+  options: [
+    { option: "one", value: "1" },
+    { option: "two", value: "2" },
+  ],
 };
 
 export const Sliders: Story<Props> = ({}) => {

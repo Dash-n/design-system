@@ -6,6 +6,7 @@ import { IconContext } from "react-icons";
 import { MdMenu, MdArrowBack } from "react-icons/md";
 import { User } from "./User/User";
 import { TeamSelect } from "./TeamSelect/TeamSelect";
+<<<<<<< HEAD
 import { SideHeader } from "./SideHeader/SideHeader";
 
 type Props = {
@@ -13,6 +14,20 @@ type Props = {
 };
 
 export const Sidenav: Story<Props> = ({}) => {
+=======
+
+type selectOption = {
+  option: string;
+  value: string;
+};
+
+type Props = {
+  teams: selectOption[];
+  children: React.ReactNode;
+};
+
+export const Sidenav: Story<Props> = ({ teams, children }) => {
+>>>>>>> feature/sidebar
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleSidebar = () => {
@@ -34,7 +49,11 @@ export const Sidenav: Story<Props> = ({}) => {
       ></div>
 
       <div className={`${styles.sidenav} ${isOpen ? styles.open : ""}`}>
+<<<<<<< HEAD
         <div style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+=======
+        <div className={styles.navItemContainer}>
+>>>>>>> feature/sidebar
           <div style={{ position: "relative" }}>
             <button
               className={`${styles.toggleButton} ${styles.inside}`}
@@ -45,6 +64,7 @@ export const Sidenav: Story<Props> = ({}) => {
               </IconContext.Provider>
             </button>
           </div>
+<<<<<<< HEAD
           <TeamSelect
             id="name"
             name="name"
@@ -66,6 +86,10 @@ export const Sidenav: Story<Props> = ({}) => {
           <MenuButton variant="indivdash" link="google.com"></MenuButton>
           <MenuButton variant="teamphysio" link="google.com"></MenuButton>
           <MenuButton variant="indivphysio" link="google.com"></MenuButton>
+=======
+          <TeamSelect id="teams" name="teams" options={teams} />
+          {children}
+>>>>>>> feature/sidebar
         </div>
         <User username="Admin"></User>
       </div>
