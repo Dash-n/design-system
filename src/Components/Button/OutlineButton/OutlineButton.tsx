@@ -1,10 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./OutlineButton.module.css";
-<<<<<<< HEAD
 import { toTitlecase } from "../../../Utils/toTitleCase.ts";
-=======
-import { toTitlecase } from "../../../Utils/index.ts";
->>>>>>> feature/modals
 
 type Props = {
   label: string;
