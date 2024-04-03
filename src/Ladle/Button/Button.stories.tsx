@@ -24,6 +24,7 @@ export const Buttons: Story<Props> = ({ label, variant, disabled }) => (
     ></Button>
     <Button variant="primary" label="primary" onClick={onClick}></Button>
     <Button variant="warning" label="warning button" onClick={onClick}></Button>
+    <Button variant="warning" label="warning button" onClick={onClick}></Button>
     <Button
       variant="primary"
       label="primary"
@@ -70,6 +71,11 @@ export const OutlineButtons: Story<Props> = ({ label, variant, disabled }) => (
       onClick={onClick}
     ></OutlineButton>
     <OutlineButton
+      variant="warning"
+      label="warning button"
+      onClick={onClick}
+    ></OutlineButton>
+    <OutlineButton
       variant="primary"
       label="primary"
       disabled
@@ -99,17 +105,22 @@ export const IconButtons: Story<Props> = ({}) => (
     <IconButton
       variant="edit"
       iconSize="24px"
-      label={<MdEdit />}
+      icon={<MdEdit />}
       onClick={onClick}
     ></IconButton>
     <IconButton
       variant="settings"
-      label={<MdSettings />}
+      icon={<MdSettings />}
       onClick={onClick}
     ></IconButton>
     <IconButton
       variant="delete"
-      label={<MdDelete />}
+      icon={<MdDelete />}
+      onClick={onClick}
+    ></IconButton>
+    <IconButton
+      variant="delete"
+      icon={<MdDelete />}
       onClick={onClick}
     ></IconButton>
   </div>

@@ -1,22 +1,4 @@
-/* other buttons reading from this apparently */
-:root {
-  --main-bg-color: #4f84f7;
-  --main-hover-color: #426fcf;
-  --main-active-color: #365aa8;
-  --main-disabled-color: #e9f1fd;
-
-  --outline-hover-color: #ceddfd;
-  --outline-active-color: #87abfa;
-
-  --warning-outline-bg-color: #ff2929;
-  --warning-outline-hover-color: #ffa1a1;
-  --warning-outline-active-color: #ff7a7a;
-
-  --warning-bg-color: #ff2929;
-  --warning-hover-color: #d60000;
-  --warning-active-color: #ad0000;
-  --warning-disabled-color: #ffd1d9;
-}
+@import "../../../vars.css";
 
 .button {
   display: flex;
@@ -56,4 +38,9 @@
 .button:disabled {
   color: var(--main-disabled-color);
   border: 1px var(--main-disabled-color) solid;
+}
+
+.warning:disabled {
+  color: var(--warning-disabled-color);
+  border: 1px var(--warning-disabled-color) solid;
 }

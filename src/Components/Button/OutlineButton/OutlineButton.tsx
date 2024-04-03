@@ -7,6 +7,7 @@ type Props = {
   disabled?: boolean;
   variant: string;
   onClick: () => void;
+  customStyles?: any;
 };
 
 export const OutlineButton: Story<Props> = ({
@@ -14,14 +15,16 @@ export const OutlineButton: Story<Props> = ({
   variant,
   disabled,
   onClick,
+  customStyles,
 }) => {
   return (
     <button
       className={`${styles[variant]} ${styles.button}`}
       disabled={disabled}
       onClick={onClick}
+      style={customStyles}
     >
-      {label}
+      {toTitlecase(label)}
     </button>
   );
 };
