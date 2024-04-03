@@ -1,3 +1,5 @@
+@import "../../../vars.css";
+
 .paginator {
   display: flex;
   align-items: center;
@@ -31,6 +33,13 @@
 }
 
 .paginInput {
-  width: 40px;
+  /* width: 40px; */
   margin: 0 8px;
+}
+
+.hide {
+  position: absolute;
+  opacity: 0;
+  z-index: -100;
+  white-space: pre;
 }

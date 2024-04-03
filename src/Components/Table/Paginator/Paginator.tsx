@@ -9,6 +9,14 @@ import {
   MdKeyboardArrowRight,
 } from "react-icons/md";
 import { IconContext } from "react-icons";
+import { useRef, useState, useEffect } from "react";
+
+const Input = () => {};
+
+type selectOption = {
+  option: string;
+  value: string;
+};
 
 type Props = {
   pageSize?: number;
@@ -19,6 +27,7 @@ type Props = {
   changePage: (e: number) => void;
   jumpPage: (e: number) => void;
   setItems: (e: number) => void;
+  displayOptions?: selectOption[];
 };
 
 export const Paginator: Story<Props> = ({
@@ -29,18 +38,40 @@ export const Paginator: Story<Props> = ({
   changePage,
   jumpPage,
   setItems,
+  displayOptions = [{ option: "10" }, { option: "25" }, { option: "50" }],
 }) => {
+  const [content, setContent] = useState("");
+  const [width, setWidth] = useState(50);
+  const [bcontent, bsetContent] = useState("");
+  const [bwidth, bsetWidth] = useState(50);
+  const span = useRef();
+  const span2 = useRef();
+
+  useEffect(() => {
+    setWidth(span.current.offsetWidth + 30);
+  }, [content]);
+  useEffect(() => {
+    setWidth(span2.current.offsetWidth + 30);
+  }, [content]);
+
+  const changeHandler = (evt) => {
+    setContent(evt.target.value);
+  };
+
   return (
     <div className={styles.paginator}>
       <p className={styles.paginText}>Showing</p>
       {/* Number of Items */}
       <div className={styles.paginInput}>
+        <span className={styles.hide} ref={span2}>
+          {content}
+        </span>
         <Select
           id="items"
           name="items"
-          options={["10", "25", "50"]}
-          values={["10", "25", "50"]}
+          options={displayOptions}
           setAnswer={setItems}
+          onChange={changeHandler}
         />
       </div>
 
@@ -67,12 +98,17 @@ export const Paginator: Story<Props> = ({
 
         {/* Page picker */}
         <div className={styles.paginInput}>
+          <span className={styles.hide} ref={span}>
+            {content}
+          </span>
           <NumberInput
             id="items"
             name="items"
             min={1}
             max={pageCount}
+            style={{ width }}
             updateValue={jumpPage}
+            onChange={changeHandler}
           />
         </div>
         <p className={styles.paginText}>of {pageCount}</p>

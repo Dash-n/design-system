@@ -6,9 +6,9 @@
 }
 
 table {
+  border-radius: 8px;
   box-sizing: border-box;
   width: 100%;
-  font-family: "Geist";
   border-spacing: 0px;
   background-color: white;
 }
@@ -17,6 +17,7 @@ table {
   top: 0;
   position: sticky;
   z-index: 1;
+  border-radius: 8px;
 }
 
 .stickyGroup {
@@ -25,6 +26,13 @@ table {
   margin: 0;
   padding: 0;
   border-right: 1px solid #c4c4c4;
+}
+
+th:first-child {
+  border-radius: 8px 0 0 0;
+}
+th:last-child:not(.stickyHeader) {
+  border-radius: 0 8px 0 0;
 }
 
 .headerCell {

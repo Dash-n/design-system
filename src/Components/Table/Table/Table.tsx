@@ -15,7 +15,9 @@ type Props = {
   sort?: { key: null; direction: string };
   alternate?: boolean;
   handleSort?: (key: string) => void;
-  customHeaderStyles?: string[];
+  customHeaderStyles?: any;
+  customClasses?: any;
+  sticky?: string[];
 };
 
 export const Table: Story<Props> = ({
@@ -23,31 +25,13 @@ export const Table: Story<Props> = ({
   sort,
   alternate = false,
   handleSort,
-  customHeaderStyles = {},
+  customHeaderStyles,
+  customClasses = {},
+  sticky = [],
 }) => {
   const headers = content.length === 0 ? null : Object.keys(content[0]);
 
-  const checkColumn = (header: string, index: number) => {
-    if (headers === null) {
-      return false;
-    } else return headers[index] === header;
-  };
-
-  const customStyles = {
-    id: { color: "red" },
-    first_name: {
-      maxWidth: "200px",
-      wordWrap: "break-word",
-      textAlign: "left",
-    },
-    ip_address: { width: "100px", maxWidth: "100px", wordWrap: "break-word" },
-  };
-  const customClasses = {
-    email: styles.truncate,
-  };
-  const sticky = ["first_name", true && "ip_address", "gender"].filter(Boolean);
-
-  const customHeaderStyle = checkColumn()?: null;
+  // const sticky = ["first_name", true && "ip_address", "gender"].filter(Boolean);
 
   const renderTableHeaders = () => {
     if (content.length === 0) {
@@ -141,7 +125,7 @@ export const Table: Story<Props> = ({
               <td
                 className={`${styles.bodyCell} ${customClasses[headers[subIndex]]} ${styles.stickyCell}`}
                 key={subIndex}
-                style={customHeaderStyle[headers[subIndex]]}
+                style={customHeaderStyles[headers[subIndex]]}
               >
                 {checkValue(value)}
               </td>
@@ -153,7 +137,7 @@ export const Table: Story<Props> = ({
             <td
               className={`${styles.bodyCell} ${customClasses[headers[subIndex]]}`}
               key={subIndex}
-              style={customHeaderStyle[headers[subIndex]]}
+              style={customHeaderStyles[headers[subIndex]]}
             >
               {checkValue(value)}
             </td>
