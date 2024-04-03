@@ -15,8 +15,10 @@
   --warning-hover-color: #d60000;
   --warning-active-color: #ad0000;
   --warning-disabled-color: #ffd1d9;
+  --text-color: #606060;
   background-color: #f4f4f4;
 
-  font-size: large;
+  font-size: 32;
+  color: var(--text-color);
   font-family: "Geist";
 }
