@@ -245,7 +245,6 @@ export const PieCharts: Story<Props> = ({
   return (
     <div
       style={{
-        backgroundColor: "#c4c4c4",
         width: `${containerWidth}%`,
         height: `${containerHeight}%`,
       }}

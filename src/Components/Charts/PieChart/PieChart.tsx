@@ -45,15 +45,16 @@ const renderCustomizedLabel = ({
   percent,
   index,
 }) => {
-  const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+  const radius = innerRadius + (outerRadius - innerRadius) * 1.1;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
+  console.log(midAngle);
 
   return (
     <text
       x={x}
       y={y}
-      fill="white"
+      // fill="white"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
     >
@@ -78,15 +79,15 @@ export const PieChart: Story<Props> = ({
         <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
           <PChart>
             <Tooltip content={<PieTooltip />} />
-            <Legend verticalAlign="top" align="right" />
+            <Legend verticalAlign="middle" align="right" layout="vertical" />
             <Pie
               data={data}
-              cx="50%"
+              cx="40%"
               cy="50%"
               labelLine={false}
               label={renderCustomizedLabel}
-              innerRadius="10%"
-              outerRadius="25%"
+              innerRadius="55%"
+              outerRadius="100%-48px"
               fill="#8884d8"
               dataKey={dataKey}
               nameKey={nameKey}

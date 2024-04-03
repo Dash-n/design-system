@@ -37,7 +37,7 @@ export const RadarChart: Story<Props> = ({
       <ResponsiveContainer width={`${width}%`} height={`${height}%`}>
         <RChart
           data={data}
-          outerRadius={100}
+          outerRadius={150}
           margin={{
             top: 5,
             right: 30,
