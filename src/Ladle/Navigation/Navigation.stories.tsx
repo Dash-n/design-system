@@ -2,6 +2,16 @@ import type { Story } from "@ladle/react";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { CardButton } from "../../Components/Navigation/CardButton/CardButton.tsx";
 import { FolderButton } from "../../Components/Navigation/FolderButton/FolderButton.tsx";
+import {
+  MdEdit,
+  MdList,
+  MdEditNote,
+  MdBuild,
+  MdGroups,
+  MdDirectionsRun,
+  MdMedicalServices,
+  MdMedication,
+} from "react-icons/md";
 
 type Props = {
   label?: string;

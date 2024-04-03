@@ -77,7 +77,7 @@ Selects.args = {
   ],
 };
 
-export const Sidenavs: Story<Props> = ({}) => (
+export const Sidenavs: Story<Props> = ({ teams }) => (
   <div
     style={{
       width: "100%",
@@ -86,7 +86,7 @@ export const Sidenavs: Story<Props> = ({}) => (
       position: "relative",
     }}
   >
-    <Sidenav>
+    <Sidenav teams={teams}>
       <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
       <MenuButton icon={<MdList />} label="Database" link="google.com" />
       <MenuButton icon={<MdEditNote />} label="Reports" link="google.com" />
@@ -107,3 +107,11 @@ export const Sidenavs: Story<Props> = ({}) => (
     </Sidenav>
   </div>
 );
+Sidenavs.args = {
+  teams: [
+    { option: "PolyU - Men's Basketball", value: "mbbal" },
+    { option: "PolyU - Men's Handball", value: "mhbal" },
+    { option: "PolyU - Men's Rugby" },
+    { option: "PolyU - Men's Soccer" },
+  ],
+};

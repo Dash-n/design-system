@@ -27,7 +27,7 @@
 }
 .a:focus,
 .a:hover:not(:disabled) {
-  border: 2px #4f84f7 solid;
+  border: 1px #4f84f7 solid;
   border-radius: 0 8px 8px 8px;
 }
 
@@ -52,14 +52,14 @@
 .a::before {
   content: "";
   position: absolute;
-  left: 2px;
-  top: -6px;
-  height: 8px;
+  left: 1px;
+  top: -7px;
+  height: 9px;
   width: calc(100% - 9px);
   background: #f4f4f4;
   z-index: 0;
-  clip-path: polygon(0% 0%, 20% 0%, 36% 100%, 0% 100%);
-  border-radius: 6px 0 0 0;
+  clip-path: polygon(0% 0%, 20% 0%, 39% 100%, 0% 100%);
+  border-radius: 7px 0 0 0;
   box-shadow: red 60px -16px;
 }
 
@@ -111,14 +111,14 @@ p {
 
 .iconButton.primary {
   color: #4f84f7;
-  border: 2px #4f84f7 solid;
+  border: 1px #4f84f7 solid;
 }
 .iconButton.primary:hover {
   background: #ceddfd;
 }
 .iconButton.warning {
   color: #ff2929;
-  border: 2px #ff2929 solid;
+  border: 1px #ff2929 solid;
 }
 
 .iconButton.warning:hover {

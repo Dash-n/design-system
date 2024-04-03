@@ -22,7 +22,6 @@ export const MenuButton: Story<Props> = ({
       <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
         {icon}
         {label}
-        {/* {iconMappings[variant].icon} {iconMappings[variant].label} */}
       </div>
     </IconContext.Provider>
   </a>

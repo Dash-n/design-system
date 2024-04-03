@@ -27,7 +27,7 @@ a:link {
   text-decoration: none;
 }
 .a:hover:not(:disabled) {
-  border: 2px #4f84f7 solid;
+  border: 1px #4f84f7 solid;
   border-radius: 8px;
 }
 a:focus ~ .buttonContainer {
@@ -80,14 +80,14 @@ p {
 
 .iconButton.primary {
   color: #4f84f7;
-  border: 2px #4f84f7 solid;
+  border: 1px #4f84f7 solid;
 }
 .iconButton.primary:hover {
   background: #ceddfd;
 }
 .iconButton.warning {
   color: #ff2929;
-  border: 2px #ff2929 solid;
+  border: 1px #ff2929 solid;
 }
 
 .iconButton.warning:hover {
