@@ -41,7 +41,10 @@ export const DraggableContainer: Story<Props> = ({
                           >
                             <MdOutlineOpenWith />
                           </div>
+
+                          {/* content */}
                           <div className={styles.containerBody}>{item}</div>
+
                           <div className={styles.deleteEnd}>
                             <button
                               className={styles.deleteButton}
