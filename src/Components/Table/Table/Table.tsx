@@ -31,8 +31,6 @@ export const Table: Story<Props> = ({
 }) => {
   const headers = content.length === 0 ? null : Object.keys(content[0]);
 
-  // const sticky = ["first_name", true && "ip_address", "gender"].filter(Boolean);
-
   const renderTableHeaders = () => {
     if (content.length === 0) {
       return null;

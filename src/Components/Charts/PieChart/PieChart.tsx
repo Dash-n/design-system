@@ -54,7 +54,6 @@ const renderCustomizedLabel = ({
     <text
       x={x}
       y={y}
-      // fill="white"
       textAnchor={x > cx ? "start" : "end"}
       dominantBaseline="central"
     >
