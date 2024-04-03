@@ -1,17 +1,14 @@
+@import "../../../vars.css";
+
 .container {
   display: flex;
   align-items: center;
+  justify-items: center;
   position: relative;
-  padding-left: 32px;
+  padding-left: 24px;
   margin-bottom: 12px;
   height: 24px;
-  align-items: center;
   cursor: pointer;
-
-  font-size: 16px;
-  font-family: "Geist";
-  font-weight: 400;
-  color: #606060;
 }
 
 .container input {
@@ -25,10 +22,10 @@
 .checkmark {
   position: absolute;
   box-sizing: border-box;
-  top: 0;
+  top: 4px;
   left: 0;
-  height: 24px;
-  width: 24px;
+  height: 16px;
+  width: 16px;
   border-radius: 4px;
   border: 2px #606060 solid;
   background-color: white;
@@ -64,12 +61,16 @@
   display: block;
 }
 .container .checkmark:after {
-  left: 5px;
+  left: 3px;
+  top: 1px;
+  width: 3px;
+  height: 6px;
+  /* left: 5px;
   top: 2px;
   width: 5px;
-  height: 10px;
+  height: 10px; */
   border: solid white;
-  border-width: 0 4px 4px 0;
+  border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);

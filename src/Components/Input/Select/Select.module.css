@@ -1,3 +1,5 @@
+@import "../../../vars.css";
+
 .select {
   height: 40px;
   width: 100%;
@@ -6,9 +8,6 @@
   box-sizing: border-box;
   border: 1px #c4c4c4 solid;
 
-  color: #606060;
-  font-size: 14px;
-  font-family: "Geist";
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -25,7 +24,7 @@
 
 .label {
   position: absolute;
-  left: 12px;
+  left: 2px;
   padding: 12px 8px 0px 8px;
 
   background: none;
@@ -41,7 +40,7 @@
 .select:not(:placeholder-shown) + .label,
 .select:focus + .label {
   position: absolute;
-  left: 12px;
+  left: 2px;
   padding: 4px 4px;
   background: white;
   height: 12px;

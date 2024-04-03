@@ -1,3 +1,5 @@
+@import "../../../vars.css";
+
 .input {
   height: 40px;
   width: 100%;
@@ -5,10 +7,6 @@
   border-radius: 4px;
   box-sizing: border-box;
   border: 1px #c4c4c4 solid;
-
-  color: #606060;
-  font-size: 14px;
-  font-family: "Geist";
 
   transition: box-shadow 0.2s ease-out;
 

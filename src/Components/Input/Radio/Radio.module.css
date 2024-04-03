@@ -1,16 +1,14 @@
+@import "../../../vars.css";
+
 .container {
   display: flex;
   align-items: center;
   position: relative;
-  padding-left: 32px;
+  padding-left: 24px;
   margin-bottom: 12px;
   cursor: pointer;
   height: 24px;
   align-items: center;
-  font-size: 16px;
-  font-family: "Geist";
-  font-weight: 400;
-  color: #606060;
   gap: 4px;
 }
 
@@ -25,10 +23,10 @@
 .checkmark {
   position: absolute;
   box-sizing: border-box;
-  top: 0;
+  top: 4px;
   left: 0;
-  height: 24px;
-  width: 24px;
+  height: 16px;
+  width: 16px;
   border-radius: 50%;
   border: 2px #606060 solid;
   background-color: white;
@@ -70,10 +68,10 @@
   display: block;
 }
 .container .checkmark:after {
-  top: 5px;
-  left: 5px;
-  width: 10px;
-  height: 10px;
+  top: 3px;
+  left: 3px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
   background: white;
 }
