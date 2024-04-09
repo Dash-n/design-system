@@ -21,22 +21,12 @@ export const Buttons: Story<Props> = ({ label, variant, disabled }) => (
       label={label}
       disabled={disabled}
       onClick={onClick}
-    ></Button>
-    <Button variant="primary" label="primary" onClick={onClick}></Button>
-    <Button variant="warning" label="warning button" onClick={onClick}></Button>
-    <Button variant="warning" label="warning button" onClick={onClick}></Button>
-    <Button
-      variant="primary"
-      label="primary"
-      disabled
-      onClick={onClick}
-    ></Button>
-    <Button
-      variant="warning"
-      label="warning"
-      disabled
-      onClick={onClick}
-    ></Button>
+    />
+    <Button variant="primary" label="primary" onClick={onClick} />
+    <Button variant="warning" label="warning button" onClick={onClick} />
+    <Button variant="warning" label="warning button" onClick={onClick} />
+    <Button variant="primary" label="primary" disabled onClick={onClick} />
+    <Button variant="warning" label="warning" disabled onClick={onClick} />
   </div>
 );
 Buttons.args = {
@@ -59,34 +49,22 @@ export const OutlineButtons: Story<Props> = ({ label, variant, disabled }) => (
       label={label}
       disabled={disabled}
       onClick={onClick}
-    ></OutlineButton>
-    <OutlineButton
-      variant="primary"
-      label="primary"
-      onClick={onClick}
-    ></OutlineButton>
-    <OutlineButton
-      variant="warning"
-      label="warning button"
-      onClick={onClick}
-    ></OutlineButton>
-    <OutlineButton
-      variant="warning"
-      label="warning button"
-      onClick={onClick}
-    ></OutlineButton>
+    />
+    <OutlineButton variant="primary" label="primary" onClick={onClick} />
+    <OutlineButton variant="warning" label="warning button" onClick={onClick} />
+    <OutlineButton variant="warning" label="warning button" onClick={onClick} />
     <OutlineButton
       variant="primary"
       label="primary"
       disabled
       onClick={onClick}
-    ></OutlineButton>
+    />
     <OutlineButton
       variant="warning"
       label="warning"
       disabled
       onClick={onClick}
-    ></OutlineButton>
+    />
   </div>
 );
 OutlineButtons.args = {
@@ -107,21 +85,9 @@ export const IconButtons: Story<Props> = ({}) => (
       iconSize="24px"
       icon={<MdEdit />}
       onClick={onClick}
-    ></IconButton>
-    <IconButton
-      variant="settings"
-      icon={<MdSettings />}
-      onClick={onClick}
-    ></IconButton>
-    <IconButton
-      variant="delete"
-      icon={<MdDelete />}
-      onClick={onClick}
-    ></IconButton>
-    <IconButton
-      variant="delete"
-      icon={<MdDelete />}
-      onClick={onClick}
-    ></IconButton>
+    />
+    <IconButton variant="settings" icon={<MdSettings />} onClick={onClick} />
+    <IconButton variant="delete" icon={<MdDelete />} onClick={onClick} />
+    <IconButton variant="delete" icon={<MdDelete />} onClick={onClick} />
   </div>
 );
