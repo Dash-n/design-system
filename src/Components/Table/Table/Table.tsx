@@ -2,10 +2,12 @@ import type { Story } from "@ladle/react";
 import styles from "./Table.module.css";
 import { IconContext } from "react-icons";
 import { toTitlecase } from "../../../Utils/toTitleCase";
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 const root = document.documentElement;
-const ALT_COLOR = "#f4f4f4";
+const ALT_COLOR = getComputedStyle(root).getPropertyValue(
+  "--hard-background-color"
+);
 const HIGHLIGHT_COLOR = getComputedStyle(root).getPropertyValue(
   "--outline-hover-color"
 );
