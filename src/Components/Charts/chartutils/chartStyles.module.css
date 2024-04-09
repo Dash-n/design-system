@@ -1,0 +1,7 @@
+.customTooltip {
+  /* display: flex;
+  flex-direction: column; */
+  padding: "16px";
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--soft-background-color);
+}

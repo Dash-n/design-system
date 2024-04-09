@@ -30,7 +30,10 @@ type Props = {
   title?: string;
   customData: any;
   domain: any;
+  activeStroke: string;
 };
+
+var style = getComputedStyle(document.body);
 
 export const StackedBarChart: Story<Props> = ({
   id,
@@ -44,6 +47,7 @@ export const StackedBarChart: Story<Props> = ({
   xLabel,
   yLabel,
   domain,
+  activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -75,7 +79,7 @@ export const StackedBarChart: Story<Props> = ({
                 dataKey={point}
                 stackId="a"
                 fill={customData[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" />}
+                activeBar={<Rectangle stroke={activeStroke} />}
               />
             );
           })}

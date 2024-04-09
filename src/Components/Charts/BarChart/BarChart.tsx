@@ -30,7 +30,10 @@ type Props = {
   title?: string;
   customData: any;
   domain?: any;
+  activeStroke?: string;
 };
+
+var style = getComputedStyle(document.body);
 
 export const BarChart: Story<Props> = ({
   id,
@@ -44,6 +47,7 @@ export const BarChart: Story<Props> = ({
   xLabel,
   yLabel,
   domain = ["auto", "auto"],
+  activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -80,7 +84,9 @@ export const BarChart: Story<Props> = ({
                 shape={<Rectangle radius={[8, 8, 0, 0]} />}
                 dataKey={point}
                 fill={customData[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" radius={[8, 8, 0, 0]} />}
+                activeBar={
+                  <Rectangle stroke={activeStroke} radius={[8, 8, 0, 0]} />
+                }
               />
             );
           })}

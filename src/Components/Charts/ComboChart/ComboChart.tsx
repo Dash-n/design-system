@@ -31,7 +31,10 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  activeStroke: string;
 };
+
+var style = getComputedStyle(document.body);
 
 export const ComboChart: Story<Props> = ({
   id,
@@ -45,6 +48,7 @@ export const ComboChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -79,7 +83,7 @@ export const ComboChart: Story<Props> = ({
               <Bar
                 dataKey={point}
                 fill={customData[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" />}
+                activeBar={<Rectangle stroke={activeStroke} />}
                 maxBarSize={20}
               />
             );

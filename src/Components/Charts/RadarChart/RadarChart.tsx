@@ -20,7 +20,11 @@ type Props = {
   axisKey: string;
   valueKey: string;
   title?: string;
+  strokeColor?: string;
+  fillColor?: string;
 };
+
+var style = getComputedStyle(document.body);
 
 export const RadarChart: Story<Props> = ({
   id,
@@ -30,6 +34,8 @@ export const RadarChart: Story<Props> = ({
   axisKey,
   valueKey,
   title,
+  strokeColor = style.getPropertyValue("--main-bg-color"),
+  fillColor = style.getPropertyValue("--main-hover-color"),
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -52,8 +58,8 @@ export const RadarChart: Story<Props> = ({
           <Tooltip content={CustomTooltip} />
           <Radar
             dataKey={valueKey}
-            stroke="#332288"
-            fill="#88CCEE"
+            stroke={strokeColor}
+            fill={fillColor}
             fillOpacity={0.6}
           />
         </RChart>
