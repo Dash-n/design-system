@@ -1,3 +1,5 @@
+@import "../../../vars.css";
+
 .selectBox {
   display: flex;
   position: relative;
@@ -9,13 +11,13 @@
   border-radius: 8px;
   border-radius: 4px;
   box-sizing: border-box;
-  border: 1px #c4c4c4 solid;
+  border: 1px solid var(--soft-background-color);
 }
 
 .select {
   width: 100%;
   border: none;
-  color: #606060;
+  color: var(--text-color);
   font-size: 14px;
   font-family: "Geist";
   white-space: nowrap;
@@ -24,7 +26,7 @@
 }
 
 .select:focus {
-  box-shadow: 0 0 2px 3px #4f84f7;
+  box-shadow: 0 0 2px 3px var(--main-bg-color);
   outline: none;
 
   transition: box-shadow 0.3s ease-out;
@@ -52,11 +54,11 @@
 }
 
 .select:focus::placeholder {
-  color: #c4c4c4;
+  color: var(--soft-background-color);
 }
 
 .select:disabled + .label {
-  color: #c4c4c4;
+  color: var(--soft-background-color);
 }
 
 .logo {

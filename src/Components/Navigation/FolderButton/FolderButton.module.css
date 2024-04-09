@@ -1,9 +1,11 @@
+@import "../../../vars.css";
+
 .container {
   height: 128px;
   width: 184px;
   border-radius: 8px;
   position: relative;
-  background-color: #f4f4f4;
+  background-color: var(--hard-background-color);
 }
 
 .a {
@@ -15,7 +17,7 @@
   height: 100%;
   width: 100%;
 
-  color: #4f84f7;
+  color: var(--main-bg-color);
 
   font-size: large;
   font-family: "Geist";
@@ -27,7 +29,7 @@
 }
 .a:focus,
 .a:hover:not(:disabled) {
-  border: 1px #4f84f7 solid;
+  border: 1px solid var(--main-bg-color);
   border-radius: 0 8px 8px 8px;
 }
 
@@ -43,7 +45,7 @@
   top: -8px;
   height: 10px;
   width: 100%;
-  background: #f4f4f4;
+  background: var(--hard-background-color);
   z-index: -1;
   clip-path: polygon(0% 0%, 20% 0%, 40% 100%, 0% 100%);
   border-radius: 8px 0 0 0;
@@ -56,7 +58,7 @@
   top: -7px;
   height: 9px;
   width: calc(100% - 9px);
-  background: #f4f4f4;
+  background: var(--hard-background-color);
   z-index: 0;
   clip-path: polygon(0% 0%, 20% 0%, 39% 100%, 0% 100%);
   border-radius: 7px 0 0 0;
@@ -65,7 +67,7 @@
 
 a:focus::after,
 a:hover:not(:disabled):after {
-  background: #4f84f7;
+  background: var(--main-bg-color);
 }
 
 .a:disabled {
@@ -110,17 +112,17 @@ p {
 }
 
 .iconButton.primary {
-  color: #4f84f7;
-  border: 1px #4f84f7 solid;
+  color: var(--main-bg-color);
+  border: 1px solid var(--main-bg-color);
 }
 .iconButton.primary:hover {
-  background: #ceddfd;
+  background: var(--outline-hover-color);
 }
 .iconButton.warning {
-  color: #ff2929;
-  border: 1px #ff2929 solid;
+  color: var(--warning-bg-color);
+  border: 1px solid var(--warning-outline-bg-color);
 }
 
 .iconButton.warning:hover {
-  background: #ffa1a1;
+  background: var(--warning-outline-hover-color);
 }

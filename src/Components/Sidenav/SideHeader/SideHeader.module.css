@@ -20,17 +20,17 @@
   margin: 0 4px;
 
   border-radius: 8px;
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--soft-background-color);
 }
 
 a:link {
   text-decoration: none;
 }
 .a:hover:not(:disabled) {
-  border: 1px #a3bffb solid;
+  border: 1px solid var(--main-hover-color);
 }
 .a:active:not(:disabled) {
-  background-color: #e9f1fd;
+  background-color: var(--main-disabled-color);
 }
 
 .a:disabled {
