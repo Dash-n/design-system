@@ -28,35 +28,35 @@
   height: 16px;
   width: 16px;
   border-radius: 50%;
-  border: 2px #606060 solid;
+  border: 1px solid var(--text-color);
   background-color: white;
 }
 
 .container input:disabled ~ .checkmark {
-  background-color: #efefef;
-  border: 2px #c4c4c4 solid;
+  background-color: var(--main-disabled-color);
+  border: 1px solid var(--soft-background-color);
 }
 
 .container input:disabled ~ span {
-  color: #e9f1fd;
+  color: var(--main-disabled-color);
 }
 
 .container:hover input:not(:disabled) ~ .checkmark {
-  background-color: #ceddfd;
+  background-color: var(--outline-hover-color);
 }
 
 .container input:checked ~ .checkmark {
-  background-color: #4f84f7;
-  border: 2px #4f84f7 solid;
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--main-bg-color);
 }
 
 .container:hover input:checked ~ .checkmark {
-  background-color: #4f84f7;
+  background-color: var(--main-bg-color);
 }
 
 .container input:focus-visible ~ .checkmark {
-  box-shadow: 0 0 2px 3px #4f84f7;
-  border: 2px #606060 solid;
+  box-shadow: 0 0 2px 3px var(--main-bg-color);
+  border: 1px solid var(--text-color);
 }
 
 .checkmark:after {
@@ -68,8 +68,8 @@
   display: block;
 }
 .container .checkmark:after {
-  top: 3px;
-  left: 3px;
+  top: 4px;
+  left: 4px;
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -77,9 +77,9 @@
 }
 
 .container input:disabled ~ .inputLabel {
-  color: #c4c4c4;
+  color: var(--soft-background-color);
 }
 
 .container:disabled input ~ .checkmark {
-  background-color: #ceddfd;
+  background-color: var(--outline-hover-color);
 }

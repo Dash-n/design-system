@@ -1,3 +1,5 @@
+@import "../../../vars.css";
+
 :root {
   --tooltipWidth: 36px;
   --markWidth: 20px;
@@ -22,19 +24,19 @@
   border-radius: 50%;
   line-height: 38px;
 
-  background: #4f84f7;
+  background: var(--main-bg-color);
 }
 
 .thumb:focus {
   outline: none;
   background: white;
-  box-shadow: 0 0 2px 4px #4f84f7;
+  box-shadow: 0 0 2px 4px var(--main-bg-color);
 }
 
 .track {
   position: relative;
   height: 4px;
-  background: #4f84f7;
+  background: var(--main-bg-color);
   border-radius: 4px;
   bottom: calc(var(--markWidth) - 2px);
 }
@@ -51,7 +53,7 @@
   transform: translateX(calc((var(--thumbWidth) - var(--markWidth)) / 2));
   border-radius: 100%;
 
-  background: #4f84f7;
+  background: var(--main-bg-color);
 }
 
 .toolTip {
@@ -63,7 +65,7 @@
   height: var(--tooltipWidth);
   border-radius: 50% 50% 50% 0;
   transform: translateY(calc(var(--tooltipWidth) * -1.25)) rotate(-45deg);
-  background: #4f84f7;
+  background: var(--main-bg-color);
   color: white;
   content: "";
 }
