@@ -1,8 +1,9 @@
 import type { Story } from "@ladle/react";
-import { Container } from "../Components/Container/Container";
-import { DraggableContainer } from "../Components/Container/DraggableContainer/DraggableContainer";
+import { Container } from "../../Components/Container/Container";
+import { DraggableContainer } from "../../Components/Container/DraggableContainer/DraggableContainer";
 import { useState, useEffect } from "react";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+
+import "react-big-calendar/lib/css/react-big-calendar.css";
 
 type Props = {
   width?: string;

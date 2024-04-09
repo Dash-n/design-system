@@ -1,7 +1,9 @@
 import type { Story } from "@ladle/react";
 import { CalendarMonthDay } from "../../Components/Calendar/CalendarMonth/CalendarMonthDay";
-import { Calendar } from "../../Components/Calendar/CalendarMonth/CalendarMonth";
+import { CalendarMonth } from "../../Components/Calendar/CalendarMonth/CalendarMonth";
 import { useState } from "react";
+
+import events from "./events";
 
 type Props = {
   width?: string;
@@ -53,7 +55,11 @@ export const Calendars: Story<Props> = ({}) => {
         flexDirection: "row",
       }}
     >
-      <Calendar changeMonth={changePage} selectedMonth={monthIndex} />
+      <CalendarMonth
+        events={events}
+        changeMonth={changePage}
+        selectedMonth={monthIndex}
+      />
     </div>
   );
 };
