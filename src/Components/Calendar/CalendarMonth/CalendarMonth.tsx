@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
-import styles from "./CalendarMonth.module.css";
 import "./big-calendar.css";
+import styles from "./CalendarMonth.module.css";
 
 import { CalendarMonthDay } from "./CalendarMonthDay";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
@@ -45,7 +45,7 @@ export const CalendarMonth: Story<Props> = ({
   selectedMonth = new Date().getMonth(),
 }: Props) => {
   return (
-    <div className="myCustomHeight">
+    <div className={styles.myCustomHeight}>
       <Calendar
         localizer={localizer}
         events={events}

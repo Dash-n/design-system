@@ -81,3 +81,7 @@
   color: #606060;
   cursor: pointer;
 }
+
+.myCustomHeight {
+  width: 100%;
+}
