@@ -159,7 +159,7 @@ export const Paginators: Story<Props> = ({}) => {
         jumpPage={jumpPage}
         pageCount={pageCount}
         displayOptions={[{ option: 5 }, { option: 200 }]}
-      ></Paginator>
+      />
       Page: {pageIndex + 1}
       <br />
       Items per page: {pageSize}

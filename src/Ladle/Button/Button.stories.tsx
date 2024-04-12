@@ -43,7 +43,7 @@ Buttons.argTypes = {
 
 export const OutlineButtons: Story<Props> = ({ label, variant, disabled }) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <span className="material-icons"></span>
+    <span className="material-icons" />
     <OutlineButton
       variant={variant}
       label={label}

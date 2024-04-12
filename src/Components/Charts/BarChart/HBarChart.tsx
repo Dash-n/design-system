@@ -69,7 +69,7 @@ export const HBarChart: Story<Props> = ({
             dataKey={xAxisKey}
             type="category"
             label={{ value: yLabel, position: "top" }}
-          ></YAxis>
+          />
 
           <XAxis type="number" domain={domain}>
             <Label value={xLabel} position="bottom" />

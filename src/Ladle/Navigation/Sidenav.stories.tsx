@@ -16,10 +16,12 @@ import {
   MdMedication,
   MdMedicalServices,
 } from "react-icons/md";
+
 type selectOption = {
   option: string;
   value: string;
 };
+
 type Props = {
   username: string;
   options: selectOption[];
@@ -64,7 +66,7 @@ export const Selects: Story<Props> = ({ options }) => {
         label="Superbowl"
         options={options}
         setAnswer={handleChange}
-      ></TeamSelect>
+      />
     </div>
   );
 };

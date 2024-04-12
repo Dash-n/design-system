@@ -16,6 +16,6 @@ const exampleContent = [
 
 export const Toasts: Story<Props> = ({ content, variant, disabled }) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <Card variant={variant} content={exampleContent}></Card>
+    <Card variant={variant} content={exampleContent} />
   </div>
 );

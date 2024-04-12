@@ -33,7 +33,7 @@ export const Checkbox: Story<Props> = ({
       }}
     />
     <div className={styles.inputLabel}>{label ?? id}</div>
-    <span className={styles.checkmark}></span>
+    <span className={styles.checkmark} />
   </label>
 );
 

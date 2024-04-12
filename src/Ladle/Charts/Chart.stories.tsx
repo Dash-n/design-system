@@ -24,8 +24,8 @@ type Props = {
   title: string;
   customData: any[];
   dotRadius: number;
-  domainMin: any;
-  domainMax: any;
+  domainMin: number;
+  domainMax: number;
 };
 
 function filterKeysByType(dataArray, dataType) {
@@ -68,7 +68,7 @@ export const BarCharts: Story<Props> = ({
         height={100}
         customData={customData}
         domain={[domainMin, domainMax]}
-      ></BarChart>
+      />
     </div>
   );
 };
@@ -135,7 +135,7 @@ export const ComboCharts: Story<Props> = ({
         height={100}
         customData={customData}
         domain={[domainMin, domainMax]}
-      ></ComboChart>
+      />
     </div>
   );
 };
@@ -206,7 +206,7 @@ export const HorizontalBarCharts: Story<Props> = ({
         height={containerHeight}
         domain={[domainMin, domainMax]}
         customData={customData}
-      ></HBarChart>
+      />
     </div>
   );
 };
@@ -256,7 +256,7 @@ export const PieCharts: Story<Props> = ({
         dataKey="points_scored"
         width="100"
         height="100"
-      ></PieChart>
+      />
     </div>
   );
 };
@@ -300,7 +300,7 @@ export const StackedBarCharts: Story<Props> = ({
         height={100}
         domain={[domainMin, domainMax]}
         customData={customData}
-      ></StackedBarChart>
+      />
     </div>
   );
 };
@@ -367,7 +367,7 @@ export const LineCharts: Story<Props> = ({
         height={100}
         domain={[domainMin, domainMax]}
         customData={customData}
-      ></LineChart>
+      />
     </div>
   );
 };
@@ -435,7 +435,7 @@ export const ScatterCharts: Story<Props> = ({
         height={100}
         domain={[domainMin, domainMax]}
         customData={customData}
-      ></ScatterChart>
+      />
     </div>
   );
 };
@@ -501,7 +501,7 @@ export const RadarCharts: Story<RadarProps> = ({
         data={exercisedata}
         valueKey={valueKey}
         axisKey={axisKey}
-      ></RadarChart>
+      />
     </div>
   );
 };
