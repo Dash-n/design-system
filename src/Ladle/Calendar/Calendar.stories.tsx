@@ -2,6 +2,7 @@ import type { Story } from "@ladle/react";
 import { Calendar } from "../../Components/Calendar/Calendar";
 
 import events from "./events";
+import backgroundEvents from "./backgroundEvents";
 
 type Props = {
   width?: string;
@@ -11,6 +12,9 @@ type Props = {
 };
 
 export const Calendars: Story<Props> = ({}) => {
+  const handleClick = (e) => {
+    console.log(e);
+  };
   return (
     <div
       style={{
@@ -20,7 +24,11 @@ export const Calendars: Story<Props> = ({}) => {
         flexDirection: "row",
       }}
     >
-      <Calendar events={events} />
+      <Calendar
+        events={events}
+        backgroundEvents={backgroundEvents}
+        handleClick={handleClick}
+      />
     </div>
   );
 };

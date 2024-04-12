@@ -4,7 +4,7 @@
   --main-active-color: #365aa8;
   --main-disabled-color: #e9f1fd;
 
-  --outline-hover-color: #ceddfd;
+  --outline-hover-color: rgb(206, 221, 253);
   --outline-active-color: #87abfa;
 
   --warning-outline-bg-color: #ff2929;

@@ -12,11 +12,11 @@ type Props = {
 
 export const Buttons: Story<Props> = ({ label, variant, disabled }) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <Button variant={variant} label={label} disabled={disabled}></Button>
-    <Button variant="primary" label="primary"></Button>
-    <Button variant="warning" label="warning button"></Button>
-    <Button variant="primary" label="primary" disabled></Button>
-    <Button variant="warning" label="warning" disabled></Button>
+    <Button variant={variant} label={label} disabled={disabled} />
+    <Button variant="primary" label="primary" />
+    <Button variant="warning" label="warning button" />
+    <Button variant="primary" label="primary" disabled />
+    <Button variant="warning" label="warning" disabled />
   </div>
 );
 Buttons.args = {
@@ -34,15 +34,11 @@ Buttons.argTypes = {
 export const OutlineButtons: Story<Props> = ({ label, variant, disabled }) => (
   <div style={{ display: "flex", gap: "8px" }}>
     <span className="material-icons"></span>
-    <OutlineButton
-      variant={variant}
-      label={label}
-      disabled={disabled}
-    ></OutlineButton>
-    <OutlineButton variant="primary" label="primary"></OutlineButton>
-    <OutlineButton variant="warning" label="warning button"></OutlineButton>
-    <OutlineButton variant="primary" label="primary" disabled></OutlineButton>
-    <OutlineButton variant="warning" label="warning" disabled></OutlineButton>
+    <OutlineButton variant={variant} label={label} disabled={disabled} />
+    <OutlineButton variant="primary" label="primary" />
+    <OutlineButton variant="warning" label="warning button" />
+    <OutlineButton variant="primary" label="primary" disabled />
+    <OutlineButton variant="warning" label="warning" disabled />
   </div>
 );
 OutlineButtons.args = {
@@ -58,8 +54,8 @@ OutlineButtons.argTypes = {
 };
 export const IconButtons: Story<Props> = ({}) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <IconButton variant="edit" iconSize="24px" label={<MdEdit />}></IconButton>
-    <IconButton variant="settings" label={<MdSettings />}></IconButton>
-    <IconButton variant="delete" label={<MdDelete />}></IconButton>
+    <IconButton variant="edit" iconSize="24px" label={<MdEdit />} />
+    <IconButton variant="settings" label={<MdSettings />} />
+    <IconButton variant="delete" label={<MdDelete />} />
   </div>
 );

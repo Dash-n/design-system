@@ -298,7 +298,8 @@ button.rbc-input::-moz-focus-inner {
   text-align: left;
 }
 .rbc-event:hover {
-  background-color: var(--outline-hover-color);
+  background-color: rgba(206, 221, 253, 0.6);
+  z-index: 2;
 }
 .rbc-slot-selecting .rbc-event,
 .rbc-slot-selecting .rbc-day-slot .rbc-background-event,
@@ -658,6 +659,12 @@ button.rbc-input::-moz-focus-inner {
 .rbc-day-slot .rbc-time-slot {
   border-top: 1px solid #f7f7f7;
 }
+.rbc-day-slot .rbc-time-slot {
+  /* content: 100%;
+  width: 100%;
+  border-top: 1px solid red;
+  display: block; */
+}
 
 .rbc-time-view-resources .rbc-time-gutter,
 .rbc-time-view-resources .rbc-time-header-gutter {
@@ -860,6 +867,6 @@ button.rbc-input::-moz-focus-inner {
   left: 0;
   right: 0;
   height: 3px;
-  background-color: var(--main-bg-color);
+  background-color: red;
   pointer-events: none;
 }
