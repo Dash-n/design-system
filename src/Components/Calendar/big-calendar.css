@@ -465,8 +465,6 @@ button.rbc-input::-moz-focus-inner {
 }
 
 .rbc-day-bg {
-  border-radius: 8px;
-  border: 1px solid var(--calendar-color);
   -webkit-box-flex: 1;
   -ms-flex: 1 0 0%;
   flex: 1 0 0%;
