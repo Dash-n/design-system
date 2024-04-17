@@ -9,18 +9,20 @@ type Props = {
   iconSize?: string;
   onClick: () => void;
   customStyles?: any;
+  customClass?: string;
 };
 
 export const IconButton: Story<Props> = ({
-  variant,
+  variant = "primary",
   disabled,
   icon,
   iconSize = "24px",
   onClick,
   customStyles,
+  customClass,
 }) => (
   <button
-    className={`${styles[variant]} ${styles.button}`}
+    className={`${styles[variant]} ${styles.button} ${customClass}`}
     style={customStyles}
     disabled={disabled}
     onClick={onClick}
