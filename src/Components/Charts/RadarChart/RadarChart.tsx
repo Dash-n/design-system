@@ -24,7 +24,7 @@ type Props = {
   fillColor?: string;
 };
 
-var style = getComputedStyle(document.body);
+const style = getComputedStyle(document.body);
 
 export const RadarChart: Story<Props> = ({
   id,

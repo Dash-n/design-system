@@ -25,6 +25,10 @@
   cursor: default;
 }
 
+span {
+  font-size: 13px;
+}
+
 .paginText {
   padding: 0 8px;
 }
@@ -36,6 +40,5 @@
 .hide {
   position: absolute;
   opacity: 0;
-  z-index: -100;
   white-space: pre;
 }

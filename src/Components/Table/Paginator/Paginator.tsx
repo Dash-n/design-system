@@ -40,18 +40,12 @@ export const Paginator: Story<Props> = ({
   setItems,
   displayOptions = [{ option: "10" }, { option: "25" }, { option: "50" }],
 }) => {
-  const [content, setContent] = useState("");
-  const [width, setWidth] = useState(50);
-  const [bcontent, bsetContent] = useState("");
-  const [bwidth, bsetWidth] = useState(50);
+  const [content, setContent] = useState(0);
+  const [width, setWidth] = useState();
   const span = useRef();
-  const span2 = useRef();
 
   useEffect(() => {
     setWidth(span.current.offsetWidth + 30);
-  }, [content]);
-  useEffect(() => {
-    setWidth(span2.current.offsetWidth + 30);
   }, [content]);
 
   const changeHandler = (evt) => {
@@ -63,15 +57,12 @@ export const Paginator: Story<Props> = ({
       <p className={styles.paginText}>Showing</p>
       {/* Number of Items */}
       <div className={styles.paginInput}>
-        <span className={styles.hide} ref={span2}>
-          {content}
-        </span>
         <Select
           id="items"
           name="items"
+          style={{ textAlign: "right" }}
           options={displayOptions}
           setAnswer={setItems}
-          onChange={changeHandler}
         />
       </div>
 

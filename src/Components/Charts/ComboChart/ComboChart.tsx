@@ -34,7 +34,7 @@ type Props = {
   activeStroke: string;
 };
 
-var style = getComputedStyle(document.body);
+const style = getComputedStyle(document.body);
 
 export const ComboChart: Story<Props> = ({
   id,
