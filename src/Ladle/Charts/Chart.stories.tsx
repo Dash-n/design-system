@@ -66,6 +66,7 @@ export const BarCharts: Story<Props> = ({
         yLabel={yLabel}
         keys={keys}
         colors={colors}
+        legendPos={{ height: 100, align: "left", verticalAlign: "bottom" }}
         width={100}
         height={100}
         customData={customData}

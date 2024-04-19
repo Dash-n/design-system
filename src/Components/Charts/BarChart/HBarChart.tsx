@@ -30,7 +30,8 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
-  domain: any;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
+  domain?: [string|number, string|number];;
   activeStroke?: string;
 };
 
@@ -47,6 +48,7 @@ export const HBarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
   domain,
   activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
@@ -77,9 +79,9 @@ export const HBarChart: Story<Props> = ({
 
           <Tooltip content={CustomTooltip} />
           <Legend
-            verticalAlign="top"
-            align="right"
-            height={32}
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 50}
             formatter={titleLegend}
           />
 

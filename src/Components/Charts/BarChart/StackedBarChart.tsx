@@ -29,6 +29,7 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
   domain?: [string | number, string | number];
   activeStroke: string;
 };
@@ -46,6 +47,7 @@ export const StackedBarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
   domain,
   activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
@@ -72,7 +74,12 @@ export const StackedBarChart: Story<Props> = ({
             domain={domain}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 50}
+            formatter={titleLegend}
+          />
           {keys?.map((point, index) => {
             return (
               <Bar

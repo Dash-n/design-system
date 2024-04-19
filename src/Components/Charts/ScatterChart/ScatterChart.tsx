@@ -29,6 +29,7 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
   dotRadius: number;
 };
 
@@ -107,6 +108,7 @@ export const ScatterChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
   dotRadius,
 }) => {
   keys ??= [];
@@ -134,9 +136,9 @@ export const ScatterChart: Story<Props> = ({
           />
           <Tooltip content={CustomTooltip} />
           <Legend
-            verticalAlign="top"
-            align="left"
-            height={32}
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 32}
             content={customLegend}
           />
           {keys?.map((point, index) => {

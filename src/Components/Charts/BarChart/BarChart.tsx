@@ -29,7 +29,8 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
-  domain?: any;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
+  domain?: [string | number, string | number];
   activeStroke?: string;
 };
 
@@ -46,6 +47,7 @@ export const BarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
   domain = ["auto", "auto"],
   activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
@@ -73,9 +75,9 @@ export const BarChart: Story<Props> = ({
           />
           <Tooltip content={CustomTooltip} />
           <Legend
-            verticalAlign="top"
-            align="right"
-            height={24}
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 50}
             formatter={titleLegend}
           />
           {keys?.map((point, index) => {

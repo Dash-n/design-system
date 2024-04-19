@@ -30,6 +30,7 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title?: string;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
   customData: any;
   activeStroke: string;
 };
@@ -48,6 +49,7 @@ export const ComboChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
   activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
   return (
@@ -73,9 +75,9 @@ export const ComboChart: Story<Props> = ({
           />
           <Tooltip content={CustomTooltip} />
           <Legend
-            verticalAlign="top"
-            align="right"
-            height={32}
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 50}
             formatter={titleLegend}
           />
           {barKeys?.map((point, index) => {
