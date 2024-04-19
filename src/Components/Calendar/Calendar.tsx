@@ -84,7 +84,9 @@ export const Calendar: Story<Props> = ({
       if (show === null) {
         // console.log(start);
         // console.log(end);
-        const title = window.prompt("New Event name");
+        const title = window.prompt(
+          "New Event name" + start.toString() + end.toString()
+        );
         if (title) {
           setEvents((prev) => [...prev, { start, end, title }]);
         }
@@ -185,6 +187,11 @@ export const Calendar: Story<Props> = ({
           setContextMenuInfo(undefined);
         }}
       ></div>
+      {/* <EventPopup
+        event={eventPopup}
+        show={show === selected.id}
+        closePopup={() => togglePopup(null)}
+      /> */}
       <BigCalendar
         localizer={localizer}
         events={myEvents}
