@@ -12,6 +12,7 @@
 
   font-size: large;
   font-family: "Geist";
+  pointer-events: all;
 
   border: none;
 }
