@@ -26,13 +26,16 @@ const sampleEvent = {
 export const EventPopups: Story<Props> = ({}) => {
   const [show, setShow] = useState(false);
   const togglePopup = () => {
-    setShow(!show);
+    setShow(true);
+  };
+  const closePopup = () => {
+    setShow(false);
   };
   return (
     <>
       <div className={styles.centerDiv} onClick={togglePopup}>
         Hello
-        <EventPopup event={sampleEvent} show={show} closePopup={togglePopup} />
+        <EventPopup event={sampleEvent} show={show} closePopup={closePopup} />
       </div>
     </>
   );

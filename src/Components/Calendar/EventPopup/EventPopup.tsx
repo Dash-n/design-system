@@ -4,6 +4,7 @@ import { IconContext } from "react-icons";
 import styles from "./EventPopup.module.css";
 import { Button } from "../../Button/Button/Button";
 import { OutlineButton } from "../../Button/OutlineButton/OutlineButton";
+import { TextInput } from "../../Input/Text/TextInput";
 
 type Props = {
   children?: React.ReactNode;
@@ -29,6 +30,8 @@ export const EventPopup: Story<Props> = ({
   });
   const end = new Date(event?.end).toLocaleString("en-GB", { timeZone: "UTC" });
 
+  //   const bookNew = (event) =>
+
   //   const closePopup = () => {
   //     show = false;
   //   };
@@ -47,18 +50,23 @@ export const EventPopup: Story<Props> = ({
           </div>
         </div>
         <div className={styles.eventInfo}>
-          <div className={styles.fieldSection}>
-            <strong>Event: </strong>
-            {event?.title}
-          </div>
-          <div className={styles.fieldSection}>
-            <strong>Time Start: </strong>
-            {start}
-          </div>
-          <div className={styles.fieldSection}>
-            <strong>Time End: </strong>
-            {end}
-          </div>
+          <form>
+            <div className={styles.fieldSection}>
+              <strong>Event: </strong>
+              <TextInput id="event" name="event" placeholder={event?.title} />
+              {/* {event?.title} */}
+            </div>
+            <div className={styles.fieldSection}>
+              <strong>Time Start: </strong>
+              <TextInput id="start" name="start" placeholder={start} />
+              {/* {start} */}
+            </div>
+            <div className={styles.fieldSection}>
+              <strong>Time End: </strong>
+              <TextInput id="end" name="end" placeholder={end} />
+              {/* {end} */}
+            </div>
+          </form>
         </div>
         <a className={styles.dashboardLink} href={"Dashboard link"}>
           Go to Physio Dashboard
