@@ -49,7 +49,6 @@
   z-index: -1;
   clip-path: polygon(0% 0%, 20% 0%, 40% 100%, 0% 100%);
   border-radius: 8px 0 0 0;
-  /* box-shadow: red 60px -16px; */
 }
 .a::before {
   content: "";
