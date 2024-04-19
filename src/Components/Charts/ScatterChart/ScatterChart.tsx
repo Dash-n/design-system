@@ -90,7 +90,7 @@ const Star = (props: any) => {
       fill={fill}
       viewBox="0 0 1024 1024"
     >
-      <polygon points="100,10 60,132 160,52 40,52 140,132" />{" "}
+      <polygon points="100,10 60,132 160,52 40,52 140,132" />
     </svg>
   );
 };

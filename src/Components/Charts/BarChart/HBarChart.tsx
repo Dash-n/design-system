@@ -31,7 +31,7 @@ type Props = {
   title?: string;
   customData: any;
   legendPos?: { verticalAlign?: string; align?: string; height?: number };
-  domain?: [string|number, string|number];;
+  domain?: [string | number, string | number];
   activeStroke?: string;
 };
 
