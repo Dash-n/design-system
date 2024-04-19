@@ -7,7 +7,7 @@ type Props = {
   disabled?: boolean;
   variant?: string;
   onClick?: () => void;
-  customStyles?: any;
+  customStyles?: string;
   customClass?: string;
 };
 

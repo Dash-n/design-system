@@ -93,55 +93,34 @@ export const Table: Story<Props> = ({
     );
   };
 
-  const HighlightableTableRow = ({ item, index }) => {
-    const [isHovered, setIsHovered] = useState(false);
-    const isOdd = index % 2 === 0;
-
-    const handleMouseOver = () => {
-      setIsHovered(true);
-    };
-
-    const handleMouseOut = () => {
-      setIsHovered(false);
-    };
-
+  const HighlightableTableRow = ({ item }) => {
     return (
-      <tr
-        style={{
-          backgroundColor: isHovered
-            ? HIGHLIGHT_COLOR
-            : alternate
-              ? isOdd
-                ? ALT_COLOR
-                : "transparent"
-              : "transparent",
-        }}
-        onMouseOver={handleMouseOver}
-        onMouseOut={handleMouseOut}
-      >
+      <tr>
         <td className={`${styles.stickyGroup}`}>
-          {Object.values(item).map((value, subIndex) =>
-            sticky.includes(headers[subIndex]) ? (
+          {Object.values(item).map(
+            (value, subIndex) =>
+              sticky.includes(headers[subIndex]) && (
+                <td
+                  className={`${styles.bodyCell} ${customClasses[headers[subIndex]]} ${styles.stickyCell}`}
+                  key={subIndex}
+                  style={customHeaderStyles[headers[subIndex]]}
+                >
+                  {checkValue(value)}
+                </td>
+              )
+          )}
+        </td>
+        {Object.values(item).map(
+          (value, subIndex) =>
+            !sticky.includes(headers[subIndex]) && (
               <td
-                className={`${styles.bodyCell} ${customClasses[headers[subIndex]]} ${styles.stickyCell}`}
+                className={`${styles.bodyCell} ${customClasses[headers[subIndex]]}`}
                 key={subIndex}
                 style={customHeaderStyles[headers[subIndex]]}
               >
                 {checkValue(value)}
               </td>
-            ) : null
-          )}
-        </td>
-        {Object.values(item).map((value, subIndex) =>
-          sticky.includes(headers[subIndex]) ? null : (
-            <td
-              className={`${styles.bodyCell} ${customClasses[headers[subIndex]]}`}
-              key={subIndex}
-              style={customHeaderStyles[headers[subIndex]]}
-            >
-              {checkValue(value)}
-            </td>
-          )
+            )
         )}
       </tr>
     );

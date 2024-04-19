@@ -8,7 +8,7 @@ type Props = {
   variant: string;
   iconSize?: string;
   onClick: () => void;
-  customStyles?: any;
+  customStyles?: string;
   customClass?: string;
 };
 

@@ -1,4 +1,5 @@
 @import "../../../vars.css";
+@import "../inputs.css";
 
 .container {
   display: flex;
@@ -25,8 +26,8 @@
   box-sizing: border-box;
   top: 4px;
   left: 0;
-  height: 16px;
-  width: 16px;
+  height: var(--input-interactable-height);
+  width: var(--input-interactable-width);
   border-radius: 50%;
   border: 1px solid var(--text-color);
   background-color: white;
