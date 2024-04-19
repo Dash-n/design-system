@@ -4,20 +4,14 @@ import { useState } from "react";
 
 type Props = {
   children: React.ReactNode;
-  // modal: boolean;
-  // toggleModal: () => void;
+  modal: boolean;
+  toggleModal: () => void;
 };
 
-export const Modal: Story<Props> = ({ children }) => {
-  const [modal, setModal] = useState(true);
-
-  const toggleModal = () => {
-    setModal(!modal);
-  };
-
+export const Modal: Story<Props> = ({ modal, toggleModal, children }) => {
   return (
     <>
-      <button onClick={toggleModal}>Open Modal</button>
+      {/* <button onClick={toggleModal}>Open Modal</button> */}
       {modal && (
         <div className={styles.modal}>
           <div className={styles.overlay} onClick={toggleModal} />

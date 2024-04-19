@@ -6,10 +6,20 @@ type Props = {
   label: string;
   disabled?: boolean;
   variant: string;
+  onClick: (e) => void;
 };
 
-export const Button: Story<Props> = ({ label, variant, disabled }) => (
-  <button className={`${styles[variant]} ${styles.button}`} disabled={disabled}>
+export const Button: Story<Props> = ({
+  label,
+  variant = "primary",
+  disabled,
+  onClick,
+}) => (
+  <button
+    className={`${styles[variant]} ${styles.button}`}
+    disabled={disabled}
+    onClick={onClick}
+  >
     {toTitlecase(label)}
   </button>
 );

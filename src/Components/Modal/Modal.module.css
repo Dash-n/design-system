@@ -6,6 +6,7 @@
   left: 0;
   right: 0;
   position: fixed;
+  z-index: 5;
 }
 
 .overlay {
@@ -23,6 +24,7 @@
   border-radius: 8px;
   max-width: 600px;
   min-width: 300px;
+  z-index: 6;
 }
 
 .notifContainer {

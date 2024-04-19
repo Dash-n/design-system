@@ -7,6 +7,8 @@ import moment from "moment";
 import { cloneElement, useCallback, useState } from "react";
 import { Toggle } from "../Toggle/ToggleSwitch/Toggle";
 import { OutlineButton } from "../Button/OutlineButton/OutlineButton";
+import { Modal } from "../Modal/Modal";
+import { EventPopup } from "./EventPopup/EventPopup";
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
@@ -15,22 +17,32 @@ type Keys = keyof typeof Views;
 type Props = {
   events: any;
   backgroundEvents: any;
-  handleClick: (e) => void;
+  // handleClick: (e) => void;
 };
 
 export const Calendar: Story<Props> = ({
   events,
   backgroundEvents,
-  handleClick,
+  // handleClick,
 }: Props) => {
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
+  const [myEvents, setEvents] = useState(events);
+  const [selected, setSelected] = useState();
+  const [eventPopup, setEventPopup] = useState();
   const [contextMenuInfo, setContextMenuInfo] = useState<{
     xPosition: number;
     yPosition: number;
     selectedTime: string;
     resourceId: number;
   }>();
+
+  const [show, setShow] = useState(null);
+
+  const togglePopup = (id) => {
+    setShow(id);
+    console.log(show);
+  };
 
   const onPrevClick = useCallback(() => {
     if (view === Views.DAY) {
@@ -40,7 +52,6 @@ export const Calendar: Story<Props> = ({
     } else {
       setDate(moment(date).subtract(1, "M").toDate());
     }
-    // console.log(view);
   }, [view, date]);
 
   const onNextClick = useCallback(() => {
@@ -54,20 +65,33 @@ export const Calendar: Story<Props> = ({
   }, [view, date]);
 
   const handleChange = (value: string) => {
-    // console.log(value);
     if (value === "Month") setView(Views.MONTH);
     if (value === "Week") setView(Views.WEEK);
     if (value === "Day") setView(Views.DAY);
   };
 
-  const onTimeslotClick = (value: any) => {
-    console.log(value);
-    console.log("Clicked");
+  const eventClick = (event: any) => {
+    setSelected(event);
+    setEventPopup(event);
+    togglePopup(event.id);
   };
-
-  const eventClick = (value: any) => {
-    console.log(value.event);
+  const popupClick = (event: any) => {
+    console.log(event);
   };
+  const handleSelectSlot = useCallback(
+    ({ start, end }) => {
+      console.log(show);
+      if (show === null) {
+        // console.log(start);
+        // console.log(end);
+        const title = window.prompt("New Event name");
+        if (title) {
+          setEvents((prev) => [...prev, { start, end, title }]);
+        }
+      }
+    },
+    [setEvents]
+  );
 
   const currentMonth = date.toLocaleString("default", { month: "long" });
 
@@ -85,7 +109,7 @@ export const Calendar: Story<Props> = ({
       return (
         <div
           className={`${styles.eventLabel} ${past && styles.pastEvent}`}
-          onClick={handleClick}
+          onClick={togglePopup}
         >
           <div className={styles.timeLabel}>{timeString}</div>
           <div className={styles.titleLabel}>{title}</div>
@@ -102,50 +126,20 @@ export const Calendar: Story<Props> = ({
         flex: 1,
         backgroundColor: hasCustomInfo ? "#f5f5dc" : "#fff",
       };
+      return <div style={style}>{timeSlotWrapperProps.children}</div>;
+    },
+    eventWrapper: ({ event, children }) => {
       return (
-        <div style={style}>
-          {/* {hasCustomInfo && "Custom Day Wrapper"} */}
-          {timeSlotWrapperProps.children}
+        <div style={{ position: "relative" }}>
+          {children}
+          <EventPopup
+            event={eventPopup}
+            show={show === event.id}
+            closePopup={() => togglePopup(null)}
+          />
         </div>
       );
     },
-    eventWrapper: (eventWrapperProps) => {
-      const style = {
-        border: "4px solid",
-        borderColor:
-          eventWrapperProps.event.start.getHours() % 2 === 0 ? "green" : "red",
-        padding: "5px",
-        // top: eventWrapperProps.style ?? "0px",
-      };
-      // console.log(eventWrapperProps);
-      return (
-        <div style={style} onClick={eventClick(eventWrapperProps)}>
-          {eventWrapperProps.children}
-        </div>
-      );
-    },
-    // timeSlotWrapper: ({
-    //   children,
-    //   value,
-    //   resource,
-    // }: {
-    //   children: JSX.Element;
-    //   value: string;
-    //   resource: number;
-    // }) => {
-    //   return cloneElement(children, {
-    //     onContextMenu: (e: MouseEvent) => {
-    //       e.preventDefault();
-    //       console.log("click");
-    //       setContextMenuInfo({
-    //         xPosition: e.clientX,
-    //         yPosition: e.clientY,
-    //         selectedTime: value,
-    //         resourceId: resource,
-    //       });
-    //     },
-    //   });
-    // },
   };
   const onTodayClick = useCallback(() => {
     setDate(moment().toDate());
@@ -193,9 +187,12 @@ export const Calendar: Story<Props> = ({
       ></div>
       <BigCalendar
         localizer={localizer}
-        events={events}
+        events={myEvents}
         components={components}
         backgroundEvents={backgroundEvents}
+        selected={selected}
+        onSelectEvent={eventClick}
+        onSelectSlot={handleSelectSlot}
         startAccessor="start"
         endAccessor="end"
         date={date}
@@ -206,7 +203,16 @@ export const Calendar: Story<Props> = ({
         view={view}
         onView={setView}
         onNavigate={setDate}
+        selectable
+        popup
       />
+      {/* <Modal
+        modal={modal}
+        toggleModal={toggleModal}
+        children={<EventPopup event={eventPopup} />}
+      /> */}
+
+      {/* <EventPopup event={eventPopup} show={show} closePopup={togglePopup} /> */}
       <div className={`${styles.isOpen && !!contextMenuInfo}`}>
         <div
           style={{

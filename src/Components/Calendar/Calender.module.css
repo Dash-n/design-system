@@ -99,6 +99,15 @@
   text-overflow: ellipsis;
 }
 
-.pastEvent {
-  color: #b8b8b8;
+.rbc-event > .pastEvent {
+  background-color: #b8b8b8;
 }
+
+.rbc-overlay {
+  border-radius: 8px !important;
+}
+
+/* .menu {
+  position: "fixed";
+  top: 
+} */

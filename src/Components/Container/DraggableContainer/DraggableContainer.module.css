@@ -22,10 +22,13 @@
 }
 
 .deleteEnd {
+  position: absolute;
   padding: 8px;
 }
 
 .deleteButton {
+  position: absolute;
+  left: 50;
   padding: 0;
   border: none;
   background: none;
