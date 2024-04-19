@@ -28,6 +28,8 @@ type Props = {
   domainMax: number;
 };
 
+const exampleColors = ["#DDCC77", "#CC6677", "#88CCEE"];
+
 function filterKeysByType(dataArray, dataType) {
   return dataArray.map((obj) =>
     Object.keys(obj).filter((key) => typeof obj[key] === dataType)
@@ -80,7 +82,7 @@ BarCharts.args = {
   title: "Team Stats",
   xLabel: "#",
   yLabel: "#",
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -147,7 +149,7 @@ ComboCharts.args = {
   yLabel: "#",
   domainMin: 0,
   domainMax: 100,
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -218,7 +220,7 @@ HorizontalBarCharts.args = {
   yLabel: "#",
   domainMin: 0,
   domainMax: 200,
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -312,7 +314,7 @@ StackedBarCharts.args = {
   yLabel: "#",
   domainMin: 0,
   domainMax: 100,
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -380,7 +382,7 @@ LineCharts.args = {
   yLabel: "#",
   domainMin: 0,
   domainMax: 100,
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -446,7 +448,7 @@ ScatterCharts.args = {
   dotRadius: 8,
   xLabel: "#",
   yLabel: "#",
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  colors: exampleColors,
   domainMin: 0,
   domainMax: 100,
   customData: {

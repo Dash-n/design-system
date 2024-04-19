@@ -87,7 +87,6 @@ export const PieChart: Story<Props> = ({
               label={renderCustomizedLabel}
               innerRadius="55%"
               outerRadius="100%-48px"
-              fill="#8884d8"
               dataKey={dataKey}
               nameKey={nameKey}
             >
