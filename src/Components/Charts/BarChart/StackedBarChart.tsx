@@ -29,7 +29,7 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
-  domain: any;
+  domain?: [string | number, string | number];
   activeStroke: string;
 };
 

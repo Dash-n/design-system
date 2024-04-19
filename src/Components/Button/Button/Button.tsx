@@ -7,7 +7,6 @@ type Props = {
   disabled?: boolean;
   variant?: string;
   onClick?: () => void;
-  customStyles?: string;
   customClass?: string;
 };
 
@@ -16,12 +15,10 @@ export const Button: Story<Props> = ({
   variant = "primary",
   disabled,
   onClick,
-  customStyles,
   customClass,
 }) => (
   <button
     className={`${styles[variant]} ${styles.button} ${customClass}`}
-    style={customStyles}
     disabled={disabled}
     onClick={onClick}
   >
