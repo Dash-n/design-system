@@ -7,5 +7,7 @@ type Props = {
 };
 
 export const SideHeader: Story<Props> = ({ label }: Props) => (
-  <div className={styles.header}>{toTitlecase(label)}</div>
+  <div className={styles.headerContainer}>
+    <div className={styles.header}>{toTitlecase(label)}</div>
+  </div>
 );

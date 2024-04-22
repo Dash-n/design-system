@@ -30,7 +30,12 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
+  domain?: [string | number, string | number];
+  activeStroke?: string;
 };
+
+const style = getComputedStyle(document.body);
 
 export const HBarChart: Story<Props> = ({
   id,
@@ -43,6 +48,9 @@ export const HBarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
+  domain,
+  activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -63,21 +71,26 @@ export const HBarChart: Story<Props> = ({
             dataKey={xAxisKey}
             type="category"
             label={{ value: yLabel, position: "top" }}
-          ></YAxis>
+          />
 
-          <XAxis type="number">
+          <XAxis type="number" domain={domain}>
             <Label value={xLabel} position="bottom" />
           </XAxis>
 
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 50}
+            formatter={titleLegend}
+          />
 
           {keys?.map((point, index) => {
             return (
               <Bar
                 dataKey={point}
                 fill={customData[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" />}
+                activeBar={<Rectangle stroke={activeStroke} />}
               />
             );
           })}

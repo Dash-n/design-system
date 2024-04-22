@@ -29,6 +29,7 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
   dotRadius: number;
 };
 
@@ -89,7 +90,7 @@ const Star = (props: any) => {
       fill={fill}
       viewBox="0 0 1024 1024"
     >
-      <polygon points="100,10 60,132 160,52 40,52 140,132" />{" "}
+      <polygon points="100,10 60,132 160,52 40,52 140,132" />
     </svg>
   );
 };
@@ -107,6 +108,7 @@ export const ScatterChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
   dotRadius,
 }) => {
   keys ??= [];
@@ -133,7 +135,12 @@ export const ScatterChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" content={customLegend} />
+          <Legend
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 32}
+            content={customLegend}
+          />
           {keys?.map((point, index) => {
             return (
               <Line

@@ -1,3 +1,5 @@
+@import "../../../vars.css";
+
 .paginator {
   display: flex;
   align-items: center;
@@ -5,9 +7,6 @@
 
   height: 40px;
   padding: 8px 8px;
-
-  font-size: 14px;
-  font-family: "Geist";
 
   border: none;
 }
@@ -26,11 +25,20 @@
   cursor: default;
 }
 
+span {
+  font-size: 13px;
+}
+
 .paginText {
   padding: 0 8px;
 }
 
 .paginInput {
-  width: 40px;
   margin: 0 8px;
+}
+
+.hide {
+  position: absolute;
+  opacity: 0;
+  white-space: pre;
 }

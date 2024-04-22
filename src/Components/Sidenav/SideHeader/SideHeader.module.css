@@ -1,27 +1,36 @@
-.header {
+@import "../../../vars.css";
+
+.headerContainer {
   display: flex;
+  box-sizing: border-box;
   align-items: center;
 
   height: 40px;
-  width: 80%;
-  border-radius: 8px;
-  padding: 0 16px;
+  width: 100%;
 
   background-color: white;
-
-  font-size: 16px;
-  font-family: "Geist";
-
-  border: 1px solid #c4c4c4;
 }
+
+.header {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  padding: 0 4px;
+  margin: 0 4px;
+
+  border-radius: 8px;
+  border: 1px solid var(--soft-background-color);
+}
+
 a:link {
   text-decoration: none;
 }
 .a:hover:not(:disabled) {
-  border: 1px #a3bffb solid;
+  border: 1px solid var(--main-hover-color);
 }
 .a:active:not(:disabled) {
-  background-color: #e9f1fd;
+  background-color: var(--main-disabled-color);
 }
 
 .a:disabled {

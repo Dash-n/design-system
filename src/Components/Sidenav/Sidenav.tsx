@@ -36,7 +36,7 @@ export const Sidenav: Story<Props> = ({ teams, children }) => {
       <div
         className={`${styles.overlay} ${isOpen ? styles.show : ""}`}
         onClick={toggleSidebar}
-      ></div>
+      />
 
       <div className={`${styles.sidenav} ${isOpen ? styles.open : ""}`}>
         <div className={styles.navItemContainer}>
@@ -53,7 +53,7 @@ export const Sidenav: Story<Props> = ({ teams, children }) => {
           <TeamSelect id="teams" name="teams" options={teams} />
           {children}
         </div>
-        <User username="Admin"></User>
+        <User username="Admin" />
       </div>
     </div>
   );

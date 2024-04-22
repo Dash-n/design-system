@@ -29,7 +29,12 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
+  domain?: [string | number, string | number];
+  activeStroke?: string;
 };
+
+const style = getComputedStyle(document.body);
 
 export const BarChart: Story<Props> = ({
   id,
@@ -42,9 +47,10 @@ export const BarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
+  domain = ["auto", "auto"],
+  activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
-  // customData = customData[0];
-
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
       <p className={styles.title}>{title}</p>
@@ -65,15 +71,24 @@ export const BarChart: Story<Props> = ({
 
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
+            domain={domain}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 50}
+            formatter={titleLegend}
+          />
           {keys?.map((point, index) => {
             return (
               <Bar
+                shape={<Rectangle radius={[8, 8, 0, 0]} />}
                 dataKey={point}
                 fill={customData[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" />}
+                activeBar={
+                  <Rectangle stroke={activeStroke} radius={[8, 8, 0, 0]} />
+                }
               />
             );
           })}

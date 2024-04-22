@@ -1,10 +1,12 @@
+@import "../../../vars.css";
+
 .container {
   height: 128px;
   width: 184px;
   border-radius: 8px;
 
   position: relative;
-  background-color: #f4f4f4;
+  background-color: var(--hard-background-color);
 }
 
 .a {
@@ -15,7 +17,7 @@
   height: 100%;
   width: 100%;
 
-  color: #4f84f7;
+  color: var(--main-bg-color);
 
   font-size: large;
 
@@ -27,7 +29,7 @@ a:link {
   text-decoration: none;
 }
 .a:hover:not(:disabled) {
-  border: 2px #4f84f7 solid;
+  border: 1px solid var(--main-bg-color);
   border-radius: 8px;
 }
 a:focus ~ .buttonContainer {
@@ -79,17 +81,17 @@ p {
 }
 
 .iconButton.primary {
-  color: #4f84f7;
-  border: 2px #4f84f7 solid;
+  color: var(--main-bg-color);
+  border: 1px solid var(--main-bg-color);
 }
 .iconButton.primary:hover {
-  background: #ceddfd;
+  background: var(--outline-hover-color);
 }
 .iconButton.warning {
-  color: #ff2929;
-  border: 2px #ff2929 solid;
+  color: var(--warning-bg-color);
+  border: 1px solid var(--warning-bg-color);
 }
 
 .iconButton.warning:hover {
-  background: #ffa1a1;
+  background: var(--warning-outline-hover-color);
 }

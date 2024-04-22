@@ -1,7 +1,4 @@
-:root {
-  font-size: large;
-  font-family: "Geist";
-}
+@import "../../../vars.css";
 
 .tableContainer {
   overflow: auto;
@@ -9,16 +6,18 @@
 }
 
 table {
+  border-radius: 8px;
   box-sizing: border-box;
   width: 100%;
-  font-family: "Geist";
   border-spacing: 0px;
+  background-color: white;
 }
 
 .headerRow {
   top: 0;
   position: sticky;
   z-index: 1;
+  border-radius: 8px;
 }
 
 .stickyGroup {
@@ -26,7 +25,23 @@ table {
   left: 0;
   margin: 0;
   padding: 0;
-  border-right: 1px solid #c4c4c4;
+  border-right: 1px solid var(--soft-background-color);
+}
+
+th:first-child {
+  border-radius: 8px 0 0 0;
+}
+th:last-child:not(.stickyHeader) {
+  border-radius: 0 8px 0 0;
+}
+tr:nth-child(odd) {
+  background-color: var(--hard-background-color);
+}
+tr:nth-child(even) {
+  background-color: transparent;
+}
+tr:hover {
+  background-color: var(--outline-hover-color);
 }
 
 .headerCell {
@@ -34,8 +49,8 @@ table {
   font-weight: 600;
   height: 48px;
   padding: 8px;
-  background-color: #4f84f7;
-  color: white;
+  background-color: var(--main-bg-color);
+  color: white !important;
   cursor: pointer;
 }
 
@@ -44,8 +59,7 @@ table {
   font-weight: 400;
   width: 100%;
   padding: 8px;
-  color: #606060;
-  background-color: white;
+  color: var(--text-color);
   text-align: center;
 }
 
@@ -62,10 +76,6 @@ table {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 100px;
-}
-
-.bodyRow:hover > .bodyCell {
-  background-color: var(--outline-hover-color);
 }
 
 .nestedCell {

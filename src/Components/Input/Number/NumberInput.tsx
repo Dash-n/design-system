@@ -10,7 +10,9 @@ type Props = {
   min?: number;
   max?: number;
   size?: number;
+  style: any;
   setText?: () => void;
+  onChange?: (value: any) => void;
   updateValue?: (value: any) => void;
 };
 
@@ -23,8 +25,10 @@ export const NumberInput: Story<Props> = ({
   min,
   max,
   size,
+  style,
   setText,
   updateValue,
+  onChange,
 }) => {
   return (
     <div className={styles.inputBox}>
@@ -38,7 +42,8 @@ export const NumberInput: Story<Props> = ({
         min={min}
         max={max}
         size={size}
-        onChange={setText}
+        style={style}
+        onChange={onChange}
         onKeyUp={updateValue}
       />
       {label && (

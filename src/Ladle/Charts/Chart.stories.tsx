@@ -24,7 +24,11 @@ type Props = {
   title: string;
   customData: any[];
   dotRadius: number;
+  domainMin: number;
+  domainMax: number;
 };
+
+const exampleColors = ["#DDCC77", "#CC6677", "#88CCEE"];
 
 function filterKeysByType(dataArray, dataType) {
   return dataArray.map((obj) =>
@@ -42,6 +46,8 @@ export const BarCharts: Story<Props> = ({
   yLabel,
   customData,
   title,
+  domainMin,
+  domainMax,
 }) => {
   return (
     <div
@@ -60,20 +66,24 @@ export const BarCharts: Story<Props> = ({
         yLabel={yLabel}
         keys={keys}
         colors={colors}
+        legendPos={{ height: 50, align: "right", verticalAlign: "top" }}
         width={100}
         height={100}
         customData={customData}
-      ></BarChart>
+        domain={[domainMin, domainMax]}
+      />
     </div>
   );
 };
 BarCharts.args = {
   containerWidth: 100,
   containerHeight: 80,
+  domainMin: 0,
+  domainMax: 200,
   title: "Team Stats",
   xLabel: "#",
   yLabel: "#",
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -103,6 +113,8 @@ export const ComboCharts: Story<Props> = ({
   yLabel,
   customData,
   title,
+  domainMin,
+  domainMax,
 }) => {
   return (
     <div
@@ -125,7 +137,8 @@ export const ComboCharts: Story<Props> = ({
         width={100}
         height={100}
         customData={customData}
-      ></ComboChart>
+        domain={[domainMin, domainMax]}
+      />
     </div>
   );
 };
@@ -135,7 +148,9 @@ ComboCharts.args = {
   title: "Team Stats",
   xLabel: "#",
   yLabel: "#",
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  domainMin: 0,
+  domainMax: 100,
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -168,6 +183,8 @@ export const HorizontalBarCharts: Story<Props> = ({
   xAxisKey,
   xLabel,
   yLabel,
+  domainMin,
+  domainMax,
   customData,
   title,
 }) => {
@@ -190,8 +207,9 @@ export const HorizontalBarCharts: Story<Props> = ({
         colors={colors}
         width={containerWidth}
         height={containerHeight}
+        domain={[domainMin, domainMax]}
         customData={customData}
-      ></HBarChart>
+      />
     </div>
   );
 };
@@ -201,7 +219,9 @@ HorizontalBarCharts.args = {
   title: "Team Stats",
   xLabel: "#",
   yLabel: "#",
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  domainMin: 0,
+  domainMax: 200,
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -239,7 +259,7 @@ export const PieCharts: Story<Props> = ({
         dataKey="points_scored"
         width="100"
         height="100"
-      ></PieChart>
+      />
     </div>
   );
 };
@@ -257,6 +277,8 @@ export const StackedBarCharts: Story<Props> = ({
   xAxisKey,
   xLabel,
   yLabel,
+  domainMin,
+  domainMax,
   customData,
   title,
 }) => {
@@ -279,8 +301,9 @@ export const StackedBarCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
+        domain={[domainMin, domainMax]}
         customData={customData}
-      ></StackedBarChart>
+      />
     </div>
   );
 };
@@ -290,7 +313,9 @@ StackedBarCharts.args = {
   title: "Team Stats",
   xLabel: "Players",
   yLabel: "#",
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
+  domainMin: 0,
+  domainMax: 100,
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -318,6 +343,8 @@ export const LineCharts: Story<Props> = ({
   xAxisKey,
   xLabel,
   yLabel,
+  domainMin,
+  domainMax,
   customData,
   title,
   dotRadius,
@@ -341,8 +368,9 @@ export const LineCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
+        domain={[domainMin, domainMax]}
         customData={customData}
-      ></LineChart>
+      />
     </div>
   );
 };
@@ -353,8 +381,9 @@ LineCharts.args = {
   dotRadius: 8,
   xLabel: "#",
   yLabel: "#",
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
-
+  domainMin: 0,
+  domainMax: 100,
+  colors: exampleColors,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -382,6 +411,8 @@ export const ScatterCharts: Story<Props> = ({
   xAxisKey,
   xLabel,
   yLabel,
+  domainMin,
+  domainMax,
   customData,
   title,
   dotRadius,
@@ -405,8 +436,9 @@ export const ScatterCharts: Story<Props> = ({
         colors={colors}
         width={100}
         height={100}
+        domain={[domainMin, domainMax]}
         customData={customData}
-      ></ScatterChart>
+      />
     </div>
   );
 };
@@ -417,8 +449,9 @@ ScatterCharts.args = {
   dotRadius: 8,
   xLabel: "#",
   yLabel: "#",
-  colors: ["#DDCC77", "#CC6677", "#88CCEE"],
-
+  colors: exampleColors,
+  domainMin: 0,
+  domainMax: 100,
   customData: {
     points_scored: { label: "Points Scored", color: "green" },
     assists: { label: "Points Scored", color: "blue" },
@@ -471,7 +504,7 @@ export const RadarCharts: Story<RadarProps> = ({
         data={exercisedata}
         valueKey={valueKey}
         axisKey={axisKey}
-      ></RadarChart>
+      />
     </div>
   );
 };

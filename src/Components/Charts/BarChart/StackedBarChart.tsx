@@ -29,7 +29,12 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
+  domain?: [string | number, string | number];
+  activeStroke: string;
 };
+
+const style = getComputedStyle(document.body);
 
 export const StackedBarChart: Story<Props> = ({
   id,
@@ -42,6 +47,9 @@ export const StackedBarChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
+  domain,
+  activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -63,16 +71,22 @@ export const StackedBarChart: Story<Props> = ({
 
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
+            domain={domain}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 50}
+            formatter={titleLegend}
+          />
           {keys?.map((point, index) => {
             return (
               <Bar
                 dataKey={point}
                 stackId="a"
                 fill={customData[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" />}
+                activeBar={<Rectangle stroke={activeStroke} />}
               />
             );
           })}

@@ -3,6 +3,7 @@ import { Button } from "../../Components/Button/Button/Button.tsx";
 import { OutlineButton } from "../../Components/Button/OutlineButton/OutlineButton.tsx";
 import { IconButton } from "../../Components/Button/IconButton/IconButton.tsx";
 import { MdEdit, MdSettings, MdDelete } from "react-icons/md";
+import styles from "./Button.stories.module.css";
 
 type Props = {
   label?: string;
@@ -10,13 +11,24 @@ type Props = {
   variant?: string;
 };
 
+const onClick = () => {
+  console.log("Pressed");
+};
+
 export const Buttons: Story<Props> = ({ label, variant, disabled }) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <Button variant={variant} label={label} disabled={disabled} />
-    <Button variant="primary" label="primary" />
-    <Button variant="warning" label="warning button" />
-    <Button variant="primary" label="primary" disabled />
-    <Button variant="warning" label="warning" disabled />
+    <Button
+      variant={variant}
+      label={label}
+      disabled={disabled}
+      onClick={onClick}
+    />
+    <Button variant="primary" label="primary" onClick={onClick} />
+    <Button variant="warning" label="warning button" onClick={onClick} />
+    <Button variant="warning" label="warning button" onClick={onClick} />
+    <Button variant="primary" label="primary" disabled onClick={onClick} />
+    <Button variant="warning" label="warning" disabled onClick={onClick} />
+    <Button label="Custom Class" customClass={styles.customClass} />
   </div>
 );
 Buttons.args = {
@@ -33,12 +45,29 @@ Buttons.argTypes = {
 
 export const OutlineButtons: Story<Props> = ({ label, variant, disabled }) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <span className="material-icons"></span>
-    <OutlineButton variant={variant} label={label} disabled={disabled} />
-    <OutlineButton variant="primary" label="primary" />
-    <OutlineButton variant="warning" label="warning button" />
-    <OutlineButton variant="primary" label="primary" disabled />
-    <OutlineButton variant="warning" label="warning" disabled />
+    <span className="material-icons" />
+    <OutlineButton
+      variant={variant}
+      label={label}
+      disabled={disabled}
+      onClick={onClick}
+    />
+    <OutlineButton variant="primary" label="primary" onClick={onClick} />
+    <OutlineButton variant="warning" label="warning button" onClick={onClick} />
+    <OutlineButton variant="warning" label="warning button" onClick={onClick} />
+    <OutlineButton
+      variant="primary"
+      label="primary"
+      disabled
+      onClick={onClick}
+    />
+    <OutlineButton
+      variant="warning"
+      label="warning"
+      disabled
+      onClick={onClick}
+    />
+    <OutlineButton label="Custom Class" customClass={styles.customClass} />
   </div>
 );
 OutlineButtons.args = {
@@ -54,8 +83,18 @@ OutlineButtons.argTypes = {
 };
 export const IconButtons: Story<Props> = ({}) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <IconButton variant="edit" iconSize="24px" label={<MdEdit />} />
-    <IconButton variant="settings" label={<MdSettings />} />
-    <IconButton variant="delete" label={<MdDelete />} />
+    <IconButton
+      variant="edit"
+      iconSize="24px"
+      icon={<MdEdit />}
+      onClick={onClick}
+    />
+    <IconButton variant="settings" icon={<MdSettings />} onClick={onClick} />
+    <IconButton variant="delete" icon={<MdDelete />} onClick={onClick} />
+    <IconButton
+      customClass={styles.customClass}
+      icon={<MdDelete />}
+      onClick={onClick}
+    />
   </div>
 );
