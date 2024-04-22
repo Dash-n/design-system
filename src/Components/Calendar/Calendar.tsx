@@ -39,11 +39,6 @@ export const Calendar: Story<Props> = ({
 
   const [show, setShow] = useState(null);
 
-  const togglePopup = (id) => {
-    setShow(id);
-    console.log(show);
-  };
-
   const onPrevClick = useCallback(() => {
     if (view === Views.DAY) {
       setDate(moment(date).subtract(1, "d").toDate());
@@ -70,30 +65,47 @@ export const Calendar: Story<Props> = ({
     if (value === "Day") setView(Views.DAY);
   };
 
+  const togglePopup = (id) => {
+    setShow(id);
+    console.log(show);
+  };
+
   const eventClick = (event: any) => {
-    setSelected(event);
+    // setSelected(event);
     setEventPopup(event);
     togglePopup(event.id);
   };
-  const popupClick = (event: any) => {
-    console.log(event);
-  };
-  const handleSelectSlot = useCallback(
-    ({ start, end }) => {
-      console.log(show);
-      if (show === null) {
-        // console.log(start);
-        // console.log(end);
-        const title = window.prompt(
-          "New Event name" + start.toString() + end.toString()
-        );
-        if (title) {
-          setEvents((prev) => [...prev, { start, end, title }]);
-        }
+
+  const handleSelectSlot = (event: any) => {
+    console.log(show); //Prints null even if Popup is open
+    if (show === null) {
+      const title = window.prompt(
+        "New Event name" + event.start.toString() + event.end.toString()
+      );
+      if (title) {
+        setEvents((prev) => [
+          ...prev,
+          { start: event.start, end: event.end, title },
+        ]);
       }
-    },
-    [setEvents]
-  );
+    }
+    // },
+    // [setEvents]
+  };
+  // const handleSelectSlot = useCallback(
+  //   ({ start, end }) => {
+  //     console.log(show); //Prints null even if Popup is open
+  //     if (show === null) {
+  //       const title = window.prompt(
+  //         "New Event name" + start.toString() + end.toString()
+  //       );
+  //       if (title) {
+  //         setEvents((prev) => [...prev, { start, end, title }]);
+  //       }
+  //     }
+  //   },
+  //   [setEvents]
+  // );
 
   const currentMonth = date.toLocaleString("default", { month: "long" });
 
@@ -111,7 +123,7 @@ export const Calendar: Story<Props> = ({
       return (
         <div
           className={`${styles.eventLabel} ${past && styles.pastEvent}`}
-          onClick={togglePopup}
+          // onClick={togglePopup}
         >
           <div className={styles.timeLabel}>{timeString}</div>
           <div className={styles.titleLabel}>{title}</div>
@@ -187,11 +199,6 @@ export const Calendar: Story<Props> = ({
           setContextMenuInfo(undefined);
         }}
       ></div>
-      {/* <EventPopup
-        event={eventPopup}
-        show={show === selected.id}
-        closePopup={() => togglePopup(null)}
-      /> */}
       <BigCalendar
         localizer={localizer}
         events={myEvents}

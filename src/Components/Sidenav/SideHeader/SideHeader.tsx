@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./SideHeader.module.css";
-import { toTitlecase } from "../..";
+import { toTitlecase } from "../../../Utils/toTitleCase";
 
 type Props = {
   label: string;

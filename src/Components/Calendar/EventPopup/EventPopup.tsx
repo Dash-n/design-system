@@ -54,17 +54,14 @@ export const EventPopup: Story<Props> = ({
             <div className={styles.fieldSection}>
               <strong>Event: </strong>
               <TextInput id="event" name="event" placeholder={event?.title} />
-              {/* {event?.title} */}
             </div>
             <div className={styles.fieldSection}>
               <strong>Time Start: </strong>
               <TextInput id="start" name="start" placeholder={start} />
-              {/* {start} */}
             </div>
             <div className={styles.fieldSection}>
               <strong>Time End: </strong>
               <TextInput id="end" name="end" placeholder={end} />
-              {/* {end} */}
             </div>
           </form>
         </div>
@@ -76,7 +73,6 @@ export const EventPopup: Story<Props> = ({
           <Button label="Reschedule" />
         </div>
 
-        {/* Close Button */}
         <div className={styles.deleteEnd}>
           <button className={styles.closeButton} onClick={closePopup}>
             <IconContext.Provider value={{ size: "20px" }}>
