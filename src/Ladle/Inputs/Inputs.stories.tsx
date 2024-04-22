@@ -60,7 +60,7 @@ export const NumberInputs: Story<Props> = ({}) => {
         min={0}
         max={10}
         updateValue={handleChange}
-      ></NumberInput>
+      />
       <NumberInput
         id="name"
         name="name"
@@ -68,7 +68,7 @@ export const NumberInputs: Story<Props> = ({}) => {
         max={10}
         label="Reps"
         updateValue={handleChange}
-      ></NumberInput>
+      />
       {value}
     </div>
   );
@@ -86,7 +86,7 @@ export const Checkboxes: Story<Props> = ({ label }) => {
         name="test"
         checked={zeroChecked}
         setChecked={setZeroChecked}
-      ></Checkbox>
+      />
       <Checkbox
         id="1"
         value="1"
@@ -94,7 +94,7 @@ export const Checkboxes: Story<Props> = ({ label }) => {
         label={`One Selected: ${oneChecked}`}
         checked={oneChecked}
         setChecked={setOneChecked}
-      ></Checkbox>
+      />
       <Checkbox
         id="2"
         value="2"
@@ -102,10 +102,10 @@ export const Checkboxes: Story<Props> = ({ label }) => {
         label={`Two Selected: ${twoChecked}`}
         checked={twoChecked}
         setChecked={setTwoChecked}
-      ></Checkbox>
+      />
       <div>
         Checked: {zeroChecked && "0"} {oneChecked && "1"} {twoChecked && "2"}
-        <Checkbox id="user" value="none" name="user" label={label}></Checkbox>
+        <Checkbox id="user" value="none" name="user" label={label} />
       </div>
     </div>
   );
@@ -129,19 +129,19 @@ export const Radios: Story<Props> = ({}) => {
         label={`One Selected: ${value === "1"}`}
         checked
         setChecked={handleChange}
-      ></Radio>
+      />
       <Radio
         value="2"
         name="test"
         label={`Two Selected: ${value === "2"}`}
         setChecked={handleChange}
-      ></Radio>
+      />
       <Radio
         value="3"
         name="test"
         label={`Three Selected: ${value === "3"}`}
         setChecked={handleChange}
-      ></Radio>
+      />
       <div>Value: {`${value}`}</div>
     </div>
   );
@@ -169,7 +169,7 @@ export const Selects: Story<Props> = ({ options }) => {
         label="Superbowl"
         options={options}
         setAnswer={handleChange}
-      ></Select>
+      />
       <div style={{ width: "60px" }}>
         <Select
           id="name"
@@ -177,14 +177,9 @@ export const Selects: Story<Props> = ({ options }) => {
           label="Superbowl"
           options={options}
           setAnswer={handleChange}
-        ></Select>
+        />
       </div>
-      <Select
-        id="name"
-        name="two"
-        options={options}
-        setAnswer={handleChange}
-      ></Select>
+      <Select id="name" name="two" options={options} setAnswer={handleChange} />
       {value}
     </div>
   );

@@ -32,6 +32,6 @@ const exampleContent = [
 
 export const Toasts: Story<Props> = ({ content, variant, disabled }) => (
   <div style={{ display: "flex", gap: "8px" }}>
-    <Toast variant={variant} content={exampleContent}></Toast>
+    <Toast variant={variant} content={exampleContent} />
   </div>
 );

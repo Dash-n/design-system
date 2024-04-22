@@ -1,0 +1,30 @@
+:root {
+  --main-bg-color: #4f84f7;
+  --main-hover-color: #426fcf;
+  --main-active-color: #365aa8;
+  --main-disabled-color: #e9f1fd;
+
+  --outline-hover-color: #ceddfd;
+  --outline-active-color: #87abfa;
+
+  --warning-outline-bg-color: #ff2929;
+  --warning-outline-hover-color: #ffa1a1;
+  --warning-outline-active-color: #ff7a7a;
+
+  --warning-bg-color: #ff2929;
+  --warning-hover-color: #d60000;
+  --warning-active-color: #ad0000;
+  --warning-disabled-color: #ffd1d9;
+
+  --text-color: #606060;
+  --hard-background-color: #f4f4f4;
+  --soft-background-color: #c4c4c4;
+
+  --border-radius-lg: 16px;
+  --border-radius-md: 8px;
+  --border-radius-sm: 4px;
+
+  font-size: 32;
+  color: var(--text-color);
+  font-family: "Geist";
+}

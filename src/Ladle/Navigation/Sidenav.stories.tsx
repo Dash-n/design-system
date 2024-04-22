@@ -16,10 +16,12 @@ import {
   MdMedication,
   MdMedicalServices,
 } from "react-icons/md";
+
 type selectOption = {
   option: string;
-  value: string;
+  value?: string;
 };
+
 type Props = {
   username: string;
   options: selectOption[];
@@ -64,7 +66,7 @@ export const Selects: Story<Props> = ({ options }) => {
         label="Superbowl"
         options={options}
         setAnswer={handleChange}
-      ></TeamSelect>
+      />
     </div>
   );
 };
@@ -77,7 +79,21 @@ Selects.args = {
   ],
 };
 
-export const Sidenavs: Story<Props> = ({}) => (
+const menuItems = [
+  { icon: <MdEdit />, label: "Inputs", link: "google.com" },
+  { icon: <MdList />, label: "Database", link: "google.com" },
+  { icon: <MdEditNote />, label: "Reports", link: "google.com" },
+  { icon: <MdBuild />, label: "Gym Program", link: "google.com" },
+];
+
+const dashboards = [
+  { icon: <MdGroups />, label: "Team", link: "google.com" },
+  { icon: <MdDirectionsRun />, label: "Individual", link: "google.com" },
+  { icon: <MdMedicalServices />, label: "Team Physio", link: "google.com" },
+  { icon: <MdMedication />, label: "Physio", link: "" },
+];
+
+export const Sidenavs: Story<Props> = ({ teams }) => (
   <div
     style={{
       width: "100%",
@@ -86,24 +102,22 @@ export const Sidenavs: Story<Props> = ({}) => (
       position: "relative",
     }}
   >
-    <Sidenav>
-      <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
-      <MenuButton icon={<MdList />} label="Database" link="google.com" />
-      <MenuButton icon={<MdEditNote />} label="Reports" link="google.com" />
-      <MenuButton icon={<MdBuild />} label="Gym Program" link="google.com" />
+    <Sidenav teams={teams}>
+      {menuItems.map((item) => (
+        <MenuButton icon={item.icon} label={item.label} link={item.link} />
+      ))}
       <SideHeader label="Dashboards" />
-      <MenuButton icon={<MdGroups />} label="Team" link="google.com" />
-      <MenuButton
-        icon={<MdDirectionsRun />}
-        label="Individual"
-        link="google.com"
-      />
-      <MenuButton
-        icon={<MdMedicalServices />}
-        label="Team Physio"
-        link="google.com"
-      />
-      <MenuButton icon={<MdMedication />} label="Physio" link="google.com" />
+      {dashboards.map((item) => (
+        <MenuButton icon={item.icon} label={item.label} link={item.link} />
+      ))}
     </Sidenav>
   </div>
 );
+Sidenavs.args = {
+  teams: [
+    { option: "PolyU - Men's Basketball", value: "mbbal" },
+    { option: "PolyU - Men's Handball", value: "mhbal" },
+    { option: "PolyU - Men's Rugby" },
+    { option: "PolyU - Men's Soccer" },
+  ],
+};

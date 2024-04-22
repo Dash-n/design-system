@@ -22,7 +22,7 @@ export const Toast: Story<Props> = ({ content }) => {
             </div>
             <span className={`${content[index].unread ? styles.dot : ""}`} />
           </div>
-          <span className={styles.lineSpan}></span>
+          <span className={styles.lineSpan} />
         </div>
       ))}
     </div>

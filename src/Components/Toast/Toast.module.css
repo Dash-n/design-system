@@ -8,9 +8,8 @@
   border-radius: 8px;
   padding: 8px 16px;
   font-size: large;
-  font-family: "Geist";
 
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--soft-background-color);
 }
 
 .notifContainer {
@@ -36,7 +35,7 @@
 .lineSpan {
   display: block;
   width: 100%;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid var(--soft-background-color);
 }
 
 .dot {

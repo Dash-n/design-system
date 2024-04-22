@@ -18,25 +18,25 @@ export const Toggles: Story<Props> = ({}) => {
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      <Toggle name="two" values={["1", "2"]} setChecked={handleChange}></Toggle>
+      <Toggle name="two" values={["1", "2"]} setChecked={handleChange} />
       <Toggle
         name="two"
         values={["list", "grid"]}
         labels={view}
         setChecked={handleChange}
-      ></Toggle>
+      />
       <Toggle
         name="three"
         values={["Day", "Month", "Year"]}
         setChecked={handleChange}
-      ></Toggle>
+      />
       <Toggle
         name="mmonth"
         values={["one", "two", "three", "four", "five"]}
         labels={["January", "February", "March", "April", <MdGridView />]}
         setChecked={handleChange}
         iconSize={"24px"}
-      ></Toggle>
+      />
       {value}
     </div>
   );
@@ -57,7 +57,7 @@ export const PageToggles: Story<Props> = ({}) => {
         name="two"
         values={["Page 1", "Page 2"]}
         setChecked={handleChange}
-      ></PageToggle>
+      />
 
       {value}
     </div>

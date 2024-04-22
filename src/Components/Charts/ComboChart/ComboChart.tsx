@@ -30,8 +30,12 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title?: string;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
   customData: any;
+  activeStroke: string;
 };
+
+const style = getComputedStyle(document.body);
 
 export const ComboChart: Story<Props> = ({
   id,
@@ -45,6 +49,8 @@ export const ComboChart: Story<Props> = ({
   title,
   xLabel,
   yLabel,
+  legendPos,
+  activeStroke = style.getPropertyValue("--main-bg-color"),
 }) => {
   return (
     <div id={id} style={{ width: "100%", height: "100%" }}>
@@ -68,13 +74,18 @@ export const ComboChart: Story<Props> = ({
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 50}
+            formatter={titleLegend}
+          />
           {barKeys?.map((point, index) => {
             return (
               <Bar
                 dataKey={point}
                 fill={customData[point].color ?? COLORS[index % COLORS.length]}
-                activeBar={<Rectangle stroke="#4F84F7" />}
+                activeBar={<Rectangle stroke={activeStroke} />}
                 maxBarSize={20}
               />
             );

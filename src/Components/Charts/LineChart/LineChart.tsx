@@ -30,6 +30,8 @@ type Props = {
   customData: any;
   dotRadius: number;
   strokeWidth: number;
+  legendPos?: { verticalAlign?: string; align?: string; height?: number };
+  domain?: [string | number, string | number];
 };
 
 export const LineChart: Story<Props> = ({
@@ -44,6 +46,8 @@ export const LineChart: Story<Props> = ({
   xLabel,
   yLabel,
   dotRadius,
+  domain,
+  legendPos,
   strokeWidth = 1,
 }) => {
   return (
@@ -66,11 +70,16 @@ export const LineChart: Story<Props> = ({
 
           <YAxis
             label={{ value: yLabel, angle: -90, position: "insideLeft" }}
+            domain={domain}
           />
           <Tooltip content={CustomTooltip} />
-          <Legend verticalAlign="top" align="right" formatter={titleLegend} />
+          <Legend
+            verticalAlign={legendPos?.verticalAlign ?? "top"}
+            align={legendPos?.align ?? "right"}
+            height={legendPos?.height ?? 32}
+            formatter={titleLegend}
+          />
           {keys?.map((point, index) => {
-            console.log(dotRadius);
             return (
               <Line
                 dataKey={point}

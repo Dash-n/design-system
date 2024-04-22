@@ -1,14 +1,13 @@
+@import "../../../vars.css";
+
 .select {
   height: 40px;
   width: 100%;
   border-radius: 8px;
   border-radius: 4px;
   box-sizing: border-box;
-  border: 1px #c4c4c4 solid;
+  border: 1px solid var(--soft-background-color);
 
-  color: #606060;
-  font-size: 14px;
-  font-family: "Geist";
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -17,7 +16,7 @@
 }
 
 .select:focus {
-  box-shadow: 0 0 2px 3px #4f84f7;
+  box-shadow: 0 0 2px 3px var(--main-bg-color);
   outline: none;
 
   transition: box-shadow 0.3s ease-out;
@@ -25,7 +24,7 @@
 
 .label {
   position: absolute;
-  left: 12px;
+  left: 2px;
   padding: 12px 8px 0px 8px;
 
   background: none;
@@ -41,7 +40,7 @@
 .select:not(:placeholder-shown) + .label,
 .select:focus + .label {
   position: absolute;
-  left: 12px;
+  left: 2px;
   padding: 4px 4px;
   background: white;
   height: 12px;
@@ -65,9 +64,9 @@
 }
 
 .select:focus::placeholder {
-  color: #c4c4c4;
+  color: var(--soft-background-color);
 }
 
 .select:disabled + .label {
-  color: #c4c4c4;
+  color: var(--soft-background-color);
 }

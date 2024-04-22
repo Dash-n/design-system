@@ -1,3 +1,5 @@
+@import "../../vars.css";
+
 .cardContainer {
   display: flex;
   flex-direction: column;
@@ -13,7 +15,7 @@
   font-size: large;
   font-family: "Geist";
 
-  border: 1px solid #c4c4c4;
+  border: 1px solid var(--soft-background-color);
 }
 
 .notifContainer {
@@ -34,5 +36,5 @@
 span {
   display: block;
   width: 100%;
-  border-top: 1px solid #ccc;
+  border-top: 1px solid var(--soft-background-color);
 }

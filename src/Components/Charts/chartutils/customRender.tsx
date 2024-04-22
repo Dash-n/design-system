@@ -1,4 +1,5 @@
 import { toTitlecase } from "../../../Utils/toTitleCase";
+import styles from "./chartStyles.module.css";
 
 export const COLORS = [
   "#88CCEE",

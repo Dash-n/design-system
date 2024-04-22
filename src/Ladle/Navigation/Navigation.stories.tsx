@@ -2,6 +2,16 @@ import type { Story } from "@ladle/react";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { CardButton } from "../../Components/Navigation/CardButton/CardButton.tsx";
 import { FolderButton } from "../../Components/Navigation/FolderButton/FolderButton.tsx";
+import {
+  MdEdit,
+  MdList,
+  MdEditNote,
+  MdBuild,
+  MdGroups,
+  MdDirectionsRun,
+  MdMedicalServices,
+  MdMedication,
+} from "react-icons/md";
 
 type Props = {
   label?: string;
@@ -17,6 +27,17 @@ const storyDiv = {
   flexDirection: "row",
 };
 
+const menuItems = [
+  { icon: <MdEdit />, label: "Inputs", link: "google.com" },
+  { icon: <MdList />, label: "Database", link: "google.com" },
+  { icon: <MdEditNote />, label: "Reports", link: "google.com" },
+  { icon: <MdBuild />, label: "Gym Program", link: "google.com" },
+  { icon: <MdGroups />, label: "Team", link: "google.com" },
+  { icon: <MdDirectionsRun />, label: "Individual", link: "google.com" },
+  { icon: <MdMedicalServices />, label: "Team Physio", link: "google.com" },
+  { icon: <MdMedication />, label: "Physio", link: "" },
+];
+
 export const MenuButtons: Story<Props> = ({}) => (
   <div
     style={{
@@ -26,7 +47,10 @@ export const MenuButtons: Story<Props> = ({}) => (
       flexDirection: "column",
     }}
   >
-    <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
+    {menuItems.map((item) => (
+      <MenuButton icon={item.icon} label={item.label} link={item.link} />
+    ))}
+    {/* <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
     <MenuButton icon={<MdList />} label="Database" link="google.com" />
     <MenuButton icon={<MdEditNote />} label="Reports" link="google.com" />
     <MenuButton icon={<MdBuild />} label="Gym Program" link="google.com" />
@@ -46,7 +70,7 @@ export const MenuButtons: Story<Props> = ({}) => (
       label="Physio"
       link="?story=button--outline-buttons"
       disabled={true}
-    />
+    /> */}
   </div>
 );
 export const CardButtons: Story<Props> = ({}) => {

@@ -5,16 +5,25 @@ import { toTitlecase } from "../../../Utils/toTitleCase.ts";
 type Props = {
   label: string;
   disabled?: boolean;
-  variant: string;
+  variant?: string;
+  onClick: () => void;
+  customClass?: string;
 };
 
-export const OutlineButton: Story<Props> = ({ label, variant, disabled }) => {
+export const OutlineButton: Story<Props> = ({
+  label,
+  variant = "primary",
+  disabled,
+  onClick,
+  customClass,
+}) => {
   return (
     <button
-      className={`${styles[variant]} ${styles.button}`}
+      className={`${styles[variant]} ${styles.button} ${customClass}`}
       disabled={disabled}
+      onClick={onClick}
     >
-      {label}
+      {toTitlecase(label)}
     </button>
   );
 };

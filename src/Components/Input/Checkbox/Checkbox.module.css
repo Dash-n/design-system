@@ -1,17 +1,14 @@
+@import "../../../vars.css";
+
 .container {
   display: flex;
   align-items: center;
+  justify-items: center;
   position: relative;
-  padding-left: 32px;
+  padding-left: 24px;
   margin-bottom: 12px;
   height: 24px;
-  align-items: center;
   cursor: pointer;
-
-  font-size: 16px;
-  font-family: "Geist";
-  font-weight: 400;
-  color: #606060;
 }
 
 .container input {
@@ -25,34 +22,31 @@
 .checkmark {
   position: absolute;
   box-sizing: border-box;
-  top: 0;
+  top: 4px;
   left: 0;
-  height: 24px;
-  width: 24px;
+  height: 16px;
+  width: 16px;
   border-radius: 4px;
-  border: 2px #606060 solid;
+  border: 1px solid var(--text-color);
   background-color: white;
 }
 
 .container:hover input:not(:disabled) ~ .checkmark {
-  background-color: #ceddfd;
+  background-color: var(--outline-hover-color);
 }
 
 .container input:checked ~ .checkmark {
-  background-color: #4f84f7;
-  border: 2px #4f84f7 solid;
+  background-color: var(--main-bg-color);
+  border: 1px solid var(--main-bg-color);
 }
 
 .container:hover input:checked ~ .checkmark {
-  background-color: #426fcf;
+  background-color: var(--main-hover-color);
 }
 
 .container input:focus-visible ~ .checkmark {
-  box-shadow: 0 0 2px 3px #4f84f7;
-  /*box-shadow instead of outline to get rounded edges.
-  compatibility issues?*/
-
-  border: 2px #606060 solid;
+  box-shadow: 0 0 2px 3px var(--main-bg-color);
+  border: 1px solid var(--text-color);
 }
 
 .checkmark:after {
@@ -64,22 +58,22 @@
   display: block;
 }
 .container .checkmark:after {
-  left: 5px;
+  left: 4px;
   top: 2px;
-  width: 5px;
-  height: 10px;
+  width: 3px;
+  height: 6px;
   border: solid white;
-  border-width: 0 4px 4px 0;
+  border-width: 0 2px 2px 0;
   -webkit-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
 
 .container input:disabled ~ .inputLabel {
-  color: #c4c4c4;
+  color: var(--soft-background-color);
 }
 
 .container input:disabled ~ .checkmark {
-  background-color: #efefef;
-  border: 2px #c4c4c4 solid;
+  background-color: var(--hard-background-color);
+  border: 1px solid var(--soft-background-color);
 }

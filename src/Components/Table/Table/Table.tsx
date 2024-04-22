@@ -2,43 +2,36 @@ import type { Story } from "@ladle/react";
 import styles from "./Table.module.css";
 import { IconContext } from "react-icons";
 import { toTitlecase } from "../../../Utils/toTitleCase";
+import { useState } from "react";
+
+const root = document.documentElement;
+const ALT_COLOR = getComputedStyle(root).getPropertyValue(
+  "--hard-background-color"
+);
+const HIGHLIGHT_COLOR = getComputedStyle(root).getPropertyValue(
+  "--outline-hover-color"
+);
 
 type Props = {
   content: string[];
   sort?: { key: null; direction: string };
+  alternate?: boolean;
   handleSort?: (key: string) => void;
-  customHeaderStyles?: string[];
+  customHeaderStyles?: any;
+  customClasses?: any;
+  sticky?: string[];
 };
 
 export const Table: Story<Props> = ({
   content,
   sort,
+  alternate = false,
   handleSort,
   customHeaderStyles,
+  customClasses = {},
+  sticky = [],
 }) => {
   const headers = content.length === 0 ? null : Object.keys(content[0]);
-
-  const checkColumn = (header: string, index: number) => {
-    if (headers === null) {
-      return false;
-    } else return headers[index] === header;
-  };
-
-  const customStyles = {
-    id: { color: "red" },
-    first_name: {
-      maxWidth: "200px",
-      wordWrap: "break-word",
-      left: "0",
-    },
-    ip_address: { width: "100px", maxWidth: "100px", wordWrap: "break-word" },
-  };
-  const customClasses = {
-    email: styles.truncate,
-  };
-  const sticky = ["first_name", true && "ip_address", "gender"].filter(Boolean);
-
-  const customHeaderStyle = checkColumn() ? { color: "red" } : null;
 
   const renderTableHeaders = () => {
     if (content.length === 0) {
@@ -58,7 +51,7 @@ export const Table: Story<Props> = ({
                     key={header}
                     onClick={() => handleSort(header)}
                     tabIndex={0}
-                    style={customStyles[header]}
+                    style={customHeaderStyles[header]}
                   >
                     {toTitlecase(header)}
                     {sort.key === header &&
@@ -75,7 +68,7 @@ export const Table: Story<Props> = ({
                   key={header}
                   onClick={() => handleSort(header)}
                   tabIndex={0}
-                  style={customStyles[header]}
+                  style={customHeaderStyles[header]}
                 >
                   {toTitlecase(header)}
                   {sort.key === header &&
@@ -100,36 +93,44 @@ export const Table: Story<Props> = ({
     );
   };
 
-  const renderTableRows = () => {
+  const HighlightableTableRow = ({ item }) => {
     return (
-      <tbody>
-        {content.map((item, index) => (
-          <tr key={index} className={styles.bodyRow}>
-            <td className={`${styles.stickyGroup}`}>
-              {Object.values(item).map((value, subIndex) =>
-                sticky.includes(headers[subIndex]) ? (
-                  <td
-                    className={`${styles.bodyCell} ${customClasses[headers[subIndex]]} ${styles.stickyCell}`}
-                    key={subIndex}
-                    style={customStyles[headers[subIndex]]}
-                  >
-                    {checkValue(value)}
-                  </td>
-                ) : null
-              )}
-            </td>
-            {Object.values(item).map((value, subIndex) =>
-              sticky.includes(headers[subIndex]) ? null : (
+      <tr>
+        <td className={`${styles.stickyGroup}`}>
+          {Object.values(item).map(
+            (value, subIndex) =>
+              sticky.includes(headers[subIndex]) && (
                 <td
-                  className={`${styles.bodyCell} ${customClasses[headers[subIndex]]}`}
+                  className={`${styles.bodyCell} ${customClasses[headers[subIndex]]} ${styles.stickyCell}`}
                   key={subIndex}
-                  style={customStyles[headers[subIndex]]}
+                  style={customHeaderStyles[headers[subIndex]]}
                 >
                   {checkValue(value)}
                 </td>
               )
-            )}
-          </tr>
+          )}
+        </td>
+        {Object.values(item).map(
+          (value, subIndex) =>
+            !sticky.includes(headers[subIndex]) && (
+              <td
+                className={`${styles.bodyCell} ${customClasses[headers[subIndex]]}`}
+                key={subIndex}
+                style={customHeaderStyles[headers[subIndex]]}
+              >
+                {checkValue(value)}
+              </td>
+            )
+        )}
+      </tr>
+    );
+  };
+
+  const renderTableRows = () => {
+    return (
+      <tbody>
+        {content.map((item, index) => (
+          <HighlightableTableRow key={index} item={item} index={index} />
         ))}
       </tbody>
     );

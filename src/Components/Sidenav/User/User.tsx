@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./User.module.css";
-import { toTitlecase } from "../../index.ts";
+import { toTitlecase } from "../../../Utils/toTitleCase";
 import { MdLogout, MdSettings } from "react-icons/md";
 
 type Props = {

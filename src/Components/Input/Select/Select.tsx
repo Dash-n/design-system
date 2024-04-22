@@ -11,6 +11,7 @@ type Props = {
   label?: string;
   disabled?: boolean;
   options: selectOption[];
+  style?: any;
   setAnswer: (e) => void;
 };
 
@@ -20,6 +21,7 @@ export const Select: Story<Props> = ({
   label,
   disabled,
   options = [],
+  style,
   setAnswer,
 }) => (
   <div className={styles.selectBox}>
@@ -28,6 +30,7 @@ export const Select: Story<Props> = ({
       id={id}
       name={name}
       disabled={disabled}
+      style={style}
       onChange={setAnswer}
     >
       {options.map((option) => (
