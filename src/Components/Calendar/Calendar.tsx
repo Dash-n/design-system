@@ -7,7 +7,6 @@ import moment from "moment";
 import { cloneElement, useCallback, useState } from "react";
 import { Toggle } from "../Toggle/ToggleSwitch/Toggle";
 import { OutlineButton } from "../Button/OutlineButton/OutlineButton";
-import { Modal } from "../Modal/Modal";
 import { EventPopup } from "./EventPopup/EventPopup";
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
@@ -15,30 +14,19 @@ const localizer = momentLocalizer(moment); // or globalizeLocalizer
 type Keys = keyof typeof Views;
 
 type Props = {
-  events: any;
-  backgroundEvents: any;
-  // handleClick: (e) => void;
+  events: { id: number; title: string; start: Date; end: Date };
+  backgroundEvents: { id: number; title: string; start: Date; end: Date };
 };
 
-export const Calendar: Story<Props> = ({
-  events,
-  backgroundEvents,
-  // handleClick,
-}: Props) => {
+export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [myEvents, setEvents] = useState(events);
   const [selected, setSelected] = useState();
   const [eventPopup, setEventPopup] = useState();
-  const [contextMenuInfo, setContextMenuInfo] = useState<{
-    xPosition: number;
-    yPosition: number;
-    selectedTime: string;
-    resourceId: number;
-  }>();
-
   const [show, setShow] = useState(null);
 
+  // Date Navigation ///
   const onPrevClick = useCallback(() => {
     if (view === Views.DAY) {
       setDate(moment(date).subtract(1, "d").toDate());
@@ -49,6 +37,10 @@ export const Calendar: Story<Props> = ({
     }
   }, [view, date]);
 
+  const onTodayClick = useCallback(() => {
+    setDate(moment().toDate());
+  }, []);
+
   const onNextClick = useCallback(() => {
     if (view === Views.DAY) {
       setDate(moment(date).add(1, "d").toDate());
@@ -58,8 +50,9 @@ export const Calendar: Story<Props> = ({
       setDate(moment(date).add(1, "M").toDate());
     }
   }, [view, date]);
+  /// Data Navigation end ///
 
-  const handleChange = (value: string) => {
+  const changeView = (value: string) => {
     if (value === "Month") setView(Views.MONTH);
     if (value === "Week") setView(Views.WEEK);
     if (value === "Day") setView(Views.DAY);
@@ -71,41 +64,27 @@ export const Calendar: Story<Props> = ({
   };
 
   const eventClick = (event: any) => {
-    // setSelected(event);
     setEventPopup(event);
     togglePopup(event.id);
   };
 
   const handleSelectSlot = (event: any) => {
-    console.log(show); //Prints null even if Popup is open
+    console.log(show); //Check: Prints null even if Popup is open
     if (show === null) {
       const title = window.prompt(
         "New Event name" + event.start.toString() + event.end.toString()
       );
-      if (title) {
-        setEvents((prev) => [
-          ...prev,
-          { start: event.start, end: event.end, title },
-        ]);
-      }
+      //Booking function goes here
+      // if (title) {
+      //   setEvents((prev) => [
+      //     ...prev,
+      //     { start: event.start, end: event.end, title },
+      //   ]);
+      // }
     }
     // },
     // [setEvents]
   };
-  // const handleSelectSlot = useCallback(
-  //   ({ start, end }) => {
-  //     console.log(show); //Prints null even if Popup is open
-  //     if (show === null) {
-  //       const title = window.prompt(
-  //         "New Event name" + start.toString() + end.toString()
-  //       );
-  //       if (title) {
-  //         setEvents((prev) => [...prev, { start, end, title }]);
-  //       }
-  //     }
-  //   },
-  //   [setEvents]
-  // );
 
   const currentMonth = date.toLocaleString("default", { month: "long" });
 
@@ -121,19 +100,17 @@ export const Calendar: Story<Props> = ({
       const timeString =
         date.getHours() + ":" + `${date.getMinutes()}`.padStart(2, "0");
       return (
-        <div
-          className={`${styles.eventLabel} ${past && styles.pastEvent}`}
-          // onClick={togglePopup}
-        >
+        <div className={`${styles.eventLabel} ${past && styles.pastEvent}`}>
           <div className={styles.timeLabel}>{timeString}</div>
           <div className={styles.titleLabel}>{title}</div>
         </div>
       );
     },
     timeSlotWrapper: (timeSlotWrapperProps) => {
-      // Show different styles at arbitrary time
+      // Can use this to set work hours
       const hasCustomInfo = timeSlotWrapperProps.value
-        ? timeSlotWrapperProps.value.getHours() === 4
+        ? timeSlotWrapperProps.value.getHours() >= 7 &&
+          timeSlotWrapperProps.value.getHours() < 19
         : false;
       const style = {
         display: "flex",
@@ -155,9 +132,6 @@ export const Calendar: Story<Props> = ({
       );
     },
   };
-  const onTodayClick = useCallback(() => {
-    setDate(moment().toDate());
-  }, []);
 
   return (
     <div className={styles.myCustomHeight}>
@@ -185,20 +159,10 @@ export const Calendar: Story<Props> = ({
         <Toggle
           name="viewSelect"
           values={["Month", "Week", "Day"]}
-          setChecked={handleChange}
+          setChecked={changeView}
         />
       </div>
-      <div
-        style={{
-          flex: "1",
-          width: "100%",
-          overflow: "auto",
-          position: "relative",
-        }}
-        onClick={() => {
-          setContextMenuInfo(undefined);
-        }}
-      ></div>
+
       <BigCalendar
         localizer={localizer}
         events={myEvents}
@@ -220,23 +184,6 @@ export const Calendar: Story<Props> = ({
         selectable
         popup
       />
-      {/* <Modal
-        modal={modal}
-        toggleModal={toggleModal}
-        children={<EventPopup event={eventPopup} />}
-      /> */}
-
-      {/* <EventPopup event={eventPopup} show={show} closePopup={togglePopup} /> */}
-      <div className={`${styles.isOpen && !!contextMenuInfo}`}>
-        <div
-          style={{
-            position: "fixed",
-            zIndex: 1000,
-            top: contextMenuInfo?.yPosition,
-            right: contextMenuInfo?.xPosition,
-          }}
-        ></div>
-      </div>
     </div>
   );
 };
