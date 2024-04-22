@@ -60,7 +60,6 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
 
   const togglePopup = (id) => {
     setShow(id);
-    console.log(show);
   };
 
   const eventClick = (event: any) => {
@@ -69,7 +68,6 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
   };
 
   const handleSelectSlot = (event: any) => {
-    console.log(show); //Check: Prints null even if Popup is open
     if (show === null) {
       const title = window.prompt(
         "New Event name" + event.start.toString() + event.end.toString()
@@ -107,7 +105,7 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
       );
     },
     timeSlotWrapper: (timeSlotWrapperProps) => {
-      // Can use this to set work hours
+      // Can use this to set work hours highlight
       const hasCustomInfo = timeSlotWrapperProps.value
         ? timeSlotWrapperProps.value.getHours() >= 7 &&
           timeSlotWrapperProps.value.getHours() < 19
@@ -149,8 +147,7 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
         <p className="rbc-toolbar-label">
           {view === "month"
             ? currentMonth
-            : // ? `${date.getMonth() + 1}-${date.getFullYear()}`
-              view === "week"
+            : view === "week"
               ? `${date.getMonth() + 1}-${date.getFullYear()}`
               : view === "day"
                 ? `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
