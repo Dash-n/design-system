@@ -5,6 +5,8 @@ import styles from "./EventPopup.module.css";
 import { Button } from "../../Button/Button/Button";
 import { OutlineButton } from "../../Button/OutlineButton/OutlineButton";
 import { TextInput } from "../../Input/Text/TextInput";
+import { Datepicker } from "../../Input/Date/Date";
+import { useState } from "react";
 
 type Props = {
   children?: React.ReactNode;
@@ -25,11 +27,30 @@ export const EventPopup: Story<Props> = ({
   show = false,
   closePopup,
 }: Props) => {
-  const start = new Date(event?.start).toLocaleString("en-GB", {
-    timeZone: "UTC",
-  });
-  const end = new Date(event?.end).toLocaleString("en-GB", { timeZone: "UTC" });
+  const [title, setTitle] = useState("");
+  const [start, setStart] = useState(
+    new Date(event?.start).toLocaleString("en-GB", {
+      timeZone: "UTC",
+    })
+  );
+  const [end, setEnd] = useState(
+    new Date(event?.end).toLocaleString("en-GB", {
+      timeZone: "UTC",
+    })
+  );
 
+  //   const start = new Date(event?.start).toLocaleString("en-GB", {
+  //     timeZone: "UTC",
+  //   });
+  //   const end = new Date(event?.end).toLocaleString("en-GB", { timeZone: "UTC" });
+
+  const book = (e) => {
+    e.preventDefault();
+    console.log(title);
+    const event = { title, start, end };
+
+    console.log(event);
+  };
   //   const bookNew = (event) =>
 
   //   const closePopup = () => {
@@ -50,18 +71,38 @@ export const EventPopup: Story<Props> = ({
           </div>
         </div>
         <div className={styles.eventInfo}>
-          <form>
+          <form onSubmit={book}>
+            <input name="query" />
+            <input type="submit" />
             <div className={styles.fieldSection}>
               <strong>Event: </strong>
-              <TextInput id="event" name="event" placeholder={event?.title} />
+              <TextInput
+                id="event"
+                name="event"
+                placeholder={event?.title}
+                inputValue={title}
+                setInputValue={setTitle}
+              />
             </div>
             <div className={styles.fieldSection}>
               <strong>Time Start: </strong>
-              <TextInput id="start" name="start" placeholder={start} />
+              <Datepicker
+                id="start"
+                name="start"
+                placeholder={start}
+                inputValue={start}
+                setInputValue={setStart}
+              />
             </div>
             <div className={styles.fieldSection}>
               <strong>Time End: </strong>
-              <TextInput id="end" name="end" placeholder={end} />
+              <Datepicker
+                id="end"
+                name="end"
+                placeholder={end}
+                inputValue={end}
+                setInputValue={setEnd}
+              />
             </div>
           </form>
         </div>
@@ -70,7 +111,8 @@ export const EventPopup: Story<Props> = ({
         </a>
         <div className={styles.buttonSection}>
           <OutlineButton variant="warning" label="Cancel" />
-          <Button label="Reschedule" />
+          <Button label="Schedule" onClick={book} />
+          <button>click</button>
         </div>
 
         <div className={styles.deleteEnd}>

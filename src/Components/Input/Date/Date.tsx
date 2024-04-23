@@ -13,11 +13,20 @@ type Props = {
   id: string;
   label?: string;
   name: string;
+  placeholder?: string;
+  inputValue: string;
+  setInputValue: (e) => void;
 };
 
-export const Datepicker: Story<Props> = ({ id, name, label }) => {
+export const Datepicker: Story<Props> = ({
+  id,
+  name,
+  label,
+  placeholder,
+  inputValue,
+  setInputValue,
+}) => {
   const [selected, setSelected] = useState<Date>();
-  const [inputValue, setInputValue] = useState<string>("");
   const [isOpen, setIsOpen] = useState(false);
 
   const { inputProps, dayPickerProps } = useInput({
@@ -28,6 +37,7 @@ export const Datepicker: Story<Props> = ({ id, name, label }) => {
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
+    // setInputValue(e);
     const date = parse(e.currentTarget.value, "y-MM-dd", new Date());
     if (isValid(date)) {
       setSelected(date);
@@ -54,11 +64,12 @@ export const Datepicker: Story<Props> = ({ id, name, label }) => {
 
   return (
     <>
-      <div className={styles.overlay} onClick={closePopup} />
+      {isOpen && <div className={styles.overlay} onClick={closePopup} />}
       <div className={styles.inputBox}>
         <input
           id={id}
           name={name}
+          placeholder={placeholder}
           className={styles.input}
           {...inputProps}
           value={inputValue}
