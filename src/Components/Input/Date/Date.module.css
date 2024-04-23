@@ -73,6 +73,23 @@
   color: var(--soft-background-color);
 }
 
-.rdp-button_reset {
-  color: red !important;
+.daypickerContainer {
+  position: absolute;
+  top: 45px;
+  background-color: white;
+  border: 1px solid var(--soft-background-color);
+  box-shadow: 0 0 2px 3px var(--main-bg-color);
+  border-radius: var(--border-radius-md);
+  width: min-content;
+  z-index: 10;
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
 }

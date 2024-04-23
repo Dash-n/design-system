@@ -5,7 +5,7 @@ import { Checkbox } from "../../Components/Input/Checkbox/Checkbox.tsx";
 import { Radio } from "../../Components/Input/Radio/Radio.tsx";
 import { Select } from "../../Components/Input/Select/Select.tsx";
 import { Slider } from "../../Components/Input/Slider/Slider.tsx";
-import { Date } from "../../Components/Input/Date/Date.tsx";
+import { Datepicker } from "../../Components/Input/Date/Date.tsx";
 import { useState } from "react";
 import { format } from "date-fns";
 
@@ -210,12 +210,19 @@ export const Sliders: Story<Props> = ({}) => {
   );
 };
 
-export const DatePicker: Story<Props> = ({}) => {
+export const DatePickers: Story<Props> = ({}) => {
   const [selected, setSelected] = useState<Date>();
 
   let footer = <p>Select Date</p>;
   if (selected) {
     footer = <p>{format(selected, "PP")}</p>;
   }
-  return <Date selected={selected} footer={footer} onSelect={setSelected} />;
+  return (
+    <Datepicker
+      label="date"
+      selected={selected}
+      footer={footer}
+      onSelect={setSelected}
+    />
+  );
 };
