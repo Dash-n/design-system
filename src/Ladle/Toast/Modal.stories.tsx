@@ -23,8 +23,7 @@ export const Modals: Story<Props> = ({}) => {
   };
   return (
     <div>
-      <button onClick={toggleModal}></button>
-      {/* <div style={{ display: "flex", gap: "8px" }}> */}
+      <button onClick={toggleModal}>Open Modal</button>
       <Modal
         modal={modal}
         toggleModal={toggleModal}
