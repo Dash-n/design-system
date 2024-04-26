@@ -212,6 +212,7 @@ export const Sliders: Story<Props> = ({}) => {
 
 export const DatePickers: Story<Props> = ({}) => {
   const [selected, setSelected] = useState<Date>();
+  const [date, setDate] = useState("2024-04-09");
 
   let footer = <p>Select Date</p>;
   if (selected) {
@@ -219,10 +220,11 @@ export const DatePickers: Story<Props> = ({}) => {
   }
   return (
     <Datepicker
-      label="date"
-      selected={selected}
-      footer={footer}
-      onSelect={setSelected}
+      id="date"
+      name="date"
+      label="Datetime"
+      inputValue={date}
+      setInputValue={setDate}
     />
   );
 };

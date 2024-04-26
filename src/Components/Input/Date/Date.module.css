@@ -8,6 +8,7 @@
   border: 1px solid var(--soft-background-color);
 
   color: var(--text-color);
+  font-family: Geist;
 
   transition: box-shadow 0.2s ease-out;
 
@@ -53,6 +54,8 @@
 }
 
 .inputBox {
+  display: flex;
+  gap: 4px;
   position: relative;
   width: 100%;
 }
@@ -74,7 +77,7 @@
 }
 
 .daypickerContainer {
-  position: absolute;
+  /* position: absolute; */
   top: 45px;
   background-color: white;
   border: 1px solid var(--soft-background-color);

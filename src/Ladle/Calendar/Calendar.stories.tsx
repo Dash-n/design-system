@@ -31,11 +31,19 @@ export const EventPopups: Story<Props> = ({}) => {
   const closePopup = () => {
     setShow(false);
   };
+  const onSubmit = () => {
+    console.log("Submit");
+  };
   return (
     <>
       <div className={styles.centerDiv} onClick={togglePopup}>
         Hello
-        <EventPopup event={sampleEvent} show={show} closePopup={closePopup} />
+        <EventPopup
+          event={sampleEvent}
+          show={show}
+          closePopup={closePopup}
+          submit={onSubmit}
+        />
       </div>
     </>
   );
