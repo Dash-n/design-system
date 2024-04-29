@@ -4,7 +4,7 @@ import styles from "./Calender.module.css";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import { EventProps, Views } from "react-big-calendar";
 import moment from "moment";
-import { cloneElement, useCallback, useState } from "react";
+import { cloneElement, useCallback, useState, useRef, useEffect } from "react";
 import { Toggle } from "../Toggle/ToggleSwitch/Toggle";
 import { OutlineButton } from "../Button/OutlineButton/OutlineButton";
 import { EventPopup } from "./EventPopup/EventPopup";
@@ -14,18 +14,25 @@ const localizer = momentLocalizer(moment); // or globalizeLocalizer
 type Keys = keyof typeof Views;
 
 type Props = {
-  events: { id: number; title: string; start: Date; end: Date };
+  events: { id: number; title: string; start: Date; end: Date; etc?: {} };
   backgroundEvents: { id: number; title: string; start: Date; end: Date };
 };
 
 export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
-  const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
+  const [view, setView] = useState<(typeof Views)[Keys]>(Views.MONTH);
   const [myEvents, setEvents] = useState(events);
   const [selected, setSelected] = useState();
   const [eventPopup, setEventPopup] = useState();
   const [show, setShow] = useState(null);
 
+  const [adjustedPosition, setAdjustedPosition] = useState({ top: 0, left: 0 });
+  const popupRef = useRef(null);
+  // useEffect(() => {
+  //   if (show) {
+  //     adjustPopupPosition();
+  //   }
+  // }, [show]);
   // Date Navigation ///
   const onPrevClick = useCallback(() => {
     if (view === Views.DAY) {
@@ -59,6 +66,7 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
   };
 
   const togglePopup = (id) => {
+    adjustPopupPosition();
     setShow(id);
   };
 
@@ -67,27 +75,62 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
     togglePopup(event.id);
   };
 
-  const handleSelectSlot = (event: any) => {
-    if (show === null) {
-      const title = window.prompt(
-        "New Event name" + event.start.toString() + event.end.toString()
-      );
-      //Booking function goes here
-      // if (title) {
-      //   setEvents((prev) => [
-      //     ...prev,
-      //     { start: event.start, end: event.end, title },
-      //   ]);
-      // }
-    }
+  // const emptyEvent = {
+  //   id: myEvents.slice(-1)[0].id + 1,
+  //   title: "",
+  //   start:
+  // }
+
+  const handleSelectSlot = useCallback((event: any) => {
+    // console.log(event);
+    setTimeout(() => {
+      console.log(event);
+    }, 250);
+
+    // if (show === null) {
+    //   var newEvent = {
+    //     id: myEvents.slice(-1)[0].id + 1,
+    //     title: "",
+    //     start: event.start,
+    //     end: event.end,
+    //   };
+    //   setEventPopup(newEvent);
+    //   togglePopup(0);
+
+    // const title = window.prompt(
+    //   "New Event name" + event.start.toString() + event.end.toString()
+    // );
+    // //Booking function goes here
+    // if (title) {
+    //   setEvents((prev) => [
+    //     ...prev,
+    //     {
+    //       id: myEvents.slice(-1)[0].id + 1,
+    //       start: event.start,
+    //       end: event.end,
+    //       title,
+    //     },
+    //   ]);
+    // }
+    // }
+
     // },
     // [setEvents]
+  }, []);
+
+  const onEventSubmit = (event: any) => {
+    // setEvents((prev) => [
+    //   ...prev,
+    //   { id: event.id, start: event.start, end: event.end, title: event.title },
+    // ]);
   };
 
   const currentMonth = date.toLocaleString("default", { month: "long" });
 
   const components: any = {
     event: ({ event }: any) => {
+      event.start = new Date(event.start);
+      event.end = new Date(event.end);
       const title = event?.title;
       const date = event?.start;
       let past = false;
@@ -95,8 +138,7 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
       if (currentDate > event?.end) {
         past = true;
       }
-      const timeString =
-        date.getHours() + ":" + `${date.getMinutes()}`.padStart(2, "0");
+      const timeString = `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}`;
       return (
         <div className={`${styles.eventLabel} ${past && styles.pastEvent}`}>
           <div className={styles.timeLabel}>{timeString}</div>
@@ -106,6 +148,7 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
     },
     timeSlotWrapper: (timeSlotWrapperProps) => {
       // Can use this to set work hours highlight
+      // console.log(timeSlotWrapperProps);
       const hasCustomInfo = timeSlotWrapperProps.value
         ? timeSlotWrapperProps.value.getHours() >= 7 &&
           timeSlotWrapperProps.value.getHours() < 19
@@ -114,21 +157,66 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
         display: "flex",
         flex: 1,
         backgroundColor: hasCustomInfo ? "#f5f5dc" : "#fff",
+        position: "relative",
       };
-      return <div style={style}>{timeSlotWrapperProps.children}</div>;
-    },
-    eventWrapper: ({ event, children }) => {
       return (
-        <div style={{ position: "relative" }}>
-          {children}
-          <EventPopup
-            event={eventPopup}
-            show={show === event.id}
-            closePopup={() => togglePopup(null)}
-          />
+        <div style={style}>
+          {/* abc */}
+          {timeSlotWrapperProps.children}
         </div>
       );
     },
+    eventWrapper: ({ event, children }) => {
+      return (
+        <div style={{ position: "relative" }} ref={popupRef}>
+          {children}
+          <div>
+            <EventPopup
+              id={event.id}
+              event={eventPopup}
+              show={show === event.id}
+              closePopup={() => togglePopup(null)}
+              submit={onEventSubmit}
+            />
+          </div>
+        </div>
+      );
+    },
+  };
+
+  const adjustPopupPosition = () => {
+    if (!popupRef.current) return;
+
+    const popupRect = popupRef.current.getClientRects();
+    console.log(popupRect);
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    console.log(viewportWidth);
+    console.log(viewportHeight);
+
+    // Calculate the position of the popup relative to the viewport
+    let adjustedTop = popupRect.top - popupRect.y;
+    let adjustedLeft = popupRect.left - popupRect.x;
+
+    if (popupRect.top < 0) {
+      adjustedTop = 0;
+      console.log("Too high");
+    } else if (popupRect.bottom > viewportHeight) {
+      console.log("too low");
+      adjustedTop = viewportHeight - popupRect.height - popupRect.y;
+    }
+
+    if (popupRect.left < 0) {
+      adjustedLeft = 0;
+      console.log("too left");
+    } else if (popupRect.right + popupRect.width > viewportWidth) {
+      console.log("too right");
+      adjustedLeft = 0 - (viewportWidth - (popupRect.width + popupRect.x));
+    }
+    // console.log(adjustd);
+
+    // Set the adjusted position
+    setAdjustedPosition({ top: adjustedTop, left: adjustedLeft });
   };
 
   return (
@@ -136,7 +224,11 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
       {/* Toolbar */}
       <div className="rbc-toolbar">
         <div>
-          <OutlineButton variant="primary" label="Back" onClick={onPrevClick} />
+          <OutlineButton
+            variant="primary"
+            label="Previous"
+            onClick={onPrevClick}
+          />
           <OutlineButton
             variant="primary"
             label="Today"
@@ -146,9 +238,9 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
         </div>
         <p className="rbc-toolbar-label">
           {view === "month"
-            ? currentMonth
+            ? `${currentMonth} ${date.getFullYear()}`
             : view === "week"
-              ? `${date.getMonth() + 1}-${date.getFullYear()}`
+              ? `${currentMonth} ${date.getFullYear()}`
               : view === "day"
                 ? `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
                 : ""}
@@ -164,9 +256,10 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
         localizer={localizer}
         events={myEvents}
         components={components}
-        backgroundEvents={backgroundEvents}
+        // backgroundEvents={backgroundEvents}
         selected={selected}
         onSelectEvent={eventClick}
+        // onSelecting={handleSelectSlot}
         onSelectSlot={handleSelectSlot}
         startAccessor="start"
         endAccessor="end"
@@ -181,6 +274,19 @@ export const Calendar: Story<Props> = ({ events, backgroundEvents }: Props) => {
         selectable
         popup
       />
+      {/* <div
+        className="popupref"
+        style={{ top: adjustedPosition.top, left: adjustedPosition.left }}
+        ref={popupRef}
+      >
+        <EventPopup
+          id={0}
+          event={eventPopup}
+          show={show === 0}
+          closePopup={() => togglePopup(null)}
+          submit={onEventSubmit}
+        />
+      </div> */}
     </div>
   );
 };

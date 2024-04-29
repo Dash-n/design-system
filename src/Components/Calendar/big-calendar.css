@@ -381,7 +381,7 @@ button.rbc-input::-moz-focus-inner {
   position: relative;
   border: 1px solid #ddd;
   border-radius: 8px;
-  overflow: hidden;
+  /* overflow: auto; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -657,11 +657,12 @@ button.rbc-input::-moz-focus-inner {
 .rbc-day-slot .rbc-time-slot {
   border-top: 1px solid #f7f7f7;
 }
-.rbc-day-slot .rbc-time-slot {
-  /* content: 100%;
+.rbc-day-slot .rbc-time-slot:hover {
+  content: 100%;
   width: 100%;
   border-top: 1px solid red;
-  display: block; */
+  background-color: red;
+  display: block;
 }
 
 .rbc-time-view-resources .rbc-time-gutter,

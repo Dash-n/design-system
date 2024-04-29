@@ -1,15 +1,15 @@
 import type { Story } from "@ladle/react";
 import { MdClose } from "react-icons/md";
 import { IconContext } from "react-icons";
-import styles from "./EventPopup.module.css";
 import { Button } from "../../Button/Button/Button";
 import { OutlineButton } from "../../Button/OutlineButton/OutlineButton";
 import { TextInput } from "../../Input/Text/TextInput";
 import { Datepicker } from "../../Input/Date/Date";
-import { useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { convertToDateTimeLocalString } from "../../../Utils/convertToDateTimeLocalString";
 import { IconButton } from "../../Button/IconButton/IconButton";
 import { MdArrowBack } from "react-icons/md";
+import styles from "./EventPopup.module.css";
 
 type Props = {
   children?: React.ReactNode;
@@ -19,6 +19,7 @@ type Props = {
   margin?: string;
   show: boolean;
   id: number;
+  style: {};
   closePopup: () => void;
   submit: ({}) => void;
 };
@@ -32,17 +33,22 @@ export const EventPopup: Story<Props> = ({
   event,
   show = false,
   closePopup,
-  submit,
+  style,
 }: Props) => {
   const [title, setTitle] = useState(event?.title);
   const [start, setStart] = useState(new Date(event?.start));
   const [end, setEnd] = useState(new Date(event?.end));
-  const [startString, setStartString] = useState(new Date(event?.start));
-  const [endString, setEndString] = useState(new Date(event?.end));
+  const [startString, setStartString] = useState(
+    convertToDateTimeLocalString(new Date(event?.start))
+  );
+  const [endString, setEndString] = useState(
+    convertToDateTimeLocalString(new Date(event?.end))
+  );
   const [field, setField] = useState("start");
   const [page, setPage] = useState(0);
 
   var confirmDateChange = () => {
+    console.log(start);
     if (field === "start") setStartString(start);
     else if (field === "end") setEndString(end);
     setPage(0);
@@ -53,8 +59,8 @@ export const EventPopup: Story<Props> = ({
     const event = {
       id,
       title,
-      start: new Date(start).toISOString(),
-      end: new Date(end).toISOString(),
+      startString: new Date(startString).toISOString(),
+      endString: new Date(endString).toISOString(),
     };
     submit(event);
 
@@ -69,7 +75,10 @@ export const EventPopup: Story<Props> = ({
 
   return (
     <div className={styles.popup}>
-      <div className={`${styles.popuptext} ${show && styles.show}`}>
+      <div
+        className={`${styles.popuptext} ${show && styles.show}`}
+        style={style}
+      >
         {page === 0 && (
           <div id="page0" className={styles.popupPage}>
             <div className={styles.popupHeader}>
@@ -101,7 +110,7 @@ export const EventPopup: Story<Props> = ({
                     type="datetime-local"
                     className={styles.input}
                     value={startString}
-                    // onChange={handlestartChange}
+                    readOnly
                     onClick={() => {
                       handleChangePage(1, "start");
                     }}
@@ -113,6 +122,7 @@ export const EventPopup: Story<Props> = ({
                     type="datetime-local"
                     className={styles.input}
                     value={endString}
+                    readOnly
                     onClick={() => {
                       handleChangePage(1, "end");
                     }}
@@ -177,8 +187,6 @@ export const EventPopup: Story<Props> = ({
           </div>
         )}
       </div>
-
-      {/* </div> */}
     </div>
   );
 };

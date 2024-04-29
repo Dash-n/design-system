@@ -27,6 +27,7 @@ export const EventPopups: Story<Props> = ({}) => {
   const [show, setShow] = useState(false);
   const togglePopup = () => {
     setShow(true);
+    console.log("push");
   };
   const closePopup = () => {
     setShow(false);

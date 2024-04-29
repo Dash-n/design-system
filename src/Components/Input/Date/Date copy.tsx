@@ -30,7 +30,6 @@ export const Datepicker: Story<Props> = ({
 }) => {
   const [selected, setSelected] = useState<Date>();
   const [isOpen, setIsOpen] = useState(open);
-  const [time, setTime] = useState("");
 
   const { inputProps, dayPickerProps } = useInput({
     defaultSelected: new Date(),
@@ -52,21 +51,10 @@ export const Datepicker: Story<Props> = ({
   const handleDaySelect: SelectSingleEventHandler = (date) => {
     setSelected(date);
     if (date) {
-      setInputValue(convertToDateTimeLocalString(date));
-      // setInputValue(format(date, "y-MM-dd hh:mm"));
+      setInputValue(format(date, "y-MM-dd hh:mm"));
     } else {
       setInputValue("");
     }
-  };
-
-  const convertToDateTimeLocalString = (date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
   };
 
   const openPopup = () => {
@@ -81,7 +69,6 @@ export const Datepicker: Story<Props> = ({
       <input
         id={id}
         name={name}
-        type="time"
         placeholder={placeholder}
         className={styles.input}
         {...inputProps}
@@ -94,26 +81,44 @@ export const Datepicker: Story<Props> = ({
           {label}
         </label>
       )}
-      {/* <input
-        type="time"
-        id="time"
-        name={name}
-        className={styles.input}
-        value={inputValue.getTime}
-      /> */}
+      <input type="time" id="time" name={name} className={styles.inp} />
     </div>
   );
 
   return (
-    <div className={styles.daypickerContainer}>
-      <DayPicker
-        initialFocus={true}
-        mode="single"
-        {...dayPickerProps}
-        selected={selected}
-        onSelect={handleDaySelect}
-        footer={footer}
-      />
+    <div>
+      {isOpen && <div className={styles.overlay} onClick={closePopup} />}
+      {!isOpen && (
+        <div className={styles.inputBox}>
+          <input
+            id={id}
+            name={name}
+            placeholder={placeholder}
+            className={styles.input}
+            {...inputProps}
+            value={inputValue}
+            onChange={handleInputChange}
+            onFocus={openPopup}
+          />
+          {label && (
+            <label htmlFor={id} className={styles.label}>
+              {label}
+            </label>
+          )}
+        </div>
+      )}
+      {isOpen && (
+        <div className={styles.daypickerContainer}>
+          <DayPicker
+            initialFocus={true}
+            mode="single"
+            {...dayPickerProps}
+            selected={selected}
+            onSelect={handleDaySelect}
+            footer={footer}
+          />
+        </div>
+      )}
     </div>
   );
 };
