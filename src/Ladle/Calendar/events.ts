@@ -10,8 +10,8 @@ export default [
   {
     id: 1,
     title: "Physio Appointment",
-    start: "2024-04-09T16:00:00.000Z",
-    end: "2024-04-09T22:00:00.000Z",
+    start: "2024-04-10T00:00:00.000Z",
+    end: "2024-04-10T12:00:00.000Z",
   },
   {
     id: 2,

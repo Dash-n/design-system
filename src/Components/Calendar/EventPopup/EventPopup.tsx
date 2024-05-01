@@ -12,8 +12,8 @@ import { MdArrowBack } from "react-icons/md";
 import styles from "./EventPopup.module.css";
 
 type Props = {
-  children?: React.ReactNode;
-  event: any;
+  // children?: React.ReactNode;
+  event: Event;
   width?: string;
   height?: string;
   margin?: string;
@@ -25,7 +25,10 @@ type Props = {
 };
 
 type Event = {
-  player?: string;
+  id: number;
+  title: string;
+  start: string;
+  end: string;
 };
 
 export const EventPopup: Story<Props> = ({
@@ -33,6 +36,7 @@ export const EventPopup: Story<Props> = ({
   event,
   show = false,
   closePopup,
+  submit,
   style,
 }: Props) => {
   const [title, setTitle] = useState(event?.title);
@@ -47,8 +51,9 @@ export const EventPopup: Story<Props> = ({
   const [field, setField] = useState("start");
   const [page, setPage] = useState(0);
 
+  // const setStates
+
   var confirmDateChange = () => {
-    console.log(start);
     if (field === "start") setStartString(start);
     else if (field === "end") setEndString(end);
     setPage(0);
@@ -63,14 +68,15 @@ export const EventPopup: Story<Props> = ({
       endString: new Date(endString).toISOString(),
     };
     submit(event);
-
-    console.log(event);
   };
 
   const handleChangePage = (page: Number, field: string) => {
-    console.log(startString);
     setPage(page);
     setField(field);
+  };
+
+  const handleDateChange = (date) => {
+    setStart(date);
   };
 
   return (
@@ -92,49 +98,63 @@ export const EventPopup: Story<Props> = ({
               </div>
             </div>
             <div className={styles.eventInfo}>
-              <form onSubmit={book}>
-                <div className={styles.fieldSection}>
-                  <strong>Event: </strong>
-                  <TextInput
-                    id="event"
-                    name="event"
-                    placeholder={event?.title}
-                    inputValue={title}
-                    setInputValue={setTitle}
-                  />
-                </div>
-                <div className={styles.fieldSection}>
-                  <strong>Time Start: </strong>
+              {/* <form onSubmit={book}> */}
+              <div className={styles.fieldSection}>
+                <strong>Event: </strong>
+                <TextInput
+                  id="event"
+                  name="event"
+                  placeholder={"New Event"}
+                  inputValue={title}
+                  setInputValue={setTitle}
+                />
+              </div>
+              <div className={styles.fieldSection}>
+                <strong>Time Start: </strong>
 
-                  <input
-                    type="datetime-local"
-                    className={styles.input}
-                    value={startString}
-                    readOnly
-                    onClick={() => {
+                <input
+                  type="datetime-local"
+                  className={styles.input}
+                  value={startString}
+                  readOnly
+                  onKeyUp={(e) => {
+                    if (e.key === "Enter") {
                       handleChangePage(1, "start");
-                    }}
-                  />
-                </div>
-                <div className={styles.fieldSection}>
-                  <strong>Time End: </strong>
-                  <input
-                    type="datetime-local"
-                    className={styles.input}
-                    value={endString}
-                    readOnly
-                    onClick={() => {
+                    }
+                  }}
+                  // onChange={handleDateChange}
+                  onClick={() => {
+                    handleChangePage(1, "start");
+                  }}
+                />
+              </div>
+              <div className={styles.fieldSection}>
+                <strong>Time End: </strong>
+                <input
+                  type="datetime-local"
+                  className={styles.input}
+                  value={endString}
+                  readOnly
+                  onKeyUp={(e) => {
+                    if (e.key === "Enter") {
                       handleChangePage(1, "end");
-                    }}
-                  />
-                </div>
-              </form>
+                    }
+                  }}
+                  onClick={() => {
+                    handleChangePage(1, "end");
+                  }}
+                />
+              </div>
+              {/* </form> */}
             </div>
             <a className={styles.dashboardLink} href={"Dashboard link"}>
               Go to Physio Dashboard
             </a>
             <div className={styles.buttonSection}>
-              <Button label="Schedule" onClick={book} />
+              <Button
+                label={`${id ? "Re-Schedule" : "Schedule"}`}
+                onClick={book}
+              />
               <OutlineButton variant="warning" label="Delete Appointment" />
             </div>
 
@@ -159,8 +179,8 @@ export const EventPopup: Story<Props> = ({
             <Datepicker
               id="start"
               name="start"
-              placeholder={start}
-              inputValue={start}
+              placeholder={startString}
+              inputValue={startString}
               setInputValue={setStart}
             />
             <Button label="Confirm" onClick={confirmDateChange} />
@@ -178,8 +198,8 @@ export const EventPopup: Story<Props> = ({
             <Datepicker
               id="end"
               name="end"
-              placeholder={end}
-              inputValue={end}
+              placeholder={endString}
+              inputValue={endString}
               setInputValue={setEnd}
             />
 

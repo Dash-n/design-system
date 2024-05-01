@@ -8,7 +8,7 @@
 
 .container {
   padding: 16px 16px;
-  background-color: white;
+  background-color: var(--background-light);
   border-radius: 8px;
   border: 1px solid #c4c4c4;
   overflow: hidden;
@@ -28,7 +28,7 @@
   height: 100%;
   width: 100%;
   padding: 8px;
-  background-color: white;
+  background-color: var(--background-light);
   border: 1px solid var(--calendar-color);
   border-radius: 8px;
 }

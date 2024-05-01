@@ -5,6 +5,8 @@
   /* display: inline-block; */
   /* pointer-events: none; */
   /* cursor: pointer; */
+  left: 40%;
+  top: 30%;
 }
 .container {
   padding: 16px 16px;
@@ -34,10 +36,10 @@
   border-radius: 6px;
   padding: 8px;
   position: absolute;
-  top: 50%;
-  z-index: 99;
-  bottom: 125%;
-  left: 50%;
+  /* top: 30%; */
+  z-index: 10;
+  /* bottom: 125%; */
+  /* left: 50%; */
   margin-left: -80px;
   border: 1px solid var(--soft-background-color);
 }

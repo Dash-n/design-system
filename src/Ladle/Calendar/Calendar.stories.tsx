@@ -11,7 +11,6 @@ type Props = {
   width?: string;
   height?: string;
   margin?: string;
-  bookings: any[];
   show: boolean;
 };
 

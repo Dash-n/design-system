@@ -30,7 +30,7 @@ export const Datepicker: Story<Props> = ({
 }) => {
   const [selected, setSelected] = useState<Date>();
   const [isOpen, setIsOpen] = useState(open);
-  const [time, setTime] = useState("");
+  const [time, setTime] = useState(inputValue.substring(11));
 
   const { inputProps, dayPickerProps } = useInput({
     defaultSelected: new Date(),
@@ -38,18 +38,36 @@ export const Datepicker: Story<Props> = ({
     required: true,
   });
 
-  const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const handleDayChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setInputValue(e.currentTarget.value);
     // setInputValue(e);
     const date = parse(e.currentTarget.value, "y-MM-dd hh:mm", new Date());
-    if (isValid(date)) {
-      setSelected(date);
-    } else {
-      setSelected(undefined);
-    }
+    // if (isValid(date)) {
+    //   setSelected(date);
+    // } else {
+    //   setSelected(undefined);
+    // }
+  };
+
+  const handleTimeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setTime(e.currentTarget.value);
+    const newDatetime = `${inputValue.substring(0, 11)}${e.currentTarget.value}`;
+    console.log(newDatetime);
+    // setInputValue(e.currentTarget.value);
+    setInputValue(newDatetime);
+    // const date = parse(newDatetime, "y-MM-dd hh:mm", new Date());
+    // if (isValid(date)) {
+    //   setSelected(date);
+    // } else {
+    //   setSelected(undefined);
+    // }
   };
 
   const handleDaySelect: SelectSingleEventHandler = (date) => {
+    const hours = parseInt(time.substring(0, 2));
+    const minutes = parseInt(time.substring(3, 5));
+    date.setHours(hours, minutes);
+    console.log(date);
     setSelected(date);
     if (date) {
       setInputValue(convertToDateTimeLocalString(date));
@@ -78,6 +96,7 @@ export const Datepicker: Story<Props> = ({
 
   const footer = (
     <div className={styles.inputBox}>
+      {inputValue}
       <input
         id={id}
         name={name}
@@ -85,15 +104,10 @@ export const Datepicker: Story<Props> = ({
         placeholder={placeholder}
         className={styles.input}
         {...inputProps}
-        value={inputValue}
-        onChange={handleInputChange}
+        value={time}
+        onChange={handleTimeChange}
         onFocus={openPopup}
       />
-      {label && (
-        <label htmlFor={id} className={styles.label}>
-          {label}
-        </label>
-      )}
       {/* <input
         type="time"
         id="time"
