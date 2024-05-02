@@ -20,7 +20,7 @@ export const Toggle: Story<Props> = ({
   return (
     <div className={styles.container}>
       {values?.map((values, index) => (
-        <label className={styles.switch}>
+        <label className={styles.switch} key={index}>
           <input
             type="radio"
             name={name}

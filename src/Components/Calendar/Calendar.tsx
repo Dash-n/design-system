@@ -46,27 +46,35 @@ export const Calendar: Story<Props> = ({
   const popupRef = useRef(null);
 
   const onPrevClick = useCallback(() => {
+    const newDate = new Date(date);
+
     if (view === Views.DAY) {
-      setDate(moment(date).subtract(1, "d").toDate());
+      newDate.setDate(date.getDate() - 1);
+      // setDate(moment(date).subtract(1, "d").toDate());
     } else if (view === Views.WEEK) {
-      setDate(moment(date).subtract(1, "w").toDate());
+      newDate.setDate(date.getDate() - 7);
+      // setDate(moment(date).subtract(1, "w").toDate());
     } else {
-      setDate(moment(date).subtract(1, "M").toDate());
+      newDate.setMonth(date.getMonth() - 1);
     }
+    // console.log(date);
+    setDate(newDate);
   }, [view, date]);
 
   const onTodayClick = useCallback(() => {
-    setDate(moment().toDate());
+    setDate(new Date());
   }, []);
 
   const onNextClick = useCallback(() => {
+    const newDate = new Date(date);
     if (view === Views.DAY) {
-      setDate(moment(date).add(1, "d").toDate());
+      newDate.setDate(date.getDate() + 1);
     } else if (view === Views.WEEK) {
-      setDate(moment(date).add(1, "w").toDate());
+      newDate.setDate(date.getDate() + 7);
     } else {
-      setDate(moment(date).add(1, "M").toDate());
+      newDate.setMonth(date.getMonth() + 1); //Check Day
     }
+    setDate(newDate);
   }, [view, date]);
   /// Data Navigation end ///
 
@@ -168,10 +176,11 @@ export const Calendar: Story<Props> = ({
       return <div style={style}>{timeSlotWrapperProps.children}</div>;
     },
     eventWrapper: ({ event, children }) => {
+      console.log("EVENT");
       return (
         <div>
           {children}
-          <div ref={popupRef}>
+          <div className="popupdiv">
             <EventPopup
               id={event.id}
               event={eventPopup}
@@ -223,13 +232,13 @@ export const Calendar: Story<Props> = ({
   return (
     <div className={styles.myCustomHeight}>
       <div
+        ref={popupRef}
         className="popupref"
         style={{
           position: "absolute",
           left: "30%",
           top: "30%",
         }}
-        ref={popupRef}
       >
         <EventPopup
           id={0}
