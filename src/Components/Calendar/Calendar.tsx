@@ -2,6 +2,7 @@ import type { Story } from "@ladle/react";
 import "./big-calendar.css";
 import styles from "./Calender.module.css";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+import Toolbar from "react-big-calendar/lib/Toolbar";
 import { EventProps, Views } from "react-big-calendar";
 import moment from "moment";
 import { cloneElement, useCallback, useState, useRef, useEffect } from "react";
@@ -25,7 +26,8 @@ export const Calendar: Story<Props> = ({
   availability,
 }: Props) => {
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
-  const [view, setView] = useState<(typeof Views)[Keys]>(Views.MONTH);
+  const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
+  const [toggleValue, setToggleValue] = useState("Month");
   const [myEvents, setEvents] = useState(events);
   const [selected, setSelected] = useState();
   const [eventPopup, setEventPopup] = useState();
@@ -42,47 +44,59 @@ export const Calendar: Story<Props> = ({
     `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
   );
 
+  class CustomToolbar extends Toolbar {
+    render() {
+      return (
+        <div className="rbc-toolbar">
+          <div>
+            <OutlineButton
+              variant="primary"
+              label="Previous"
+              onClick={() => this.navigate("PREV")}
+            />
+            <OutlineButton
+              variant="primary"
+              label="Today"
+              onClick={() => this.navigate("TODAY")}
+            />
+            <OutlineButton
+              variant="primary"
+              label="Next"
+              onClick={() => this.navigate("NEXT")}
+            />
+          </div>
+          <p className="rbc-toolbar-label">{this.props.label}</p>
+          <Toggle
+            name="viewSelect"
+            values={["Month", "Week", "Day"]}
+            setChecked={changeView}
+          />
+        </div>
+      );
+    }
+
+    navigate = (action) => {
+      this.props.onNavigate(action);
+    };
+  }
+
   const [adjustedPosition, setAdjustedPosition] = useState({ top: 0, left: 0 });
   const popupRef = useRef(null);
 
-  const onPrevClick = useCallback(() => {
-    const newDate = new Date(date);
-
-    if (view === Views.DAY) {
-      newDate.setDate(date.getDate() - 1);
-      // setDate(moment(date).subtract(1, "d").toDate());
-    } else if (view === Views.WEEK) {
-      newDate.setDate(date.getDate() - 7);
-      // setDate(moment(date).subtract(1, "w").toDate());
-    } else {
-      newDate.setMonth(date.getMonth() - 1);
-    }
-    // console.log(date);
-    setDate(newDate);
-  }, [view, date]);
-
-  const onTodayClick = useCallback(() => {
-    setDate(new Date());
-  }, []);
-
-  const onNextClick = useCallback(() => {
-    const newDate = new Date(date);
-    if (view === Views.DAY) {
-      newDate.setDate(date.getDate() + 1);
-    } else if (view === Views.WEEK) {
-      newDate.setDate(date.getDate() + 7);
-    } else {
-      newDate.setMonth(date.getMonth() + 1); //Check Day
-    }
-    setDate(newDate);
-  }, [view, date]);
-  /// Data Navigation end ///
-
   const changeView = (value: string) => {
     togglePopup(null);
-    if (value === "Month") setView(Views.MONTH);
-    if (value === "Week") setView(Views.WEEK);
-    if (value === "Day") setView(Views.DAY);
+    if (value === "Month") {
+      setView(Views.MONTH);
+      setToggleValue("Month");
+    }
+    if (value === "Week") {
+      setView(Views.WEEK);
+      setToggleValue("Week");
+    }
+    if (value === "Day") {
+      setView(Views.DAY);
+      setToggleValue("Day");
+    }
   };
 
   const togglePopup = (id) => {
@@ -192,6 +206,7 @@ export const Calendar: Story<Props> = ({
         </div>
       );
     },
+    toolbar: CustomToolbar,
   };
 
   const adjustPopupPosition = () => {
@@ -249,7 +264,7 @@ export const Calendar: Story<Props> = ({
         />
       </div>
       {/* Toolbar */}
-      <div className="rbc-toolbar">
+      {/* <div className="rbc-toolbar">
         <div>
           <OutlineButton
             variant="primary"
@@ -269,7 +284,7 @@ export const Calendar: Story<Props> = ({
           values={["Month", "Week", "Day"]}
           setChecked={changeView}
         />
-      </div>
+      </div> */}
 
       <BigCalendar
         localizer={localizer}
@@ -284,8 +299,8 @@ export const Calendar: Story<Props> = ({
         date={date}
         step={15}
         timeslots={4}
-        toolbar={false}
-        defaultView={Views.MONTH}
+        toolbar={true}
+        // defaultView={Views.MONTH}
         view={view}
         onView={setView}
         onNavigate={setDate}
