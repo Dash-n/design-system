@@ -1,7 +1,7 @@
 import type { Story } from "@ladle/react";
 import { Calendar } from "../../Components/Calendar/Calendar";
 import { EventPopup } from "../../Components/Calendar/EventPopup/EventPopup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./Calendar.stories.module.css";
 
 import events from "./events";
@@ -24,6 +24,7 @@ const sampleEvent = {
 
 export const EventPopups: Story<Props> = ({}) => {
   const [show, setShow] = useState(false);
+
   const togglePopup = () => {
     setShow(true);
     console.log("push");
@@ -50,6 +51,7 @@ export const EventPopups: Story<Props> = ({}) => {
 };
 
 export const Calendars: Story<Props> = ({}) => {
+  console.log(events);
   return (
     <div
       style={{

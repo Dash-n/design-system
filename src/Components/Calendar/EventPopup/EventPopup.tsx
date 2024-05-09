@@ -10,10 +10,11 @@ import { convertToDateTimeLocalString } from "../../../Utils/convertToDateTimeLo
 import { IconButton } from "../../Button/IconButton/IconButton";
 import { MdArrowBack } from "react-icons/md";
 import styles from "./EventPopup.module.css";
+import { CalendarEvent, PopupEvent } from "../calendarutils/calendarutils";
 
 type Props = {
   // children?: React.ReactNode;
-  event: Event;
+  event: PopupEvent;
   width?: string;
   height?: string;
   margin?: string;
@@ -21,62 +22,95 @@ type Props = {
   id: number;
   style: {};
   closePopup: () => void;
-  submit: ({}) => void;
+  submitEvent: (event: CalendarEvent) => void;
+  deleteEvent: () => void;
 };
 
-type Event = {
-  id: number;
-  title: string;
+type TempTime = {
   start: string;
   end: string;
 };
 
 export const EventPopup: Story<Props> = ({
-  id,
+  // id,
   event,
   show = false,
   closePopup,
-  submit,
+  submitEvent,
+  deleteEvent,
   style,
 }: Props) => {
-  const [title, setTitle] = useState(event?.title);
-  const [start, setStart] = useState(new Date(event?.start));
-  const [end, setEnd] = useState(new Date(event?.end));
-  const [startString, setStartString] = useState(
-    convertToDateTimeLocalString(new Date(event?.start))
-  );
-  const [endString, setEndString] = useState(
-    convertToDateTimeLocalString(new Date(event?.end))
-  );
+  const [calendarEvent, setCalendarEvent] = useState<PopupEvent>({
+    id: 0,
+    title: "",
+    start: "",
+    end: "",
+  });
+
+  const [tempTime, setTempTime] = useState<TempTime>({
+    start: "",
+    end: "",
+  });
+
   const [field, setField] = useState("start");
   const [page, setPage] = useState(0);
 
-  // const setStates
+  const inputRef = useRef("");
+
+  useEffect(() => {
+    if (event) {
+      console.log("new event");
+      setCalendarEvent((prev) => ({
+        ...prev,
+        id: event.id,
+        title: event.title,
+        start: event.start,
+        end: event.end,
+      }));
+      setTempTime((prev) => ({
+        ...prev,
+        start: event.start,
+        end: event.end,
+      }));
+      inputRef.current = event.title;
+    }
+  }, [event]);
 
   var confirmDateChange = () => {
-    if (field === "start") setStartString(start);
-    else if (field === "end") setEndString(end);
+    setCalendarEvent((prev) => ({
+      ...prev,
+      title: calendarEvent.title,
+      start: tempTime.start,
+      end: tempTime.end,
+    }));
     setPage(0);
   };
 
-  const book = (e) => {
-    e.preventDefault();
-    const event = {
-      id,
-      title,
-      startString: new Date(startString).toISOString(),
-      endString: new Date(endString).toISOString(),
-    };
-    submit(event);
-  };
-
-  const handleChangePage = (page: Number, field: string) => {
+  const handleChangePage = (page: number, field: string) => {
     setPage(page);
     setField(field);
   };
 
-  const handleDateChange = (date) => {
-    setStart(date);
+  const handleDateChange = (date: string) => {
+    setTempTime((prev) => ({
+      ...prev,
+      [field]: date,
+    }));
+  };
+
+  const handleTitleChange = (title: string) => {
+    inputRef.current = title;
+    console.log(inputRef.current);
+  };
+
+  const submit = () => {
+    const subEvent: CalendarEvent = {
+      id: calendarEvent.id,
+      title: inputRef.current,
+      start: new Date(calendarEvent.start),
+      end: new Date(calendarEvent.end),
+    };
+    submitEvent(subEvent);
   };
 
   return (
@@ -98,15 +132,14 @@ export const EventPopup: Story<Props> = ({
               </div>
             </div>
             <div className={styles.eventInfo}>
-              {/* <form onSubmit={book}> */}
               <div className={styles.fieldSection}>
                 <strong>Event: </strong>
                 <TextInput
-                  id="event"
-                  name="event"
+                  id="title"
+                  name="title"
                   placeholder={"New Event"}
-                  inputValue={title}
-                  setInputValue={setTitle}
+                  defaultValue={event.title}
+                  onChange={handleTitleChange}
                 />
               </div>
               <div className={styles.fieldSection}>
@@ -115,14 +148,13 @@ export const EventPopup: Story<Props> = ({
                 <input
                   type="datetime-local"
                   className={styles.input}
-                  value={startString}
+                  value={calendarEvent.start}
                   readOnly
                   onKeyUp={(e) => {
                     if (e.key === "Enter") {
                       handleChangePage(1, "start");
                     }
                   }}
-                  // onChange={handleDateChange}
                   onClick={() => {
                     handleChangePage(1, "start");
                   }}
@@ -133,7 +165,7 @@ export const EventPopup: Story<Props> = ({
                 <input
                   type="datetime-local"
                   className={styles.input}
-                  value={endString}
+                  value={calendarEvent.end}
                   readOnly
                   onKeyUp={(e) => {
                     if (e.key === "Enter") {
@@ -145,17 +177,20 @@ export const EventPopup: Story<Props> = ({
                   }}
                 />
               </div>
-              {/* </form> */}
             </div>
             <a className={styles.dashboardLink} href={"Dashboard link"}>
               Go to Physio Dashboard
             </a>
             <div className={styles.buttonSection}>
               <Button
-                label={`${id ? "Re-Schedule" : "Schedule"}`}
-                onClick={book}
+                label={`${event.id ? "Re-Schedule" : "Schedule"}`}
+                onClick={submit}
               />
-              <OutlineButton variant="warning" label="Delete Appointment" />
+              <OutlineButton
+                variant="warning"
+                label="Delete Appointment"
+                onClick={deleteEvent}
+              />
             </div>
 
             <div className={styles.deleteEnd}>
@@ -179,11 +214,11 @@ export const EventPopup: Story<Props> = ({
             <Datepicker
               id="start"
               name="start"
-              placeholder={startString}
-              inputValue={startString}
-              setInputValue={setStart}
+              placeholder={tempTime.start}
+              inputValue={tempTime.start}
+              setInputValue={handleDateChange}
             />
-            <Button label="Confirm" onClick={confirmDateChange} />
+            <Button name="start" label="Confirm" onClick={confirmDateChange} />
           </div>
         )}
         {page === 1 && field === "end" && (
@@ -198,12 +233,12 @@ export const EventPopup: Story<Props> = ({
             <Datepicker
               id="end"
               name="end"
-              placeholder={endString}
-              inputValue={endString}
-              setInputValue={setEnd}
+              placeholder={tempTime.end}
+              inputValue={tempTime.end}
+              setInputValue={handleDateChange}
             />
 
-            <Button label="Confirm" onClick={confirmDateChange} />
+            <Button name="start" label="Confirm" onClick={confirmDateChange} />
           </div>
         )}
       </div>

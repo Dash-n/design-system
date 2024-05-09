@@ -9,13 +9,15 @@ import { cloneElement, useCallback, useState, useRef, useEffect } from "react";
 import { Toggle } from "../Toggle/ToggleSwitch/Toggle";
 import { OutlineButton } from "../Button/OutlineButton/OutlineButton";
 import { EventPopup } from "./EventPopup/EventPopup";
+import { convertToDateTimeLocalString } from "../../Utils/convertToDateTimeLocalString";
+import { CalendarEvent, PopupEvent } from "./calendarutils/calendarutils";
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
 type Keys = keyof typeof Views;
 
 type Props = {
-  events: { id: number; title: string; start: Date; end: Date; etc?: {} };
+  events: CalendarEvent[];
   backgroundEvents: { id: number; title: string; start: Date; end: Date };
   availability?: { start: string; end: string };
 };
@@ -28,9 +30,9 @@ export const Calendar: Story<Props> = ({
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
   const [toggleValue, setToggleValue] = useState("Month");
-  const [myEvents, setEvents] = useState(events);
+  const [myEvents, setEvents] = useState<CalendarEvent[]>(events);
   const [selected, setSelected] = useState();
-  const [eventPopup, setEventPopup] = useState();
+  const [eventPopup, setEventPopup] = useState<PopupEvent>(null);
   const [show, setShow] = useState(null);
   const [test, setTest] = useState(["a"]);
 
@@ -79,6 +81,37 @@ export const Calendar: Story<Props> = ({
       this.props.onNavigate(action);
     };
   }
+  /*const hasMonth = local.eq(start, end, "month")
+const hasYear = // as above
+const formatter = `DD ${hasMonth && MMM} ${hasYear && YYYY}`
+
+local.format(start, formatter)*/
+
+  //Week Label
+  const dayRangeHeaderFormat = (
+    { start, end },
+    culture,
+    localizer: momentLocalizer
+  ) => {
+    const sameMonth = localizer.eq(start, end, "month");
+    const sameYear = localizer.eq(start, end, "year");
+    const formatter = `DD ${sameMonth ? "" : "MMM"} ${sameYear ? "" : "YYYY"}`;
+    console.log(formatter);
+
+    return (
+      localizer.format(start, formatter, culture) +
+      " – " +
+      localizer.format(
+        end,
+        localizer.eq(start, end, "month") ? "DD MMMM YYYY" : "DD MMM YYYY",
+        culture
+      )
+    );
+  };
+
+  //Day Label
+  const dayHeaderFormat = (date: Date, culture, localizer) =>
+    localizer.format(date, "dddd DD MMMM, YYYY", culture);
 
   const [adjustedPosition, setAdjustedPosition] = useState({ top: 0, left: 0 });
   const popupRef = useRef(null);
@@ -105,7 +138,13 @@ export const Calendar: Story<Props> = ({
   };
 
   const eventClick = (event: any) => {
-    setEventPopup(event);
+    const newEvent = {
+      id: event.id,
+      title: event.title,
+      start: convertToDateTimeLocalString(event.start),
+      end: convertToDateTimeLocalString(event.end),
+    } as PopupEvent;
+    setEventPopup(newEvent);
     togglePopup(event.id);
   };
 
@@ -114,42 +153,24 @@ export const Calendar: Story<Props> = ({
       const newEvent = {
         id: myEvents.slice(-1)[0].id + 1,
         title: "",
-        start: event.start,
-        end: event.end,
-      };
-      setEventPopup(event);
+        start: convertToDateTimeLocalString(event.start),
+        end: convertToDateTimeLocalString(event.end),
+      } as PopupEvent;
+      console.log(newEvent);
+      setEventPopup(newEvent);
       togglePopup(0);
     }
   };
 
-  const submitNewEvent = (event) => {
+  const submitNewEvent = (event: CalendarEvent) => {
     const nextId = myEvents.slice(-1)[0].id + 1;
 
-    setEvents([
-      ...myEvents,
-      {
-        id: nextId,
-        title: event.title,
-        start: event.startString,
-        end: event.endString,
-      },
-    ]);
+    setEvents([...myEvents, event]);
     togglePopup(null);
   };
 
-  const editEvent = (event) => {
-    setEvents(
-      myEvents.map((item) =>
-        item.id === event.id
-          ? {
-              id: event.id,
-              title: event.title,
-              start: event.startString,
-              end: event.endString,
-            }
-          : item
-      )
-    );
+  const editEvent = (event: CalendarEvent) => {
+    setEvents(myEvents.map((item) => (item.id === event.id ? event : item)));
   };
 
   const components: any = {
@@ -190,17 +211,15 @@ export const Calendar: Story<Props> = ({
       return <div style={style}>{timeSlotWrapperProps.children}</div>;
     },
     eventWrapper: ({ event, children }) => {
-      console.log("EVENT");
       return (
         <div>
           {children}
           <div className="popupdiv">
             <EventPopup
-              id={event.id}
               event={eventPopup}
               show={show === event.id}
               closePopup={() => togglePopup(null)}
-              submit={editEvent}
+              submitEvent={editEvent}
             />
           </div>
         </div>
@@ -255,40 +274,19 @@ export const Calendar: Story<Props> = ({
           top: "30%",
         }}
       >
+        {/* EMPTY POPUP */}
         <EventPopup
-          id={0}
           event={eventPopup}
           show={show === 0}
           closePopup={() => togglePopup(null)}
-          submit={submitNewEvent}
+          submitEvent={submitNewEvent}
         />
       </div>
-      {/* Toolbar */}
-      {/* <div className="rbc-toolbar">
-        <div>
-          <OutlineButton
-            variant="primary"
-            label="Previous"
-            onClick={onPrevClick}
-          />
-          <OutlineButton
-            variant="primary"
-            label="Today"
-            onClick={onTodayClick}
-          />
-          <OutlineButton variant="primary" label="Next" onClick={onNextClick} />
-        </div>
-        <p className="rbc-toolbar-label">{toolbarTitle.get(view)}</p>
-        <Toggle
-          name="viewSelect"
-          values={["Month", "Week", "Day"]}
-          setChecked={changeView}
-        />
-      </div> */}
 
       <BigCalendar
         localizer={localizer}
         events={myEvents}
+        formats={{ dayRangeHeaderFormat, dayHeaderFormat }}
         components={components}
         selected={selected}
         onSelectEvent={eventClick}

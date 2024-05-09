@@ -30,7 +30,7 @@ export const Datepicker: Story<Props> = ({
 }) => {
   const [selected, setSelected] = useState<Date>();
   const [isOpen, setIsOpen] = useState(open);
-  const [time, setTime] = useState(inputValue.substring(11));
+  const [time, setTime] = useState(inputValue.substring(11, 16));
 
   const { inputProps, dayPickerProps } = useInput({
     defaultSelected: new Date(),

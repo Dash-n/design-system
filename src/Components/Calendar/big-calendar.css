@@ -162,9 +162,12 @@ button.rbc-input::-moz-focus-inner {
   display: none;
 }
 
+.rbc-events-container {
+  box-sizing: border-box;
+  /* border: 2px solid var(--main-bg-color); */
+}
 .rbc-today {
-  border: 2px solid var(--main-bg-color) !important;
-  box-shadow: inset 0 0 1px 1px var(--main-bg-color);
+  box-shadow: inset 0px 0 0px 3px var(--main-bg-color);
 }
 
 .rbc-toolbar {
@@ -656,6 +659,9 @@ button.rbc-input::-moz-focus-inner {
 }
 .rbc-day-slot .rbc-time-slot {
   border-top: 1px solid #f7f7f7;
+}
+.rbc-time-slot {
+  min-height: 20px;
 }
 .rbc-day-slot .rbc-time-slot:hover {
   content: 100%;

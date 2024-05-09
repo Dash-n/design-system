@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./TextInput.module.css";
-import { ChangeEventHandler, useState } from "react";
+import { ChangeEventHandler, useState, useRef } from "react";
 
 type Props = {
   id: string;
@@ -10,8 +10,9 @@ type Props = {
   disabled?: boolean;
   maxLength?: number;
   size?: number;
-  inputValue: string;
-  setInputValue: (e) => void;
+  inputValue?: string;
+  defaultValue?: string;
+  onChange: (value: string) => void;
 };
 
 export const TextInput: Story<Props> = ({
@@ -23,11 +24,13 @@ export const TextInput: Story<Props> = ({
   maxLength,
   size,
   inputValue,
-  setInputValue,
+  defaultValue,
+  onChange,
 }) => {
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setInputValue(e.currentTarget.value);
+    onChange(e.currentTarget.value);
   };
+
   return (
     <div className={styles.inputBox}>
       <input
@@ -38,6 +41,7 @@ export const TextInput: Story<Props> = ({
         disabled={disabled}
         maxLength={maxLength}
         size={size}
+        defaultValue={defaultValue}
         value={inputValue}
         onChange={handleInputChange}
       />

@@ -212,7 +212,7 @@ export const Sliders: Story<Props> = ({}) => {
 
 export const DatePickers: Story<Props> = ({}) => {
   const [selected, setSelected] = useState<Date>();
-  const [date, setDate] = useState("2024-04-09");
+  const [date, setDate] = useState("2024-04-09T15:00");
 
   let footer = <p>Select Date</p>;
   if (selected) {
