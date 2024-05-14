@@ -1,7 +1,7 @@
 import type { Story } from "@ladle/react";
 import { Toggle } from "../../Components/Toggle/ToggleSwitch/Toggle.tsx";
 import { PageToggle } from "../../Components/Toggle/PageToggle/PageToggle.tsx";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { MdFormatListBulleted, MdGridView } from "react-icons/md";
 type Props = {
   options: string;
@@ -14,11 +14,15 @@ export const Toggles: Story<Props> = ({}) => {
     setValue(value);
   };
 
+  useEffect(() => {
+    setValue(value);
+  }, []);
+
   const view = [<MdFormatListBulleted />, <MdGridView />];
 
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
-      <Toggle name="two" values={["1", "2"]} setChecked={handleChange} />
+      <Toggle name="one" values={["1", "2"]} setChecked={handleChange} />
       <Toggle
         name="two"
         values={["list", "grid"]}
@@ -29,12 +33,14 @@ export const Toggles: Story<Props> = ({}) => {
         name="three"
         values={["Day", "Month", "Year"]}
         setChecked={handleChange}
+        defaultValue="Month"
       />
       <Toggle
         name="mmonth"
         values={["one", "two", "three", "four", "five"]}
         labels={["January", "February", "March", "April", <MdGridView />]}
         setChecked={handleChange}
+        defaultValue="two"
         iconSize={"24px"}
       />
       {value}

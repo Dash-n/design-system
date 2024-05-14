@@ -123,6 +123,8 @@ export const Radios: Story<Props> = ({}) => {
 
   return (
     <div>
+      <input type="radio" name="name" value="name" checked />
+
       <Radio
         value="1"
         name="test"

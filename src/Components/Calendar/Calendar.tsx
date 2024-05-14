@@ -76,6 +76,7 @@ export const Calendar: Story<Props> = ({
             <Toggle
               name="NavButtons"
               values={["Previous", "Today", "Next"]}
+              defaultValue=""
               setChecked={this.handleNavigation}
             />
           </div>
@@ -84,6 +85,7 @@ export const Calendar: Story<Props> = ({
             name="viewSelect"
             values={["Month", "Week", "Day"]}
             setChecked={changeView}
+            defaultValue={toggleValue}
           />
         </div>
       );

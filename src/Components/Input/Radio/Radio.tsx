@@ -16,6 +16,7 @@ export const Radio: Story<Props> = ({
   name,
   value,
   setChecked,
+  checked,
 }) => (
   <label className={styles.container}>
     <input
@@ -26,6 +27,7 @@ export const Radio: Story<Props> = ({
       onChange={(e) => {
         setChecked(e.target.value);
       }}
+      // checked={checked}
     />
     <div className={styles.inputLabel}>{label}</div>
 
