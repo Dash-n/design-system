@@ -6,12 +6,16 @@ import styles from "./Calendar.stories.module.css";
 
 import events from "./events";
 import backgroundEvents from "./backgroundEvents";
-
+type selectOption = {
+  option: string;
+  value: string;
+};
 type Props = {
   width?: string;
   height?: string;
   margin?: string;
   show: boolean;
+  athletes: selectOption;
 };
 
 const sampleEvent = {
@@ -26,8 +30,7 @@ export const EventPopups: Story<Props> = ({}) => {
   const [show, setShow] = useState(false);
 
   const togglePopup = () => {
-    setShow(true);
-    console.log("push");
+    setShow(!show);
   };
   const closePopup = () => {
     setShow(false);
@@ -37,8 +40,8 @@ export const EventPopups: Story<Props> = ({}) => {
   };
   return (
     <>
-      <div className={styles.centerDiv} onClick={togglePopup}>
-        Hello
+      <div className={styles.centerDiv}>
+        <button onClick={togglePopup}>Hello</button>
         <EventPopup
           event={sampleEvent}
           show={show}
@@ -50,13 +53,13 @@ export const EventPopups: Story<Props> = ({}) => {
   );
 };
 
-export const Calendars: Story<Props> = ({}) => {
+export const Calendars: Story<Props> = ({ athletes }) => {
   console.log(events);
   return (
     <div
       style={{
         width: "100%",
-        height: "80%",
+        height: "100vh",
         display: "flex",
         flexDirection: "row",
       }}
@@ -64,8 +67,11 @@ export const Calendars: Story<Props> = ({}) => {
       <Calendar
         events={events}
         backgroundEvents={backgroundEvents}
-        // handleClick={handleClick}
+        athletes={athletes}
       />
     </div>
   );
+};
+Calendars.args = {
+  athletes: [{ option: "Greg Gregory", value: "1" }, { option: "John Doe" }],
 };

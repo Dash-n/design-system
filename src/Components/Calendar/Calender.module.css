@@ -15,7 +15,7 @@
 }
 
 .calendar {
-  height: 80%;
+  height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -105,4 +105,14 @@
 
 .rbc-overlay {
   border-radius: 8px !important;
+}
+
+.timeSlot {
+  display: flex;
+  flex: 1;
+  position: relative;
+}
+
+.timeSlot:hover {
+  background-color: var(--soft-background-color);
 }

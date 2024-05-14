@@ -22,9 +22,14 @@
 
   --background-light: white;
 
+  --border-radius-xl: 24px;
   --border-radius-lg: 16px;
   --border-radius-md: 8px;
   --border-radius-sm: 4px;
+
+  --padding-lg: 16px 16px;
+  --padding-md: 8px 8px;
+  --padding-sm: 4px 4px;
 
   font-size: 32;
   color: var(--text-color);

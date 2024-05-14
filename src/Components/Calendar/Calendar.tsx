@@ -11,6 +11,7 @@ import { OutlineButton } from "../Button/OutlineButton/OutlineButton";
 import { EventPopup } from "./EventPopup/EventPopup";
 import { convertToDateTimeLocalString } from "../../Utils/convertToDateTimeLocalString";
 import { CalendarEvent, PopupEvent } from "./calendarutils/calendarutils";
+import { PageToggle } from "../Toggle/PageToggle/PageToggle";
 
 const localizer = momentLocalizer(moment); // or globalizeLocalizer
 
@@ -20,21 +21,26 @@ type Props = {
   events: CalendarEvent[];
   backgroundEvents: { id: number; title: string; start: Date; end: Date };
   availability?: { start: string; end: string };
+  defaultEventLength?: number;
+  athletes: [{ option: string; value: string }];
 };
 
 export const Calendar: Story<Props> = ({
   events,
   backgroundEvents,
   availability,
+  defaultEventLength = 30,
+  athletes,
 }: Props) => {
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
-  const [view, setView] = useState<(typeof Views)[Keys]>(Views.WEEK);
+  const [view, setView] = useState<(typeof Views)[Keys]>(Views.MONTH);
   const [toggleValue, setToggleValue] = useState("Month");
   const [myEvents, setEvents] = useState<CalendarEvent[]>(events);
   const [selected, setSelected] = useState();
   const [eventPopup, setEventPopup] = useState<PopupEvent>(null);
-  const [show, setShow] = useState(null);
-  const [test, setTest] = useState(["a"]);
+  const [show, setShow] = useState(false);
+
+  console.log(myEvents);
 
   const currentMonth = date.toLocaleString("default", { month: "long" });
 
@@ -47,24 +53,30 @@ export const Calendar: Story<Props> = ({
   );
 
   class CustomToolbar extends Toolbar {
+    handleNavigation = (value: string) => {
+      switch (value) {
+        case "Previous":
+          this.navigate("PREV");
+          break;
+        case "Today":
+          this.navigate("TODAY");
+          break;
+        case "Next":
+          this.navigate("NEXT");
+          break;
+      }
+    };
+    // const navButtons = new Map();
+    // navButtons.set("Previous", () => this.navigate("PREV"))
+
     render() {
       return (
         <div className="rbc-toolbar">
-          <div>
-            <OutlineButton
-              variant="primary"
-              label="Previous"
-              onClick={() => this.navigate("PREV")}
-            />
-            <OutlineButton
-              variant="primary"
-              label="Today"
-              onClick={() => this.navigate("TODAY")}
-            />
-            <OutlineButton
-              variant="primary"
-              label="Next"
-              onClick={() => this.navigate("NEXT")}
+          <div className={styles.toolbarNav}>
+            <Toggle
+              name="NavButtons"
+              values={["Previous", "Today", "Next"]}
+              setChecked={this.handleNavigation}
             />
           </div>
           <p className="rbc-toolbar-label">{this.props.label}</p>
@@ -81,11 +93,6 @@ export const Calendar: Story<Props> = ({
       this.props.onNavigate(action);
     };
   }
-  /*const hasMonth = local.eq(start, end, "month")
-const hasYear = // as above
-const formatter = `DD ${hasMonth && MMM} ${hasYear && YYYY}`
-
-local.format(start, formatter)*/
 
   //Week Label
   const dayRangeHeaderFormat = (
@@ -96,7 +103,6 @@ local.format(start, formatter)*/
     const sameMonth = localizer.eq(start, end, "month");
     const sameYear = localizer.eq(start, end, "year");
     const formatter = `DD ${sameMonth ? "" : "MMM"} ${sameYear ? "" : "YYYY"}`;
-    console.log(formatter);
 
     return (
       localizer.format(start, formatter, culture) +
@@ -117,7 +123,7 @@ local.format(start, formatter)*/
   const popupRef = useRef(null);
 
   const changeView = (value: string) => {
-    togglePopup(null);
+    // togglePopup(false);
     if (value === "Month") {
       setView(Views.MONTH);
       setToggleValue("Month");
@@ -132,9 +138,9 @@ local.format(start, formatter)*/
     }
   };
 
-  const togglePopup = (id) => {
-    adjustPopupPosition();
-    setShow(id);
+  const togglePopup = () => {
+    // adjustPopupPosition();
+    setShow(!show);
   };
 
   const eventClick = (event: any) => {
@@ -145,32 +151,39 @@ local.format(start, formatter)*/
       end: convertToDateTimeLocalString(event.end),
     } as PopupEvent;
     setEventPopup(newEvent);
-    togglePopup(event.id);
+    togglePopup();
   };
 
   const handleSelectSlot = (event: any) => {
-    if (show === null) {
-      const newEvent = {
-        id: myEvents.slice(-1)[0].id + 1,
-        title: "",
-        start: convertToDateTimeLocalString(event.start),
-        end: convertToDateTimeLocalString(event.end),
-      } as PopupEvent;
-      console.log(newEvent);
-      setEventPopup(newEvent);
-      togglePopup(0);
+    // if (show === null) {
+    const endTime = moment(event.start).add(defaultEventLength, "m").toDate();
+    console.log(event.start);
+    const newEvent = {
+      id: myEvents.slice(-1)[0].id + 1,
+      title: "",
+      start: convertToDateTimeLocalString(event.start),
+      end: convertToDateTimeLocalString(endTime),
+    } as PopupEvent;
+    setEventPopup(newEvent);
+    togglePopup();
+  };
+
+  const idExists = (array: CalendarEvent[], idToCheck: number): boolean => {
+    return array.some((obj) => obj.id === idToCheck);
+  };
+
+  const submitEvent = (event: CalendarEvent) => {
+    if (idExists(myEvents, event.id)) {
+      setEvents(myEvents.map((item) => (item.id === event.id ? event : item)));
+    } else {
+      setEvents([...myEvents, event]);
     }
+    togglePopup();
   };
 
-  const submitNewEvent = (event: CalendarEvent) => {
-    const nextId = myEvents.slice(-1)[0].id + 1;
-
-    setEvents([...myEvents, event]);
-    togglePopup(null);
-  };
-
-  const editEvent = (event: CalendarEvent) => {
-    setEvents(myEvents.map((item) => (item.id === event.id ? event : item)));
+  const deleteEvent = (id: number) => {
+    setEvents(myEvents.filter((item) => item.id !== id));
+    togglePopup();
   };
 
   const components: any = {
@@ -187,7 +200,9 @@ local.format(start, formatter)*/
       const timeString = `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}`;
       return (
         <div className={`${styles.eventLabel} `}>
-          <div className={styles.timeLabel}>{timeString}</div>
+          {view === "month" && (
+            <div className={styles.timeLabel}>{timeString}</div>
+          )}
           <div className={styles.titleLabel}>{title}</div>
         </div>
       );
@@ -208,80 +223,26 @@ local.format(start, formatter)*/
         flex: 1,
         position: "relative",
       };
-      return <div style={style}>{timeSlotWrapperProps.children}</div>;
+      return (
+        <div className={styles.timeSlot}>{timeSlotWrapperProps.children}</div>
+      );
     },
     eventWrapper: ({ event, children }) => {
-      return (
-        <div>
-          {children}
-          <div className="popupdiv">
-            <EventPopup
-              event={eventPopup}
-              show={show === event.id}
-              closePopup={() => togglePopup(null)}
-              submitEvent={editEvent}
-            />
-          </div>
-        </div>
-      );
+      return <div onClick={eventClick}>{children}</div>;
     },
     toolbar: CustomToolbar,
   };
 
-  const adjustPopupPosition = () => {
-    if (!popupRef.current) return;
-    console.log(popupRef);
-    //Still debugging this function
-
-    const popupRect = popupRef.current.getBoundingClientRect();
-    console.log(popupRect);
-    //Still debugging this function
-    const viewportWidth = window.innerWidth;
-    const viewportHeight = window.innerHeight;
-
-    // Calculate the position of the popup relative to the viewport
-    let adjustedTop = popupRect.top - popupRect.y;
-    let adjustedLeft = popupRect.left - popupRect.x;
-
-    if (popupRect.top < 0) {
-      adjustedTop = 0;
-      console.log("Too high");
-    } else if (popupRect.bottom > viewportHeight) {
-      console.log("too low");
-      adjustedTop = viewportHeight - popupRect.height - popupRect.y;
-    }
-
-    if (popupRect.left < 0) {
-      adjustedLeft = 0;
-      console.log("too left");
-    } else if (popupRect.right + popupRect.width > viewportWidth) {
-      console.log("too right");
-      adjustedLeft = 0 - (viewportWidth - (popupRect.width + popupRect.x));
-    }
-
-    // Set the adjusted position
-    setAdjustedPosition({ top: adjustedTop, left: adjustedLeft });
-  };
-
   return (
-    <div className={styles.myCustomHeight}>
-      <div
-        ref={popupRef}
-        className="popupref"
-        style={{
-          position: "absolute",
-          left: "30%",
-          top: "30%",
-        }}
-      >
-        {/* EMPTY POPUP */}
-        <EventPopup
-          event={eventPopup}
-          show={show === 0}
-          closePopup={() => togglePopup(null)}
-          submitEvent={submitNewEvent}
-        />
-      </div>
+    <div className={styles.calendar}>
+      <EventPopup
+        event={eventPopup}
+        show={show}
+        closePopup={() => togglePopup()}
+        submitEvent={submitEvent}
+        deleteEvent={deleteEvent}
+        athletes={athletes}
+      />
 
       <BigCalendar
         localizer={localizer}
@@ -298,7 +259,6 @@ local.format(start, formatter)*/
         step={15}
         timeslots={4}
         toolbar={true}
-        // defaultView={Views.MONTH}
         view={view}
         onView={setView}
         onNavigate={setDate}

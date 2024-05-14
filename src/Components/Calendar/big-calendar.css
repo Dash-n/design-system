@@ -666,8 +666,8 @@ button.rbc-input::-moz-focus-inner {
 .rbc-day-slot .rbc-time-slot:hover {
   content: 100%;
   width: 100%;
-  border-top: 1px solid red;
-  background-color: red;
+  /* border-top: 1px solid red; */
+  background-color: var(--soft-background-color);
   display: block;
 }
 
@@ -774,7 +774,6 @@ button.rbc-input::-moz-focus-inner {
 .rbc-time-view .rbc-row {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  min-height: 20px;
 }
 
 .rbc-time-header {
