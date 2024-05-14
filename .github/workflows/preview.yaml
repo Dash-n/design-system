@@ -12,39 +12,7 @@ on:
         default: 'main'
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    outputs:
-      sha: ${{ steps.set_output.outputs.sha }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          ref: ${{ github.event.inputs.branch || github.ref_name }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-
-      - name: Install dependencies
-        run: yarn install
-
-      - name: Build bundle
-        run: yarn ladle build
-
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: github-pages
-          path: ./build 
-
-      - name: Set output
-        id: set_output
-        run: echo "::set-output name=sha::${{ github.sha }}"
-
-  deploy:
-    needs: build
+  build_and_deploy:
     runs-on: ubuntu-latest
     environment:
       name: github-pages
@@ -56,15 +24,23 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Download artifact
-        uses: actions/download-artifact@v4
+        uses: actions/checkout@v2
         with:
-          name: github-pages
-          path: ./build
+          ref: ${{ github.event.inputs.branch || github.ref_name }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Build bundle
+        run: yarn ladle build
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
+        with:
+          path: ./build # Ensure this is the correct path where the build output is located
