@@ -39,8 +39,12 @@ jobs:
       - name: Build bundle
         run: yarn ladle build
 
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: github-pages
+          path: ./build 
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        with:
-          path: ./build # Ensure this is the correct path where the build output is located
