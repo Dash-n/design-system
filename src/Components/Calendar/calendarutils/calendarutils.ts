@@ -11,3 +11,9 @@ export type PopupEvent = {
   start: string;
   end: string;
 };
+
+export const defaultEventLength = 30;
+export const availability = { start: "00:00", end: "12:00" };
+export const mode = "physio";
+export const timeRange = { start: "00:00", end: "12:00" };
+export const defaultView = "Month";

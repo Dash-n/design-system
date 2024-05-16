@@ -115,4 +115,27 @@
 
 .timeSlot:hover {
   background-color: var(--soft-background-color);
+  z-index: 4;
+}
+
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 5;
+  pointer-events: none;
+  opacity: 0;
+
+  background-color: rgba(49, 49, 49, 0.8);
+  transition: all 0.3s ease-in;
+}
+
+.overlayVisible {
+  pointer-events: none;
+  transition: all 0.3s ease-in;
+  opacity: 100;
 }

@@ -26,12 +26,9 @@ export const Toggle: Story<Props> = ({
     setSelectedOption(event.target.value);
     setChecked(event.target.value);
   };
-  console.log(defaultValue);
 
   useEffect(() => {
     if (defaultValue == undefined) {
-      console.log("Blank");
-      console.log(values[0]);
       setSelectedOption(values[0]);
     } else setSelectedOption(defaultValue);
   }, []);

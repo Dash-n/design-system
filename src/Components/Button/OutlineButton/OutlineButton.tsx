@@ -23,7 +23,7 @@ export const OutlineButton: Story<Props> = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {toTitlecase(label)}
+      {label}
     </button>
   );
 };

@@ -7,7 +7,8 @@ import { TextInput } from "../../Input/Text/TextInput";
 import { Datepicker } from "../../Input/Date/Date";
 import { useRef, useEffect, useState } from "react";
 import { convertToDateTimeLocalString } from "../../../Utils/convertToDateTimeLocalString";
-import { IconButton } from "../../Button/IconButton/IconButton";
+import moment from "moment";
+import { isValid } from "date-fns";
 import { MdArrowBack } from "react-icons/md";
 import styles from "./EventPopup.module.css";
 import { Select } from "../../Input/Select/Select";
@@ -15,7 +16,6 @@ import { CalendarEvent, PopupEvent } from "../calendarutils/calendarutils";
 import { Modal } from "../../Modal/Modal";
 
 type Props = {
-  // children?: React.ReactNode;
   athletes: [{ option: string; value: string }];
   event: PopupEvent;
   width?: string;
@@ -35,7 +35,6 @@ type TempTime = {
 };
 
 export const EventPopup: Story<Props> = ({
-  // id,
   athletes,
   event = { id: 0, title: "", start: "", end: "" },
   show = false,
@@ -64,7 +63,6 @@ export const EventPopup: Story<Props> = ({
 
   useEffect(() => {
     if (event) {
-      console.log(event);
       setCalendarEvent((prev) => ({
         ...prev,
         id: event.id ?? 0,
@@ -78,12 +76,16 @@ export const EventPopup: Story<Props> = ({
         end: event.end,
       }));
       inputRef.current = event.title;
-      console.log(inputRef);
     }
-  }, [event]);
+  }, [show]);
 
-  console.log(calendarEvent);
   var confirmDateChange = () => {
+    const starttime = new Date(tempTime.start);
+    const endtime = new Date(tempTime.end);
+    if (endtime < starttime) {
+      const newEnd = moment(starttime).add(30, "m").toDate();
+      tempTime.end = convertToDateTimeLocalString(newEnd);
+    }
     setCalendarEvent((prev) => ({
       ...prev,
       title: calendarEvent.title,
@@ -111,7 +113,6 @@ export const EventPopup: Story<Props> = ({
 
   const handleTitleChange = (title: string) => {
     inputRef.current = title;
-    console.log(inputRef.current);
   };
 
   const submit = () => {
@@ -121,7 +122,7 @@ export const EventPopup: Story<Props> = ({
       start: new Date(calendarEvent.start),
       end: new Date(calendarEvent.end),
     };
-    submitEvent(subEvent);
+    if (validEvent(subEvent)) submitEvent(subEvent);
   };
 
   const toggleModal = () => {
@@ -129,28 +130,40 @@ export const EventPopup: Story<Props> = ({
   };
 
   const handleDelete = () => {
-    console.log("delete");
     deleteEvent(event.id);
     toggleModal();
   };
-  const ConfirmModal = ({ element }: { element: React.ReactNode }) => {
-    return (
-      <div className={styles.confirmModal}>
-        <strong>Are you sure you want to delete Event {event.title}?</strong>
-        <div className={styles.buttonSection}>
-          <Button variant="warning" label="Confirm" onClick={handleDelete} />
-          <OutlineButton label="Cancel" onClick={toggleModal} />
-        </div>
+
+  const ConfirmModal = (
+    <div className={styles.confirmModal}>
+      <strong>Are you sure you want to delete Event {event.title}?</strong>
+      <div className={styles.buttonSection}>
+        <Button variant="warning" label="Confirm" onClick={handleDelete} />
+        <OutlineButton label="Cancel" onClick={toggleModal} />
       </div>
-    );
+    </div>
+  );
+
+  const validEvent = (event: CalendarEvent) => {
+    if (event.title == "") {
+      alert("Please enter Event Name");
+      return false;
+    }
+    if (!isValid(event.start)) {
+      alert("Invalid Start Date");
+      return false;
+    }
+    if (!isValid(event.end)) {
+      alert("Invalid End Date");
+      return false;
+    }
+    return true;
   };
 
   return (
     <>
       {show && (
         <div className={styles.modal}>
-          <div className={styles.overlay} onClick={closePopup} />
-
           <div className={`${styles.modalContainer}`}>
             {page === 0 && (
               <div id="page0" className={styles.popupPage}>
@@ -178,6 +191,7 @@ export const EventPopup: Story<Props> = ({
                       placeholder={"New Event"}
                       defaultValue={event?.title}
                       onChange={handleTitleChange}
+                      required
                     />
                   </div>
                   <div className={styles.fieldSection}>
@@ -234,7 +248,7 @@ export const EventPopup: Story<Props> = ({
                       <Modal
                         modal={modal}
                         toggleModal={toggleModal}
-                        children={<ConfirmModal />}
+                        children={ConfirmModal}
                       />
                     </>
                   )}
@@ -287,6 +301,7 @@ export const EventPopup: Story<Props> = ({
                   placeholder={tempTime.end}
                   inputValue={tempTime.end}
                   setInputValue={handleDateChange}
+                  startDate={new Date(calendarEvent.start)}
                 />
 
                 <Button

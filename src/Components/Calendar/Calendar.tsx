@@ -3,17 +3,20 @@ import "./big-calendar.css";
 import styles from "./Calender.module.css";
 import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
 import Toolbar from "react-big-calendar/lib/Toolbar";
-import { EventProps, Views } from "react-big-calendar";
+import { Views } from "react-big-calendar";
 import moment from "moment";
-import { cloneElement, useCallback, useState, useRef, useEffect } from "react";
+import { useCallback, useState } from "react";
 import { Toggle } from "../Toggle/ToggleSwitch/Toggle";
-import { OutlineButton } from "../Button/OutlineButton/OutlineButton";
 import { EventPopup } from "./EventPopup/EventPopup";
 import { convertToDateTimeLocalString } from "../../Utils/convertToDateTimeLocalString";
-import { CalendarEvent, PopupEvent } from "./calendarutils/calendarutils";
-import { PageToggle } from "../Toggle/PageToggle/PageToggle";
+import {
+  CalendarEvent,
+  PopupEvent,
+  defaultEventLength as defaultEveLength,
+  defaultView,
+} from "./calendarutils/calendarutils";
 
-const localizer = momentLocalizer(moment); // or globalizeLocalizer
+const localizer = momentLocalizer(moment);
 
 type Keys = keyof typeof Views;
 
@@ -29,18 +32,16 @@ export const Calendar: Story<Props> = ({
   events,
   backgroundEvents,
   availability,
-  defaultEventLength = 30,
+  defaultEventLength = defaultEveLength,
   athletes,
 }: Props) => {
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.MONTH);
-  const [toggleValue, setToggleValue] = useState("Month");
+  const [toggleValue, setToggleValue] = useState(defaultView);
   const [myEvents, setEvents] = useState<CalendarEvent[]>(events);
   const [selected, setSelected] = useState();
-  const [eventPopup, setEventPopup] = useState<PopupEvent>(null);
+  const [eventPopup, setEventPopup] = useState<PopupEvent>();
   const [show, setShow] = useState(false);
-
-  console.log(myEvents);
 
   const currentMonth = date.toLocaleString("default", { month: "long" });
 
@@ -66,8 +67,6 @@ export const Calendar: Story<Props> = ({
           break;
       }
     };
-    // const navButtons = new Map();
-    // navButtons.set("Previous", () => this.navigate("PREV"))
 
     render() {
       return (
@@ -96,6 +95,14 @@ export const Calendar: Story<Props> = ({
     };
   }
 
+  const onView = useCallback(
+    (newView) => {
+      setView(newView);
+      setToggleValue("Day");
+    },
+    [setView]
+  );
+
   //Week Label
   const dayRangeHeaderFormat = (
     { start, end },
@@ -118,14 +125,10 @@ export const Calendar: Story<Props> = ({
   };
 
   //Day Label
-  const dayHeaderFormat = (date: Date, culture, localizer) =>
+  const dayHeaderFormat = (date: Date, culture, localizer: momentLocalizer) =>
     localizer.format(date, "dddd DD MMMM, YYYY", culture);
 
-  const [adjustedPosition, setAdjustedPosition] = useState({ top: 0, left: 0 });
-  const popupRef = useRef(null);
-
   const changeView = (value: string) => {
-    // togglePopup(false);
     if (value === "Month") {
       setView(Views.MONTH);
       setToggleValue("Month");
@@ -141,7 +144,6 @@ export const Calendar: Story<Props> = ({
   };
 
   const togglePopup = () => {
-    // adjustPopupPosition();
     setShow(!show);
   };
 
@@ -157,11 +159,12 @@ export const Calendar: Story<Props> = ({
   };
 
   const handleSelectSlot = (event: any) => {
-    // if (show === null) {
-    const endTime = moment(event.start).add(defaultEventLength, "m").toDate();
-    console.log(event.start);
+    let endTime = event.end;
+    if (event.action === "click") {
+      endTime = moment(event.start).add(defaultEventLength, "m").toDate();
+    }
     const newEvent = {
-      id: myEvents.slice(-1)[0].id + 1,
+      id: myEvents.slice(-1)[0].id + 1, //get next ID available after last element. Should be safe?
       title: "",
       start: convertToDateTimeLocalString(event.start),
       end: convertToDateTimeLocalString(endTime),
@@ -211,7 +214,7 @@ export const Calendar: Story<Props> = ({
     },
     timeSlotWrapper: (timeSlotWrapperProps) => {
       /*
-      //Future feature 
+      //Future feature if needed
       //Template for setting work hours highlight. 
       
       const hasCustomInfo = timeSlotWrapperProps.value
@@ -237,6 +240,9 @@ export const Calendar: Story<Props> = ({
 
   return (
     <div className={styles.calendar}>
+      <div
+        className={`${styles.overlay} ${show ? styles.overlayVisible : ""}`}
+      />
       <EventPopup
         event={eventPopup}
         show={show}
@@ -253,7 +259,6 @@ export const Calendar: Story<Props> = ({
         components={components}
         selected={selected}
         onSelectEvent={eventClick}
-        onSelecting={handleSelectSlot}
         onSelectSlot={handleSelectSlot}
         startAccessor="start"
         endAccessor="end"
@@ -262,7 +267,7 @@ export const Calendar: Story<Props> = ({
         timeslots={4}
         toolbar={true}
         view={view}
-        onView={setView}
+        onView={onView}
         onNavigate={setDate}
         selectable
         popup

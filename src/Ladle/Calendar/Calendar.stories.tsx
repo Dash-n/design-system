@@ -54,14 +54,14 @@ export const EventPopups: Story<Props> = ({}) => {
 };
 
 export const Calendars: Story<Props> = ({ athletes }) => {
-  console.log(events);
   return (
     <div
       style={{
-        width: "100%",
-        height: "100vh",
+        width: "95%",
+        height: "95vh",
         display: "flex",
         flexDirection: "row",
+        justifyContent: "center",
       }}
     >
       <Calendar
@@ -73,5 +73,5 @@ export const Calendars: Story<Props> = ({ athletes }) => {
   );
 };
 Calendars.args = {
-  athletes: [{ option: "Greg Gregory", value: "1" }, { option: "John Doe" }],
+  athletes: [{ option: "Greg Gregory" }, { option: "John Doe" }],
 };

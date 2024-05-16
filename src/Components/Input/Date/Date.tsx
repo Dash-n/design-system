@@ -17,6 +17,8 @@ type Props = {
   inputValue: string;
   setInputValue: (e) => void;
   open?: boolean;
+  startDate?: Date;
+  endDate?: Date;
 };
 
 export const Datepicker: Story<Props> = ({
@@ -27,6 +29,8 @@ export const Datepicker: Story<Props> = ({
   inputValue,
   setInputValue,
   open = false,
+  startDate,
+  endDate,
 }) => {
   const [selected, setSelected] = useState<Date>();
   const [isOpen, setIsOpen] = useState(open);
@@ -123,10 +127,12 @@ export const Datepicker: Story<Props> = ({
       <DayPicker
         initialFocus={true}
         mode="single"
+        disabled={{ before: startDate, after: endDate }}
         {...dayPickerProps}
         selected={selected}
         onSelect={handleDaySelect}
         footer={footer}
+        required
       />
     </div>
   );

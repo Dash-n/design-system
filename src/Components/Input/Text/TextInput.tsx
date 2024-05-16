@@ -13,6 +13,7 @@ type Props = {
   inputValue?: string;
   defaultValue?: string;
   onChange: (value: string) => void;
+  required?: boolean;
 };
 
 export const TextInput: Story<Props> = ({
@@ -26,6 +27,7 @@ export const TextInput: Story<Props> = ({
   inputValue,
   defaultValue,
   onChange,
+  required,
 }) => {
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     onChange(e.currentTarget.value);
@@ -44,6 +46,7 @@ export const TextInput: Story<Props> = ({
         defaultValue={defaultValue}
         value={inputValue}
         onChange={handleInputChange}
+        required={required}
       />
       {label && (
         <label htmlFor={id} className={styles.label}>
