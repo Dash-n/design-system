@@ -123,27 +123,19 @@ export const Radios: Story<Props> = ({}) => {
 
   return (
     <div>
-      <input type="radio" name="name" value="name" checked />
+      <input type="radio" name="name" value="name" />
 
       <Radio
-        value="1"
+        values={["1", "2", "3"]}
         name="test"
-        label={`One Selected: ${value === "1"}`}
-        checked
+        labels={[
+          `One Selected: ${value === "1"}`,
+          `Two Selected: ${value === "2"}`,
+          `Three Selected: ${value === "3"}`,
+        ]}
         setChecked={handleChange}
       />
-      <Radio
-        value="2"
-        name="test"
-        label={`Two Selected: ${value === "2"}`}
-        setChecked={handleChange}
-      />
-      <Radio
-        value="3"
-        name="test"
-        label={`Three Selected: ${value === "3"}`}
-        setChecked={handleChange}
-      />
+
       <div>Value: {`${value}`}</div>
     </div>
   );

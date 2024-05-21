@@ -11,7 +11,6 @@ type Props = {
 export const Modal: Story<Props> = ({ modal, toggleModal, children }) => {
   return (
     <>
-      {/* <button onClick={toggleModal}>Open Modal</button> */}
       {modal && (
         <div className={styles.modal}>
           <div className={styles.overlay} onClick={toggleModal} />

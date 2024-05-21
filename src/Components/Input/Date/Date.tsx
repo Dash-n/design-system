@@ -3,6 +3,7 @@ import "./style.css";
 import styles from "./Date.module.css";
 import { format, parse, isValid } from "date-fns";
 import { ChangeEventHandler, useState } from "react";
+import { convertToDateTimeLocalString } from "../../../Utils/convertToDateTimeLocalString";
 import {
   DayPicker,
   useInput,
@@ -42,60 +43,27 @@ export const Datepicker: Story<Props> = ({
     required: true,
   });
 
-  const handleDayChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setInputValue(e.currentTarget.value);
-    // setInputValue(e);
-    const date = parse(e.currentTarget.value, "y-MM-dd hh:mm", new Date());
-    // if (isValid(date)) {
-    //   setSelected(date);
-    // } else {
-    //   setSelected(undefined);
-    // }
-  };
-
   const handleTimeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setTime(e.currentTarget.value);
     const newDatetime = `${inputValue.substring(0, 11)}${e.currentTarget.value}`;
     console.log(newDatetime);
-    // setInputValue(e.currentTarget.value);
     setInputValue(newDatetime);
-    // const date = parse(newDatetime, "y-MM-dd hh:mm", new Date());
-    // if (isValid(date)) {
-    //   setSelected(date);
-    // } else {
-    //   setSelected(undefined);
-    // }
   };
 
-  const handleDaySelect: SelectSingleEventHandler = (date) => {
+  const handleDaySelect: SelectSingleEventHandler = (selectedDate: Date) => {
     const hours = parseInt(time.substring(0, 2));
     const minutes = parseInt(time.substring(3, 5));
-    date.setHours(hours, minutes);
-    console.log(date);
-    setSelected(date);
-    if (date) {
-      setInputValue(convertToDateTimeLocalString(date));
-      // setInputValue(format(date, "y-MM-dd hh:mm"));
+    selectedDate.setHours(hours, minutes);
+    setSelected(selectedDate);
+    if (selectedDate) {
+      setInputValue(convertToDateTimeLocalString(selectedDate));
     } else {
       setInputValue("");
     }
   };
 
-  const convertToDateTimeLocalString = (date) => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, "0");
-    const day = date.getDate().toString().padStart(2, "0");
-    const hours = date.getHours().toString().padStart(2, "0");
-    const minutes = date.getMinutes().toString().padStart(2, "0");
-
-    return `${year}-${month}-${day}T${hours}:${minutes}`;
-  };
-
   const openPopup = () => {
     setIsOpen(true);
-  };
-  const closePopup = () => {
-    setIsOpen(false);
   };
 
   const footer = (
@@ -107,18 +75,11 @@ export const Datepicker: Story<Props> = ({
         type="time"
         placeholder={placeholder}
         className={styles.input}
-        {...inputProps}
         value={time}
         onChange={handleTimeChange}
         onFocus={openPopup}
+        {...inputProps}
       />
-      {/* <input
-        type="time"
-        id="time"
-        name={name}
-        className={styles.input}
-        value={inputValue.getTime}
-      /> */}
     </div>
   );
 
@@ -128,11 +89,11 @@ export const Datepicker: Story<Props> = ({
         initialFocus={true}
         mode="single"
         disabled={{ before: startDate, after: endDate }}
-        {...dayPickerProps}
         selected={selected}
         onSelect={handleDaySelect}
         footer={footer}
         required
+        {...dayPickerProps}
       />
     </div>
   );

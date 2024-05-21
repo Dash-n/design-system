@@ -45,27 +45,14 @@ export const Calendar: Story<Props> = ({
 
   const currentMonth = date.toLocaleString("default", { month: "long" });
 
-  const toolbarTitle = new Map();
-  toolbarTitle.set("month", `${currentMonth} ${date.getFullYear()}`);
-  toolbarTitle.set("week", `${currentMonth} ${date.getFullYear()}`);
-  toolbarTitle.set(
-    "day",
-    `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear()}`
-  );
+  const toolbarNav = new Map();
+  toolbarNav.set("Previous", "PREV");
+  toolbarNav.set("Today", "TODAY");
+  toolbarNav.set("Next", "NEXT");
 
   class CustomToolbar extends Toolbar {
     handleNavigation = (value: string) => {
-      switch (value) {
-        case "Previous":
-          this.navigate("PREV");
-          break;
-        case "Today":
-          this.navigate("TODAY");
-          break;
-        case "Next":
-          this.navigate("NEXT");
-          break;
-      }
+      this.navigate(toolbarNav.get(value));
     };
 
     render() {
@@ -109,9 +96,9 @@ export const Calendar: Story<Props> = ({
     culture,
     localizer: momentLocalizer
   ) => {
-    const sameMonth = localizer.eq(start, end, "month");
-    const sameYear = localizer.eq(start, end, "year");
-    const formatter = `DD ${sameMonth ? "" : "MMM"} ${sameYear ? "" : "YYYY"}`;
+    const monthPrint = localizer.eq(start, end, "month") ? "" : "MMM";
+    const yearPrint = localizer.eq(start, end, "year") ? "" : "YYYY";
+    const formatter = `DD ${monthPrint} ${yearPrint}`;
 
     return (
       localizer.format(start, formatter, culture) +
@@ -131,16 +118,14 @@ export const Calendar: Story<Props> = ({
   const changeView = (value: string) => {
     if (value === "Month") {
       setView(Views.MONTH);
-      setToggleValue("Month");
     }
     if (value === "Week") {
       setView(Views.WEEK);
-      setToggleValue("Week");
     }
     if (value === "Day") {
       setView(Views.DAY);
-      setToggleValue("Day");
     }
+    setToggleValue(value);
   };
 
   const togglePopup = () => {
@@ -164,7 +149,7 @@ export const Calendar: Story<Props> = ({
       endTime = moment(event.start).add(defaultEventLength, "m").toDate();
     }
     const newEvent = {
-      id: myEvents.slice(-1)[0].id + 1, //get next ID available after last element. Should be safe?
+      id: Array.from(myEvents).slice(-1)[0].id + 1, //get next ID available after last element. Should be safe?
       title: "",
       start: convertToDateTimeLocalString(event.start),
       end: convertToDateTimeLocalString(endTime),

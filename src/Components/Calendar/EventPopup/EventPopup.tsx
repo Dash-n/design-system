@@ -79,6 +79,32 @@ export const EventPopup: Story<Props> = ({
     }
   }, [show]);
 
+  const Page2 = (field: string) => (
+    <div className={styles.dateSection}>
+      <div className={styles.dateSectionHeader}>
+        <OutlineButton label={<MdArrowBack />} onClick={() => setPage(0)} />
+        <strong>Time Start: </strong>
+      </div>
+      {field === "start" && (
+        <Datepicker
+          id={field}
+          name={field}
+          inputValue={tempTime.start}
+          setInputValue={handleDateChange}
+        />
+      )}
+      {field === "end" && (
+        <Datepicker
+          id={field}
+          name={field}
+          inputValue={tempTime.end}
+          setInputValue={handleDateChange}
+        />
+      )}
+      <Button name={field} label="Confirm" onClick={confirmDateChange} />
+    </div>
+  );
+
   var confirmDateChange = () => {
     const starttime = new Date(tempTime.start);
     const endtime = new Date(tempTime.end);
@@ -263,54 +289,7 @@ export const EventPopup: Story<Props> = ({
                 </div>
               </div>
             )}
-            {page === 1 && field === "start" && (
-              <div className={styles.dateSection}>
-                <div className={styles.dateSectionHeader}>
-                  <OutlineButton
-                    label={<MdArrowBack />}
-                    onClick={() => setPage(0)}
-                  />{" "}
-                  <strong>Time Start: </strong>
-                </div>
-                <Datepicker
-                  id="start"
-                  name="start"
-                  placeholder={tempTime.start}
-                  inputValue={tempTime.start}
-                  setInputValue={handleDateChange}
-                />
-                <Button
-                  name="start"
-                  label="Confirm"
-                  onClick={confirmDateChange}
-                />
-              </div>
-            )}
-            {page === 1 && field === "end" && (
-              <div className={styles.dateSection}>
-                <div className={styles.dateSectionHeader}>
-                  <OutlineButton
-                    label={<MdArrowBack />}
-                    onClick={() => setPage(0)}
-                  />{" "}
-                  <strong>Time End: </strong>
-                </div>
-                <Datepicker
-                  id="end"
-                  name="end"
-                  placeholder={tempTime.end}
-                  inputValue={tempTime.end}
-                  setInputValue={handleDateChange}
-                  startDate={new Date(calendarEvent.start)}
-                />
-
-                <Button
-                  name="start"
-                  label="Confirm"
-                  onClick={confirmDateChange}
-                />
-              </div>
-            )}
+            {page === 1 && Page2(field)}
           </div>
         </div>
       )}

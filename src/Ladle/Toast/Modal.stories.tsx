@@ -21,6 +21,7 @@ export const Modals: Story<Props> = ({}) => {
   const toggleModal = () => {
     setModal(!modal);
   };
+
   return (
     <div>
       <button onClick={toggleModal}>Open Modal</button>
@@ -30,6 +31,5 @@ export const Modals: Story<Props> = ({}) => {
         children={<p>Content</p>}
       />
     </div>
-    // </div>
   );
 };

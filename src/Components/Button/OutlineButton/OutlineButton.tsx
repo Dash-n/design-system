@@ -3,7 +3,7 @@ import styles from "./OutlineButton.module.css";
 import { toTitlecase } from "../../../Utils/toTitleCase.ts";
 
 type Props = {
-  label: string;
+  label: string | Element;
   disabled?: boolean;
   variant?: string;
   onClick: () => void;
