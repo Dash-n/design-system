@@ -14,6 +14,7 @@ import styles from "./EventPopup.module.css";
 import { Select } from "../../Input/Select/Select";
 import { CalendarEvent, PopupEvent } from "../calendarutils/calendarutils";
 import { Modal } from "../../Modal/Modal";
+import { ChangeEvent } from "react";
 import defaultAvatar from "../../../images/defaultAvatar.jpeg";
 
 type Athlete = {
@@ -22,7 +23,6 @@ type Athlete = {
   photo?: string;
 };
 type Props = {
-  // athletes: [{ option: string; value: string }];
   athletes: Athlete[];
   event: PopupEvent;
   show: boolean;
@@ -68,6 +68,7 @@ export const EventPopup: Story<Props> = ({
   const inputRef = useRef("");
 
   useEffect(() => {
+    setPage(0);
     if (event) {
       setCalendarEvent((prev) => ({
         ...prev,
@@ -162,10 +163,13 @@ export const EventPopup: Story<Props> = ({
     }));
   };
 
-  const handleAthleteChange = (e) => {
-    const selectedAthlete = athletes.find((a) => a.name === e.target.value);
-    setSelectedAthlete(selectedAthlete);
-    console.log(selectedAthlete);
+  const handleAthleteChange = (event: ChangeEvent<HTMLSelectElement>) => {
+    if (athletes) {
+      const selectedAthlete = athletes.find(
+        (a) => a.name === event.target.value
+      );
+      setSelectedAthlete(selectedAthlete);
+    }
   };
 
   const handleTitleChange = (title: string) => {

@@ -1,4 +1,5 @@
 import type { Story } from "@ladle/react";
+import { ChangeEvent } from "react";
 import styles from "./Select.module.css";
 
 type selectOption = {
@@ -13,7 +14,7 @@ type Props = {
   options: selectOption[];
   style?: any;
   emptyOption?: string;
-  setAnswer: (e) => void;
+  setAnswer: (event: ChangeEvent<HTMLSelectElement>) => void;
 };
 
 export const Select: Story<Props> = ({

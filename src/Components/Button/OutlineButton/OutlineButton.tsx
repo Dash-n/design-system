@@ -1,9 +1,10 @@
 import type { Story } from "@ladle/react";
 import styles from "./OutlineButton.module.css";
+import { ReactNode } from "react";
 import { toTitlecase } from "../../../Utils/toTitleCase.ts";
 
 type Props = {
-  label: string | Element;
+  label: string | ReactNode;
   disabled?: boolean;
   variant?: string;
   onClick: () => void;

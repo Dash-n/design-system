@@ -26,12 +26,11 @@ type DateRange = {
 
 type Props = {
   events: CalendarEvent[];
-  backgroundEvents: { id: number; title: string; start: Date; end: Date };
+  backgroundEvents?: { id: number; title: string; start: Date; end: Date };
   availability?: { start: string; end: string };
   defaultEventLength?: number;
   athletes: Athlete[];
-  // athletes: [{ option: string; value: string }];
-  config: CalendarConfig;
+  config?: CalendarConfig;
 };
 
 type CalendarConfig = {
@@ -77,7 +76,6 @@ export const Calendar: Story<Props> = ({
     };
 
     render() {
-      console.log(this);
       return (
         <div className="rbc-toolbar">
           <div className={styles.toolbarNav}>

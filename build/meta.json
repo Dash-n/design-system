@@ -1,0 +1,405 @@
+{
+  "about": {
+    "homepage": "https://www.ladle.dev",
+    "github": "https://github.com/tajo/ladle",
+    "version": 1
+  },
+  "stories": {
+    "button--buttons": {
+      "name": "Buttons",
+      "levels": [
+        "Button"
+      ],
+      "locStart": 18,
+      "locEnd": 33,
+      "filePath": "src/Ladle/Button/Button.stories.tsx",
+      "namedExport": "Buttons",
+      "meta": {}
+    },
+    "button--icon-buttons": {
+      "name": "Icon buttons",
+      "levels": [
+        "Button"
+      ],
+      "locStart": 84,
+      "locEnd": 100,
+      "filePath": "src/Ladle/Button/Button.stories.tsx",
+      "namedExport": "IconButtons",
+      "meta": {}
+    },
+    "button--outline-buttons": {
+      "name": "Outline buttons",
+      "levels": [
+        "Button"
+      ],
+      "locStart": 46,
+      "locEnd": 72,
+      "filePath": "src/Ladle/Button/Button.stories.tsx",
+      "namedExport": "OutlineButtons",
+      "meta": {}
+    },
+    "calendar--calendars": {
+      "name": "Calendars",
+      "levels": [
+        "Calendar"
+      ],
+      "locStart": 62,
+      "locEnd": 76,
+      "filePath": "src/Ladle/Calendar/Calendar.stories.tsx",
+      "namedExport": "Calendars",
+      "meta": {}
+    },
+    "calendar--event-popups": {
+      "name": "Event popups",
+      "levels": [
+        "Calendar"
+      ],
+      "locStart": 33,
+      "locEnd": 60,
+      "filePath": "src/Ladle/Calendar/Calendar.stories.tsx",
+      "namedExport": "EventPopups",
+      "meta": {}
+    },
+    "chart--bar-charts": {
+      "name": "Bar charts",
+      "levels": [
+        "Chart"
+      ],
+      "locStart": 39,
+      "locEnd": 77,
+      "filePath": "src/Ladle/Charts/Chart.stories.tsx",
+      "namedExport": "BarCharts",
+      "meta": {}
+    },
+    "chart--combo-charts": {
+      "name": "Combo charts",
+      "levels": [
+        "Chart"
+      ],
+      "locStart": 105,
+      "locEnd": 144,
+      "filePath": "src/Ladle/Charts/Chart.stories.tsx",
+      "namedExport": "ComboCharts",
+      "meta": {}
+    },
+    "chart--horizontal-bar-charts": {
+      "name": "Horizontal bar charts",
+      "levels": [
+        "Chart"
+      ],
+      "locStart": 178,
+      "locEnd": 215,
+      "filePath": "src/Ladle/Charts/Chart.stories.tsx",
+      "namedExport": "HorizontalBarCharts",
+      "meta": {}
+    },
+    "chart--line-charts": {
+      "name": "Line charts",
+      "levels": [
+        "Chart"
+      ],
+      "locStart": 338,
+      "locEnd": 376,
+      "filePath": "src/Ladle/Charts/Chart.stories.tsx",
+      "namedExport": "LineCharts",
+      "meta": {}
+    },
+    "chart--pie-charts": {
+      "name": "Pie charts",
+      "levels": [
+        "Chart"
+      ],
+      "locStart": 244,
+      "locEnd": 265,
+      "filePath": "src/Ladle/Charts/Chart.stories.tsx",
+      "namedExport": "PieCharts",
+      "meta": {}
+    },
+    "chart--radar-charts": {
+      "name": "Radar charts",
+      "levels": [
+        "Chart"
+      ],
+      "locStart": 485,
+      "locEnd": 510,
+      "filePath": "src/Ladle/Charts/Chart.stories.tsx",
+      "namedExport": "RadarCharts",
+      "meta": {}
+    },
+    "chart--scatter-charts": {
+      "name": "Scatter charts",
+      "levels": [
+        "Chart"
+      ],
+      "locStart": 406,
+      "locEnd": 444,
+      "filePath": "src/Ladle/Charts/Chart.stories.tsx",
+      "namedExport": "ScatterCharts",
+      "meta": {}
+    },
+    "chart--stacked-bar-charts": {
+      "name": "Stacked bar charts",
+      "levels": [
+        "Chart"
+      ],
+      "locStart": 272,
+      "locEnd": 309,
+      "filePath": "src/Ladle/Charts/Chart.stories.tsx",
+      "namedExport": "StackedBarCharts",
+      "meta": {}
+    },
+    "container--containers": {
+      "name": "Containers",
+      "levels": [
+        "Container"
+      ],
+      "locStart": 14,
+      "locEnd": 21,
+      "filePath": "src/Ladle/Container/Container.stories.tsx",
+      "namedExport": "Containers",
+      "meta": {}
+    },
+    "container--draggable-containers": {
+      "name": "Draggable containers",
+      "levels": [
+        "Container"
+      ],
+      "locStart": 30,
+      "locEnd": 73,
+      "filePath": "src/Ladle/Container/Container.stories.tsx",
+      "namedExport": "DraggableContainers",
+      "meta": {}
+    },
+    "inputs--checkboxes": {
+      "name": "Checkboxes",
+      "levels": [
+        "Inputs"
+      ],
+      "locStart": 77,
+      "locEnd": 112,
+      "filePath": "src/Ladle/Inputs/Inputs.stories.tsx",
+      "namedExport": "Checkboxes",
+      "meta": {}
+    },
+    "inputs--date-pickers": {
+      "name": "Date pickers",
+      "levels": [
+        "Inputs"
+      ],
+      "locStart": 207,
+      "locEnd": 224,
+      "filePath": "src/Ladle/Inputs/Inputs.stories.tsx",
+      "namedExport": "DatePickers",
+      "meta": {}
+    },
+    "inputs--number-inputs": {
+      "name": "Number inputs",
+      "levels": [
+        "Inputs"
+      ],
+      "locStart": 46,
+      "locEnd": 75,
+      "filePath": "src/Ladle/Inputs/Inputs.stories.tsx",
+      "namedExport": "NumberInputs",
+      "meta": {}
+    },
+    "inputs--radios": {
+      "name": "Radios",
+      "levels": [
+        "Inputs"
+      ],
+      "locStart": 117,
+      "locEnd": 142,
+      "filePath": "src/Ladle/Inputs/Inputs.stories.tsx",
+      "namedExport": "Radios",
+      "meta": {}
+    },
+    "inputs--selects": {
+      "name": "Selects",
+      "levels": [
+        "Inputs"
+      ],
+      "locStart": 144,
+      "locEnd": 180,
+      "filePath": "src/Ladle/Inputs/Inputs.stories.tsx",
+      "namedExport": "Selects",
+      "meta": {}
+    },
+    "inputs--sliders": {
+      "name": "Sliders",
+      "levels": [
+        "Inputs"
+      ],
+      "locStart": 188,
+      "locEnd": 205,
+      "filePath": "src/Ladle/Inputs/Inputs.stories.tsx",
+      "namedExport": "Sliders",
+      "meta": {}
+    },
+    "inputs--text-inputs": {
+      "name": "Text inputs",
+      "levels": [
+        "Inputs"
+      ],
+      "locStart": 22,
+      "locEnd": 40,
+      "filePath": "src/Ladle/Inputs/Inputs.stories.tsx",
+      "namedExport": "TextInputs",
+      "meta": {}
+    },
+    "navigation--card-buttons": {
+      "name": "Card buttons",
+      "levels": [
+        "Navigation"
+      ],
+      "locStart": 76,
+      "locEnd": 105,
+      "filePath": "src/Ladle/Navigation/Navigation.stories.tsx",
+      "namedExport": "CardButtons",
+      "meta": {}
+    },
+    "navigation--folder-buttons": {
+      "name": "Folder buttons",
+      "levels": [
+        "Navigation"
+      ],
+      "locStart": 107,
+      "locEnd": 131,
+      "filePath": "src/Ladle/Navigation/Navigation.stories.tsx",
+      "namedExport": "FolderButtons",
+      "meta": {}
+    },
+    "navigation--menu-buttons": {
+      "name": "Menu buttons",
+      "levels": [
+        "Navigation"
+      ],
+      "locStart": 41,
+      "locEnd": 75,
+      "filePath": "src/Ladle/Navigation/Navigation.stories.tsx",
+      "namedExport": "MenuButtons",
+      "meta": {}
+    },
+    "sidenav--selects": {
+      "name": "Selects",
+      "levels": [
+        "Sidenav"
+      ],
+      "locStart": 48,
+      "locEnd": 72,
+      "filePath": "src/Ladle/Navigation/Sidenav.stories.tsx",
+      "namedExport": "Selects",
+      "meta": {}
+    },
+    "sidenav--side-headers": {
+      "name": "Side headers",
+      "levels": [
+        "Sidenav"
+      ],
+      "locStart": 39,
+      "locEnd": 43,
+      "filePath": "src/Ladle/Navigation/Sidenav.stories.tsx",
+      "namedExport": "SideHeaders",
+      "meta": {}
+    },
+    "sidenav--sidenavs": {
+      "name": "Sidenavs",
+      "levels": [
+        "Sidenav"
+      ],
+      "locStart": 96,
+      "locEnd": 115,
+      "filePath": "src/Ladle/Navigation/Sidenav.stories.tsx",
+      "namedExport": "Sidenavs",
+      "meta": {}
+    },
+    "sidenav--users": {
+      "name": "Users",
+      "levels": [
+        "Sidenav"
+      ],
+      "locStart": 31,
+      "locEnd": 35,
+      "filePath": "src/Ladle/Navigation/Sidenav.stories.tsx",
+      "namedExport": "Users",
+      "meta": {}
+    },
+    "table--paginators": {
+      "name": "Paginators",
+      "levels": [
+        "Table"
+      ],
+      "locStart": 106,
+      "locEnd": 170,
+      "filePath": "src/Ladle/Table/Table.stories.tsx",
+      "namedExport": "Paginators",
+      "meta": {}
+    },
+    "table--tables": {
+      "name": "Tables",
+      "levels": [
+        "Table"
+      ],
+      "locStart": 17,
+      "locEnd": 101,
+      "filePath": "src/Ladle/Table/Table.stories.tsx",
+      "namedExport": "Tables",
+      "meta": {}
+    },
+    "card--toasts": {
+      "name": "Toasts",
+      "levels": [
+        "Card"
+      ],
+      "locStart": 17,
+      "locEnd": 21,
+      "filePath": "src/Ladle/Toast/Card.stories.tsx",
+      "namedExport": "Toasts",
+      "meta": {}
+    },
+    "modal--modals": {
+      "name": "Modals",
+      "levels": [
+        "Modal"
+      ],
+      "locStart": 18,
+      "locEnd": 35,
+      "filePath": "src/Ladle/Toast/Modal.stories.tsx",
+      "namedExport": "Modals",
+      "meta": {}
+    },
+    "toast--toasts": {
+      "name": "Toasts",
+      "levels": [
+        "Toast"
+      ],
+      "locStart": 33,
+      "locEnd": 37,
+      "filePath": "src/Ladle/Toast/Toast.stories.tsx",
+      "namedExport": "Toasts",
+      "meta": {}
+    },
+    "toggle--page-toggles": {
+      "name": "Page toggles",
+      "levels": [
+        "Toggle"
+      ],
+      "locStart": 51,
+      "locEnd": 71,
+      "filePath": "src/Ladle/Toggle/Toggle.stories.tsx",
+      "namedExport": "PageToggles",
+      "meta": {}
+    },
+    "toggle--toggles": {
+      "name": "Toggles",
+      "levels": [
+        "Toggle"
+      ],
+      "locStart": 10,
+      "locEnd": 49,
+      "filePath": "src/Ladle/Toggle/Toggle.stories.tsx",
+      "namedExport": "Toggles",
+      "meta": {}
+    }
+  }
+}
