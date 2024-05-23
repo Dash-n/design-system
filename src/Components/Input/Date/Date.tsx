@@ -1,13 +1,13 @@
 import type { Story } from "@ladle/react";
 import "./style.css";
 import styles from "./Date.module.css";
-import { format, parse, isValid } from "date-fns";
 import { ChangeEventHandler, useState } from "react";
 import { convertToDateTimeLocalString } from "../../../Utils/convertToDateTimeLocalString";
 import {
   DayPicker,
   useInput,
   SelectSingleEventHandler,
+  DateRange,
 } from "react-day-picker";
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
   name: string;
   placeholder?: string;
   inputValue: string;
-  setInputValue: (e) => void;
+  setInputValue: (timeString: string) => void;
   open?: boolean;
   startDate?: Date;
   endDate?: Date;
@@ -25,7 +25,6 @@ type Props = {
 export const Datepicker: Story<Props> = ({
   id,
   name,
-  label,
   placeholder,
   inputValue,
   setInputValue,
@@ -33,9 +32,9 @@ export const Datepicker: Story<Props> = ({
   startDate,
   endDate,
 }) => {
-  const [selected, setSelected] = useState<Date>();
+  const [selected, setSelected] = useState<Date>(new Date());
   const [isOpen, setIsOpen] = useState(open);
-  const [time, setTime] = useState(inputValue.substring(11, 16));
+  const [selectTime, setSelectTime] = useState(inputValue.substring(11, 16));
 
   const { inputProps, dayPickerProps } = useInput({
     defaultSelected: new Date(),
@@ -44,19 +43,18 @@ export const Datepicker: Story<Props> = ({
   });
 
   const handleTimeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setTime(e.currentTarget.value);
+    setSelectTime(e.currentTarget.value);
     const newDatetime = `${inputValue.substring(0, 11)}${e.currentTarget.value}`;
-    console.log(newDatetime);
     setInputValue(newDatetime);
   };
 
-  const handleDaySelect: SelectSingleEventHandler = (selectedDate: Date) => {
-    const hours = parseInt(time.substring(0, 2));
-    const minutes = parseInt(time.substring(3, 5));
-    selectedDate.setHours(hours, minutes);
-    setSelected(selectedDate);
-    if (selectedDate) {
-      setInputValue(convertToDateTimeLocalString(selectedDate));
+  const handleDaySelect: SelectSingleEventHandler = (day: Date | undefined) => {
+    const hours = parseInt(selectTime.substring(0, 2));
+    const minutes = parseInt(selectTime.substring(3, 5));
+    day?.setHours(hours, minutes);
+    setSelected(day ?? new Date());
+    if (day) {
+      setInputValue(convertToDateTimeLocalString(day));
     } else {
       setInputValue("");
     }
@@ -68,17 +66,15 @@ export const Datepicker: Story<Props> = ({
 
   const footer = (
     <div className={styles.inputBox}>
-      {inputValue}
       <input
         id={id}
         name={name}
         type="time"
         placeholder={placeholder}
         className={styles.input}
-        value={time}
+        value={selectTime}
         onChange={handleTimeChange}
         onFocus={openPopup}
-        {...inputProps}
       />
     </div>
   );
@@ -88,7 +84,7 @@ export const Datepicker: Story<Props> = ({
       <DayPicker
         initialFocus={true}
         mode="single"
-        disabled={{ before: startDate, after: endDate }}
+        disabled={{ before: startDate, after: endDate } as unknown as DateRange}
         selected={selected}
         onSelect={handleDaySelect}
         footer={footer}

@@ -19,13 +19,30 @@ import {
 const localizer = momentLocalizer(moment);
 
 type Keys = keyof typeof Views;
+type DateRange = {
+  start: Date;
+  end: Date;
+};
 
 type Props = {
   events: CalendarEvent[];
   backgroundEvents: { id: number; title: string; start: Date; end: Date };
   availability?: { start: string; end: string };
   defaultEventLength?: number;
-  athletes: [{ option: string; value: string }];
+  athletes: Athlete[];
+  // athletes: [{ option: string; value: string }];
+  config: CalendarConfig;
+};
+
+type CalendarConfig = {
+  step: number;
+  timeslots: number;
+};
+
+type Athlete = {
+  name: string;
+  team?: string;
+  photo?: string;
 };
 
 export const Calendar: Story<Props> = ({
@@ -34,16 +51,20 @@ export const Calendar: Story<Props> = ({
   availability,
   defaultEventLength = defaultEveLength,
   athletes,
+  config = { step: 15, timeslots: 4 },
 }: Props) => {
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.MONTH);
   const [toggleValue, setToggleValue] = useState(defaultView);
   const [myEvents, setEvents] = useState<CalendarEvent[]>(events);
   const [selected, setSelected] = useState();
-  const [eventPopup, setEventPopup] = useState<PopupEvent>();
+  const [eventPopup, setEventPopup] = useState<PopupEvent>({
+    id: 0,
+    title: "",
+    start: "",
+    end: "",
+  } as PopupEvent);
   const [show, setShow] = useState(false);
-
-  const currentMonth = date.toLocaleString("default", { month: "long" });
 
   const toolbarNav = new Map();
   toolbarNav.set("Previous", "PREV");
@@ -56,6 +77,7 @@ export const Calendar: Story<Props> = ({
     };
 
     render() {
+      console.log(this);
       return (
         <div className="rbc-toolbar">
           <div className={styles.toolbarNav}>
@@ -77,13 +99,13 @@ export const Calendar: Story<Props> = ({
       );
     }
 
-    navigate = (action) => {
+    navigate = (action: string) => {
       this.props.onNavigate(action);
     };
   }
 
   const onView = useCallback(
-    (newView) => {
+    (newView: Views) => {
       setView(newView);
       setToggleValue("Day");
     },
@@ -92,28 +114,37 @@ export const Calendar: Story<Props> = ({
 
   //Week Label
   const dayRangeHeaderFormat = (
-    { start, end },
-    culture,
+    dateRange: DateRange,
+    locale: string,
     localizer: momentLocalizer
   ) => {
-    const monthPrint = localizer.eq(start, end, "month") ? "" : "MMM";
-    const yearPrint = localizer.eq(start, end, "year") ? "" : "YYYY";
+    const monthPrint = localizer.eq(dateRange.start, dateRange.end, "month")
+      ? ""
+      : "MMM";
+    const yearPrint = localizer.eq(dateRange.start, dateRange.end, "year")
+      ? ""
+      : "YYYY";
     const formatter = `DD ${monthPrint} ${yearPrint}`;
 
     return (
-      localizer.format(start, formatter, culture) +
+      localizer.format(dateRange.start, formatter, locale) +
       " – " +
       localizer.format(
-        end,
-        localizer.eq(start, end, "month") ? "DD MMMM YYYY" : "DD MMM YYYY",
-        culture
+        dateRange.end,
+        localizer.eq(dateRange.start, dateRange.end, "month")
+          ? "DD MMMM YYYY"
+          : "DD MMM YYYY",
+        locale
       )
     );
   };
 
   //Day Label
-  const dayHeaderFormat = (date: Date, culture, localizer: momentLocalizer) =>
-    localizer.format(date, "dddd DD MMMM, YYYY", culture);
+  const dayHeaderFormat = (
+    date: Date,
+    locale: string,
+    localizer: momentLocalizer
+  ) => localizer.format(date, "dddd DD MMMM, YYYY", locale);
 
   const changeView = (value: string) => {
     if (value === "Month") {
@@ -182,11 +213,9 @@ export const Calendar: Story<Props> = ({
       event.end = new Date(event.end);
       const title = event?.title;
       const date = event?.start;
-      let past = false;
       const currentDate = new Date();
-      if (currentDate > event?.end) {
-        past = true;
-      }
+      const past = currentDate > event?.end; // currently Unused (can use to set styling for past events)
+
       const timeString = `${date.getHours()}:${date.getMinutes().toString().padStart(2, "0")}`;
       return (
         <div className={`${styles.eventLabel} `}>
@@ -197,7 +226,7 @@ export const Calendar: Story<Props> = ({
         </div>
       );
     },
-    timeSlotWrapper: (timeSlotWrapperProps) => {
+    timeSlotWrapper: (timeSlotWrapperProps: any) => {
       /*
       //Future feature if needed
       //Template for setting work hours highlight. 
@@ -207,12 +236,6 @@ export const Calendar: Story<Props> = ({
           timeSlotWrapperProps.value.getHours() < availability?.end
         : false;
       */
-
-      const style = {
-        display: "flex",
-        flex: 1,
-        position: "relative",
-      };
       return (
         <div className={styles.timeSlot}>{timeSlotWrapperProps.children}</div>
       );
@@ -248,8 +271,8 @@ export const Calendar: Story<Props> = ({
         startAccessor="start"
         endAccessor="end"
         date={date}
-        step={15}
-        timeslots={4}
+        step={config.step}
+        timeslots={config.timeslots}
         toolbar={true}
         view={view}
         onView={onView}
