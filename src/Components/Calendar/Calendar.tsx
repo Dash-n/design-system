@@ -1,9 +1,15 @@
 import type { Story } from "@ladle/react";
 import "./big-calendar.css";
 import styles from "./Calender.module.css";
-import { Calendar as BigCalendar, momentLocalizer } from "react-big-calendar";
+import {
+  Calendar as BigCalendar,
+  Culture,
+  momentLocalizer,
+  DateLocalizer,
+  Formats,
+  Views,
+} from "react-big-calendar";
 import Toolbar from "react-big-calendar/lib/Toolbar";
-import { Views } from "react-big-calendar";
 import moment from "moment";
 import { useCallback, useState } from "react";
 import { Toggle } from "../Toggle/ToggleSwitch/Toggle";
@@ -74,6 +80,7 @@ export const Calendar: Story<Props> = ({
     handleNavigation = (value: string) => {
       this.navigate(toolbarNav.get(value));
     };
+    props: any;
 
     render() {
       return (
@@ -103,7 +110,7 @@ export const Calendar: Story<Props> = ({
   }
 
   const onView = useCallback(
-    (newView: Views) => {
+    (newView: (typeof Views)[Keys]) => {
       setView(newView);
       setToggleValue("Day");
     },
@@ -113,8 +120,8 @@ export const Calendar: Story<Props> = ({
   //Week Label
   const dayRangeHeaderFormat = (
     dateRange: DateRange,
-    locale: string,
-    localizer: momentLocalizer
+    locale: Culture,
+    localizer: DateLocalizer
   ) => {
     const monthPrint = localizer.eq(dateRange.start, dateRange.end, "month")
       ? ""
@@ -140,8 +147,8 @@ export const Calendar: Story<Props> = ({
   //Day Label
   const dayHeaderFormat = (
     date: Date,
-    locale: string,
-    localizer: momentLocalizer
+    locale: Culture,
+    localizer: DateLocalizer
   ) => localizer.format(date, "dddd DD MMMM, YYYY", locale);
 
   const changeView = (value: string) => {
@@ -238,8 +245,8 @@ export const Calendar: Story<Props> = ({
         <div className={styles.timeSlot}>{timeSlotWrapperProps.children}</div>
       );
     },
-    eventWrapper: ({ event, children }) => {
-      return <div onClick={eventClick}>{children}</div>;
+    eventWrapper: (eventObject: any) => {
+      return <div onClick={eventClick}>{eventObject.children}</div>;
     },
     toolbar: CustomToolbar,
   };
@@ -261,7 +268,7 @@ export const Calendar: Story<Props> = ({
       <BigCalendar
         localizer={localizer}
         events={myEvents}
-        formats={{ dayRangeHeaderFormat, dayHeaderFormat }}
+        formats={{ dayRangeHeaderFormat, dayHeaderFormat } as Formats}
         components={components}
         selected={selected}
         onSelectEvent={eventClick}
