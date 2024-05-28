@@ -36,7 +36,7 @@ export const Toggles: Story<Props> = ({}) => {
         defaultValue="Month"
       />
       <Toggle
-        name="mmonth"
+        name="month"
         values={["one", "two", "three", "four", "five"]}
         labels={["January", "February", "March", "April", <MdGridView />]}
         setChecked={handleChange}

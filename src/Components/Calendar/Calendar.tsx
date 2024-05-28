@@ -37,6 +37,18 @@ type Props = {
   defaultEventLength?: number;
   athletes: Athlete[];
   config?: CalendarConfig;
+  weekStartDay?: number;
+  initHour: number;
+};
+
+type ToolbarProps = {
+  date: Date;
+  label: string;
+  localizer: DateLocalizer;
+  onNavigate: (action: string) => void;
+  onView: (newView: (typeof Views)[Keys]) => void;
+  view: string;
+  views: string[];
 };
 
 type CalendarConfig = {
@@ -56,7 +68,9 @@ export const Calendar: Story<Props> = ({
   availability,
   defaultEventLength = defaultEveLength,
   athletes,
+  weekStartDay = 1,
   config = { step: 15, timeslots: 4 },
+  initHour = 8,
 }: Props) => {
   const [date, setDate] = useState<Date>(moment(new Date()).toDate());
   const [view, setView] = useState<(typeof Views)[Keys]>(Views.MONTH);
@@ -71,16 +85,26 @@ export const Calendar: Story<Props> = ({
   } as PopupEvent);
   const [show, setShow] = useState(false);
 
+  const initTime = new Date();
   const toolbarNav = new Map();
   toolbarNav.set("Previous", "PREV");
   toolbarNav.set("Today", "TODAY");
   toolbarNav.set("Next", "NEXT");
 
+  moment.locale("en", {
+    week: {
+      dow: weekStartDay,
+      doy: 1,
+    },
+  });
+
+  initTime.setHours(initHour);
+
   class CustomToolbar extends Toolbar {
     handleNavigation = (value: string) => {
       this.navigate(toolbarNav.get(value));
     };
-    props: any;
+    props!: ToolbarProps;
 
     render() {
       return (
@@ -130,18 +154,17 @@ export const Calendar: Story<Props> = ({
       ? ""
       : "YYYY";
     const formatter = `DD ${monthPrint} ${yearPrint}`;
+    const dayPrint = localizer.format(dateRange.start, formatter, locale);
 
-    return (
-      localizer.format(dateRange.start, formatter, locale) +
-      " – " +
-      localizer.format(
-        dateRange.end,
-        localizer.eq(dateRange.start, dateRange.end, "month")
-          ? "DD MMMM YYYY"
-          : "DD MMM YYYY",
-        locale
-      )
+    const weekFormatter = localizer.format(
+      dateRange.end,
+      localizer.eq(dateRange.start, dateRange.end, "month")
+        ? "DD MMMM YYYY"
+        : "DD MMM YYYY",
+      locale
     );
+
+    return `${dayPrint} - ${weekFormatter}`;
   };
 
   //Day Label
@@ -149,7 +172,7 @@ export const Calendar: Story<Props> = ({
     date: Date,
     locale: Culture,
     localizer: DateLocalizer
-  ) => localizer.format(date, "dddd DD MMMM, YYYY", locale);
+  ) => localizer.format(date, "dddd DD MMMM YYYY", locale);
 
   const changeView = (value: string) => {
     if (value === "Month") {
@@ -278,6 +301,7 @@ export const Calendar: Story<Props> = ({
         date={date}
         step={config.step}
         timeslots={config.timeslots}
+        scrollToTime={initTime}
         toolbar={true}
         view={view}
         onView={onView}

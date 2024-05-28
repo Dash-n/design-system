@@ -11,11 +11,13 @@ type Athlete = {
   photo?: string;
 };
 type Props = {
-  width?: string;
-  height?: string;
-  margin?: string;
-  show: boolean;
+  backgroundEvents?: { id: number; title: string; start: Date; end: Date };
+  availability?: { start: string; end: string };
+  defaultEventLength?: number;
   athletes: Athlete[];
+  // config?: CalendarConfig;
+  weekStartDay?: number;
+  initHour: number;
 };
 
 const sampleEvent = {
@@ -69,7 +71,11 @@ export const EventPopups: Story<Props> = ({}) => {
   );
 };
 
-export const Calendars: Story<Props> = ({ athletes }) => {
+export const Calendars: Story<Props> = ({
+  athletes,
+  weekStartDay,
+  initHour,
+}) => {
   return (
     <div
       style={{
@@ -80,10 +86,17 @@ export const Calendars: Story<Props> = ({ athletes }) => {
         justifyContent: "center",
       }}
     >
-      <Calendar events={events} athletes={athletes} />
+      <Calendar
+        events={events}
+        athletes={athletes}
+        weekStartDay={weekStartDay}
+        initHour={initHour}
+      />
     </div>
   );
 };
 Calendars.args = {
   athletes: sampleAthletes,
+  weekStartDay: 0,
+  initHour: 8,
 };

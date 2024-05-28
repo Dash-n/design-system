@@ -107,7 +107,7 @@ export const EventPopup: Story<Props> = ({
     </div>
   );
 
-  const Page2 = (field: string) => (
+  const SecondPage = (field: string) => (
     <div className={styles.dateSection}>
       <div className={styles.dateSectionHeader}>
         <OutlineButton label={<MdArrowBack />} onClick={() => setPage(0)} />
@@ -130,7 +130,6 @@ export const EventPopup: Story<Props> = ({
           startDate={new Date(calendarEvent.start)}
         />
       )}
-      {field}
       <Button name={field} label="Confirm" onClick={confirmDateChange} />
     </div>
   );
@@ -292,7 +291,7 @@ export const EventPopup: Story<Props> = ({
                 </div>
               </div>
             )}
-            {page === 1 && Page2(field)}
+            {page === 1 && SecondPage(field)}
           </div>
         </div>
       )}

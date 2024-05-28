@@ -24,7 +24,7 @@ export const OutlineButton: Story<Props> = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {label}
+      {typeof label === "string" ? toTitlecase(label as string) : label}
     </button>
   );
 };

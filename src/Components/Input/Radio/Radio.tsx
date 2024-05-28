@@ -25,12 +25,6 @@ export const Radio: Story<Props> = ({
     setChecked(event.target.value);
   };
 
-  // useEffect(() => {
-  //   if (defaultValue == undefined) {
-  //     setSelectedOption(values[0]);
-  //   } else setSelectedOption(defaultValue);
-  // }, []);
-
   return (
     <div className={styles.container}>
       {values?.map((value, index) => (
