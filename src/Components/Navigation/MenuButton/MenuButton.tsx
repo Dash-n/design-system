@@ -17,12 +17,12 @@ export const MenuButton: Story<Props> = ({
   link,
   label,
 }: Props) => (
-  <a href={link} className={`${styles.a}`} disabled={disabled}>
+  <div className={`${styles.a}`} disabled={disabled}>
     <IconContext.Provider value={{ size: iconSize }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+      <div className={styles.buttonLabel}>
         {icon}
         {label}
       </div>
     </IconContext.Provider>
-  </a>
+  </div>
 );

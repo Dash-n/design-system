@@ -76,3 +76,13 @@
 .rdp-button_reset {
   color: red !important;
 }
+input[type="time"]::-webkit-calendar-picker-indicator {
+  width: 28px;
+  height: 28px;
+}
+
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  filter: brightness(0) saturate(100%) invert(42%) sepia(87%) saturate(1147%)
+    hue-rotate(203deg) brightness(98%) contrast(97%);
+  cursor: pointer;
+}

@@ -5,16 +5,19 @@ import { TeamSelect } from "../../Components/Sidenav/TeamSelect/TeamSelect";
 import { Sidenav } from "../../Components/Sidenav/Sidenav.tsx";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { useState } from "react";
+import styles from "./Sidenav.stories.module.css";
 
 import {
-  MdDirectionsRun,
-  MdEdit,
+  MdInsights,
+  MdFitnessCenter,
   MdList,
   MdEditNote,
   MdBuild,
+  MdPerson,
   MdGroups,
   MdMedication,
   MdMedicalServices,
+  MdMonitorHeart,
 } from "react-icons/md";
 
 type selectOption = {
@@ -80,17 +83,17 @@ Selects.args = {
 };
 
 const menuItems = [
-  { icon: <MdEdit />, label: "Inputs", link: "google.com" },
+  { icon: <MdEditNote />, label: "Inputs", link: "google.com" },
   { icon: <MdList />, label: "Database", link: "google.com" },
-  { icon: <MdEditNote />, label: "Reports", link: "google.com" },
-  { icon: <MdBuild />, label: "Gym Program", link: "google.com" },
+  { icon: <MdInsights />, label: "Reports", link: "google.com" },
+  { icon: <MdFitnessCenter />, label: "Gym Program", link: "google.com" },
 ];
 
 const dashboards = [
   { icon: <MdGroups />, label: "Team", link: "google.com" },
-  { icon: <MdDirectionsRun />, label: "Individual", link: "google.com" },
+  { icon: <MdPerson />, label: "Individual", link: "google.com" },
   { icon: <MdMedicalServices />, label: "Team Physio", link: "google.com" },
-  { icon: <MdMedication />, label: "Physio", link: "" },
+  { icon: <MdMonitorHeart />, label: "Physio", link: "" },
 ];
 
 export const Sidenavs: Story<Props> = ({ teams }) => (
@@ -104,11 +107,15 @@ export const Sidenavs: Story<Props> = ({ teams }) => (
   >
     <Sidenav teams={teams}>
       {menuItems.map((item) => (
-        <MenuButton icon={item.icon} label={item.label} link={item.link} />
+        <div className={styles.buttonContainer}>
+          <MenuButton icon={item.icon} label={item.label} link={item.link} />
+        </div>
       ))}
       <SideHeader label="Dashboards" />
       {dashboards.map((item) => (
-        <MenuButton icon={item.icon} label={item.label} link={item.link} />
+        <div className={styles.buttonContainer}>
+          <MenuButton icon={item.icon} label={item.label} link={item.link} />
+        </div>
       ))}
     </Sidenav>
   </div>

@@ -38,6 +38,8 @@ export const Tables: Story<Props> = ({ alternate }) => {
 
   const titleButtons = {
     display: "flex",
+    margin: "8px",
+    gap: "8px",
   };
 
   const customStyles = {
