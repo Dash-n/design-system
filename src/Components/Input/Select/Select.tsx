@@ -1,4 +1,5 @@
 import type { Story } from "@ladle/react";
+import { ChangeEvent } from "react";
 import styles from "./Select.module.css";
 
 type selectOption = {
@@ -12,7 +13,8 @@ type Props = {
   disabled?: boolean;
   options: selectOption[];
   style?: any;
-  setAnswer: (e) => void;
+  emptyOption?: string;
+  setAnswer: (event: ChangeEvent<HTMLSelectElement>) => void;
 };
 
 export const Select: Story<Props> = ({
@@ -20,6 +22,7 @@ export const Select: Story<Props> = ({
   name,
   label,
   disabled,
+  emptyOption = "None",
   options = [],
   style,
   setAnswer,
@@ -33,8 +36,11 @@ export const Select: Story<Props> = ({
       style={style}
       onChange={setAnswer}
     >
+      <option value="">{emptyOption}</option>
       {options.map((option) => (
-        <option value={option.value}>{option.option}</option>
+        <option key={option.value} value={option.value}>
+          {option.option}
+        </option>
       ))}
       ;
     </select>

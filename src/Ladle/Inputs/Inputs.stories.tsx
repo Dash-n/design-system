@@ -5,7 +5,7 @@ import { Checkbox } from "../../Components/Input/Checkbox/Checkbox.tsx";
 import { Radio } from "../../Components/Input/Radio/Radio.tsx";
 import { Select } from "../../Components/Input/Select/Select.tsx";
 import { Slider } from "../../Components/Input/Slider/Slider.tsx";
-import { Date } from "../../Components/Input/Date/Date.tsx";
+import { Datepicker } from "../../Components/Input/Date/Date.tsx";
 import { useState } from "react";
 import { format } from "date-fns";
 
@@ -123,25 +123,19 @@ export const Radios: Story<Props> = ({}) => {
 
   return (
     <div>
+      <input type="radio" name="name" value="name" />
+
       <Radio
-        value="1"
+        values={["1", "2", "3"]}
         name="test"
-        label={`One Selected: ${value === "1"}`}
-        checked
+        labels={[
+          `One Selected: ${value === "1"}`,
+          `Two Selected: ${value === "2"}`,
+          `Three Selected: ${value === "3"}`,
+        ]}
         setChecked={handleChange}
       />
-      <Radio
-        value="2"
-        name="test"
-        label={`Two Selected: ${value === "2"}`}
-        setChecked={handleChange}
-      />
-      <Radio
-        value="3"
-        name="test"
-        label={`Three Selected: ${value === "3"}`}
-        setChecked={handleChange}
-      />
+
       <div>Value: {`${value}`}</div>
     </div>
   );
@@ -210,12 +204,21 @@ export const Sliders: Story<Props> = ({}) => {
   );
 };
 
-export const DatePicker: Story<Props> = ({}) => {
+export const DatePickers: Story<Props> = ({}) => {
   const [selected, setSelected] = useState<Date>();
+  const [date, setDate] = useState("2024-04-09T15:00");
 
   let footer = <p>Select Date</p>;
   if (selected) {
     footer = <p>{format(selected, "PP")}</p>;
   }
-  return <Date selected={selected} footer={footer} onSelect={setSelected} />;
+  return (
+    <Datepicker
+      id="date"
+      name="date"
+      label="Datetime"
+      inputValue={date}
+      setInputValue={setDate}
+    />
+  );
 };

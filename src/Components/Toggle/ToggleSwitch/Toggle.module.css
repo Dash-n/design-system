@@ -4,10 +4,7 @@
   display: flex;
   align-items: center;
   position: relative;
-  padding-left: 32px;
-  margin-bottom: 12px;
   cursor: pointer;
-  height: 24px;
   align-items: center;
 }
 
