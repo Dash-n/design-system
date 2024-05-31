@@ -1,9 +1,10 @@
 import type { Story } from "@ladle/react";
 import styles from "./OutlineButton.module.css";
+import { ReactNode } from "react";
 import { toTitlecase } from "../../../Utils/toTitleCase.ts";
 
 type Props = {
-  label: string;
+  label: string | ReactNode;
   disabled?: boolean;
   variant?: string;
   onClick: () => void;
@@ -23,7 +24,7 @@ export const OutlineButton: Story<Props> = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {toTitlecase(label)}
+      {typeof label === "string" ? toTitlecase(label as string) : label}
     </button>
   );
 };

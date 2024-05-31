@@ -1,0 +1,166 @@
+@import "../../../vars.css";
+
+.popup {
+  position: static;
+  left: 40%;
+  top: 30%;
+}
+.container {
+  padding: var(--padding-lg);
+  background-color: white;
+  border-radius: var(--border-radius-md);
+  border: 1px solid var(--soft-background-color);
+  overflow: hidden;
+  width: 300px;
+}
+
+.popup .popuptext {
+  display: flex;
+  flex-direction: column;
+  visibility: hidden;
+  min-width: 300px;
+  width: min-content;
+  height: min-content;
+  background-color: white;
+
+  border-radius: var(--border-radius-md);
+  padding: var(--border-radius-md);
+  position: absolute;
+  top: 30%;
+  z-index: 10;
+  left: 50%;
+  margin-left: -80px;
+  border: 1px solid var(--soft-background-color);
+}
+
+.popup .show {
+  visibility: visible;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+.modal .overlay {
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
+  z-index: 5;
+}
+
+.overlay {
+  background-color: rgba(49, 49, 49, 0.8);
+  transition: all 3s ease-out;
+}
+
+.modalContainer {
+  position: fixed;
+  left: calc(50% - 150px);
+  top: calc(50% - 200px);
+  line-height: 1.4;
+  background: #f1f1f1;
+  padding: var(--border-radius-xl) var(--border-radius-lg);
+  border-radius: var(--border-radius-md);
+  max-width: 600px;
+  min-width: 300px;
+  z-index: 6;
+}
+
+.deleteEnd {
+  padding: 8px;
+}
+
+.closeButton {
+  position: absolute;
+  top: var(--border-radius-md);
+  right: var(--border-radius-md);
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.popupHeader {
+  display: flex;
+}
+
+.popupHeader .athleteInfo {
+  width: 100%;
+  padding: var(--border-radius-md);
+}
+
+.popupPage {
+  display: flex;
+  flex-direction: column;
+}
+.athleteInfo .athleteName {
+  margin: 0;
+}
+.athleteInfo .teamName {
+  margin: 0;
+}
+
+.profilePic {
+  height: 64px;
+  width: 64px;
+  border-radius: 50px;
+}
+
+.eventInfo {
+  display: flex;
+  flex-direction: column;
+  padding: var(--border-radius-md);
+  gap: var(--border-radius-md);
+}
+
+.dashboardLink {
+  color: var(--main-bg-color);
+  padding: var(--border-radius-md);
+  margin: 8px 0;
+}
+
+.buttonSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+
+.input {
+  height: 40px;
+  width: 100%;
+  font-family: Geist;
+  border-radius: var(--border-radius-sm);
+  box-sizing: border-box;
+  border: 1px solid var(--soft-background-color);
+
+  color: var(--text-color);
+
+  transition: box-shadow 0.2s ease-out;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dateSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--border-radius-md);
+}
+
+.dateSectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--border-radius-md);
+}
+
+.confirmModal {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+}

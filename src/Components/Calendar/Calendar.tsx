@@ -171,9 +171,6 @@ export const Calendar: Story<Props> = ({
     return `${dayPrint} - ${weekFormatter}`;
   };
 
-  const dayFormat = (date, culture, localizer) =>
-    localizer.format(date, "ddd MM/DD", culture);
-
   //Day Label
   const dayHeaderFormat = (
     date: Date,
