@@ -8,7 +8,7 @@ type Props = {
   name?: string;
   disabled?: boolean;
   variant?: string;
-  onClick?: (e) => void;
+  onClick?: () => void;
   customClass?: string;
 };
 

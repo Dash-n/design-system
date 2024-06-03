@@ -1,7 +1,7 @@
 import type { Story } from "@ladle/react";
 import styles from "./Toggle.module.css";
 import { IconContext } from "react-icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, ChangeEventHandler } from "react";
 
 type Props = {
   name: string;
@@ -10,6 +10,7 @@ type Props = {
   labels?: any[];
   iconSize?: string;
   setChecked: (value: string) => void;
+  customClass?: string;
 };
 
 export const Toggle: Story<Props> = ({
@@ -19,10 +20,11 @@ export const Toggle: Story<Props> = ({
   name,
   setChecked,
   iconSize = "24px",
+  customClass,
 }) => {
   const [selectedOption, setSelectedOption] = useState<string>();
 
-  const handleChange = (event) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     setSelectedOption(event.target.value);
     setChecked(event.target.value);
   };
@@ -36,7 +38,7 @@ export const Toggle: Story<Props> = ({
   return (
     <div className={styles.container}>
       {values?.map((value, index) => (
-        <label className={styles.switch} key={index}>
+        <label className={`${styles.switch} ${customClass}`} key={index}>
           <input
             id={value}
             type="radio"

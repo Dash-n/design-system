@@ -20,7 +20,7 @@ import {
 
 type Props = {
   id?: string;
-  data: string[];
+  data: object[];
   keys?: string[];
   width: number;
   height: number;
@@ -31,6 +31,11 @@ type Props = {
   customData: any;
   legendPos?: { verticalAlign?: string; align?: string; height?: number };
   dotRadius: number;
+};
+
+type customDataPoint = {
+  label: string;
+  color?: string;
 };
 
 const Square = (props: any) => {

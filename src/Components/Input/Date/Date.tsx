@@ -1,4 +1,5 @@
 import type { Story } from "@ladle/react";
+import "./style.css";
 import styles from "./Date.module.css";
 import { startOfYear, endOfYear, add, sub } from "date-fns";
 import { ChangeEventHandler, useState } from "react";

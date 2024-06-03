@@ -3,6 +3,16 @@ import styles from "./DraggableContainer.module.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { MdOutlineOpenWith, MdClose } from "react-icons/md";
 import { IconContext } from "react-icons";
+import {
+  ClassAttributes,
+  HTMLAttributes,
+  LegacyRef,
+  ReactElement,
+  JSXElementConstructor,
+  ReactNode,
+  ReactPortal,
+} from "react";
+import { JSX } from "react/jsx-runtime";
 
 type Props = {
   content: any;
@@ -18,9 +28,23 @@ export const DraggableContainer: Story<Props> = ({
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Droppable droppableId="ROOT" type="group">
-        {(provided) => (
+        {(provided: {
+          droppableProps: JSX.IntrinsicAttributes &
+            ClassAttributes<HTMLDivElement> &
+            HTMLAttributes<HTMLDivElement>;
+          innerRef: LegacyRef<HTMLDivElement> | undefined;
+          placeholder:
+            | string
+            | number
+            | boolean
+            | ReactElement<any, string | JSXElementConstructor<any>>
+            | Iterable<ReactNode>
+            | ReactPortal
+            | null
+            | undefined;
+        }) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
-            {content.map((item, index) => {
+            {content.map((item: React.ReactNode, index: number) => {
               return (
                 <div
                   style={{
@@ -28,7 +52,15 @@ export const DraggableContainer: Story<Props> = ({
                   }}
                 >
                   <Draggable draggableId={`${index}`} key={item} index={index}>
-                    {(provided) => (
+                    {(provided: {
+                      draggableProps: JSX.IntrinsicAttributes &
+                        ClassAttributes<HTMLDivElement> &
+                        HTMLAttributes<HTMLDivElement>;
+                      innerRef: LegacyRef<HTMLDivElement> | undefined;
+                      dragHandleProps: JSX.IntrinsicAttributes &
+                        ClassAttributes<HTMLDivElement> &
+                        HTMLAttributes<HTMLDivElement>;
+                    }) => (
                       <div
                         className={styles.dragContainer}
                         {...provided.draggableProps}
@@ -42,7 +74,7 @@ export const DraggableContainer: Story<Props> = ({
                             <MdOutlineOpenWith />
                           </div>
 
-                          {/* content */}
+                          {/* Content Body goes Here */}
                           <div className={styles.containerBody}>{item}</div>
 
                           <div className={styles.deleteEnd}>

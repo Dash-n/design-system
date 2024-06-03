@@ -13,16 +13,16 @@ type Props = {
 export const MenuButton: Story<Props> = ({
   icon,
   iconSize = "24px",
-  disabled,
+  disabled = false,
   link,
   label,
 }: Props) => (
-  <div className={`${styles.a}`} disabled={disabled}>
+  <a href={link} className={`${styles.a} ${disabled ? styles.disabled : ""}`}>
     <IconContext.Provider value={{ size: iconSize }}>
       <div className={styles.buttonLabel}>
         {icon}
         {label}
       </div>
     </IconContext.Provider>
-  </div>
+  </a>
 );

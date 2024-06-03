@@ -22,7 +22,7 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title: string;
-  customData: any[];
+  customData: any;
   dotRadius: number;
   domainMin: number;
   domainMax: number;
@@ -433,7 +433,6 @@ export const ScatterCharts: Story<Props> = ({
         yLabel={yLabel}
         keys={keys}
         dotRadius={dotRadius}
-        colors={colors}
         width={100}
         height={100}
         domain={[domainMin, domainMax]}

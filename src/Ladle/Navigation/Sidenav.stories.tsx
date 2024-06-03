@@ -4,18 +4,16 @@ import { SideHeader } from "../../Components/Sidenav/SideHeader/SideHeader";
 import { TeamSelect } from "../../Components/Sidenav/TeamSelect/TeamSelect";
 import { Sidenav } from "../../Components/Sidenav/Sidenav.tsx";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
-import { useState } from "react";
-import styles from "./Sidenav.stories.module.css";
+import { ChangeEventHandler, useState } from "react";
+import styles from "./Navigation.stories.module.css";
 
 import {
   MdInsights,
   MdFitnessCenter,
   MdList,
   MdEditNote,
-  MdBuild,
   MdPerson,
   MdGroups,
-  MdMedication,
   MdMedicalServices,
   MdMonitorHeart,
 } from "react-icons/md";
@@ -29,6 +27,7 @@ type Props = {
   username: string;
   options: selectOption[];
   text: string;
+  teams: selectOption[];
 };
 
 export const Users: Story<Props> = ({ username }) => (
@@ -51,7 +50,7 @@ SideHeaders.args = {
 export const Selects: Story<Props> = ({ options }) => {
   const [value, setValue] = useState("");
 
-  const handleChange = (e) => {
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setValue(e.target.value);
   };
 

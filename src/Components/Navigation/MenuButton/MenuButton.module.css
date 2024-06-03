@@ -11,7 +11,6 @@
   border-radius: 8px;
 
   background-color: white;
-  /* color: var(--main-active-color); */
 
   font-family: "Geist";
 
@@ -24,15 +23,9 @@ a:link {
   outline: 1px solid var(--main-hover-color);
   color: var(--main-bg-color);
 }
-.a:active:not(:disabled) {
-  background-color: var(--main-disabled-color);
-}
 
-.a:disabled {
+.disabled {
   background-color: var(--main-disabled-color);
-}
-.warning:disabled {
-  background-color: var(--warning-disabled-color);
 }
 
 .buttonLabel {
