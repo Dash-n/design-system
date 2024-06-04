@@ -16,7 +16,7 @@ import { JSX } from "react/jsx-runtime";
 
 type Props = {
   content: any;
-  onDragEnd: () => void;
+  onDragEnd: (e: any) => void; //DropResult in the library
   onDelete: () => void;
 };
 

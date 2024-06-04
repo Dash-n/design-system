@@ -10,7 +10,7 @@ type Props = {
   min?: number;
   max?: number;
   size?: number;
-  style: any;
+  style?: React.CSSProperties;
   setText?: () => void;
   onChange?: (value: any) => void;
   updateValue?: (value: any) => void;
@@ -26,7 +26,6 @@ export const NumberInput: Story<Props> = ({
   max,
   size,
   style,
-  setText,
   updateValue,
   onChange,
 }) => {

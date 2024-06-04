@@ -9,7 +9,7 @@ import {
   MdKeyboardArrowRight,
 } from "react-icons/md";
 import { IconContext } from "react-icons";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect, ChangeEventHandler } from "react";
 
 type selectOption = {
   option: string;
@@ -23,8 +23,8 @@ type Props = {
   pageCount: number;
   disabled?: boolean;
   changePage: (e: number) => void;
-  jumpPage: (e: number) => void;
-  setItems: (e) => void;
+  jumpPage: (e: KeyboardEvent) => void;
+  setItems: (e: Event) => void;
   displayOptions?: selectOption[];
 };
 
@@ -40,16 +40,20 @@ export const Paginator: Story<Props> = ({
 }) => {
   const [content, setContent] = useState(0);
   const [width, setWidth] = useState(0);
-  // const span = useRef();
   const span = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (span.current) setWidth(span.current.offsetWidth + 30);
   }, [content]);
 
-  const changeHandler = (evt: Event) => {
-    if (evt.target) {
-      setContent(evt.target.value);
+  const changeHandler: ChangeEventHandler<HTMLInputElement> = (evt: Event) => {
+    const target = evt.target as HTMLInputElement; // Event | null
+
+    if (target === null) {
+      throw new Error("target can not be null");
+    }
+    if (target) {
+      setContent(Number(target.value));
     }
   };
 

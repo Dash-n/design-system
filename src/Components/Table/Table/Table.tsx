@@ -2,15 +2,6 @@ import type { Story } from "@ladle/react";
 import styles from "./Table.module.css";
 import { IconContext } from "react-icons";
 import { toTitlecase } from "../../../Utils/toTitleCase";
-import { useState } from "react";
-
-const root = document.documentElement;
-const ALT_COLOR = getComputedStyle(root).getPropertyValue(
-  "--hard-background-color"
-);
-const HIGHLIGHT_COLOR = getComputedStyle(root).getPropertyValue(
-  "--outline-hover-color"
-);
 
 type Props = {
   content: string[];
@@ -20,6 +11,10 @@ type Props = {
   customHeaderStyles?: any;
   customClasses?: any;
   sticky?: string[];
+};
+
+type tableItem = {
+  item: string;
 };
 
 export const Table: Story<Props> = ({
@@ -49,12 +44,13 @@ export const Table: Story<Props> = ({
                   <th
                     className={`${styles.headerCell}  ${customClasses[header]} ${styles.stickyHeader}`}
                     key={header}
-                    onClick={() => handleSort(header)}
+                    onClick={() => handleSort!(header)}
                     tabIndex={0}
                     style={customHeaderStyles[header]}
                   >
                     {toTitlecase(header)}
-                    {sort.key === header &&
+                    {sort &&
+                      sort.key === header &&
                       (sort.direction === "asc" ? "↑" : "↓")}
                   </th>
                 ))}
@@ -66,12 +62,13 @@ export const Table: Story<Props> = ({
                 <th
                   className={`${styles.headerCell} ${customClasses[header]}`}
                   key={header}
-                  onClick={() => handleSort(header)}
+                  onClick={() => handleSort!(header)}
                   tabIndex={0}
                   style={customHeaderStyles[header]}
                 >
                   {toTitlecase(header)}
-                  {sort.key === header &&
+                  {sort &&
+                    sort.key === header &&
                     (sort.direction === "asc" ? "↑" : "↓")}
                 </th>
               ))}
@@ -81,7 +78,8 @@ export const Table: Story<Props> = ({
     );
   };
 
-  const checkValue = (item: any) => {
+  const checkValue = (item: object | string) => {
+    console.log(typeof item);
     return typeof item === "object" ? (
       <div className={styles.nestedCell}>
         {Object.values(item).map((value) => (
@@ -93,30 +91,30 @@ export const Table: Story<Props> = ({
     );
   };
 
-  const HighlightableTableRow = ({ item }) => {
+  const HighlightableTableRow = (tableItem: tableItem) => {
     return (
       <tr>
         <td className={`${styles.stickyGroup}`}>
-          {Object.values(item).map(
+          {Object.values(tableItem.item).map(
             (value, subIndex) =>
-              sticky.includes(headers[subIndex]) && (
+              sticky.includes(headers![subIndex]) && (
                 <td
-                  className={`${styles.bodyCell} ${customClasses[headers[subIndex]]} ${styles.stickyCell}`}
+                  className={`${styles.bodyCell} ${customClasses[headers![subIndex]]} ${styles.stickyCell}`}
                   key={subIndex}
-                  style={customHeaderStyles[headers[subIndex]]}
+                  style={customHeaderStyles[headers![subIndex]]}
                 >
                   {checkValue(value)}
                 </td>
               )
           )}
         </td>
-        {Object.values(item).map(
+        {Object.values(tableItem.item).map(
           (value, subIndex) =>
-            !sticky.includes(headers[subIndex]) && (
+            !sticky.includes(headers![subIndex]) && (
               <td
-                className={`${styles.bodyCell} ${customClasses[headers[subIndex]]}`}
+                className={`${styles.bodyCell} ${customClasses[headers![subIndex]]}`}
                 key={subIndex}
-                style={customHeaderStyles[headers[subIndex]]}
+                style={customHeaderStyles[headers![subIndex]]}
               >
                 {checkValue(value)}
               </td>
@@ -130,7 +128,7 @@ export const Table: Story<Props> = ({
     return (
       <tbody>
         {content.map((item, index) => (
-          <HighlightableTableRow key={index} item={item} index={index} />
+          <HighlightableTableRow key={index} item={item} />
         ))}
       </tbody>
     );
