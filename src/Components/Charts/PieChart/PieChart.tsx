@@ -7,9 +7,11 @@ import {
   ResponsiveContainer,
   Tooltip,
   Legend,
+  TooltipProps,
 } from "recharts";
 import { COLORS } from "../chartutils/customRender.tsx";
 import { toTitlecase } from "../../../Utils/toTitleCase.ts";
+import { ValueType, NameType } from "recharts/types/component/DefaultTooltipContent";
 
 type Props = {
   id?: string;
@@ -20,14 +22,13 @@ type Props = {
   height: number;
   valueKey: string;
   title?: string;
-  dataPoints: any;
 };
 
-const PieTooltip = ({ active, payload, label }) => {
+const PieTooltip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
   if (active && payload && payload.length) {
     return (
       <div className={styles.customTooltip}>
-        <p>{`${toTitlecase(payload[0].name)}: ${payload[0].value}`} </p>
+        <p>{`${toTitlecase(String(payload[0].name?? ""))}: ${payload[0].value}`} </p>
       </div>
     );
   }
@@ -44,11 +45,10 @@ const renderCustomizedLabel = ({
   outerRadius,
   percent,
   index,
-}) => {
+}: ) => {
   const radius = innerRadius + (outerRadius - innerRadius) * 1.1;
   const x = cx + radius * Math.cos(-midAngle * RADIAN);
   const y = cy + radius * Math.sin(-midAngle * RADIAN);
-  console.log(midAngle);
 
   return (
     <text
