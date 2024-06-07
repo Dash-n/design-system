@@ -28,6 +28,12 @@ export const Table: Story<Props> = ({
 }) => {
   const headers = content.length === 0 ? null : Object.keys(content[0]);
 
+  const sortFunction = (header: string) => {
+    if (handleSort) {
+      handleSort(header);
+    }
+  };
+
   const renderTableHeaders = () => {
     if (content.length === 0) {
       return null;
@@ -42,11 +48,11 @@ export const Table: Story<Props> = ({
                 .filter((header) => sticky.includes(header))
                 .map((header) => (
                   <th
-                    className={`${styles.headerCell}  ${customClasses[header]} ${styles.stickyHeader}`}
+                    className={`${styles.headerCell}  ${header && customClasses[header]} ${styles.stickyHeader}`}
                     key={header}
-                    onClick={() => handleSort!(header)}
+                    onClick={() => handleSort && handleSort(header)}
                     tabIndex={0}
-                    style={customHeaderStyles[header]}
+                    style={customHeaderStyles && customHeaderStyles[header]}
                   >
                     {toTitlecase(header)}
                     {sort &&
@@ -57,14 +63,14 @@ export const Table: Story<Props> = ({
             </th>
 
             {headers
-              .filter((header) => !sticky.includes(header))
+              .filter((header) => sticky.includes(header))
               .map((header) => (
                 <th
                   className={`${styles.headerCell} ${customClasses[header]}`}
                   key={header}
-                  onClick={() => handleSort!(header)}
+                  onClick={() => sortFunction(header)}
                   tabIndex={0}
-                  style={customHeaderStyles[header]}
+                  style={customHeaderStyles && customHeaderStyles[header]}
                 >
                   {toTitlecase(header)}
                   {sort &&
@@ -79,7 +85,6 @@ export const Table: Story<Props> = ({
   };
 
   const checkValue = (item: object | string) => {
-    console.log(typeof item);
     return typeof item === "object" ? (
       <div className={styles.nestedCell}>
         {Object.values(item).map((value) => (
@@ -97,11 +102,14 @@ export const Table: Story<Props> = ({
         <td className={`${styles.stickyGroup}`}>
           {Object.values(tableItem.item).map(
             (value, subIndex) =>
-              sticky.includes(headers![subIndex]) && (
+              headers &&
+              sticky.includes(headers[subIndex]) && (
                 <td
-                  className={`${styles.bodyCell} ${customClasses[headers![subIndex]]} ${styles.stickyCell}`}
+                  className={`${styles.bodyCell} ${customClasses[headers[subIndex]]} ${styles.stickyCell}`}
                   key={subIndex}
-                  style={customHeaderStyles[headers![subIndex]]}
+                  style={
+                    customHeaderStyles && customHeaderStyles[headers[subIndex]]
+                  }
                 >
                   {checkValue(value)}
                 </td>
@@ -110,11 +118,14 @@ export const Table: Story<Props> = ({
         </td>
         {Object.values(tableItem.item).map(
           (value, subIndex) =>
-            !sticky.includes(headers![subIndex]) && (
+            headers &&
+            sticky.includes(headers[subIndex]) && (
               <td
-                className={`${styles.bodyCell} ${customClasses[headers![subIndex]]}`}
+                className={`${styles.bodyCell} ${customClasses[headers[subIndex]]}`}
                 key={subIndex}
-                style={customHeaderStyles[headers![subIndex]]}
+                style={
+                  customHeaderStyles && customHeaderStyles[headers[subIndex]]
+                }
               >
                 {checkValue(value)}
               </td>

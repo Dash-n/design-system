@@ -94,7 +94,7 @@ export const Tables: Story<Props> = ({ alternate }) => {
           sort={sort}
           handleSort={handleSort}
           alternate={alternate}
-          customHeaderStyles={customStyles}
+          // customHeaderStyles={customStyles}
           sticky={["first_name", "last_name"]}
         ></Table>
       </div>
@@ -113,9 +113,8 @@ export const Paginators: Story<Props> = ({}) => {
   const pageCount = Math.ceil(numberOfItems / pageSize);
 
   const setSize = (e: Event) => {
-
-    const target = e.target as HTMLInputElement
-    setPageSize(Number(target.value)));
+    const target = e.target as HTMLInputElement;
+    setPageSize(Number(target.value));
   };
 
   const changePage = (navFunction: number) => {

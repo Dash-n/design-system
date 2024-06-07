@@ -88,6 +88,7 @@ export const Calendar: Story<Props> = ({
 
   const initTime = new Date();
   const toolbarNav = new Map();
+  const initMinuteOffset = 55;
   toolbarNav.set("Previous", "PREV");
   toolbarNav.set("Today", "TODAY");
   toolbarNav.set("Next", "NEXT");
@@ -100,7 +101,7 @@ export const Calendar: Story<Props> = ({
   });
 
   initTime.setHours(initHour - 1);
-  initTime.setMinutes(55);
+  initTime.setMinutes(initMinuteOffset);
 
   class CustomToolbar extends Toolbar {
     handleNavigation = (value: string) => {

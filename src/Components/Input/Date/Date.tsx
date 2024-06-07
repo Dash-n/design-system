@@ -21,6 +21,7 @@ type Props = {
   open?: boolean;
   startDate?: Date;
   endDate?: Date;
+  dateYearRange?: number;
 };
 
 export const Datepicker: Story<Props> = ({
@@ -32,6 +33,7 @@ export const Datepicker: Story<Props> = ({
   open = false,
   startDate,
   endDate,
+  dateYearRange = 5,
 }) => {
   const [selected, setSelected] = useState<Date>(new Date());
   const [isOpen, setIsOpen] = useState(open);
@@ -85,8 +87,8 @@ export const Datepicker: Story<Props> = ({
         onSelect={handleDaySelect}
         showOutsideDays={true}
         footer={footer}
-        fromDate={startOfYear(sub(new Date(), { years: 5 }))}
-        toDate={endOfYear(add(new Date(), { years: 5 }))}
+        fromDate={startOfYear(sub(new Date(), { years: dateYearRange }))}
+        toDate={endOfYear(add(new Date(), { years: dateYearRange }))}
         captionLayout="dropdown"
         required
       />
