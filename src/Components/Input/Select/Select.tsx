@@ -4,7 +4,7 @@ import styles from "./Select.module.css";
 
 type selectOption = {
   option: string;
-  value: string;
+  value?: string;
 };
 type Props = {
   id: string;

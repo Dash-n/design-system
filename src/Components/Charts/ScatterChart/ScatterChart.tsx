@@ -17,10 +17,14 @@ import {
   COLORS,
   customLegend,
 } from "../chartutils/customRender.tsx";
+import {
+  VerticalAlignmentType,
+  HorizontalAlignmentType,
+} from "recharts/types/component/DefaultLegendContent";
 
 type Props = {
   id?: string;
-  data: string[];
+  data: object[];
   keys?: string[];
   width: number;
   height: number;
@@ -28,9 +32,18 @@ type Props = {
   xLabel: string;
   yLabel: string;
   title?: string;
-  customData: any;
-  legendPos?: { verticalAlign?: string; align?: string; height?: number };
+  customData: customDataPoint;
+  legendPos?: {
+    verticalAlign?: VerticalAlignmentType;
+    align?: HorizontalAlignmentType;
+    height?: number;
+  };
   dotRadius: number;
+};
+
+type customDataPoint = {
+  label: string;
+  color?: string;
 };
 
 const Square = (props: any) => {

@@ -9,13 +9,17 @@ import {
   MdKeyboardArrowRight,
 } from "react-icons/md";
 import { IconContext } from "react-icons";
-import { useRef, useState, useEffect } from "react";
-
-const Input = () => {};
+import {
+  useRef,
+  useState,
+  useEffect,
+  ChangeEventHandler,
+  ChangeEvent,
+} from "react";
 
 type selectOption = {
   option: string;
-  value: string;
+  value?: string;
 };
 
 type Props = {
@@ -25,8 +29,8 @@ type Props = {
   pageCount: number;
   disabled?: boolean;
   changePage: (e: number) => void;
-  jumpPage: (e: number) => void;
-  setItems: (e: number) => void;
+  jumpPage: (e: KeyboardEvent) => void;
+  setItems: (event: ChangeEvent<HTMLSelectElement>) => void;
   displayOptions?: selectOption[];
 };
 
@@ -41,15 +45,22 @@ export const Paginator: Story<Props> = ({
   displayOptions = [{ option: "10" }, { option: "25" }, { option: "50" }],
 }) => {
   const [content, setContent] = useState(0);
-  const [width, setWidth] = useState();
-  const span = useRef();
+  const [width, setWidth] = useState(0);
+  const span = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setWidth(span.current.offsetWidth + 30);
+    if (span.current) setWidth(span.current.offsetWidth + 30);
   }, [content]);
 
-  const changeHandler = (evt) => {
-    setContent(evt.target.value);
+  const changeHandler: ChangeEventHandler<HTMLInputElement> = (evt) => {
+    const target = evt.target as HTMLInputElement; // Event | null
+
+    if (target === null) {
+      throw new Error("target can not be null");
+    }
+    if (target) {
+      setContent(Number(target.value));
+    }
   };
 
   return (

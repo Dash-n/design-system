@@ -1,6 +1,5 @@
 import type { Story } from "@ladle/react";
 import styles from "./Toast.module.css";
-import { toTitlecase } from "../../Utils/index.ts";
 
 type Props = {
   disabled?: boolean;

@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./Sidenav.module.css";
-import { useState } from "react";
+import { ChangeEventHandler, useState } from "react";
 import { MenuButton } from "../Navigation/MenuButton/MenuButton";
 import { IconContext } from "react-icons";
 import { MdMenu, MdArrowBack } from "react-icons/md";
@@ -9,7 +9,7 @@ import { TeamSelect } from "./TeamSelect/TeamSelect";
 
 type selectOption = {
   option: string;
-  value: string;
+  value?: string;
 };
 
 type Props = {
@@ -19,6 +19,11 @@ type Props = {
 
 export const Sidenav: Story<Props> = ({ teams, children }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [value, setValue] = useState("");
+
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setValue(e.target.value);
+  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -50,7 +55,12 @@ export const Sidenav: Story<Props> = ({ teams, children }) => {
               </IconContext.Provider>
             </button>
           </div>
-          <TeamSelect id="teams" name="teams" options={teams} />
+          <TeamSelect
+            id="teams"
+            name="teams"
+            options={teams}
+            setAnswer={handleChange}
+          />
           {children}
         </div>
         <User username="Admin" />

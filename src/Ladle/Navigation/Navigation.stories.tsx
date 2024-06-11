@@ -2,6 +2,7 @@ import type { Story } from "@ladle/react";
 import { MenuButton } from "../../Components/Navigation/MenuButton/MenuButton.tsx";
 import { CardButton } from "../../Components/Navigation/CardButton/CardButton.tsx";
 import { FolderButton } from "../../Components/Navigation/FolderButton/FolderButton.tsx";
+import styles from "./Navigation.stories.module.css";
 import {
   MdEdit,
   MdList,
@@ -20,13 +21,6 @@ type Props = {
   link?: string;
 };
 
-const storyDiv = {
-  display: "flex",
-  gap: "8px",
-  width: "600px",
-  flexDirection: "row",
-};
-
 const menuItems = [
   { icon: <MdEdit />, label: "Inputs", link: "google.com" },
   { icon: <MdList />, label: "Database", link: "google.com" },
@@ -39,38 +33,15 @@ const menuItems = [
 ];
 
 export const MenuButtons: Story<Props> = ({}) => (
-  <div
-    style={{
-      display: "flex",
-      gap: "8px",
-      width: "300px",
-      flexDirection: "column",
-    }}
-  >
+  <div className={styles.buttonColumn}>
     {menuItems.map((item) => (
-      <MenuButton icon={item.icon} label={item.label} link={item.link} />
+      <MenuButton
+        key={item.label}
+        icon={item.icon}
+        label={item.label}
+        link={item.link}
+      />
     ))}
-    {/* <MenuButton icon={<MdEdit />} label="Inputs" link="google.com" />
-    <MenuButton icon={<MdList />} label="Database" link="google.com" />
-    <MenuButton icon={<MdEditNote />} label="Reports" link="google.com" />
-    <MenuButton icon={<MdBuild />} label="Gym Program" link="google.com" />
-    <MenuButton icon={<MdGroups />} label="Team" link="google.com" />
-    <MenuButton
-      icon={<MdDirectionsRun />}
-      label="Individual"
-      link="google.com"
-    />
-    <MenuButton
-      icon={<MdMedicalServices />}
-      label="Team Physio"
-      link="google.com"
-    />
-    <MenuButton
-      icon={<MdMedication />}
-      label="Physio"
-      link="?story=button--outline-buttons"
-      disabled={true}
-    /> */}
   </div>
 );
 export const CardButtons: Story<Props> = ({}) => {
@@ -85,7 +56,7 @@ export const CardButtons: Story<Props> = ({}) => {
   };
 
   return (
-    <div style={storyDiv}>
+    <div className={styles.storyDiv}>
       <CardButton
         editCallback={Edit}
         deleteCallback={Delete}
@@ -113,7 +84,7 @@ export const FolderButtons: Story<Props> = ({}) => {
   };
 
   return (
-    <div style={storyDiv}>
+    <div className={styles.storyDiv}>
       <FolderButton
         label="Inputs"
         link=""

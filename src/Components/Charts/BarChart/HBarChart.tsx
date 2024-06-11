@@ -18,6 +18,10 @@ import {
   titleLegend,
   COLORS,
 } from "../chartutils/customRender.tsx";
+import {
+  VerticalAlignmentType,
+  HorizontalAlignmentType,
+} from "recharts/types/component/DefaultLegendContent";
 
 type Props = {
   id?: string;
@@ -30,7 +34,11 @@ type Props = {
   yLabel: string;
   title?: string;
   customData: any;
-  legendPos?: { verticalAlign?: string; align?: string; height?: number };
+  legendPos?: {
+    verticalAlign?: VerticalAlignmentType;
+    align?: HorizontalAlignmentType;
+    height?: number;
+  };
   domain?: [string | number, string | number];
   activeStroke?: string;
 };

@@ -1,0 +1,17 @@
+.buttonContainer {
+  margin: 0 8px;
+}
+
+.storyDiv {
+  display: flex;
+  gap: 8px;
+  width: 600px;
+  flex-direction: row;
+}
+
+.buttonColumn {
+  display: flex;
+  gap: 8px;
+  width: 300px;
+  flex-direction: column;
+}

@@ -1,6 +1,6 @@
 import type { Story } from "@ladle/react";
 import styles from "./Radio.module.css";
-import { useState, useEffect } from "react";
+import { ChangeEventHandler, useState } from "react";
 
 type Props = {
   name: string;
@@ -20,9 +20,9 @@ export const Radio: Story<Props> = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState<string>();
 
-  const handleChange = (event) => {
-    setSelectedOption(event.target.value);
-    setChecked(event.target.value);
+  const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setSelectedOption(e.target.value);
+    setChecked(e.target.value);
   };
 
   return (
@@ -47,8 +47,4 @@ export const Radio: Story<Props> = ({
       ))}
     </div>
   );
-
-  Radio.defaultProps = {
-    name: "",
-  };
 };

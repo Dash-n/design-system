@@ -1,0 +1,18 @@
+.customTooltip {
+  display: flex;
+  flex-direction: column;
+  padding: 0 16px;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid var(--soft-background-color);
+}
+
+.tooltipTitle {
+  font-size: 20px;
+  font-weight: 400;
+  text-decoration: underline;
+}
+.customLegendWrapper {
+  display: flex;
+  justify-content: end;
+  gap: 8px;
+}

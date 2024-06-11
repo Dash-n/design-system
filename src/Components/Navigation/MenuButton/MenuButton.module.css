@@ -11,9 +11,8 @@
   border-radius: 8px;
 
   background-color: white;
-  color: var(--main-active-color);
+  color: var(--text-color);
 
-  font-size: large;
   font-family: "Geist";
 
   border: none;
@@ -22,15 +21,16 @@ a:link {
   text-decoration: none;
 }
 .a:hover:not(:disabled) {
-  border: 1px solid var(--main-hover-color);
+  outline: 1px solid var(--main-hover-color);
+  color: var(--main-bg-color);
 }
-.a:active:not(:disabled) {
+
+.disabled {
   background-color: var(--main-disabled-color);
 }
 
-.a:disabled {
-  background-color: var(--main-disabled-color);
-}
-.warning:disabled {
-  background-color: var(--warning-disabled-color);
+.buttonLabel {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }

@@ -1,6 +1,7 @@
 import type { Story } from "@ladle/react";
 import "./style.css";
 import styles from "./Date.module.css";
+import { startOfYear, endOfYear, add, sub } from "date-fns";
 import { ChangeEventHandler, useState } from "react";
 import { convertToDateTimeLocalString } from "../../../Utils/convertToDateTimeLocalString";
 import {
@@ -20,6 +21,7 @@ type Props = {
   open?: boolean;
   startDate?: Date;
   endDate?: Date;
+  dateYearRange?: number;
 };
 
 export const Datepicker: Story<Props> = ({
@@ -31,16 +33,11 @@ export const Datepicker: Story<Props> = ({
   open = false,
   startDate,
   endDate,
+  dateYearRange = 5,
 }) => {
   const [selected, setSelected] = useState<Date>(new Date());
   const [isOpen, setIsOpen] = useState(open);
   const [selectTime, setSelectTime] = useState(inputValue.substring(11, 16));
-
-  const { inputProps, dayPickerProps } = useInput({
-    defaultSelected: new Date(),
-    format: "PP",
-    required: true,
-  });
 
   const handleTimeChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSelectTime(e.currentTarget.value);
@@ -83,13 +80,17 @@ export const Datepicker: Story<Props> = ({
     <div className={styles.daypickerContainer}>
       <DayPicker
         initialFocus={true}
+        numberOfMonths={1}
         mode="single"
         disabled={{ before: startDate, after: endDate } as unknown as DateRange}
         selected={selected}
         onSelect={handleDaySelect}
+        showOutsideDays={true}
         footer={footer}
+        fromDate={startOfYear(sub(new Date(), { years: dateYearRange }))}
+        toDate={endOfYear(add(new Date(), { years: dateYearRange }))}
+        captionLayout="dropdown"
         required
-        {...dayPickerProps}
       />
     </div>
   );

@@ -38,6 +38,8 @@ export const Tables: Story<Props> = ({ alternate }) => {
 
   const titleButtons = {
     display: "flex",
+    margin: "8px",
+    gap: "8px",
   };
 
   const customStyles = {
@@ -92,7 +94,7 @@ export const Tables: Story<Props> = ({ alternate }) => {
           sort={sort}
           handleSort={handleSort}
           alternate={alternate}
-          customHeaderStyles={customStyles}
+          // customHeaderStyles={customStyles}
           sticky={["first_name", "last_name"]}
         ></Table>
       </div>
@@ -110,8 +112,9 @@ export const Paginators: Story<Props> = ({}) => {
 
   const pageCount = Math.ceil(numberOfItems / pageSize);
 
-  const setSize = (e) => {
-    setPageSize(e.target.value);
+  const setSize = (e: Event) => {
+    const target = e.target as HTMLInputElement;
+    setPageSize(Number(target.value));
   };
 
   const changePage = (navFunction: number) => {
@@ -133,15 +136,21 @@ export const Paginators: Story<Props> = ({}) => {
     }
   };
 
-  const jumpPage = (e) => {
-    const newPage = e.target.value;
+  const jumpPage = (e: KeyboardEvent) => {
+    const target = e.target as HTMLInputElement; // Event | null
+
+    if (target === null) {
+      throw new Error("target can not be null");
+    }
+
+    const newPage = Number(target.value);
     if (e.key === "Enter") {
       if (newPage <= 0) {
         setPageIndex(0);
       } else if (newPage > pageCount) {
         setPageIndex(pageCount - 1);
       } else {
-        setPageIndex(e.target.value - 1);
+        setPageIndex(newPage - 1);
       }
     }
   };
@@ -158,7 +167,7 @@ export const Paginators: Story<Props> = ({}) => {
         changePage={changePage}
         jumpPage={jumpPage}
         pageCount={pageCount}
-        displayOptions={[{ option: 5 }, { option: 200 }]}
+        displayOptions={[{ option: "5" }, { option: "200" }]}
       />
       Page: {pageIndex + 1}
       <br />
@@ -167,9 +176,4 @@ export const Paginators: Story<Props> = ({}) => {
       Total number of items: {numberOfItems}
     </div>
   );
-};
-Paginators.args = {
-  pagesize: 5,
-  pageindex: 0,
-  numberOfItems: 10,
 };

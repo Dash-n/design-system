@@ -4,7 +4,7 @@ import logo from "../../../images/polyulogo.png";
 
 type selectOption = {
   option: string;
-  value: string;
+  value?: string;
 };
 type Props = {
   id: string;

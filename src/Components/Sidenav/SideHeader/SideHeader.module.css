@@ -16,8 +16,9 @@
   height: 100%;
   width: 100%;
   align-items: center;
-  padding: 0 4px;
-  margin: 0 4px;
+  padding: 0 16px;
+  margin: 0 8px;
+  font-size: large;
 
   border-radius: 8px;
   border: 1px solid var(--soft-background-color);

@@ -13,13 +13,13 @@ type Props = {
 export const MenuButton: Story<Props> = ({
   icon,
   iconSize = "24px",
-  disabled,
+  disabled = false,
   link,
   label,
 }: Props) => (
-  <a href={link} className={`${styles.a}`} disabled={disabled}>
+  <a href={link} className={`${styles.a} ${disabled ? styles.disabled : ""}`}>
     <IconContext.Provider value={{ size: iconSize }}>
-      <div style={{ display: "flex", alignItems: "center", gap: "24px" }}>
+      <div className={styles.buttonLabel}>
         {icon}
         {label}
       </div>

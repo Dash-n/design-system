@@ -3,6 +3,7 @@ import styles from "./DraggableContainer.module.css";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { MdOutlineOpenWith, MdClose } from "react-icons/md";
 import { IconContext } from "react-icons";
+import { ReactNode } from "react";
 
 type Props = {
   content: any;
@@ -20,14 +21,15 @@ export const DraggableContainer: Story<Props> = ({
       <Droppable droppableId="ROOT" type="group">
         {(provided) => (
           <div {...provided.droppableProps} ref={provided.innerRef}>
-            {content.map((item, index) => {
+            {content.map((item: ReactNode, index: number) => {
               return (
                 <div
+                  key={index}
                   style={{
                     margin: "8px",
                   }}
                 >
-                  <Draggable draggableId={`${index}`} key={item} index={index}>
+                  <Draggable draggableId={`${index}`} index={index}>
                     {(provided) => (
                       <div
                         className={styles.dragContainer}
@@ -42,8 +44,10 @@ export const DraggableContainer: Story<Props> = ({
                             <MdOutlineOpenWith />
                           </div>
 
-                          {/* content */}
-                          <div className={styles.containerBody}>{item}</div>
+                          <div className={styles.containerBody}>
+                            {/* Content Body goes Here */}
+                            {item}
+                          </div>
 
                           <div className={styles.deleteEnd}>
                             <button

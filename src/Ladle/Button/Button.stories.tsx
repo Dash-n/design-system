@@ -6,7 +6,7 @@ import { MdEdit, MdSettings, MdDelete } from "react-icons/md";
 import styles from "./Button.stories.module.css";
 
 type Props = {
-  label?: string;
+  label: string;
   disabled?: boolean;
   variant?: string;
 };
@@ -67,7 +67,11 @@ export const OutlineButtons: Story<Props> = ({ label, variant, disabled }) => (
       disabled
       onClick={onClick}
     />
-    <OutlineButton label="Custom Class" customClass={styles.customClass} />
+    <OutlineButton
+      label="Custom Class"
+      customClass={styles.customClass}
+      onClick={onClick}
+    />
   </div>
 );
 OutlineButtons.args = {
@@ -92,6 +96,7 @@ export const IconButtons: Story<Props> = ({}) => (
     <IconButton variant="settings" icon={<MdSettings />} onClick={onClick} />
     <IconButton variant="delete" icon={<MdDelete />} onClick={onClick} />
     <IconButton
+      variant="custom"
       customClass={styles.customClass}
       icon={<MdDelete />}
       onClick={onClick}

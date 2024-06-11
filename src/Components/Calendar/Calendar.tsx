@@ -21,6 +21,7 @@ import {
   defaultEventLength as defaultEveLength,
   defaultView,
 } from "./calendarutils/calendarutils";
+import { MdArrowBackIos, MdArrowForwardIos } from "react-icons/md";
 
 const localizer = momentLocalizer(moment);
 
@@ -87,6 +88,7 @@ export const Calendar: Story<Props> = ({
 
   const initTime = new Date();
   const toolbarNav = new Map();
+  const initMinuteOffset = 55;
   toolbarNav.set("Previous", "PREV");
   toolbarNav.set("Today", "TODAY");
   toolbarNav.set("Next", "NEXT");
@@ -98,7 +100,8 @@ export const Calendar: Story<Props> = ({
     },
   });
 
-  initTime.setHours(initHour);
+  initTime.setHours(initHour - 1);
+  initTime.setMinutes(initMinuteOffset);
 
   class CustomToolbar extends Toolbar {
     handleNavigation = (value: string) => {
@@ -113,14 +116,16 @@ export const Calendar: Story<Props> = ({
             <Toggle
               name="NavButtons"
               values={["Previous", "Today", "Next"]}
+              labels={[<MdArrowBackIos />, "Today", <MdArrowForwardIos />]}
               defaultValue=""
               setChecked={this.handleNavigation}
             />
           </div>
           <p className="rbc-toolbar-label">{this.props.label}</p>
           <Toggle
+            customClass={styles.viewToggleButton}
             name="viewSelect"
-            values={["Month", "Week", "Day"]}
+            values={["Day", "Week", "Month"]}
             setChecked={changeView}
             defaultValue={toggleValue}
           />
